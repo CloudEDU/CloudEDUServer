@@ -17,6 +17,7 @@ namespace CloudEDUServer
                                   select mngr;
                 manager = returnValue.FirstOrDefault<MANAGER>();
             }
+            //       System.Diagnostics.Debug.WriteLine(manager);
             return manager;
         }
 
@@ -73,5 +74,63 @@ namespace CloudEDUServer
             }
             return managers;
         }
+
+        public static bool AddManagerType(TYPE type)
+        {
+            int count = 0;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                try
+                {
+                    ctx.TYPEs.Add(type);
+                    count = ctx.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
+                    return false;
+                }
+            }
+            return count == 1;
+        }
+
+        public static bool AddManager(MANAGER manager)
+        {
+            int count = 0;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                try
+                {
+                    ctx.MANAGERs.Add(manager);
+                    count = ctx.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
+                    return false;
+                }
+            }
+            return count == 1;
+        }
+
+        public static bool AddPermission(PERMISSION permission)
+        {
+            int count = 0;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                try
+                {
+                    ctx.PERMISSIONs.Add(permission);
+                    count = ctx.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
+                    return false;
+                }
+            }
+            return count == 1;
+        }
+
     }
 }
