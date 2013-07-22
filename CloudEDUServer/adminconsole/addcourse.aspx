@@ -6,16 +6,16 @@
 <head id="Head1" runat="server">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>Form Controls | BlueWhale Admin</title>
+
     <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/nav.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/usercss.css" media="screen" />
     <!--[if IE 6]><link rel="stylesheet" type="text/css" href="css/ie6.css" media="screen" /><![endif]-->
     <!--[if IE 7]><link rel="stylesheet" type="text/css" href="css/ie.css" media="screen" /><![endif]-->
-    <link href="css/fancy-button/fancy-button.css" rel="stylesheet" type="text/css" />
-    <!--Jquery UI CSS-->
-    <link href="css/themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+    <link href="css/table/demo_page.css" rel="stylesheet" type="text/css" />
     <!-- BEGIN: load jquery -->
     <script src="js/jquery-1.6.4.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/jquery-ui/jquery.ui.core.min.js"></script>
@@ -23,7 +23,22 @@
     <script src="js/jquery-ui/jquery.ui.accordion.min.js" type="text/javascript"></script>
     <script src="js/jquery-ui/jquery.effects.core.min.js" type="text/javascript"></script>
     <script src="js/jquery-ui/jquery.effects.slide.min.js" type="text/javascript"></script>
+    <script src="js/jquery-ui/jquery.ui.mouse.min.js" type="text/javascript"></script>
+    <script src="js/jquery-ui/jquery.ui.sortable.min.js" type="text/javascript"></script>
+    <script src="js/table/jquery.dataTables.min.js" type="text/javascript"></script>
     <!-- END: load jquery -->
+
+    <!-- BEGIN: load jqplot -->
+    <link rel="stylesheet" type="text/css" href="css/jquery.jqplot.min.css" />
+    <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="js/jqPlot/excanvas.min.js"></script><![endif]-->
+    <script language="javascript" type="text/javascript" src="js/jqPlot/jquery.jqplot.min.js"></script>
+    <script language="javascript" type="text/javascript" src="js/jqPlot/plugins/jqplot.barRenderer.min.js"></script>
+    <script language="javascript" type="text/javascript" src="js/jqPlot/plugins/jqplot.pieRenderer.min.js"></script>
+    <script language="javascript" type="text/javascript" src="js/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+    <script language="javascript" type="text/javascript" src="js/jqPlot/plugins/jqplot.highlighter.min.js"></script>
+    <script language="javascript" type="text/javascript" src="js/jqPlot/plugins/jqplot.pointLabels.min.js"></script>
+    <!-- END: load jqplot -->
+
     <!--jQuery Date Picker-->
     <script src="js/jquery-ui/jquery.ui.widget.min.js" type="text/javascript"></script>
     <script src="js/jquery-ui/jquery.ui.datepicker.min.js" type="text/javascript"></script>
@@ -40,11 +55,15 @@
     <script src="js/jquery-ui/jquery.effects.explode.min.js" type="text/javascript"></script>
     <!-- jQuery dialog end here-->
     <script src="js/jquery-ui/jquery.ui.accordion.min.js" type="text/javascript"></script>
+
     <!--Fancy Button-->
     <script src="js/fancy-button/fancy-button.js" type="text/javascript"></script>
     <script src="js/setup.js" type="text/javascript"></script>
     <!-- Load TinyMCE -->
     <script src="js/tiny-mce/jquery.tinymce.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="js/table/table.js"></script>
+    <script src="js/setup.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             setupTinyMCE();
@@ -65,36 +84,7 @@
 </head>
 <body id="Body1" runat="server">
     <div class="container_12">
-        <div class="grid_12 header-repeat">
-            <div id="branding">
-                <div class="floatleft">
-                    <img src="img/logo.png" alt="Logo" /></div>
-                <div class="floatright">
-                    <div class="floatleft">
-                        <img src="img/img-profile.jpg" alt="Profile Pic" /></div>
-                    <div class="floatleft marginleft10">
-                        <ul class="inline-ul floatleft">
-                            <li>Hello Admin</li>
-                            <li><a href="#">Config</a></li>
-                            <li><a href="#">Logout</a></li>
-                        </ul>
-                        <br />
-                        <span class="small grey">Last Login: 3 hours ago</span>
-                    </div>
-                </div>
-                <div class="clear">
-                </div>
-            </div>
-        </div>
-        <div class="clear">
-        </div>
-        <div class="grid_12">
-            <ul class="nav main">
-                <li class="ic-dashboard"><a href="default.aspx"><span>Dashboard</span></a> </li>
-            </ul>
-        </div>
-        <div class="clear">
-        </div>
+        <!--#include file="Navigation.aspx" -->
         <div class="grid_12">
             <div class="box round first fullpage">
                 <h2>
