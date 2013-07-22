@@ -76,6 +76,7 @@
     <Content Include="adminconsole\css\ie6.css" />
     <Content Include="adminconsole\css\jquery.jqplot.min.css" />
     <Content Include="adminconsole\css\layout.css" />
+    <Content Include="adminconsole\css\Login.css" />
     <Content Include="adminconsole\css\nav.css" />
     <Content Include="adminconsole\css\prettyPhoto.css" />
     <Content Include="adminconsole\css\reset.css" />
@@ -457,6 +458,7 @@
     <Content Include="adminconsole\js\jquery-ui\jquery.ui.sortable.min.js" />
     <Content Include="adminconsole\js\jquery-ui\jquery.ui.tabs.min.js" />
     <Content Include="adminconsole\js\jquery-ui\jquery.ui.widget.min.js" />
+    <Content Include="adminconsole\js\MD5.js" />
     <Content Include="adminconsole\js\popup\jquery.facebox.js" />
     <Content Include="adminconsole\js\pretty-photo\jquery.prettyPhoto.js" />
     <Content Include="adminconsole\js\quick-sand\jquery.quicksand.js" />
@@ -716,6 +718,7 @@
     <Content Include="adminconsole\js\tiny-mce\utils\form_utils.js" />
     <Content Include="adminconsole\js\tiny-mce\utils\mctabs.js" />
     <Content Include="adminconsole\js\tiny-mce\utils\validate.js" />
+    <Content Include="adminconsole\Login.aspx" />
     <Content Include="adminconsole\userlist.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -726,6 +729,13 @@
     </Compile>
     <Compile Include="adminconsole\addcourse.aspx.designer.cs">
       <DependentUpon>addcourse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminconsole\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="ATTEND.cs">
       <DependentUpon>Model1.tt</DependentUpon>

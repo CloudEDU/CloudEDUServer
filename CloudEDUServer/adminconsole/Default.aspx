@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="主页" Language="C#" MasterPageFile="Site.master" AutoEventWireup="true"
-    CodeBehind="Default.aspx.cs" Inherits="cloudEdu._Default" %>
+    CodeBehind="Login.aspx.cs" Inherits="cloudEdu.Login" %>
+
 <%@ Import Namespace="CloudEDUServer" %>
+
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>Dashboard | BlueWhale Admin</title>
@@ -9,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/nav.css" media="screen" />
+    <link rel="Stylesheet" type="text/css" href="css/Default.css" media="screen" />
     <!--[if IE 6]><link rel="stylesheet" type="text/css" href="css/ie6.css" media="screen" /><![endif]-->
     <!--[if IE 7]><link rel="stylesheet" type="text/css" href="css/ie.css" media="screen" /><![endif]-->
     <!-- BEGIN: load jquery -->
@@ -28,17 +31,18 @@
     <script language="javascript" type="text/javascript" src="js/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
     <script language="javascript" type="text/javascript" src="js/jqPlot/plugins/jqplot.highlighter.min.js"></script>
     <script language="javascript" type="text/javascript" src="js/jqPlot/plugins/jqplot.pointLabels.min.js"></script>
+
     <!-- END: load jqplot -->
+
     <script src="js/setup.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             setupDashboardChart('chart1');
             setupLeftMenu();
             setSidebarHeight();
-
-
         });
     </script>
+
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
      <div class="container_12">
@@ -48,13 +52,12 @@
                     <img src="img/logo.png" alt="Logo" /></div>
                 <div class="floatright">
                     <div class="floatleft">
-                        <img src="img/img-profile.jpg" alt="Profile Pic" /></div>
+                        <%=((MANAGER)Session["manage"]).NAME%>
+                    </div>
                     <div class="floatleft marginleft10">
                         <ul class="inline-ul floatleft">
-                            <li>Hello Admin</li>
-                            <li><%= ManagerAccess.GetManagerByName("aaa").NAME %></li>
                             <li><a href="#">Config</a></li>
-                            <li><a href="#">Logout</a></li>
+     
                         </ul>
                         <br />
                         <span class="small grey">Last Login: 3 hours ago</span>
@@ -67,9 +70,7 @@
         <div class="clear">
         </div>
         <div class="grid_12">
-            <ul class="nav
-                
-                ">
+            <ul class="nav">
                 <li class="ic-dashboard"><a href="default.aspx"><span>Dashboard</span></a> </li>
 
             </ul>
