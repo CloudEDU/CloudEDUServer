@@ -720,6 +720,7 @@
     <Content Include="adminconsole\js\tiny-mce\utils\validate.js" />
     <Content Include="adminconsole\Login.aspx" />
     <Content Include="adminconsole\userlist.aspx" />
+    <Content Include="adminconsole\Navigation.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -809,6 +810,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="adminconsole\Navigation.aspx.cs">
+      <DependentUpon>Navigation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\Navigation.aspx.designer.cs">
+      <DependentUpon>Navigation.aspx</DependentUpon>
     </Compile>
     <Compile Include="NOTE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
