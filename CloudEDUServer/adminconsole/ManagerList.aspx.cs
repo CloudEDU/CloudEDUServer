@@ -30,6 +30,25 @@ namespace CloudEDUServer.adminconsole
                     //}
                 }
 
+                if (operate.Equals("edit"))
+                {
+                    string account=Request.Params.Get("account");
+                   // MANAGER editManager = ManagerAccess.GetManagerByName(account);
+                    MANAGER editManager = new MANAGER();
+                    if (editManager == null)
+                    {
+                        Response.Write("该用户不存在");
+                        Response.End();
+                    }
+                    //else if  permission
+                    else
+                    {
+                        Session["editAccount"] = account;
+                        Response.Write("success");
+                        Response.End();
+                    }
+                }
+
         
 
             }

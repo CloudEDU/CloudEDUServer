@@ -143,6 +143,7 @@
     <Content Include="adminconsole\css\themes\custom-theme\jquery.ui.theme.css" />
     <Content Include="adminconsole\css\usercss.css" />
     <Content Include="adminconsole\Default.aspx" />
+    <Content Include="adminconsole\EditManager.aspx" />
     <Content Include="adminconsole\Global.asax" />
     <Content Include="adminconsole\img\0.png" />
     <Content Include="adminconsole\img\accordian_bg.png" />
@@ -740,6 +741,13 @@
     </Compile>
     <Compile Include="adminconsole\AddManager.aspx.designer.cs">
       <DependentUpon>AddManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminconsole\EditManager.aspx.cs">
+      <DependentUpon>EditManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\EditManager.aspx.designer.cs">
+      <DependentUpon>EditManager.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminconsole\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

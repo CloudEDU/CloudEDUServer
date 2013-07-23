@@ -1,11 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManagerList.aspx.cs" Inherits="CloudEDUServer.adminconsole.ManagerList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EditManager.aspx.cs" Inherits="CloudEDUServer.adminconsole.EditManager" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Typography | BlueWhale Admin</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
@@ -66,99 +66,131 @@
 
     <script type="text/javascript" src="js/table/table.js"></script>
     <script src="js/setup.js" type="text/javascript"></script>
+    <script language="javascript" src="js/MD5.js" type="text/javascript"></script>
 
     <script type="text/javascript">
 
         $(document).ready(function () {
             setupLeftMenu();
-            // $('.datatable').dataTable();
-            //setSidebarHeight();
+            setSidebarHeight();
         });
 
-        var isOperating = false;
-        function deleteManager(account) {
-            if (isOperating) {
-                alert("操作中，请稍后");
+        var isUpdate = false;
+        function addManager() {
+            if (isUpdate) {
+                alert("数据跟新中，请稍后");
                 return;
             }
-            isOperating = true;
-            if (confirm("确认删除该管理员吗")) {
-                $.post("ManagerList.aspx", { operate: "delete", account: account }, function (data) {
-                    alert(data);
-                    isOperating = false;
-                });
-            }
-            else {
-                isOperating = false;
-            }
-        }
-        function editManager(account) {
-            if (isOperating) {
-                alert("操作中，请稍后");
-                return;
-            }
-            isOperating = true;
-            if (confirm("确认编辑该管理员吗")) {
-                $.post("ManagerList.aspx", { operate: "edit", account: account }, function (data) {
-                    if (data == "success") {
-                        window.location.href = "EditManager.aspx";
-                    }
-                    else {
-                        alert(data);
-                    }
-                    isOperating = false;
-                });
-            }
-            else {
-                isOperating = false;
-            }
-        }
-    </script>
-</head>
-<body id="Body1" runat="server">
-    <div class="container_12">    
-        <!--#include file="Navigation.aspx" -->
+            isUpdate = true;
 
+            if (confirm("确认添加新的管理员吗")) {
+                var account = document.getElementById("account").value;
+                var password = document.getElementById("password").value;
+                var confirmPassword = document.getElementById("confirmPassword").value;
+                if (account == "") {
+                    alert("账号不能为空");
+                    isUpdate = false;
+                    return;
+                }
+                if (password == "") {
+                    alert("密码不能为空");
+                    isUpdate = false;
+                    return;
+                }
+                if (!checkStr(account)) {
+                    alert("账号只能由大小写字母、数字、下划线组成");
+                    isUpdate = false;
+                    return;
+                }
+                if (!checkStr(password)) {
+                    alert("密码只能由大小写字母、数字、下划线组成");
+                    isUpdate = false;
+                    return;
+                }
+                if (password == confirmPassword) {
+                    password = hex_md5(password);
+                    jQuery.post("AddManager.aspx", { account: account, password: password }, function (data) {
+                        if (data == "success") {
+                            isUpdate = false;
+                            alert("新的管理员添加成功");
+                            window.location.href = "Default.aspx";
+                            return;
+                        }
+                        else {
+                            alert(data);
+                            isUpdata = false;
+                        }
+                    });
+                }
+                else {
+                    alert("两次密码不一致");
+                    isUpdate = false;
+                    return;
+                }
+            }
+            else {
+                isUpdate = false;
+            }
+        }
+
+        function checkStr(str) {
+            var reg = /[^A-Za-z0-9_]/;
+            if (reg.test(str)) return false;
+            else return true;
+        }
+
+   </script>
+</head>
+<body id="Body1" class="Body1" runat="server">
+   <div class="container_12">
+        <!--#include file="Navigation.aspx" -->
         <div class="grid_10">
-            <div class="box round first grid">
+            <div class="box round first fullpage">
                 <h2>
-                    Tables & Grids</h2>
-                <div class="block">
-                    
-					<table class="data display datatable">
-					<thead>
-						<tr>
-							<th>name</th>
-							<th>permission</th>
-							<th>type</th>
-                            <th>edit</th>
-                            <th>delete</th>
-						</tr>
-					</thead>
-					<tbody>
-                        <%
-                          //MANAGER[] manager=ManagerAccess.GetAllManagers();
-                          MANAGER[] manager = new MANAGER[5];
-                          for (int i=0; i<manager.Length; i++)
-                          {
-                              manager[i] = new MANAGER();
-                              manager[i].NAME = "abc";
-                        %>
-						    <tr>
-							    <td style="text-align:center"><%=manager[i].NAME %></td>
-							    <td style="text-align:center">ad</td>
-							    <td style="text-align:center"><%=manager[i].MNGR_TYPE %>></td>	
-                                <td style="text-align:center"><a href="javascript:editManager('<%=manager[i].NAME %>')">编辑管理员</a></td>						    
-							    <td style="text-align:center"><a href="javascript:deleteManager('<%=manager[i].NAME %>')">删除管理员</a></td>
-						    </tr>
-                        <%}%>					
-					</tbody>
-				</table>
-                <ul style="margin-left:800px; margin-top:20px">
-                    <li><a href="AddManager.aspx">添加管理员</a></li>
-                </ul>    
-                    
-                    
+                    Form Controls</h2>
+                <div class="block ">
+                    <form>
+                    <table class="form">
+                        <tr>
+                            <td>
+                                <label>账号</label>
+                            </td>
+                            <td>
+                                <input type="text" readonly value="<%=Session["editAccount"] %>" maxlength="10" class="success" id="account"/>
+                                <%Session["editAccount"] = null; %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>密码</label>
+                            </td>
+                            <td>
+                                <input type="password" maxlength="10"  id="password" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>确认密码</label>
+                            </td>
+                            <td>
+                                <input type="password"  maxlength="10" id="confirmPassword" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>权限</label>
+                            </td>
+                            <td>
+                                <select id="select" name="select">
+                                    <option value="1">Value 1</option>
+                                    <option value="2">Value 2</option>
+                                    <option value="3">Value 3</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>  
+                    </form>
+                    <button onclick="addManager()" style="margin-left:250px;">确认</button>
                 </div>
             </div>
         </div>
