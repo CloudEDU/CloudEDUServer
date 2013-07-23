@@ -762,12 +762,6 @@
     <Compile Include="adminconsole\ManagerList.aspx.designer.cs">
       <DependentUpon>ManagerList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ATTEND.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CATEGORY.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="adminconsole\courseedit.aspx.cs">
       <DependentUpon>courseedit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -792,49 +786,55 @@
     <Compile Include="adminconsole\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="ManagerAccess.cs" />
+    <Compile Include="ATTEND.cs">
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CATEGORY.cs">
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CloudEDUModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CloudEDUModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CloudEDUModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CloudEDUModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CloudEDUModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="COMMENT.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="COURSE.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="COURSE_CANCEL.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Course_OK.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="COURSE_PENDING.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CUSTOMER.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DOCUMENT.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LESSON.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="MANAGER.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="ManagerAccess.cs" />
     <Compile Include="adminconsole\Navigation.aspx.cs">
       <DependentUpon>Navigation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -843,39 +843,24 @@
       <DependentUpon>Navigation.aspx</DependentUpon>
     </Compile>
     <Compile Include="NOTE.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="OPR_LOG.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="PARENT_GUIDE.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="PERMISSION.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RECOMMENDATION.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RESOURCE.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RES_TYPE.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SALEORDER.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="adminconsole\Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="adminconsole\Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
-    </Compile>
-    <Compile Include="TYPE.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="adminconsole\userlist.aspx.cs">
       <DependentUpon>userlist.aspx</DependentUpon>
@@ -884,25 +869,24 @@
     <Compile Include="adminconsole\userlist.aspx.designer.cs">
       <DependentUpon>userlist.aspx</DependentUpon>
     </Compile>
+    <Compile Include="RECOMMENDATION.cs">
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RESOURCE.cs">
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RES_TYPE.cs">
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SALEORDER.cs">
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TransactionAccess.cs" />
+    <Compile Include="TYPE.cs">
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
-    <Content Include="Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
     <Content Include="packages.config" />
     <Content Include="adminconsole\img\.DS_Store" />
     <Content Include="adminconsole\img\gallery\.DS_Store" />
@@ -915,6 +899,23 @@
     <Content Include="adminconsole\js\jquery-ui\.DS_Store" />
     <Content Include="adminconsole\js\tiny-mce\.DS_Store" />
     <Content Include="adminconsole\Site.Master" />
+    <EntityDeploy Include="CloudEDUModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CloudEDUModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="CloudEDUModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CloudEDUModel.edmx</DependentUpon>
+      <LastGenOutput>CloudEDUModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="CloudEDUModel.edmx.diagram">
+      <DependentUpon>CloudEDUModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="CloudEDUModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CloudEDUModel.edmx</DependentUpon>
+      <LastGenOutput>CloudEDUModel.cs</LastGenOutput>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

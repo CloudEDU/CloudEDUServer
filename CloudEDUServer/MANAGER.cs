@@ -22,7 +22,7 @@ namespace CloudEDUServer
         public int ID { get; set; }
         public string NAME { get; set; }
         public string PASSWORD { get; set; }
-        public int MNGR_TYPE { get; set; }
+        public Nullable<int> MNGR_TYPE { get; set; }
     
         public virtual TYPE TYPE { get; set; }
         public virtual ICollection<PERMISSION> PERMISSIONs { get; set; }
