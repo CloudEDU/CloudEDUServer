@@ -50,7 +50,7 @@
             }
             password = hex_md5(password);
 
-            jQuery.post("login.aspx/login", { account: account, password: password }, function (data) {
+            jQuery.post("login.aspx", { account: account, password: password }, function (data) {
                 if (data == "success") {
                     window.location.href = "Default.aspx";
                 }
