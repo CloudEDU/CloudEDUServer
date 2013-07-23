@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CloudEDUModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CloudEDUModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="CloudEDUModelStoreContainer">
           <EntitySet Name="CATEGORY" EntityType="CloudEDUModel.Store.CATEGORY" store:Type="Tables" Schema="COURSE" />
           <EntitySet Name="COMMENT" EntityType="CloudEDUModel.Store.COMMENT" store:Type="Tables" Schema="COURSE" />
@@ -38,12 +38,7 @@
           </EntitySet>
           <EntitySet Name="NOTE" EntityType="CloudEDUModel.Store.NOTE" store:Type="Tables" Schema="CUSTOMER" />
           <EntitySet Name="OPR_LOG" EntityType="CloudEDUModel.Store.OPR_LOG" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="GRANTED" EntityType="CloudEDUModel.Store.GRANTED" store:Type="Tables" store:Schema="MANAGER" store:Name="GRANTED">
-            <DefiningQuery>SELECT 
-      [GRANTED].[MANAGER_ID] AS [MANAGER_ID], 
-      [GRANTED].[PERMISSION] AS [PERMISSION]
-      FROM [MANAGER].[GRANTED] AS [GRANTED]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="GRANTED" EntityType="CloudEDUModel.Store.GRANTED" store:Type="Tables" Schema="MANAGER" />
           <EntitySet Name="MANAGER" EntityType="CloudEDUModel.Store.MANAGER" store:Type="Tables" Schema="MANAGER" />
           <EntitySet Name="PERMISSION" EntityType="CloudEDUModel.Store.PERMISSION" store:Type="Tables" Schema="MANAGER" />
           <EntitySet Name="TYPE" EntityType="CloudEDUModel.Store.TYPE" store:Type="Tables" Schema="MANAGER" />
@@ -339,9 +334,6 @@
           <Property Name="OPR_TIME" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
           <Property Name="MSG" Type="xml" />
         </EntityType>
-        <!--生成过程中发现错误:
-      警告 6002: 表/视图“CloudEDU.MANAGER.GRANTED”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
-      -->
         <EntityType Name="GRANTED">
           <Key>
             <PropertyRef Name="MANAGER_ID" />
@@ -357,7 +349,7 @@
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="NAME" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="PASSWORD" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="MNGR_TYPE" Type="int" Nullable="false" />
+          <Property Name="MNGR_TYPE" Type="int" />
         </EntityType>
         <EntityType Name="PERMISSION">
           <Key>
@@ -467,7 +459,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__GRANTED__MANAGER__4CA06362">
-          <End Role="MANAGER" Type="CloudEDUModel.Store.MANAGER" Multiplicity="1" />
+          <End Role="MANAGER" Type="CloudEDUModel.Store.MANAGER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="GRANTED" Type="CloudEDUModel.Store.GRANTED" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MANAGER">
@@ -479,7 +473,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__GRANTED__PERMISS__4D94879B">
-          <End Role="PERMISSION" Type="CloudEDUModel.Store.PERMISSION" Multiplicity="1" />
+          <End Role="PERMISSION" Type="CloudEDUModel.Store.PERMISSION" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="GRANTED" Type="CloudEDUModel.Store.GRANTED" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PERMISSION">
@@ -491,7 +487,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__MANAGER__MNGR_TY__44FF419A">
-          <End Role="TYPE" Type="CloudEDUModel.Store.TYPE" Multiplicity="1" />
+          <End Role="TYPE" Type="CloudEDUModel.Store.TYPE" Multiplicity="0..1" />
           <End Role="MANAGER" Type="CloudEDUModel.Store.MANAGER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TYPE">
@@ -748,8 +744,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CloudEDUModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1000,8 +995,8 @@
           <NavigationProperty Name="COURSEs" Relationship="CloudEDUModel.FK_COURSE_TEACHER" FromRole="CUSTOMER" ToRole="COURSE" />
           <NavigationProperty Name="ATTENDs" Relationship="CloudEDUModel.FK_ATTEND_CUSTOMER" FromRole="CUSTOMER" ToRole="ATTEND" />
           <NavigationProperty Name="NOTEs" Relationship="CloudEDUModel.FK__NOTE__CUSTOMER_I__2334397B" FromRole="CUSTOMER" ToRole="NOTE" />
-          <NavigationProperty Name="SALEORDER_asbuyer" Relationship="CloudEDUModel.FK__SALEORDER__BUYER__5070F446" FromRole="CUSTOMER" ToRole="SALEORDER" />
-          <NavigationProperty Name="SALEORDER_assaler" Relationship="CloudEDUModel.FK__SALEORDER__SALER__5165187F" FromRole="CUSTOMER" ToRole="SALEORDER" />
+          <NavigationProperty Name="SALEORDERs" Relationship="CloudEDUModel.FK__SALEORDER__BUYER__5070F446" FromRole="CUSTOMER" ToRole="SALEORDER" />
+          <NavigationProperty Name="SALEORDERs1" Relationship="CloudEDUModel.FK__SALEORDER__SALER__5165187F" FromRole="CUSTOMER" ToRole="SALEORDER" />
           <NavigationProperty Name="COURSEs1" Relationship="CloudEDUModel.FAVORITE" FromRole="CUSTOMER" ToRole="COURSE" />
         </EntityType>
         <EntityType Name="NOTE">
@@ -1034,7 +1029,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="NAME" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="PASSWORD" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="MNGR_TYPE" Type="Int32" Nullable="false" />
+          <Property Name="MNGR_TYPE" Type="Int32" />
           <NavigationProperty Name="TYPE" Relationship="CloudEDUModel.FK__MANAGER__MNGR_TY__44FF419A" FromRole="MANAGER" ToRole="TYPE" />
           <NavigationProperty Name="PERMISSIONs" Relationship="CloudEDUModel.GRANTED" FromRole="MANAGER" ToRole="PERMISSION" />
         </EntityType>
@@ -1066,8 +1061,8 @@
           <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="TIME" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="COURSE1" Relationship="CloudEDUModel.FK__SALEORDER__COURS__534D60F1" FromRole="SALEORDER" ToRole="COURSE" />
-          <NavigationProperty Name="CUSTOMER_buyer" Relationship="CloudEDUModel.FK__SALEORDER__BUYER__5070F446" FromRole="SALEORDER" ToRole="CUSTOMER" />
-          <NavigationProperty Name="CUSTOMER_saler" Relationship="CloudEDUModel.FK__SALEORDER__SALER__5165187F" FromRole="SALEORDER" ToRole="CUSTOMER" />
+          <NavigationProperty Name="CUSTOMER" Relationship="CloudEDUModel.FK__SALEORDER__BUYER__5070F446" FromRole="SALEORDER" ToRole="CUSTOMER" />
+          <NavigationProperty Name="CUSTOMER1" Relationship="CloudEDUModel.FK__SALEORDER__SALER__5165187F" FromRole="SALEORDER" ToRole="CUSTOMER" />
         </EntityType>
         <EntityType Name="COURSE_CANCEL">
           <Key>
@@ -1334,7 +1329,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__MANAGER__MNGR_TY__44FF419A">
-          <End Role="TYPE" Type="CloudEDUModel.TYPE" Multiplicity="1" />
+          <End Role="TYPE" Type="CloudEDUModel.TYPE" Multiplicity="0..1" />
           <End Role="MANAGER" Type="CloudEDUModel.MANAGER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TYPE">

@@ -20,8 +20,8 @@ namespace CloudEDUServer
             this.COURSEs = new HashSet<COURSE>();
             this.ATTENDs = new HashSet<ATTEND>();
             this.NOTEs = new HashSet<NOTE>();
-            this.SALEORDER_asbuyer = new HashSet<SALEORDER>();
-            this.SALEORDER_assaler = new HashSet<SALEORDER>();
+            this.SALEORDERs = new HashSet<SALEORDER>();
+            this.SALEORDERs1 = new HashSet<SALEORDER>();
             this.COURSEs1 = new HashSet<COURSE>();
         }
     
@@ -39,8 +39,8 @@ namespace CloudEDUServer
         public virtual ICollection<COURSE> COURSEs { get; set; }
         public virtual ICollection<ATTEND> ATTENDs { get; set; }
         public virtual ICollection<NOTE> NOTEs { get; set; }
-        public virtual ICollection<SALEORDER> SALEORDER_asbuyer { get; set; }
-        public virtual ICollection<SALEORDER> SALEORDER_assaler { get; set; }
+        public virtual ICollection<SALEORDER> SALEORDERs { get; set; }
+        public virtual ICollection<SALEORDER> SALEORDERs1 { get; set; }
         public virtual ICollection<COURSE> COURSEs1 { get; set; }
     }
 }
