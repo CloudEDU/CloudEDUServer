@@ -187,14 +187,30 @@ namespace CloudEDUServer
             return true;
         }
 
-        public static bool ChangeManagerManagerType(MANAGER manager, TYPE type)
+        public static bool ChangeManagerManagerType(MANAGER manager, int type)
         {
-            throw new Exception("Not Support Yet");
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                try
+                {
+                    manager.MNGR_TYPE = type;
+                    ctx.Entry(manager).State = System.Data.EntityState.Modified;
+                    ctx.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
+                    return false;
+                }
+            }
+            return true;
+            //throw new Exception("Not Support Yet");
         }
 
-        public static bool GrantPermissionToManager(MANAGER manager, PERMISSION permission)
+        public static bool GrantPermissionToManager(int manager_id, int permission_id)
         {
-            throw new Exception("Not Support Yet");
+
+            //throw new Exception("Not Support Yet");
         }
 
         public static bool RevokePermissionFromManager(MANAGER manager, PERMISSION permission)
