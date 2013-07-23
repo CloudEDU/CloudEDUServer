@@ -857,6 +857,7 @@
     <Compile Include="SALEORDER.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TransactionAccess.cs" />
     <Compile Include="TYPE.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
