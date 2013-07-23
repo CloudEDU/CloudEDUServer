@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="adminconsole\addcourse.aspx" />
+    <Content Include="adminconsole\AddManager.aspx" />
     <Content Include="adminconsole\courseedit.aspx" />
     <Content Include="adminconsole\courseinformation.aspx" />
     <Content Include="adminconsole\css\960.css" />
@@ -719,6 +720,8 @@
     <Content Include="adminconsole\js\tiny-mce\utils\mctabs.js" />
     <Content Include="adminconsole\js\tiny-mce\utils\validate.js" />
     <Content Include="adminconsole\Login.aspx" />
+    <Content Include="adminconsole\Logout.aspx" />
+    <Content Include="adminconsole\ManagerList.aspx" />
     <Content Include="adminconsole\userlist.aspx" />
     <Content Include="adminconsole\Navigation.aspx" />
     <Content Include="Web.config" />
@@ -731,12 +734,33 @@
     <Compile Include="adminconsole\addcourse.aspx.designer.cs">
       <DependentUpon>addcourse.aspx</DependentUpon>
     </Compile>
+    <Compile Include="adminconsole\AddManager.aspx.cs">
+      <DependentUpon>AddManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\AddManager.aspx.designer.cs">
+      <DependentUpon>AddManager.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminconsole\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="adminconsole\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminconsole\Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminconsole\ManagerList.aspx.cs">
+      <DependentUpon>ManagerList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\ManagerList.aspx.designer.cs">
+      <DependentUpon>ManagerList.aspx</DependentUpon>
     </Compile>
     <Compile Include="ATTEND.cs">
       <DependentUpon>Model1.tt</DependentUpon>

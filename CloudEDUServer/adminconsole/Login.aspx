@@ -31,16 +31,12 @@
     <script language="javascript" src="js/MD5.js" type="text/javascript"></script>
     <script type="text/javascript">
 
-        $(document).ready(function () {
-            setupLeftMenu();
-
-            $('.datatable').dataTable();
-            setSidebarHeight();
-        });
-
         var isLogining = false;
         function login() {
-            if (isLogining) return;
+            if (isLogining) {
+                alert("正在登陆中，请稍后");
+                return;
+            }
             isLogining = true;
             var account = document.getElementById('account').value;
             var password = document.getElementById('password').value;

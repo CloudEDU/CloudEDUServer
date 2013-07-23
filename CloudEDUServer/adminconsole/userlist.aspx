@@ -72,11 +72,22 @@
         $(document).ready(function () {
             setupLeftMenu();
 
-            $('.datatable').dataTable();
-            setSidebarHeight();
-
-
+           // $('.datatable').dataTable();
+            //setSidebarHeight();
         });
+
+        var isOperating=false;
+        function deleteManage(account) {
+            if (isOperating) {
+                alert("操作中，请稍后");
+                return;
+            }
+            isOperating = true;
+            $.post("userlist.aspx", { operate: "delete", account: account }, function () {
+
+                isOperating = false;
+            });
+        }
     </script>
 </head>
 <body runat="server">
@@ -89,42 +100,28 @@
                     Tables & Grids</h2>
                 <div class="block">
                     
-					<table class="data display datatable" id="example">
+					<table class="data display datatable">
 					<thead>
 						<tr>
-							<th>Rendering engine</th>
-							<th>Browser</th>
-							<th>Platform(s)</th>
-							<th>Engine version</th>
-							<th>Delete</th>
+							<th>name</th>
+							<th>permission</th>
+							<th>type</th>
+                            <th>delete</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="odd gradeX">
-							<td>Trident</td>
-							<td>Internet
-								 Explorer 4.0</td>
-							<td>Win 95+</td>
-							<td class="center"> 4</td>
-							<td class="center">X</td>
-						</tr>
-						<tr class="even gradeC">
-							<td>Trident</td>
-							<td>Internet
-								 Explorer 5.0</td>
-							<td>Win 95+</td>
-							<td class="center">5</td>
-							<td class="center">C</td>
-						</tr>
-						<tr class="odd gradeA">
-							<td>Trident</td>
-							<td>Internet
-								 Explorer 5.5</td>
-							<td>Win 95+</td>
-							<td class="center">5.5</td>
-							<td class="center">A</td>
-						</tr>
-						
+                        <%
+                           MANAGER[] mangage=ManagerAccess.GetAllManagers();
+                           for (int i=0; i<mangage.Length; i++)
+                           {
+                        %>
+						    <tr>
+							    <td><%=mangage[i].NAME %></td>
+							    <td><%=mangage[i].PERMISSIONs %></td>
+							    <td><%=mangage[i].MNGR_TYPE %>></td>							    
+							    <td onclick="deleteManage(<%=mangage[i].NAME %>)">删除管理员</td>
+						    </tr>
+                        <%}%>						
 					</tbody>
 				</table>
                     

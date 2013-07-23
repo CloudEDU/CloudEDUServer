@@ -1,4 +1,5 @@
 ﻿<%@ Import Namespace="CloudEDUServer" %>
+
 <body>
         <div class="grid_12 header-repeat">
             <div id="branding">
@@ -6,13 +7,13 @@
                     <img src="img/logo.png" alt="Logo" /></div>
                 <div class="floatright">
                     <div class="floatleft">
-                        <p><%=((MANAGER)Session["manage"]).NAME%></p>
+                       <%-- <p><%=((MANAGER)Session["manager"]).NAME%></p>--%>
                        
                     </div>
                     <div class="floatleft marginleft10">
                         <ul class="inline-ul floatleft">
                             <li><a href="#">Config</a></li>
-                            <li onclick="logout()" style="margin-left:10px">Logout</li>
+                            <li style="margin-left:10px"><a href="Logout.aspx">Logout</a></li>
                         </ul>
                         <br />
                         <span class="small grey">Last Login: 3 hours ago</span>
@@ -27,7 +28,7 @@
 
         <div class="grid_12">
             <ul class="nav">
-                <li class="ic-dashboard"><a href="default.aspx"><span>Dashboard</span></a> </li>
+                <li class="ic-dashboard"><a href="Default.aspx"><span>Dashboard</span></a> </li>
             </ul>
         </div>
         <div class="clear">
@@ -54,7 +55,7 @@
                         </li>
                         <li><a class="menuitem">Manager Management</a>
                             <ul class="submenu">
-                                <li><a href="managerlist.html">Manager list</a> </li>
+                                <li><a href="ManagerList.aspx">Manager list</a> </li>
                                 <li><a href="dblog.html">DB Log</a> </li>
                             </ul>
                         </li>

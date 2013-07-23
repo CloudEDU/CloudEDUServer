@@ -1,11 +1,15 @@
-﻿<%@ Page Title="主页" Language="C#" MasterPageFile="Site.master" AutoEventWireup="true"
-    CodeBehind="Login.aspx.cs" Inherits="cloudEdu.Login" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManagerList.aspx.cs" Inherits="CloudEDUServer.adminconsole.ManagerList" %>
 
-<asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Dashboard | BlueWhale Admin</title>
+    <title>Typography | BlueWhale Admin</title>
 
-        <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
@@ -60,21 +64,84 @@
     <!-- Load TinyMCE -->
     <script src="js/tiny-mce/jquery.tinymce.js" type="text/javascript"></script>
 
+    <script type="text/javascript" src="js/table/table.js"></script>
     <script src="js/setup.js" type="text/javascript"></script>
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            setupDashboardChart('chart1');
-            setupLeftMenu();
-            setSidebarHeight();
-        });
-    </script>
 
-</asp:Content>
-<asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-    <div class="container_12">
-        <!--#include file="Navigation.aspx" -->    
-      
+        $(document).ready(function () {
+            setupLeftMenu();
+            // $('.datatable').dataTable();
+            //setSidebarHeight();
+        });
+
+        var isOperating = false;
+        function deleteManager(account) {
+            if (isOperating) {
+                alert("操作中，请稍后");
+                return;
+            }
+            isOperating = true;
+            if (confirm("确认删除该管理员吗")) {
+                $.post("ManagerList.aspx", { operate: "delete", account: account }, function (data) {
+                    alert(data);
+                    isOperating = false;
+                });
+            }
+            else {
+                isOperating = false;
+            }
+        }
+        function editManager(account) {
+            
+        }
+    </script>
+</head>
+<body id="Body1" runat="server">
+    <div class="container_12">    
+        <!--#include file="Navigation.aspx" -->
+
+        <div class="grid_10">
+            <div class="box round first grid">
+                <h2>
+                    Tables & Grids</h2>
+                <div class="block">
+                    
+					<table class="data display datatable">
+					<thead>
+						<tr>
+							<th>name</th>
+							<th>permission</th>
+							<th>type</th>
+                            <th>edit</th>
+                            <th>delete</th>
+						</tr>
+					</thead>
+					<tbody>
+                        <%
+                          MANAGER[] manager=ManagerAccess.GetAllManagers();
+                          for (int i=0; i<manager.Length; i++)
+                          {
+                              manager[i] = new MANAGER();
+                        %>
+						    <tr>
+							    <td style="text-align:center"><%=manager[i].NAME %></td>
+							    <td style="text-align:center">ad</td>
+							    <td style="text-align:center"><%=manager[i].MNGR_TYPE %>></td>	
+                                <td style="text-align:center"><a href="javascript:editManager('<%=manager[i].NAME %>')">编辑管理员</a></td>						    
+							    <td style="text-align:center"><a href="javascript:deleteManager('<%=manager[i].NAME %>')">删除管理员</a></td>
+						    </tr>
+                        <%}%>					
+					</tbody>
+				</table>
+                <ul style="margin-left:800px; margin-top:20px">
+                    <li><a href="AddManager.aspx">添加管理员</a></li>
+                </ul>    
+                    
+                    
+                </div>
+            </div>
+        </div>
         <div class="clear">
         </div>
     </div>
@@ -85,4 +152,5 @@
             Copyright <a href="#">BlueWhale Admin</a>. All Rights Reserved.
         </p>
     </div>
-</asp:Content>
+</body>
+</html>
