@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data;
 
 namespace CloudEDUServer
 {
@@ -132,5 +133,88 @@ namespace CloudEDUServer
             return count == 1;
         }
 
+        public static bool UpdateManager(MANAGER manager)
+        {
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                try
+                {
+                    ctx.Entry(manager).State = System.Data.EntityState.Modified;
+                    ctx.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool UpdatePermission(PERMISSION permission)
+        {
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                try
+                {
+                    ctx.Entry(permission).State = System.Data.EntityState.Modified;
+                    ctx.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool UpdateManagerType(TYPE type)
+        {
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                try
+                {
+                    ctx.Entry(type).State = System.Data.EntityState.Modified;
+                    ctx.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool ChangeManagerManagerType(MANAGER manager, TYPE type)
+        {
+            throw new Exception("Not Support Yet");
+        }
+
+        public static bool GrantPermissionToManager(MANAGER manager, PERMISSION permission)
+        {
+            throw new Exception("Not Support Yet");
+        }
+
+        public static bool RevokePermissionFromManager(MANAGER manager, PERMISSION permission)
+        {
+            throw new Exception("Not Support Yet");
+        }
+
+        public static bool RemoveManagerType(TYPE type)
+        {
+            throw new Exception("Not Support Yet");
+        }
+
+        public static bool RemoveManager(MANAGER manager)
+        {
+            throw new Exception("Not Support Yet");
+        }
+
+        public static bool RemovePermission(PERMISSION permission)
+        {
+            throw new Exception("Not Support Yet");
+        }
     }
 }

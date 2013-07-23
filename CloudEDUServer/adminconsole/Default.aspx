@@ -52,7 +52,13 @@
                     <img src="img/logo.png" alt="Logo" /></div>
                 <div class="floatright">
                     <div class="floatleft">
-                        <%=((MANAGER)Session["manage"]).NAME%>
+                        <%
+                            MANAGER manager = new MANAGER();
+                            manager.NAME = "test11";
+                            manager.PASSWORD = "asdf";
+                            manager.MNGR_TYPE = 1;
+                            ManagerAccess.AddManager(manager);
+                             %>>
                     </div>
                     <div class="floatleft marginleft10">
                         <ul class="inline-ul floatleft">
