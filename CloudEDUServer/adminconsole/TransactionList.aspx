@@ -1,15 +1,13 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManagerList.aspx.cs" Inherits="CloudEDUServer.adminconsole.ManagerList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TransactionList.aspx.cs" Inherits="CloudEDUServer.adminconsole.TransactionList" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Typography | BlueWhale Admin</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
 
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-
-    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
+     <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
@@ -64,64 +62,18 @@
     <!-- Load TinyMCE -->
     <script src="js/tiny-mce/jquery.tinymce.js" type="text/javascript"></script>
 
-    <script type="text/javascript" src="js/table/table.js"></script>
     <script src="js/setup.js" type="text/javascript"></script>
 
     <script type="text/javascript">
-
         $(document).ready(function () {
             setupLeftMenu();
             $('.datatable').dataTable({
-            "sPaginationType":"full_numbers"});
+                "sPaginationType": "full_numbers"
+            });
             setSidebarHeight();
         });
-
-        var isOperating = false;
-        function deleteManager(account) {
-            if (isOperating) {
-                alert("操作中，请稍后");
-                return;
-            }
-            isOperating = true;
-            if (confirm("确认删除该管理员吗")) {
-                $.post("ManagerList.aspx", { operate: "delete", account: account }, function (data) {
-                    if (data == "success") {
-                        alert("删除成功");
-                        isOperating = false;
-                        window.location.href = "ManagerList.aspx";
-                    }
-                    else {
-                        alert(data);
-                        isOperating = false;
-                    }
-                });
-            }
-            else {
-                isOperating = false;
-            }
-        }
-        function editManager(account) {
-            if (isOperating) {
-                alert("操作中，请稍后");
-                return;
-            }
-            isOperating = true;
-            if (confirm("确认编辑该管理员吗")) {
-                $.post("ManagerList.aspx", { operate: "edit", account: account }, function (data) {
-                    if (data == "success") {
-                        window.location.href = "EditManager.aspx";
-                    }
-                    else {
-                        alert(data);
-                    }
-                    isOperating = false;
-                });
-            }
-            else {
-                isOperating = false;
-            }
-        }
     </script>
+
 </head>
 <body id="Body1" runat="server">
     <div class="container_12">    
@@ -129,42 +81,29 @@
 
         <div class="grid_10">
             <div class="box round first grid">
-                <h2>
-                    Manager List
-                </h2>
+                <h2>Course List</h2>
                 <div class="block">
+                    
 					<table class="data display datatable">
 					<thead>
 						<tr>
-							<th  style="text-align:center">Name</th>
-							<th  style="text-align:center">Permission</th>
-							<th  style="text-align:center">Type</th>
-                            <th  style="text-align:center"></th>
-                            <th  style="text-align:center"></th>
+							<th style="text-align:center">Id</th>
+							<th style="text-align:center">Buyer</th>
+							<th style="text-align:center">Order</th>
+                            <th style="text-align:center">Saler</th>
 						</tr>
 					</thead>
 					<tbody>
-                        <%
-                         MANAGER[] manager=ManagerAccess.GetAllManagers();
-                         for (int j = 0; j < 19; j++ )
-                             for (int i = 0; i < manager.Length; i++)
-                             {
-                             
-                        %>
 						    <tr>
-							    <td style="text-align:center"><%=manager[i].NAME%></td>
-							    <td style="text-align:center"><%=ManagerAccess.getPermissionStringByManager(manager[i])%></td>
-							    <td style="text-align:center"><%=manager[i].MNGR_TYPE%></td>	
-                                <td style="text-align:center"><a href="javascript:editManager('<%=manager[i].NAME%>')">编辑</a></td>						    
-							    <td style="text-align:center"><a href="javascript:deleteManager('<%=manager[i].NAME%>')">删除</a></td>
-						    </tr>
-                        <%}%>			
+							    <td style="text-align:center"></td>
+							    <td style="text-align:center"></td>
+							    <td style="text-align:center"></td>	
+                                <td style="text-align:center"></td>						    
+							    <td style="text-align:center"></td>
+						    </tr>	
+                        		
 					</tbody>
-				</table>
-                <ul style="margin-left:800px;">
-                    <li><a href="AddManager.aspx">添加管理员</a></li>
-                </ul>        
-            
+				    </table>                               
                 </div>
             </div>
         </div>
@@ -180,3 +119,4 @@
     </div>
 </body>
 </html>
+

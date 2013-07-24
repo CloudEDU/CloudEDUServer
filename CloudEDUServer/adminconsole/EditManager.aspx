@@ -73,6 +73,8 @@
         $(document).ready(function () {
             setupLeftMenu();
             setSidebarHeight();
+            document.getElementById("type").value="<%=Session["editType"]%>" ;
+            <%Session["editType"] = null;%>
         });
 
         var isUpdate = false;
@@ -87,13 +89,12 @@
                 var account = document.getElementById("account").value;
                 var password = document.getElementById("password").value;
                 var confirmPassword = document.getElementById("confirmPassword").value;
+                var type = document.getElementById("type").value;
+                var isNewPassword = false;
+                if (password != "" || confirmPassword != "") isNewPassword = true;
+
                 if (account == "") {
                     alert("账号不能为空");
-                    isUpdate = false;
-                    return;
-                }
-                if (password == "") {
-                    alert("密码不能为空");
                     isUpdate = false;
                     return;
                 }
@@ -102,12 +103,17 @@
                     isUpdate = false;
                     return;
                 }
-                if (!checkStr(password)) {
+                if (isNewPassword && !checkStr(password)) {
                     alert("密码只能由大小写字母、数字、下划线组成");
                     isUpdate = false;
                     return;
                 }
-                if (password == confirmPassword) {
+                if (isNewPassword && password != confirmPassword) {
+                    alert("两次密码不一致");
+                    isUpdate = false;
+                    return;
+                }
+                else{
 
                     var permission = 0;
                     for (var i = 0; i < permissionLength; i++) {
@@ -116,8 +122,10 @@
                             permission += 1 << i;
                         }
                     }
-                    password = hex_md5(password);
-                    jQuery.post("EditManager.aspx", { account: account, password: password, permission:permission }, function (data) {
+                    if (isNewPassword) {
+                        password = hex_md5(password);
+                    }
+                    jQuery.post("EditManager.aspx", { account: account, password: password, permission:permission,type:type }, function (data) {
                         if (data == "success") {
                             isUpdate = false;
                             alert("管理员编辑成功");
@@ -129,11 +137,6 @@
                             isUpdate = false;
                         }
                     });
-                }
-                else {
-                    alert("两次密码不一致");
-                    isUpdate = false;
-                    return;
                 }
             }
             else {
@@ -182,6 +185,22 @@
                             </td>
                             <td>
                                 <input type="password"  maxlength="10" id="confirmPassword" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                 <label>type</label>
+                            </td>
+                            <td>
+                                <select id="type" name="select">
+                                    <%
+                                       CloudEDUServer.TYPE []allType=ManagerAccess.GetAllManagerTypes();
+                                       for (int i=0; i<allType.Length; i++)
+                                       { 
+                                    %>
+                                        <option value="<%=i %>"><%=i %></option>
+                                    <%}%>
+                                </select>
                             </td>
                         </tr>
                         <tr>

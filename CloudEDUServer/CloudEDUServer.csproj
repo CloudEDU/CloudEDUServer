@@ -65,8 +65,10 @@
   <ItemGroup>
     <Content Include="adminconsole\addcourse.aspx" />
     <Content Include="adminconsole\AddManager.aspx" />
-    <Content Include="adminconsole\courseedit.aspx" />
+    <Content Include="adminconsole\CourseCensorship.aspx" />
+    <Content Include="adminconsole\CourseComment.aspx" />
     <Content Include="adminconsole\courseinformation.aspx" />
+    <Content Include="adminconsole\CourseList.aspx" />
     <Content Include="adminconsole\css\960.css" />
     <Content Include="adminconsole\css\facebox.css" />
     <Content Include="adminconsole\css\fancy-button\fancy-button.css" />
@@ -142,6 +144,7 @@
     <Content Include="adminconsole\css\themes\custom-theme\jquery.ui.tabs.css" />
     <Content Include="adminconsole\css\themes\custom-theme\jquery.ui.theme.css" />
     <Content Include="adminconsole\css\usercss.css" />
+    <Content Include="adminconsole\DatabaseLog.aspx" />
     <Content Include="adminconsole\Default.aspx" />
     <Content Include="adminconsole\EditManager.aspx" />
     <Content Include="adminconsole\Global.asax" />
@@ -723,8 +726,10 @@
     <Content Include="adminconsole\Login.aspx" />
     <Content Include="adminconsole\Logout.aspx" />
     <Content Include="adminconsole\ManagerList.aspx" />
-    <Content Include="adminconsole\userlist.aspx" />
     <Content Include="adminconsole\Navigation.aspx" />
+    <Content Include="adminconsole\TransactionList.aspx" />
+    <Content Include="adminconsole\UserList.aspx" />
+    <Content Include="adminconsole\CourseInfo.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -741,6 +746,34 @@
     </Compile>
     <Compile Include="adminconsole\AddManager.aspx.designer.cs">
       <DependentUpon>AddManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminconsole\CourseCensorship.aspx.cs">
+      <DependentUpon>CourseCensorship.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\CourseCensorship.aspx.designer.cs">
+      <DependentUpon>CourseCensorship.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminconsole\CourseComment.aspx.cs">
+      <DependentUpon>CourseComment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\CourseComment.aspx.designer.cs">
+      <DependentUpon>CourseComment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminconsole\CourseList.aspx.cs">
+      <DependentUpon>CourseList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\CourseList.aspx.designer.cs">
+      <DependentUpon>CourseList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminconsole\DatabaseLog.aspx.cs">
+      <DependentUpon>DatabaseLog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\DatabaseLog.aspx.designer.cs">
+      <DependentUpon>DatabaseLog.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminconsole\EditManager.aspx.cs">
       <DependentUpon>EditManager.aspx</DependentUpon>
@@ -770,13 +803,6 @@
     <Compile Include="adminconsole\ManagerList.aspx.designer.cs">
       <DependentUpon>ManagerList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="adminconsole\courseedit.aspx.cs">
-      <DependentUpon>courseedit.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="adminconsole\courseedit.aspx.designer.cs">
-      <DependentUpon>courseedit.aspx</DependentUpon>
-    </Compile>
     <Compile Include="adminconsole\courseinformation.aspx.cs">
       <DependentUpon>courseinformation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -793,6 +819,20 @@
     </Compile>
     <Compile Include="adminconsole\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="adminconsole\TransactionList.aspx.cs">
+      <DependentUpon>TransactionList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\TransactionList.aspx.designer.cs">
+      <DependentUpon>TransactionList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminconsole\UserList.aspx.cs">
+      <DependentUpon>UserList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\UserList.aspx.designer.cs">
+      <DependentUpon>UserList.aspx</DependentUpon>
     </Compile>
     <Compile Include="ATTEND.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
@@ -820,6 +860,13 @@
     </Compile>
     <Compile Include="COURSE.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="adminconsole\CourseInfo.aspx.cs">
+      <DependentUpon>CourseInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\CourseInfo.aspx.designer.cs">
+      <DependentUpon>CourseInfo.aspx</DependentUpon>
     </Compile>
     <Compile Include="COURSE_CANCEL.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
@@ -869,13 +916,6 @@
     </Compile>
     <Compile Include="adminconsole\Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
-    </Compile>
-    <Compile Include="adminconsole\userlist.aspx.cs">
-      <DependentUpon>userlist.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="adminconsole\userlist.aspx.designer.cs">
-      <DependentUpon>userlist.aspx</DependentUpon>
     </Compile>
     <Compile Include="RECOMMENDATION.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>

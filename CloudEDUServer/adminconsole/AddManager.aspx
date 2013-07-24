@@ -87,6 +87,7 @@
                 var account = document.getElementById("account").value;
                 var password = document.getElementById("password").value;
                 var confirmPassword = document.getElementById("confirmPassword").value;
+                var type = document.getElementById("type").value;
                 if (account == "") {
                     alert("账号不能为空");
                     isUpdate = false;
@@ -119,7 +120,7 @@
 
                     password = hex_md5(password);
 
-                    jQuery.post("AddManager.aspx", { account: account, password: password, permission:permission }, function (data) {
+                    jQuery.post("AddManager.aspx", { account: account, password: password, permission:permission,type:type }, function (data) {
                         if (data == "success") {
                             isUpdate = false;
                             alert("新的管理员添加成功");
@@ -163,7 +164,7 @@
                     <table class="form">
                         <tr>
                             <td>
-                                <label>账号</label>
+                                <label>account</label>
                             </td>
                             <td>
                                 <input type="text"  maxlength="10" class="success" id="account"/>
@@ -171,7 +172,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label>密码</label>
+                                <label>password</label>
                             </td>
                             <td>
                                 <input type="password" maxlength="10"  id="password" />
@@ -179,7 +180,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label>确认密码</label>
+                                <label>confirm password</label>
                             </td>
                             <td>
                                 <input type="password"  maxlength="10" id="confirmPassword" />
@@ -187,7 +188,23 @@
                         </tr>
                         <tr>
                             <td>
-                                <label>权限</label>
+                                 <label>type</label>
+                            </td>
+                            <td>
+                                <select id="type" name="select">
+                                    <%
+                                       CloudEDUServer.TYPE []allType=ManagerAccess.GetAllManagerTypes();
+                                       for (int i=0; i<allType.Length; i++)
+                                       { 
+                                    %>
+                                        <option value="<%=i %>"><%=i %></option>
+                                    <%}%>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>permission</label>
                             </td>
                             <td>
                                 <%

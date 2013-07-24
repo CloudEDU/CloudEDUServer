@@ -5,7 +5,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>Dashboard | BlueWhale Admin</title>
 
-        <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
@@ -64,7 +64,6 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            setupDashboardChart('chart1');
             setupLeftMenu();
             setSidebarHeight();
         });
