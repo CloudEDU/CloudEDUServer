@@ -69,6 +69,7 @@
     <Content Include="adminconsole\CourseComment.aspx" />
     <Content Include="adminconsole\courseinformation.aspx" />
     <Content Include="adminconsole\CourseList.aspx" />
+    <Content Include="adminconsole\CourseStore.aspx" />
     <Content Include="adminconsole\css\960.css" />
     <Content Include="adminconsole\css\facebox.css" />
     <Content Include="adminconsole\css\fancy-button\fancy-button.css" />
@@ -149,6 +150,7 @@
     <Content Include="adminconsole\EditManager.aspx" />
     <Content Include="adminconsole\Global.asax" />
     <Content Include="adminconsole\img\0.png" />
+    <Content Include="adminconsole\img\a.jpg" />
     <Content Include="adminconsole\img\accordian_bg.png" />
     <Content Include="adminconsole\img\ajax-loader.gif" />
     <Content Include="adminconsole\img\application_double.png" />
@@ -156,6 +158,7 @@
     <Content Include="adminconsole\img\arrow-both.png" />
     <Content Include="adminconsole\img\arrow-desc.png" />
     <Content Include="adminconsole\img\arrow.png" />
+    <Content Include="adminconsole\img\b.jpg" />
     <Content Include="adminconsole\img\bar.gif" />
     <Content Include="adminconsole\img\bg-dark.png" />
     <Content Include="adminconsole\img\bg-input-focus.png" />
@@ -172,6 +175,7 @@
     <Content Include="adminconsole\img\button_highlight.png" />
     <Content Include="adminconsole\img\button_highlight_selected.png" />
     <Content Include="adminconsole\img\button_home.png" />
+    <Content Include="adminconsole\img\c.jpg" />
     <Content Include="adminconsole\img\calendar.gif" />
     <Content Include="adminconsole\img\chart.jpg" />
     <Content Include="adminconsole\img\checkbox.png" />
@@ -180,6 +184,7 @@
     <Content Include="adminconsole\img\chekbox_on.png" />
     <Content Include="adminconsole\img\cog.png" />
     <Content Include="adminconsole\img\cross.png" />
+    <Content Include="adminconsole\img\d.jpg" />
     <Content Include="adminconsole\img\dark-bg.png" />
     <Content Include="adminconsole\img\down.png" />
     <Content Include="adminconsole\img\fancy-button\chekbox_off.png" />
@@ -767,6 +772,13 @@
     </Compile>
     <Compile Include="adminconsole\CourseList.aspx.designer.cs">
       <DependentUpon>CourseList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminconsole\CourseStore.aspx.cs">
+      <DependentUpon>CourseStore.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\CourseStore.aspx.designer.cs">
+      <DependentUpon>CourseStore.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminconsole\DatabaseLog.aspx.cs">
       <DependentUpon>DatabaseLog.aspx</DependentUpon>
