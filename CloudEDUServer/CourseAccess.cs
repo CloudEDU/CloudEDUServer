@@ -44,6 +44,114 @@ namespace CloudEDUServer
             }
             return courses;
         }
+
+        public static CATEGORY[] GetAllCategories()
+        {
+            CATEGORY[] categories = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                categories = ctx.CATEGORies.ToArray();
+            }
+            return categories;
+        }
+
+        public static COURSE[] GetCoursesByCategory(CATEGORY category)
+        {
+            COURSE[] courses = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                courses = ctx.COURSEs.Where(c => c.CATEGORY == category.ID).ToArray();
+            }
+            return courses;
+        }
+
+        public static LESSON[] GetLessonsByCourse(COURSE course)
+        {
+            LESSON[] lessons = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                var cs = ctx.COURSEs.Include("LESSONs").Where(c => c.ID == course.ID).FirstOrDefault();
+                lessons = cs.LESSONs.ToArray();
+            }
+            return lessons;
+        }
+
+        public static LESSON[] GetLessonsByCourse(int course_id)
+        {
+            LESSON[] lessons = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                var cs = ctx.COURSEs.Include("LESSONs").Where(c => c.ID == course_id).FirstOrDefault();
+                lessons = cs.LESSONs.ToArray();
+            }
+            return lessons;
+        }
+
+        public static DOCUMENT[] GetDocumentsByLesson(LESSON lesson)
+        {
+            DOCUMENT[] documents = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                var ls = ctx.LESSONs.Include("DOCUMENTs").Where(l => l.ID == lesson.ID).FirstOrDefault();
+                documents = ls.DOCUMENTs.ToArray();
+            }
+            return documents;
+        }
+
+        public static DOCUMENT[] GetDocumentsByLesson(int lesson_id)
+        {
+            DOCUMENT[] documents = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                var ls = ctx.LESSONs.Include("DOCUMENTs").Where(l => l.ID == lesson_id).FirstOrDefault();
+                documents = ls.DOCUMENTs.ToArray();
+            }
+            return documents;
+        }
+
+        public static RESOURCE[] GetDocumentsByLesson(LESSON lesson)
+        {
+            RESOURCE[] resources = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                var rs = ctx.LESSONs.Include("RESOURCEs").Where(l => l.ID == lesson.ID).FirstOrDefault();
+                resources = rs.RESOURCEs.ToArray();
+            }
+            return resources;
+        }
+
+
+        public static RESOURCE[] GetDocumentsByLesson(int lesson_id)
+        {
+            RESOURCE[] resources = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                var rs = ctx.LESSONs.Include("RESOURCEs").Where(l => l.ID == lesson_id).FirstOrDefault();
+                resources = rs.RESOURCEs.ToArray();
+            }
+            return resources;
+        }
+
+        public static NOTE_SHARABLE[] GetAllNotesSharable()
+        {
+            NOTE_SHARABLE[] notes = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                notes = ctx.NOTE_SHARABLE.ToArray();
+            }
+            return notes;
+        }
+
+        public static NOTE_SHARABLE[] GetNoteSharableByLesson(LESSON lesson)
+        {
+            NOTE_SHARABLE[] notes = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                notes = ctx.NOTE_SHARABLE.Where(n => n.LESSON_ID == lesson.ID).ToArray();
+            }
+            return notes;
+        }
+
         #endregion
 
         #region 更新方法
@@ -129,6 +237,16 @@ namespace CloudEDUServer
                 cs = ctx.COURSEs.Where(c => c.ID == course.ID).FirstOrDefault();
             }
             return cs;
+        }
+
+        public static NOTE ConvertToNote(NOTE_SHARABLE note)
+        {
+            NOTE nt = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                nt = ctx.NOTEs.Where(n => n.ID == note.ID).FirstOrDefault();
+            }
+            return nt;
         }
         #endregion
 

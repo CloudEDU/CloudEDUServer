@@ -56,6 +56,17 @@
       [COURSE_PENDING].[START_TIME] AS [START_TIME]
       FROM [COURSE].[COURSE_PENDING] AS [COURSE_PENDING]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="NOTE_SHARABLE" EntityType="CloudEDUModel.Store.NOTE_SHARABLE" store:Type="Views" store:Schema="CUSTOMER" store:Name="NOTE_SHARABLE">
+            <DefiningQuery>SELECT 
+      [NOTE_SHARABLE].[TITLE] AS [TITLE], 
+      [NOTE_SHARABLE].[CONTENT] AS [CONTENT], 
+      [NOTE_SHARABLE].[LESSON_ID] AS [LESSON_ID], 
+      [NOTE_SHARABLE].[ID] AS [ID], 
+      [NOTE_SHARABLE].[DATE] AS [DATE], 
+      [NOTE_SHARABLE].[CUSTOMER_ID] AS [CUSTOMER_ID], 
+      [NOTE_SHARABLE].[SHARE] AS [SHARE]
+      FROM [CUSTOMER].[NOTE_SHARABLE] AS [NOTE_SHARABLE]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="COURSE_CANCEL" EntityType="CloudEDUModel.Store.COURSE_CANCEL" store:Type="Views" store:Schema="MANAGER" store:Name="COURSE_CANCEL">
             <DefiningQuery>SELECT 
       [COURSE_CANCEL].[ID] AS [ID], 
@@ -406,6 +417,25 @@
           <Property Name="PG" Type="int" />
           <Property Name="ICON_URL" Type="nvarchar" MaxLength="100" />
           <Property Name="START_TIME" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+      警告 6002: 表/视图“CloudEDU.CUSTOMER.NOTE_SHARABLE”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+        <EntityType Name="NOTE_SHARABLE">
+          <Key>
+            <PropertyRef Name="CONTENT" />
+            <PropertyRef Name="LESSON_ID" />
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="DATE" />
+            <PropertyRef Name="SHARE" />
+          </Key>
+          <Property Name="TITLE" Type="varchar" MaxLength="50" />
+          <Property Name="CONTENT" Type="text" Nullable="false" />
+          <Property Name="LESSON_ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DATE" Type="datetime" Nullable="false" />
+          <Property Name="CUSTOMER_ID" Type="int" />
+          <Property Name="SHARE" Type="bit" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
       警告 6002: 表/视图“CloudEDU.MANAGER.COURSE_CANCEL”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
@@ -879,6 +909,7 @@
             <Parameter Name="course_id" Mode="In" Type="Int32" />
             <Parameter Name="customer_id" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="NOTE_SHARABLE" EntityType="CloudEDUModel.NOTE_SHARABLE" />
         </EntityContainer>
         <EntityType Name="CATEGORY">
           <Key>
@@ -915,7 +946,7 @@
           <Property Name="PG" Type="Int32" />
           <Property Name="ICON_URL" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="START_TIME" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="CATEGORY1" Relationship="CloudEDUModel.FK_COURSE_CATEGORY" FromRole="COURSE" ToRole="CATEGORY" />
+          <NavigationProperty Name="CATEGORY_navi" Relationship="CloudEDUModel.FK_COURSE_CATEGORY" FromRole="COURSE" ToRole="CATEGORY" />
           <NavigationProperty Name="COMMENTs" Relationship="CloudEDUModel.FK_COMMENT_COURSE" FromRole="COURSE" ToRole="COMMENT" />
           <NavigationProperty Name="SALEORDERs" Relationship="CloudEDUModel.FK__SALEORDER__COURS__534D60F1" FromRole="COURSE" ToRole="SALEORDER" />
           <NavigationProperty Name="ATTENDs" Relationship="CloudEDUModel.FK_ATTEND_COURSE" FromRole="COURSE" ToRole="ATTEND" />
@@ -1020,8 +1051,8 @@
           <NavigationProperty Name="COURSEs" Relationship="CloudEDUModel.FK_COURSE_TEACHER" FromRole="CUSTOMER" ToRole="COURSE" />
           <NavigationProperty Name="ATTENDs" Relationship="CloudEDUModel.FK_ATTEND_CUSTOMER" FromRole="CUSTOMER" ToRole="ATTEND" />
           <NavigationProperty Name="NOTEs" Relationship="CloudEDUModel.FK__NOTE__CUSTOMER_I__2334397B" FromRole="CUSTOMER" ToRole="NOTE" />
-          <NavigationProperty Name="SALEORDERs" Relationship="CloudEDUModel.FK__SALEORDER__BUYER__5070F446" FromRole="CUSTOMER" ToRole="SALEORDER" />
-          <NavigationProperty Name="SALEORDERs1" Relationship="CloudEDUModel.FK__SALEORDER__SALER__5165187F" FromRole="CUSTOMER" ToRole="SALEORDER" />
+          <NavigationProperty Name="SALEORDERs_asbuyer" Relationship="CloudEDUModel.FK__SALEORDER__BUYER__5070F446" FromRole="CUSTOMER" ToRole="SALEORDER" />
+          <NavigationProperty Name="SALEORDERs_assaler" Relationship="CloudEDUModel.FK__SALEORDER__SALER__5165187F" FromRole="CUSTOMER" ToRole="SALEORDER" />
           <NavigationProperty Name="COURSEs1" Relationship="CloudEDUModel.FAVORITE" FromRole="CUSTOMER" ToRole="COURSE" />
         </EntityType>
         <EntityType Name="NOTE">
@@ -1086,8 +1117,8 @@
           <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="TIME" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="COURSE1" Relationship="CloudEDUModel.FK__SALEORDER__COURS__534D60F1" FromRole="SALEORDER" ToRole="COURSE" />
-          <NavigationProperty Name="CUSTOMER" Relationship="CloudEDUModel.FK__SALEORDER__BUYER__5070F446" FromRole="SALEORDER" ToRole="CUSTOMER" />
-          <NavigationProperty Name="CUSTOMER1" Relationship="CloudEDUModel.FK__SALEORDER__SALER__5165187F" FromRole="SALEORDER" ToRole="CUSTOMER" />
+          <NavigationProperty Name="CUSTOMER_buyer" Relationship="CloudEDUModel.FK__SALEORDER__BUYER__5070F446" FromRole="SALEORDER" ToRole="CUSTOMER" />
+          <NavigationProperty Name="CUSTOMER_saler" Relationship="CloudEDUModel.FK__SALEORDER__SALER__5165187F" FromRole="SALEORDER" ToRole="CUSTOMER" />
         </EntityType>
         <EntityType Name="COURSE_OK">
           <Key>
@@ -1408,6 +1439,22 @@
           <Property Type="Int32" Name="ErrorLine" Nullable="true" />
           <Property Type="String" Name="ErrorMessage" Nullable="true" MaxLength="4000" />
         </ComplexType>
+        <EntityType Name="NOTE_SHARABLE">
+          <Key>
+            <PropertyRef Name="CONTENT" />
+            <PropertyRef Name="LESSON_ID" />
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="DATE" />
+            <PropertyRef Name="SHARE" />
+          </Key>
+          <Property Type="String" Name="TITLE" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CONTENT" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="LESSON_ID" Nullable="false" />
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="DATE" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="CUSTOMER_ID" />
+          <Property Type="Boolean" Name="SHARE" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1696,6 +1743,19 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="NOTE_SHARABLE">
+            <EntityTypeMapping TypeName="CloudEDUModel.NOTE_SHARABLE">
+              <MappingFragment StoreEntitySet="NOTE_SHARABLE">
+                <ScalarProperty Name="SHARE" ColumnName="SHARE" />
+                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LESSON_ID" ColumnName="LESSON_ID" />
+                <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

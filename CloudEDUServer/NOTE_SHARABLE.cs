@@ -12,17 +12,14 @@ namespace CloudEDUServer
     using System;
     using System.Collections.Generic;
     
-    public partial class SALEORDER
+    public partial class NOTE_SHARABLE
     {
-        public int BUYER { get; set; }
-        public int SALER { get; set; }
-        public decimal PRICE { get; set; }
-        public int COURSE { get; set; }
+        public string TITLE { get; set; }
+        public string CONTENT { get; set; }
+        public int LESSON_ID { get; set; }
         public int ID { get; set; }
-        public System.DateTime TIME { get; set; }
-    
-        public virtual COURSE COURSE1 { get; set; }
-        public virtual CUSTOMER CUSTOMER_buyer { get; set; }
-        public virtual CUSTOMER CUSTOMER_saler { get; set; }
+        public System.DateTime DATE { get; set; }
+        public Nullable<int> CUSTOMER_ID { get; set; }
+        public bool SHARE { get; set; }
     }
 }
