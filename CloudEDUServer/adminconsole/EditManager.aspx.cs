@@ -32,7 +32,10 @@ namespace CloudEDUServer.adminconsole
                 try
                 {
                     manager.NAME = account;
-                    manager.PASSWORD = password;
+                    if (password != null && password != "")
+                    {
+                        manager.PASSWORD = password;
+                    }
 
                     PERMISSION[] permission = ManagerAccess.GetPermissionsByManager(manager);
                     for (int i = 0; i < permission.Length; i++)
@@ -48,6 +51,7 @@ namespace CloudEDUServer.adminconsole
                             permissionNum -= (1 << i);
                         }
                     }
+                    manager.MNGR_TYPE =int.Parse( Request.Params.Get("type"));
                     ManagerAccess.UpdateManager(manager);
                 }
                 catch

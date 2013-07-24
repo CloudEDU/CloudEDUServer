@@ -42,7 +42,7 @@ namespace CloudEDUServer.adminconsole
                 newManager.NAME = account;
                 newManager.PASSWORD = password;
                 int permissionNum = int.Parse(Request.Params.Get("permission"));
-
+                newManager.MNGR_TYPE=int.Parse(Request.Params.Get("type"));
                 if (ManagerAccess.AddManager(newManager))
                 {
                     try

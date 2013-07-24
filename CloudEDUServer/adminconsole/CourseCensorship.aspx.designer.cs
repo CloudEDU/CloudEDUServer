@@ -10,7 +10,7 @@
 namespace CloudEDUServer.adminconsole {
     
     
-    public partial class UserList {
+    public partial class CourseCensorship {
         
         /// <summary>
         /// Head1 控件。

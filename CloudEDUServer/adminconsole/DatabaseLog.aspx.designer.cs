@@ -10,7 +10,7 @@
 namespace CloudEDUServer.adminconsole {
     
     
-    public partial class UserList {
+    public partial class DatabaseLog {
         
         /// <summary>
         /// Head1 控件。

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManagerList.aspx.cs" Inherits="CloudEDUServer.adminconsole.ManagerList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CourseInfo.aspx.cs" Inherits="CloudEDUServer.CourseInfo" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -6,10 +6,8 @@
 <head id="Head1" runat="server">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>Typography | BlueWhale Admin</title>
-
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-
-    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
+    
+        <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
@@ -64,107 +62,66 @@
     <!-- Load TinyMCE -->
     <script src="js/tiny-mce/jquery.tinymce.js" type="text/javascript"></script>
 
-    <script type="text/javascript" src="js/table/table.js"></script>
     <script src="js/setup.js" type="text/javascript"></script>
 
     <script type="text/javascript">
 
         $(document).ready(function () {
             setupLeftMenu();
-            $('.datatable').dataTable({
-            "sPaginationType":"full_numbers"});
             setSidebarHeight();
         });
+     </script>
 
-        var isOperating = false;
-        function deleteManager(account) {
-            if (isOperating) {
-                alert("操作中，请稍后");
-                return;
-            }
-            isOperating = true;
-            if (confirm("确认删除该管理员吗")) {
-                $.post("ManagerList.aspx", { operate: "delete", account: account }, function (data) {
-                    if (data == "success") {
-                        alert("删除成功");
-                        isOperating = false;
-                        window.location.href = "ManagerList.aspx";
-                    }
-                    else {
-                        alert(data);
-                        isOperating = false;
-                    }
-                });
-            }
-            else {
-                isOperating = false;
-            }
-        }
-        function editManager(account) {
-            if (isOperating) {
-                alert("操作中，请稍后");
-                return;
-            }
-            isOperating = true;
-            if (confirm("确认编辑该管理员吗")) {
-                $.post("ManagerList.aspx", { operate: "edit", account: account }, function (data) {
-                    if (data == "success") {
-                        window.location.href = "EditManager.aspx";
-                    }
-                    else {
-                        alert(data);
-                    }
-                    isOperating = false;
-                });
-            }
-            else {
-                isOperating = false;
-            }
-        }
-    </script>
 </head>
-<body id="Body1" runat="server">
-    <div class="container_12">    
+<body>
+    <div class="container_12">
         <!--#include file="Navigation.aspx" -->
-
         <div class="grid_10">
-            <div class="box round first grid">
+            <div class="box round first">
                 <h2>
-                    Manager List
-                </h2>
+                    Typography</h2>
                 <div class="block">
-					<table class="data display datatable">
+                    <!-- paragraphs -->
+                    <p class="start">
+                        <img src="img/vertical.jpg" alt="Ginger" class="right" />Lorem Ipsum is simply dummy
+                        text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                        standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book. It has survived not only
+                        five centuries, but also the leap into electronic typesetting, remaining essentially
+                        unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+                        Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
+                        PageMaker including versions of Lorem Ipsum.</p>
+
+
+                    <p class="start">
+                        <img src="img/horizontal.jpg" alt="Ginger" class="left" />Lorem ipsum dolor sit
+                        amet, consectetur <a href="">adipisicing</a> elit, sed do eiusmod tempor incididunt
+                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+                        anim id est laborum.</p>
+                    <p>
+
+                    <table class="data display datatable">
 					<thead>
 						<tr>
-							<th  style="text-align:center">Name</th>
-							<th  style="text-align:center">Permission</th>
-							<th  style="text-align:center">Type</th>
-                            <th  style="text-align:center"></th>
-                            <th  style="text-align:center"></th>
+							<th style="text-align:center">Number</th>
+							<th style="text-align:center">content</th>
+							<th style="text-align:center">title</th>
+                            <th style="text-align:center">Document</th>
 						</tr>
 					</thead>
 					<tbody>
-                        <%
-                         MANAGER[] manager=ManagerAccess.GetAllManagers();
-                         for (int j = 0; j < 19; j++ )
-                             for (int i = 0; i < manager.Length; i++)
-                             {
-                             
-                        %>
 						    <tr>
-							    <td style="text-align:center"><%=manager[i].NAME%></td>
-							    <td style="text-align:center"><%=ManagerAccess.getPermissionStringByManager(manager[i])%></td>
-							    <td style="text-align:center"><%=manager[i].MNGR_TYPE%></td>	
-                                <td style="text-align:center"><a href="javascript:editManager('<%=manager[i].NAME%>')">编辑</a></td>						    
-							    <td style="text-align:center"><a href="javascript:deleteManager('<%=manager[i].NAME%>')">删除</a></td>
-						    </tr>
-                        <%}%>			
+							    <td style="text-align:center">VioletHill</td>
+							    <td style="text-align:center">100</td>
+							    <td style="text-align:center">mailqiufeng@gmail.com</td>	
+                                <td style="text-align:center">mailqiufeng@gmail.com</td>
+						    </tr>	
+                        		
 					</tbody>
-				</table>
-                <ul style="margin-left:800px;">
-                    <li><a href="AddManager.aspx">添加管理员</a></li>
-                </ul>        
-            
+				    </table>                        
                 </div>
             </div>
         </div>
@@ -178,5 +135,6 @@
             Copyright <a href="#">Cloud Edu</a>. All Rights Reserved.
         </p>
     </div>
+    
 </body>
 </html>

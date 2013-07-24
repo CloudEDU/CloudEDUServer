@@ -67,7 +67,7 @@ namespace CloudEDUServer.adminconsole
                     {
                         Session["editAccount"] = account;
                         Session["editPermission"] = ManagerAccess.GetPermissionsByManager(ManagerAccess.GetManagerByName(account));
-                        //PERMISSION[]permission= ManagerAccess.GetPermissionsByManager(ManagerAccess.GetManagerByName(account));
+                        Session["editType"] = ManagerAccess.GetManagerByName(account).MNGR_TYPE;
                         Response.Write("success");
                         Response.End();
                     }

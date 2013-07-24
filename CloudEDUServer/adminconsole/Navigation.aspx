@@ -13,16 +13,14 @@
                     <img src="img/logo.png" alt="Logo" /></div>
                 <div class="floatright">
                     <div class="floatleft">
-                      <p><%=((MANAGER)Session["manager"]).NAME%></p>
+                       <span class="small grey"><%=((MANAGER)Session["manager"]).NAME%></span>
                        
                     </div>
                     <div class="floatleft marginleft10">
                         <ul class="inline-ul floatleft">
-                            <li><a href="#">Config</a></li>
                             <li style="margin-left:10px"><a href="Logout.aspx">Logout</a></li>
                         </ul>
-                        <br />
-                        <span class="small grey">Last Login: 3 hours ago</span>
+                        <br />            
                     </div>
                 </div>
                 <div class="clear">
@@ -32,7 +30,7 @@
         <div class="clear">
         </div>
 
-        <div class="grid_12">
+        <div class="grid_10">
             <ul class="nav">
                 <li class="ic-dashboard"><a href="Default.aspx"><span>Dashboard</span></a> </li>
             </ul>
@@ -47,31 +45,36 @@
                     <ul class="section menu">
                         <li><a class="menuitem">User Management</a>
                             <ul class="submenu">
-                                <li><a href="userlist.aspx">User List</a> </li>
-                                <li><a href="userloginstatus.html">User Login Status</a> </li>
-                                <li><a href="userlevel.html">User Level</a></li>
+                                <li><a href="UserList.aspx">User List</a> </li>
                             </ul>
                         </li>
                         <li><a class="menuitem">Courstore Management</a>
                             <ul class="submenu">
-                                <li><a href="courselist.html">Course List</a> </li>
-                                <li><a href="courseinformation.html">Course Information</a> </li>
-                                <li><a href="coursecommentmanage.html">Comment Management</a> </li>
+                                <li><a href="CourseList.aspx">Course List</a> </li>
+                                <li><a href="CourseStore.aspx">Course Store</a></li>
+                                <li><a href="CourseComment.aspx">Course Comment</a></li>
+                                <li><a href="CourseCensorship.aspx">Course Censorship</a>
                             </ul>
                         </li>
-                        <li><a class="menuitem">Manager Management</a>
+                        <li><a class="menuitem">Manager Management</a>                            
                             <ul class="submenu">
                                 <li><a href="ManagerList.aspx">Manager list</a> </li>
-                                <li><a href="dblog.html">DB Log</a> </li>
+
                             </ul>
                         </li>
                         <li><a class="menuitem">Transaction Management</a>
                             <ul class="submenu">
-                                <li><a href="transactionlist.html">Transaction List</a> </li>
-                                <li><a href="trancactionquery.html">Transaction Query</a> </li>
-                    
+                                <li><a href="TransactionList.aspx">Transaction List</a> </li>                   
                             </ul>
                         </li>
+                        <li><a class="menuitem">Database Management</a>
+                            <ul class="submenu">
+                                <li><a href="DatabaseLog.aspx">Database Log</a> </li>                   
+                            </ul>
+                        </li>
+                        
+                        </ul>
+
                     </ul>
                 </div>
             </div>
