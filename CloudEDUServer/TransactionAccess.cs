@@ -5,6 +5,9 @@ using System.Web;
 
 namespace CloudEDUServer
 {
+    /// <summary>
+    /// 用于查询订单信息，订单信息不允许更改
+    /// </summary>
     public class TransactionAccess
     {
         public static SALEORDER[] GetAllSaleOrder()

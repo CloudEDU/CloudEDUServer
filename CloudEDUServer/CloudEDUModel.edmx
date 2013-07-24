@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CloudEDUModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CloudEDUModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="CloudEDUModelStoreContainer">
           <EntitySet Name="CATEGORY" EntityType="CloudEDUModel.Store.CATEGORY" store:Type="Tables" Schema="COURSE" />
           <EntitySet Name="COMMENT" EntityType="CloudEDUModel.Store.COMMENT" store:Type="Tables" Schema="COURSE" />
@@ -12,30 +12,13 @@
           <EntitySet Name="DOCUMENT" EntityType="CloudEDUModel.Store.DOCUMENT" store:Type="Tables" Schema="COURSE" />
           <EntitySet Name="LESSON" EntityType="CloudEDUModel.Store.LESSON" store:Type="Tables" Schema="COURSE" />
           <EntitySet Name="PARENT_GUIDE" EntityType="CloudEDUModel.Store.PARENT_GUIDE" store:Type="Tables" Schema="COURSE" />
-          <EntitySet Name="RECO_COURSE" EntityType="CloudEDUModel.Store.RECO_COURSE" store:Type="Tables" store:Schema="COURSE" store:Name="RECO_COURSE">
-            <DefiningQuery>SELECT 
-      [RECO_COURSE].[COURSE_ID] AS [COURSE_ID], 
-      [RECO_COURSE].[RECO_ID] AS [RECO_ID]
-      FROM [COURSE].[RECO_COURSE] AS [RECO_COURSE]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="RECO_COURSE" EntityType="CloudEDUModel.Store.RECO_COURSE" store:Type="Tables" Schema="COURSE" />
           <EntitySet Name="RECOMMENDATION" EntityType="CloudEDUModel.Store.RECOMMENDATION" store:Type="Tables" Schema="COURSE" />
           <EntitySet Name="RES_TYPE" EntityType="CloudEDUModel.Store.RES_TYPE" store:Type="Tables" Schema="COURSE" />
           <EntitySet Name="RESOURCE" EntityType="CloudEDUModel.Store.RESOURCE" store:Type="Tables" Schema="COURSE" />
-          <EntitySet Name="ATTEND" EntityType="CloudEDUModel.Store.ATTEND" store:Type="Tables" store:Schema="CUSTOMER" store:Name="ATTEND">
-            <DefiningQuery>SELECT 
-      [ATTEND].[CUSTOMER_ID] AS [CUSTOMER_ID], 
-      [ATTEND].[COURSE_ID] AS [COURSE_ID], 
-      [ATTEND].[START_TIME] AS [START_TIME], 
-      [ATTEND].[CURRENT_LESSON] AS [CURRENT_LESSON]
-      FROM [CUSTOMER].[ATTEND] AS [ATTEND]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="ATTEND" EntityType="CloudEDUModel.Store.ATTEND" store:Type="Tables" Schema="CUSTOMER" />
           <EntitySet Name="CUSTOMER" EntityType="CloudEDUModel.Store.CUSTOMER" store:Type="Tables" Schema="CUSTOMER" />
-          <EntitySet Name="FAVORITE" EntityType="CloudEDUModel.Store.FAVORITE" store:Type="Tables" store:Schema="CUSTOMER" store:Name="FAVORITE">
-            <DefiningQuery>SELECT 
-      [FAVORITE].[CUSTOMER_ID] AS [CUSTOMER_ID], 
-      [FAVORITE].[COURSE_ID] AS [COURSE_ID]
-      FROM [CUSTOMER].[FAVORITE] AS [FAVORITE]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="FAVORITE" EntityType="CloudEDUModel.Store.FAVORITE" store:Type="Tables" Schema="CUSTOMER" />
           <EntitySet Name="NOTE" EntityType="CloudEDUModel.Store.NOTE" store:Type="Tables" Schema="CUSTOMER" />
           <EntitySet Name="OPR_LOG" EntityType="CloudEDUModel.Store.OPR_LOG" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="GRANTED" EntityType="CloudEDUModel.Store.GRANTED" store:Type="Tables" Schema="MANAGER" />
@@ -43,29 +26,20 @@
           <EntitySet Name="PERMISSION" EntityType="CloudEDUModel.Store.PERMISSION" store:Type="Tables" Schema="MANAGER" />
           <EntitySet Name="TYPE" EntityType="CloudEDUModel.Store.TYPE" store:Type="Tables" Schema="MANAGER" />
           <EntitySet Name="SALEORDER" EntityType="CloudEDUModel.Store.SALEORDER" store:Type="Tables" Schema="TRSACTION" />
-          <EntitySet Name="COURSE_CANCEL" EntityType="CloudEDUModel.Store.COURSE_CANCEL" store:Type="Views" store:Schema="COURSE" store:Name="COURSE_CANCEL">
+          <EntitySet Name="COURSE_OK" EntityType="CloudEDUModel.Store.COURSE_OK" store:Type="Views" store:Schema="COURSE" store:Name="COURSE_OK">
             <DefiningQuery>SELECT 
-      [COURSE_CANCEL].[ID] AS [ID], 
-      [COURSE_CANCEL].[PRICE] AS [PRICE], 
-      [COURSE_CANCEL].[RATE] AS [RATE], 
-      [COURSE_CANCEL].[TITLE] AS [TITLE], 
-      [COURSE_CANCEL].[INTRO] AS [INTRO], 
-      [COURSE_CANCEL].[TEACHER] AS [TEACHER], 
-      [COURSE_CANCEL].[CATEGORY] AS [CATEGORY], 
-      [COURSE_CANCEL].[COURSE_STATUS] AS [COURSE_STATUS]
-      FROM [COURSE].[COURSE_CANCEL] AS [COURSE_CANCEL]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Course_OK" EntityType="CloudEDUModel.Store.Course_OK" store:Type="Views" store:Schema="COURSE" store:Name="Course_OK">
-            <DefiningQuery>SELECT 
-      [Course_OK].[ID] AS [ID], 
-      [Course_OK].[PRICE] AS [PRICE], 
-      [Course_OK].[RATE] AS [RATE], 
-      [Course_OK].[TITLE] AS [TITLE], 
-      [Course_OK].[INTRO] AS [INTRO], 
-      [Course_OK].[TEACHER] AS [TEACHER], 
-      [Course_OK].[CATEGORY] AS [CATEGORY], 
-      [Course_OK].[COURSE_STATUS] AS [COURSE_STATUS]
-      FROM [COURSE].[Course_OK] AS [Course_OK]</DefiningQuery>
+      [COURSE_OK].[ID] AS [ID], 
+      [COURSE_OK].[PRICE] AS [PRICE], 
+      [COURSE_OK].[RATE] AS [RATE], 
+      [COURSE_OK].[TITLE] AS [TITLE], 
+      [COURSE_OK].[INTRO] AS [INTRO], 
+      [COURSE_OK].[TEACHER] AS [TEACHER], 
+      [COURSE_OK].[CATEGORY] AS [CATEGORY], 
+      [COURSE_OK].[COURSE_STATUS] AS [COURSE_STATUS], 
+      [COURSE_OK].[PG] AS [PG], 
+      [COURSE_OK].[ICON_URL] AS [ICON_URL], 
+      [COURSE_OK].[START_TIME] AS [START_TIME]
+      FROM [COURSE].[COURSE_OK] AS [COURSE_OK]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="COURSE_PENDING" EntityType="CloudEDUModel.Store.COURSE_PENDING" store:Type="Views" store:Schema="COURSE" store:Name="COURSE_PENDING">
             <DefiningQuery>SELECT 
@@ -76,8 +50,26 @@
       [COURSE_PENDING].[INTRO] AS [INTRO], 
       [COURSE_PENDING].[TEACHER] AS [TEACHER], 
       [COURSE_PENDING].[CATEGORY] AS [CATEGORY], 
-      [COURSE_PENDING].[COURSE_STATUS] AS [COURSE_STATUS]
+      [COURSE_PENDING].[COURSE_STATUS] AS [COURSE_STATUS], 
+      [COURSE_PENDING].[PG] AS [PG], 
+      [COURSE_PENDING].[ICON_URL] AS [ICON_URL], 
+      [COURSE_PENDING].[START_TIME] AS [START_TIME]
       FROM [COURSE].[COURSE_PENDING] AS [COURSE_PENDING]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="COURSE_CANCEL" EntityType="CloudEDUModel.Store.COURSE_CANCEL" store:Type="Views" store:Schema="MANAGER" store:Name="COURSE_CANCEL">
+            <DefiningQuery>SELECT 
+      [COURSE_CANCEL].[ID] AS [ID], 
+      [COURSE_CANCEL].[PRICE] AS [PRICE], 
+      [COURSE_CANCEL].[RATE] AS [RATE], 
+      [COURSE_CANCEL].[TITLE] AS [TITLE], 
+      [COURSE_CANCEL].[INTRO] AS [INTRO], 
+      [COURSE_CANCEL].[TEACHER] AS [TEACHER], 
+      [COURSE_CANCEL].[CATEGORY] AS [CATEGORY], 
+      [COURSE_CANCEL].[COURSE_STATUS] AS [COURSE_STATUS], 
+      [COURSE_CANCEL].[PG] AS [PG], 
+      [COURSE_CANCEL].[ICON_URL] AS [ICON_URL], 
+      [COURSE_CANCEL].[START_TIME] AS [START_TIME]
+      FROM [MANAGER].[COURSE_CANCEL] AS [COURSE_CANCEL]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__COMMENT__CUSTOME__6E01572D" Association="CloudEDUModel.Store.FK__COMMENT__CUSTOME__6E01572D">
             <End Role="CUSTOMER" EntitySet="CUSTOMER" />
@@ -236,9 +228,6 @@
           <Property Name="RESTRICT_AGE" Type="int" Nullable="false" />
           <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <!--生成过程中发现错误:
-      警告 6002: 表/视图“CloudEDU.COURSE.RECO_COURSE”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
-      -->
         <EntityType Name="RECO_COURSE">
           <Key>
             <PropertyRef Name="COURSE_ID" />
@@ -274,14 +263,10 @@
           <Property Name="TYPE" Type="int" Nullable="false" />
           <Property Name="URL" Type="varchar" Nullable="false" MaxLength="100" />
         </EntityType>
-        <!--生成过程中发现错误:
-      警告 6002: 表/视图“CloudEDU.CUSTOMER.ATTEND”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
-      -->
         <EntityType Name="ATTEND">
           <Key>
             <PropertyRef Name="CUSTOMER_ID" />
             <PropertyRef Name="COURSE_ID" />
-            <PropertyRef Name="START_TIME" />
           </Key>
           <Property Name="CUSTOMER_ID" Type="int" Nullable="false" />
           <Property Name="COURSE_ID" Type="int" Nullable="false" />
@@ -302,9 +287,6 @@
           <Property Name="TEACH_RATE" Type="float" />
           <Property Name="BIRTHDAY" Type="date" Nullable="false" />
         </EntityType>
-        <!--生成过程中发现错误:
-      警告 6002: 表/视图“CloudEDU.CUSTOMER.FAVORITE”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
-      -->
         <EntityType Name="FAVORITE">
           <Key>
             <PropertyRef Name="CUSTOMER_ID" />
@@ -378,42 +360,28 @@
           <Property Name="TIME" Type="datetime" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
-      警告 6002: 表/视图“CloudEDU.COURSE.COURSE_CANCEL”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      警告 6002: 表/视图“CloudEDU.COURSE.COURSE_OK”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
       -->
-        <EntityType Name="COURSE_CANCEL">
+        <EntityType Name="COURSE_OK">
           <Key>
             <PropertyRef Name="ID" />
             <PropertyRef Name="PRICE" />
             <PropertyRef Name="TITLE" />
+            <PropertyRef Name="TEACHER" />
             <PropertyRef Name="COURSE_STATUS" />
+            <PropertyRef Name="START_TIME" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="PRICE" Type="money" Nullable="false" />
-          <Property Name="RATE" Type="int" />
+          <Property Name="RATE" Type="float" />
           <Property Name="TITLE" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="INTRO" Type="text" />
-          <Property Name="TEACHER" Type="int" />
+          <Property Name="TEACHER" Type="int" Nullable="false" />
           <Property Name="CATEGORY" Type="int" />
           <Property Name="COURSE_STATUS" Type="nchar" Nullable="false" MaxLength="10" />
-        </EntityType>
-        <!--生成过程中发现错误:
-      警告 6002: 表/视图“CloudEDU.COURSE.Course_OK”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
-      -->
-        <EntityType Name="Course_OK">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="PRICE" />
-            <PropertyRef Name="TITLE" />
-            <PropertyRef Name="COURSE_STATUS" />
-          </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="PRICE" Type="money" Nullable="false" />
-          <Property Name="RATE" Type="int" />
-          <Property Name="TITLE" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="INTRO" Type="text" />
-          <Property Name="TEACHER" Type="int" />
-          <Property Name="CATEGORY" Type="int" />
-          <Property Name="COURSE_STATUS" Type="nchar" Nullable="false" MaxLength="10" />
+          <Property Name="PG" Type="int" />
+          <Property Name="ICON_URL" Type="nvarchar" MaxLength="100" />
+          <Property Name="START_TIME" Type="datetime" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
       警告 6002: 表/视图“CloudEDU.COURSE.COURSE_PENDING”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
@@ -423,16 +391,45 @@
             <PropertyRef Name="ID" />
             <PropertyRef Name="PRICE" />
             <PropertyRef Name="TITLE" />
+            <PropertyRef Name="TEACHER" />
             <PropertyRef Name="COURSE_STATUS" />
+            <PropertyRef Name="START_TIME" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="PRICE" Type="money" Nullable="false" />
-          <Property Name="RATE" Type="int" />
+          <Property Name="RATE" Type="float" />
           <Property Name="TITLE" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="INTRO" Type="text" />
-          <Property Name="TEACHER" Type="int" />
+          <Property Name="TEACHER" Type="int" Nullable="false" />
           <Property Name="CATEGORY" Type="int" />
           <Property Name="COURSE_STATUS" Type="nchar" Nullable="false" MaxLength="10" />
+          <Property Name="PG" Type="int" />
+          <Property Name="ICON_URL" Type="nvarchar" MaxLength="100" />
+          <Property Name="START_TIME" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+      警告 6002: 表/视图“CloudEDU.MANAGER.COURSE_CANCEL”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+        <EntityType Name="COURSE_CANCEL">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PRICE" />
+            <PropertyRef Name="TITLE" />
+            <PropertyRef Name="TEACHER" />
+            <PropertyRef Name="COURSE_STATUS" />
+            <PropertyRef Name="START_TIME" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PRICE" Type="money" Nullable="false" />
+          <Property Name="RATE" Type="float" />
+          <Property Name="TITLE" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="INTRO" Type="text" />
+          <Property Name="TEACHER" Type="int" Nullable="false" />
+          <Property Name="CATEGORY" Type="int" />
+          <Property Name="COURSE_STATUS" Type="nchar" Nullable="false" MaxLength="10" />
+          <Property Name="PG" Type="int" />
+          <Property Name="ICON_URL" Type="nvarchar" MaxLength="100" />
+          <Property Name="START_TIME" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK__COMMENT__CUSTOME__6E01572D">
           <End Role="CUSTOMER" Type="CloudEDUModel.Store.CUSTOMER" Multiplicity="1" />
@@ -744,7 +741,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CloudEDUModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -766,9 +764,9 @@
           <EntitySet Name="PERMISSIONs" EntityType="CloudEDUModel.PERMISSION" />
           <EntitySet Name="TYPEs" EntityType="CloudEDUModel.TYPE" />
           <EntitySet Name="SALEORDERs" EntityType="CloudEDUModel.SALEORDER" />
-          <EntitySet Name="COURSE_CANCEL" EntityType="CloudEDUModel.COURSE_CANCEL" />
-          <EntitySet Name="Course_OK" EntityType="CloudEDUModel.Course_OK" />
+          <EntitySet Name="COURSE_OK" EntityType="CloudEDUModel.COURSE_OK" />
           <EntitySet Name="COURSE_PENDING" EntityType="CloudEDUModel.COURSE_PENDING" />
+          <EntitySet Name="COURSE_CANCEL" EntityType="CloudEDUModel.COURSE_CANCEL" />
           <AssociationSet Name="FK_COURSE_CATEGORY" Association="CloudEDUModel.FK_COURSE_CATEGORY">
             <End Role="CATEGORY" EntitySet="CATEGORies" />
             <End Role="COURSE" EntitySet="COURSEs" />
@@ -968,7 +966,6 @@
           <Key>
             <PropertyRef Name="CUSTOMER_ID" />
             <PropertyRef Name="COURSE_ID" />
-            <PropertyRef Name="START_TIME" />
           </Key>
           <Property Name="CUSTOMER_ID" Type="Int32" Nullable="false" />
           <Property Name="COURSE_ID" Type="Int32" Nullable="false" />
@@ -1064,53 +1061,68 @@
           <NavigationProperty Name="CUSTOMER" Relationship="CloudEDUModel.FK__SALEORDER__BUYER__5070F446" FromRole="SALEORDER" ToRole="CUSTOMER" />
           <NavigationProperty Name="CUSTOMER1" Relationship="CloudEDUModel.FK__SALEORDER__SALER__5165187F" FromRole="SALEORDER" ToRole="CUSTOMER" />
         </EntityType>
-        <EntityType Name="COURSE_CANCEL">
+        <EntityType Name="COURSE_OK">
           <Key>
             <PropertyRef Name="ID" />
             <PropertyRef Name="PRICE" />
             <PropertyRef Name="TITLE" />
+            <PropertyRef Name="TEACHER" />
             <PropertyRef Name="COURSE_STATUS" />
+            <PropertyRef Name="START_TIME" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="PRICE" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="RATE" Type="Int32" />
+          <Property Name="RATE" Type="Double" />
           <Property Name="TITLE" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="INTRO" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
-          <Property Name="TEACHER" Type="Int32" />
+          <Property Name="TEACHER" Type="Int32" Nullable="false" />
           <Property Name="CATEGORY" Type="Int32" />
           <Property Name="COURSE_STATUS" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
-        </EntityType>
-        <EntityType Name="Course_OK">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="PRICE" />
-            <PropertyRef Name="TITLE" />
-            <PropertyRef Name="COURSE_STATUS" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="PRICE" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="RATE" Type="Int32" />
-          <Property Name="TITLE" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="INTRO" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
-          <Property Name="TEACHER" Type="Int32" />
-          <Property Name="CATEGORY" Type="Int32" />
-          <Property Name="COURSE_STATUS" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="PG" Type="Int32" />
+          <Property Name="ICON_URL" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="START_TIME" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="COURSE_PENDING">
           <Key>
             <PropertyRef Name="ID" />
             <PropertyRef Name="PRICE" />
             <PropertyRef Name="TITLE" />
+            <PropertyRef Name="TEACHER" />
             <PropertyRef Name="COURSE_STATUS" />
+            <PropertyRef Name="START_TIME" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="PRICE" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="RATE" Type="Int32" />
+          <Property Name="RATE" Type="Double" />
           <Property Name="TITLE" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="INTRO" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
-          <Property Name="TEACHER" Type="Int32" />
+          <Property Name="TEACHER" Type="Int32" Nullable="false" />
           <Property Name="CATEGORY" Type="Int32" />
           <Property Name="COURSE_STATUS" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="PG" Type="Int32" />
+          <Property Name="ICON_URL" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="START_TIME" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="COURSE_CANCEL">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PRICE" />
+            <PropertyRef Name="TITLE" />
+            <PropertyRef Name="TEACHER" />
+            <PropertyRef Name="COURSE_STATUS" />
+            <PropertyRef Name="START_TIME" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="PRICE" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="RATE" Type="Double" />
+          <Property Name="TITLE" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="INTRO" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="TEACHER" Type="Int32" Nullable="false" />
+          <Property Name="CATEGORY" Type="Int32" />
+          <Property Name="COURSE_STATUS" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="PG" Type="Int32" />
+          <Property Name="ICON_URL" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="START_TIME" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <Association Name="FK_COURSE_CATEGORY">
           <End Role="CATEGORY" Type="CloudEDUModel.CATEGORY" Multiplicity="0..1" />
@@ -1541,9 +1553,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="COURSE_CANCEL">
-            <EntityTypeMapping TypeName="CloudEDUModel.COURSE_CANCEL">
-              <MappingFragment StoreEntitySet="COURSE_CANCEL">
+          <EntitySetMapping Name="COURSE_OK">
+            <EntityTypeMapping TypeName="CloudEDUModel.COURSE_OK">
+              <MappingFragment StoreEntitySet="COURSE_OK">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="PRICE" ColumnName="PRICE" />
                 <ScalarProperty Name="RATE" ColumnName="RATE" />
@@ -1552,20 +1564,9 @@
                 <ScalarProperty Name="TEACHER" ColumnName="TEACHER" />
                 <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
                 <ScalarProperty Name="COURSE_STATUS" ColumnName="COURSE_STATUS" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Course_OK">
-            <EntityTypeMapping TypeName="CloudEDUModel.Course_OK">
-              <MappingFragment StoreEntitySet="Course_OK">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
-                <ScalarProperty Name="RATE" ColumnName="RATE" />
-                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
-                <ScalarProperty Name="INTRO" ColumnName="INTRO" />
-                <ScalarProperty Name="TEACHER" ColumnName="TEACHER" />
-                <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
-                <ScalarProperty Name="COURSE_STATUS" ColumnName="COURSE_STATUS" />
+                <ScalarProperty Name="PG" ColumnName="PG" />
+                <ScalarProperty Name="ICON_URL" ColumnName="ICON_URL" />
+                <ScalarProperty Name="START_TIME" ColumnName="START_TIME" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1580,6 +1581,26 @@
                 <ScalarProperty Name="TEACHER" ColumnName="TEACHER" />
                 <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
                 <ScalarProperty Name="COURSE_STATUS" ColumnName="COURSE_STATUS" />
+                <ScalarProperty Name="PG" ColumnName="PG" />
+                <ScalarProperty Name="ICON_URL" ColumnName="ICON_URL" />
+                <ScalarProperty Name="START_TIME" ColumnName="START_TIME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COURSE_CANCEL">
+            <EntityTypeMapping TypeName="CloudEDUModel.COURSE_CANCEL">
+              <MappingFragment StoreEntitySet="COURSE_CANCEL">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+                <ScalarProperty Name="RATE" ColumnName="RATE" />
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="INTRO" ColumnName="INTRO" />
+                <ScalarProperty Name="TEACHER" ColumnName="TEACHER" />
+                <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
+                <ScalarProperty Name="COURSE_STATUS" ColumnName="COURSE_STATUS" />
+                <ScalarProperty Name="PG" ColumnName="PG" />
+                <ScalarProperty Name="ICON_URL" ColumnName="ICON_URL" />
+                <ScalarProperty Name="START_TIME" ColumnName="START_TIME" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
