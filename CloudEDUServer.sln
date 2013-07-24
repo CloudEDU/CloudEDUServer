@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudEDUServer", "CloudEDUServer\CloudEDUServer.csproj", "{CD7B59E1-95F2-4A31-852F-9E9DBBC40106}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication2", "ConsoleApplication2\ConsoleApplication2.csproj", "{1F388C07-4C99-4497-8C85-30278265F368}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{CD7B59E1-95F2-4A31-852F-9E9DBBC40106}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD7B59E1-95F2-4A31-852F-9E9DBBC40106}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD7B59E1-95F2-4A31-852F-9E9DBBC40106}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F388C07-4C99-4497-8C85-30278265F368}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F388C07-4C99-4497-8C85-30278265F368}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F388C07-4C99-4497-8C85-30278265F368}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F388C07-4C99-4497-8C85-30278265F368}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

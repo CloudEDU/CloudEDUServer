@@ -22,18 +22,20 @@ namespace CloudEDUServer
             // Examples:
             config.SetEntitySetAccessRule("*", EntitySetRights.AllRead);
             config.SetServiceOperationAccessRule("GetAllCourses", ServiceOperationRights.All);
-            config.SetServiceOperationAccessRule("GetCourseByName", ServiceOperationRights.All);
+            config.SetServiceOperationAccessRule("GetCoursesByName", ServiceOperationRights.All);
+            config.SetServiceOperationAccessRule("GetCoursesByDate", ServiceOperationRights.All);
+            //config.SetServiceOperationAccessRule("GetAttendingCourseByUser", ServiceOperationRights.All);
             config.DataServiceBehavior.MaxProtocolVersion = DataServiceProtocolVersion.V3;
         }
 
         [WebGet]
-        public IQueryable<COURSE> GetAllCourses()
+        public IQueryable<COURSE_OK> GetAllCourses()
         {
             // Get the ObjectContext that is the data source for the service.
             CloudEDUEntities ctx = new CloudEDUEntities();
             try
             {
-                var result = ctx.COURSEs;
+                var result = ctx.COURSE_OK;
                 return result;
             }
             catch (Exception ex)
@@ -44,7 +46,7 @@ namespace CloudEDUServer
         }
 
         [WebGet]
-        public IQueryable<COURSE> GetCourseByName(string name)
+        public IQueryable<COURSE_OK> GetCoursesByName(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -53,7 +55,7 @@ namespace CloudEDUServer
             CloudEDUEntities ctx = new CloudEDUEntities();
             try
             {
-                var result = from crs in ctx.COURSEs
+                var result = from crs in ctx.COURSE_OK
                              where crs.TITLE == name
                              select crs;
                 return result;
@@ -64,5 +66,60 @@ namespace CloudEDUServer
                     "An error occurred: {0}", ex.Message));
             }
         }
+
+        [WebGet]
+        public IQueryable<COURSE_OK> GetCoursesByDate()
+        {
+            CloudEDUEntities ctx = new CloudEDUEntities();
+            try
+            {
+                var result = from crs in ctx.COURSE_OK
+                             orderby crs.START_TIME
+                             select crs;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException(string.Format(
+                    "An error occurred: {0}", ex.Message));
+            }
+        }
+
+        public IQueryable<COURSE_OK> GetAttendingCourseByUser(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException("name", "You must provide a name!");
+            }
+            CloudEDUEntities ctx = new CloudEDUEntities();
+            try
+            {
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException(string.Format(
+                    "An error occurred: {0}", ex.Message));
+            }
+        }
+
+        //public IQueryable<COURSE_OK> GetTeachingCourseByUser(string name)
+        //{
+        //    if (string.IsNullOrEmpty(name))
+        //    {
+        //        throw new ArgumentNullException("name", "You must provide a name!");
+        //    }
+        //    CloudEDUEntities ctx = new CloudEDUEntities();
+        //    try
+        //    {
+        //        var customer = ctx.CUSTOMERs.Where(p => p.NAME == name).FirstOrDefault<CUSTOMER>();
+        //        return course;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new ApplicationException(string.Format(
+        //            "An error occurred: {0}", ex.Message));
+        //    }
+        //}
     }
 }
