@@ -1,13 +1,19 @@
 ﻿<%@ Import Namespace="CloudEDUServer" %>
 
 <body>
+    <%
+       if (Session["manager"] == null)
+       {
+           Response.Redirect("Login.aspx"); 
+       }
+    %>
         <div class="grid_12 header-repeat">
             <div id="branding">
                 <div class="floatleft">
                     <img src="img/logo.png" alt="Logo" /></div>
                 <div class="floatright">
                     <div class="floatleft">
-                       <%-- <p><%=((MANAGER)Session["manager"]).NAME%></p>--%>
+                      <p><%=((MANAGER)Session["manager"]).NAME%></p>
                        
                     </div>
                     <div class="floatleft marginleft10">

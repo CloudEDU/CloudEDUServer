@@ -84,8 +84,15 @@
             isOperating = true;
             if (confirm("确认删除该管理员吗")) {
                 $.post("ManagerList.aspx", { operate: "delete", account: account }, function (data) {
-                    alert(data);
-                    isOperating = false;
+                    if (data == "success") {
+                        alert("删除成功");
+                        isOperating = false;
+                        window.location.href = "ManagerList.aspx";
+                    }
+                    else {
+                        alert(data);
+                        isOperating = false;
+                    }
                 });
             }
             else {
@@ -137,12 +144,10 @@
 					</thead>
 					<tbody>
                         <%
-                          //MANAGER[] manager=ManagerAccess.GetAllManagers();
-                          MANAGER[] manager = new MANAGER[5];
+                         MANAGER[] manager=ManagerAccess.GetAllManagers();
+         
                           for (int i=0; i<manager.Length; i++)
                           {
-                              manager[i] = new MANAGER();
-                              manager[i].NAME = "abc";
                         %>
 						    <tr>
 							    <td style="text-align:center"><%=manager[i].NAME %></td>
