@@ -84,13 +84,16 @@
                 <h2>Course Store</h2>
                 <div class="block">
                     <div style="margin-left:auto; margin-right:auto">
-                        <button style="margin-left:200px; width:155px; height:136px; border:none; background:url(img/a.jpg)"></button> 
-                        <button style="margin-left:200px; width:155px; height:136px; border:none; background:url(img/b.jpg)"></button> 
-                    </div>
-                    <div>
-                        <button style="margin-left:200px; margin-top:100px; width:155px; height:136px; border:none; background-image:url(img/c.jpg)"></button> 
-                        <button style="margin-left:200px; margin-top:100px; width:155px; height:136px; border:none; background:url(img/d.jpg)"></button> 
-                    </div>                 
+                        <span>
+                             <button style="margin-left:300px; width:155px; height:136px; border:none; background:url(img/a.jpg)"></button>
+                             <p style="margin-left:350px">精品课程</p>   
+                        </span> 
+                          
+                        <span>
+                            <button style="margin-left:300px; width:155px; height:136px; border:none; background:url(img/b.jpg)"></button> 
+                             <p style="margin-left:350px">热门课程</p>   
+                         </span>
+                    </div>              
                 </div>
             </div>
         </div>
