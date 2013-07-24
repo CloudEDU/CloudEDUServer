@@ -75,8 +75,10 @@
             setSidebarHeight();
         });
 
+
+        var permission;
         var isUpdate = false;
-        function addManager() {
+        function addManager(permissionLength) {
             if (isUpdate) {
                 alert("数据跟新中，请稍后");
                 return;
@@ -108,8 +110,17 @@
                     return;
                 }
                 if (password == confirmPassword) {
+
+                    permission = 0;
+                    for (var i = 0; i < permissionLength; i++) {
+                        
+                        if (document.getElementById('permissionID' + i).checked) {
+                            permission += 1 << i;
+                        }
+                    }
+
                     password = hex_md5(password);
-                    jQuery.post("AddManager.aspx", { account: account, password: password }, function (data) {
+                    jQuery.post("EditManager.aspx", { account: account, password: password, permission:permission }, function (data) {
                         if (data == "success") {
                             isUpdate = false;
                             alert("新的管理员添加成功");
@@ -181,16 +192,31 @@
                                 <label>权限</label>
                             </td>
                             <td>
-                                <select id="select" name="select">
-                                    <option value="1">Value 1</option>
-                                    <option value="2">Value 2</option>
-                                    <option value="3">Value 3</option>
-                                </select>
+                               <%
+                                PERMISSION[] permission = ManagerAccess.GetAllPermissions();
+                                PERMISSION[] managerPermision =(PERMISSION[]) Session["editPermission"];
+                                int editPermisionJ=0;
+                                for (int i=0; i<permission.Length; i++)
+                                {
+                                    if (managerPermision!=null && editPermisionJ<managerPermision.Length && managerPermision[editPermisionJ].ID == permission[i].ID)
+                                    {
+                                        editPermisionJ++;                                
+                                %>
+                                      <input type="checkbox" id="<%="permissionID"+i%>" checked="checked" /><%=permission[i].NAME %>
+                                    
+                                <% } 
+                                   else
+                                   {%>
+                                      <input type="checkbox" id="<%="permissionID"+i%>" /><%=permission[i].NAME %>
+                                   <%}
+                                }
+                                Session["editPermission"]=null;
+                                %>  
                             </td>
                         </tr>
                     </table>  
                     </form>
-                    <button onclick="addManager()" style="margin-left:250px;">确认</button>
+                    <button onclick="addManager(<%=permission.Length %>)" style="margin-left:250px;">确认</button>
                 </div>
             </div>
         </div>

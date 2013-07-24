@@ -137,12 +137,10 @@
 					</thead>
 					<tbody>
                         <%
-                          //MANAGER[] manager=ManagerAccess.GetAllManagers();
-                          MANAGER[] manager = new MANAGER[5];
+                         MANAGER[] manager=ManagerAccess.GetAllManagers();
+         
                           for (int i=0; i<manager.Length; i++)
                           {
-                              manager[i] = new MANAGER();
-                              manager[i].NAME = "abc";
                         %>
 						    <tr>
 							    <td style="text-align:center"><%=manager[i].NAME %></td>

@@ -7,7 +7,7 @@
                     <img src="img/logo.png" alt="Logo" /></div>
                 <div class="floatright">
                     <div class="floatleft">
-                       <%-- <p><%=((MANAGER)Session["manager"]).NAME%></p>--%>
+                      <p><%=((MANAGER)Session["manager"]).NAME%></p>
                        
                     </div>
                     <div class="floatleft marginleft10">

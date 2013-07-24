@@ -50,7 +50,7 @@ namespace cloudEdu
                     else
                     {
                         Response.Write("密码错误");
-                         Response.End();
+                        Response.End();
                     }
                 }
             }

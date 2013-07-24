@@ -180,11 +180,13 @@
                                 <label>权限</label>
                             </td>
                             <td>
-                                <select id="select" name="select">
-                                    <option value="1">Value 1</option>
-                                    <option value="2">Value 2</option>
-                                    <option value="3">Value 3</option>
-                                </select>
+                                <%
+                                PERMISSION[] permission = ManagerAccess.GetAllPermissions();
+                                for (int i=0; i<permission.Length; i++)
+                                { 
+                                %>
+                                    <input type="checkbox" id="<%="permissionID"+permission[i].ID%>" /><%=permission[i].NAME %>
+                               <%}%>               
                             </td>
                         </tr>
                     </table>  
