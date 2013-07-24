@@ -75,8 +75,6 @@
             setSidebarHeight();
         });
 
-
-        var permission;
         var isUpdate = false;
         function addManager(permissionLength) {
             if (isUpdate) {
@@ -85,7 +83,7 @@
             }
             isUpdate = true;
 
-            if (confirm("确认添加新的管理员吗")) {
+            if (confirm("确认编辑管理员吗")) {
                 var account = document.getElementById("account").value;
                 var password = document.getElementById("password").value;
                 var confirmPassword = document.getElementById("confirmPassword").value;
@@ -111,7 +109,7 @@
                 }
                 if (password == confirmPassword) {
 
-                    permission = 0;
+                    var permission = 0;
                     for (var i = 0; i < permissionLength; i++) {
                         
                         if (document.getElementById('permissionID' + i).checked) {

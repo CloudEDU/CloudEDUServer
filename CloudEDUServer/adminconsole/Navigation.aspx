@@ -1,6 +1,12 @@
 ﻿<%@ Import Namespace="CloudEDUServer" %>
 
 <body>
+    <%
+       if (Session["manager"] == null)
+       {
+           Response.Redirect("Login.aspx"); 
+       }
+    %>
         <div class="grid_12 header-repeat">
             <div id="branding">
                 <div class="floatleft">

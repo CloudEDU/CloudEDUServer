@@ -45,6 +45,7 @@ namespace CloudEDUServer.adminconsole
                         if ((permissionNum & (1 << i)) != 0)
                         {
                             ManagerAccess.GrantPermissionToManager(manager.ID, allPermission[i].ID);
+                            permissionNum -= (1 << i);
                         }
                     }
                     ManagerAccess.UpdateManager(manager);
@@ -52,6 +53,11 @@ namespace CloudEDUServer.adminconsole
                 catch
                 {
                     Response.Write("修改错误，请重试");
+                    Response.End();
+                }
+                finally //成功
+                {
+                    Response.Write("success");
                     Response.End();
                 }
             }

@@ -41,8 +41,28 @@ namespace CloudEDUServer.adminconsole
                 MANAGER newManager = new MANAGER();
                 newManager.NAME = account;
                 newManager.PASSWORD = password;
+                int permissionNum = int.Parse(Request.Params.Get("permission"));
+
                 if (ManagerAccess.AddManager(newManager))
                 {
+                    try
+                    {
+                        newManager = ManagerAccess.GetManagerByName(account);
+                        PERMISSION[] allPermission = ManagerAccess.GetAllPermissions();
+                        for (int i = 0; permissionNum != 0; i++)
+                        {
+                            if ((permissionNum & (1 << i)) != 0)
+                            {
+                                ManagerAccess.GrantPermissionToManager(newManager.ID, allPermission[i].ID);
+                                permissionNum -= (1 << i);
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        Response.Write("权限添加失败");
+                        Response.End();
+                    }
                     Response.Write("success");
                     Response.End();
                 }

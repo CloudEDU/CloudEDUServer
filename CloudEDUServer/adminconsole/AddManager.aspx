@@ -76,7 +76,7 @@
         });
 
         var isUpdate = false;
-        function addManager() {
+        function addManager(permissionLength) {
             if (isUpdate) {
                 alert("数据跟新中，请稍后");
                 return ;
@@ -108,8 +108,18 @@
                     return;
                 }
                 if (password == confirmPassword) {
+
+                    var permission = 0;
+                    for (var i = 0; i < permissionLength; i++) {
+
+                        if (document.getElementById('permissionID' + i).checked) {
+                            permission += 1 << i;
+                        }
+                    }
+
                     password = hex_md5(password);
-                    jQuery.post("AddManager.aspx", { account: account, password: password }, function (data) {
+
+                    jQuery.post("AddManager.aspx", { account: account, password: password, permission:permission }, function (data) {
                         if (data == "success") {
                             isUpdate = false;
                             alert("新的管理员添加成功");
@@ -118,7 +128,7 @@
                         }
                         else {
                             alert(data);
-                            isUpdata = false;
+                            isUpdate = false;
                         }
                     });
                 }
@@ -183,15 +193,15 @@
                                 <%
                                 PERMISSION[] permission = ManagerAccess.GetAllPermissions();
                                 for (int i=0; i<permission.Length; i++)
-                                { 
+                                {                          
                                 %>
-                                    <input type="checkbox" id="<%="permissionID"+permission[i].ID%>" /><%=permission[i].NAME %>
-                               <%}%>               
+                                    <input type="checkbox" id="<%="permissionID"+i %>" /><%=permission[i].NAME %>
+                               <%}%>           
                             </td>
                         </tr>
                     </table>  
                     </form>
-                    <button onclick="addManager()" style="margin-left:250px;">确认</button>
+                    <button onclick="addManager(<%=permission.Length %>)" style="margin-left:250px;">确认</button>
                 </div>
             </div>
         </div>

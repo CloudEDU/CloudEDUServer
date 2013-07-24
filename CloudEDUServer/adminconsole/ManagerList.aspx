@@ -84,8 +84,15 @@
             isOperating = true;
             if (confirm("确认删除该管理员吗")) {
                 $.post("ManagerList.aspx", { operate: "delete", account: account }, function (data) {
-                    alert(data);
-                    isOperating = false;
+                    if (data == "success") {
+                        alert("删除成功");
+                        isOperating = false;
+                        window.location.href = "ManagerList.aspx";
+                    }
+                    else {
+                        alert(data);
+                        isOperating = false;
+                    }
                 });
             }
             else {

@@ -28,6 +28,21 @@ namespace CloudEDUServer.adminconsole
                     //    Response.End();
                         
                     //}
+                    if (deleteManager == null)
+                    {
+                        Response.Write("管理员不存在");
+                        Response.End();
+                    }
+                    if (ManagerAccess.RemoveManager(deleteManager.ID))
+                    {
+                        Response.Write("success");
+                        Response.End();
+                    }
+                    else
+                    {
+                        Response.Write("删除错误，请重试");
+                        Response.End();
+                    }
                 }
 
                 if (operate.Equals("edit"))
@@ -51,8 +66,8 @@ namespace CloudEDUServer.adminconsole
                     else
                     {
                         Session["editAccount"] = account;
-                        //Session["editPermission"] = ManagerAccess.GetPermissionsByManager(ManagerAccess.GetManagerByName(account));
-                       // PERMISSION[]permission= ManagerAccess.GetPermissionsByManager(ManagerAccess.GetManagerByName(account));
+                        Session["editPermission"] = ManagerAccess.GetPermissionsByManager(ManagerAccess.GetManagerByName(account));
+                        //PERMISSION[]permission= ManagerAccess.GetPermissionsByManager(ManagerAccess.GetManagerByName(account));
                         Response.Write("success");
                         Response.End();
                     }
