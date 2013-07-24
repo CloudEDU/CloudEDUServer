@@ -16,11 +16,14 @@ namespace CloudEDUServer
     {
         public int ID { get; set; }
         public decimal PRICE { get; set; }
-        public Nullable<int> RATE { get; set; }
+        public Nullable<double> RATE { get; set; }
         public string TITLE { get; set; }
         public string INTRO { get; set; }
-        public Nullable<int> TEACHER { get; set; }
+        public int TEACHER { get; set; }
         public Nullable<int> CATEGORY { get; set; }
         public string COURSE_STATUS { get; set; }
+        public Nullable<int> PG { get; set; }
+        public string ICON_URL { get; set; }
+        public System.DateTime START_TIME { get; set; }
     }
 }
