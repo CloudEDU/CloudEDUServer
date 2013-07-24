@@ -748,6 +748,7 @@
     <Content Include="adminconsole\userlist.aspx" />
     <Content Include="adminconsole\Navigation.aspx" />
     <Content Include="CourseService.svc" />
+    <Content Include="CustomerService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -847,7 +848,6 @@
     <Compile Include="CourseService.svc.cs">
       <DependentUpon>CourseService.svc</DependentUpon>
     </Compile>
-    <Compile Include="CourseAccess.cs" />
     <Compile Include="COURSE_CANCEL.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
@@ -859,6 +859,9 @@
     </Compile>
     <Compile Include="CUSTOMER.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService.svc.cs">
+      <DependentUpon>CustomerService.svc</DependentUpon>
     </Compile>
     <Compile Include="DOCUMENT.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
