@@ -19,6 +19,7 @@ namespace CloudEDUServer
         public int COURSE_ID { get; set; }
         public string CONTENT { get; set; }
         public string TITLE { get; set; }
+        public System.DateTime TIME { get; set; }
     
         public virtual CUSTOMER CUSTOMER { get; set; }
         public virtual COURSE COURSE { get; set; }
