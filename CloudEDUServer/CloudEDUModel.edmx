@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CloudEDUModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CloudEDUModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="CloudEDUModelStoreContainer">
           <EntitySet Name="CATEGORY" EntityType="CloudEDUModel.Store.CATEGORY" store:Type="Tables" Schema="COURSE" />
           <EntitySet Name="COMMENT" EntityType="CloudEDUModel.Store.COMMENT" store:Type="Tables" Schema="COURSE" />
@@ -741,8 +741,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+        <Function Name="CreateCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="COURSE">
+          <Parameter Name="teacher" Type="int" Mode="In" />
+          <Parameter Name="title" Type="nvarchar" Mode="In" />
+          <Parameter Name="intro" Type="text" Mode="In" />
+          <Parameter Name="category" Type="int" Mode="In" />
+          <Parameter Name="price" Type="money" Mode="In" />
+          <Parameter Name="pg" Type="int" Mode="In" />
+          <Parameter Name="icon_url" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="EnrollCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="COURSE">
+          <Parameter Name="course_id" Type="int" Mode="In" />
+          <Parameter Name="customer_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetCustomerAgeForID" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="CUSTOMER">
+          <Parameter Name="customer_id" Type="int" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CloudEDUModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -851,6 +866,19 @@
             <End Role="MANAGER" EntitySet="MANAGERs" />
             <End Role="PERMISSION" EntitySet="PERMISSIONs" />
           </AssociationSet>
+          <FunctionImport Name="CreateCourse" ReturnType="Collection(CloudEDUModel.CreateCourse_Result)">
+            <Parameter Name="teacher" Mode="In" Type="Int32" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="intro" Mode="In" Type="String" />
+            <Parameter Name="category" Mode="In" Type="Int32" />
+            <Parameter Name="price" Mode="In" Type="Decimal" />
+            <Parameter Name="pg" Mode="In" Type="Int32" />
+            <Parameter Name="icon_url" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="EnrollCourse" ReturnType="Collection(CloudEDUModel.EnrollCourse_Result)">
+            <Parameter Name="course_id" Mode="In" Type="Int32" />
+            <Parameter Name="customer_id" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="CATEGORY">
           <Key>
@@ -1364,6 +1392,22 @@
           <End Role="MANAGER" Type="CloudEDUModel.MANAGER" Multiplicity="*" />
           <End Role="PERMISSION" Type="CloudEDUModel.PERMISSION" Multiplicity="*" />
         </Association>
+        <ComplexType Name="CreateCourse_Result">
+          <Property Type="Int32" Name="ErrorNumber" Nullable="true" />
+          <Property Type="Int32" Name="ErrorSeverity" Nullable="true" />
+          <Property Type="Int32" Name="ErrorState" Nullable="true" />
+          <Property Type="String" Name="ErrorProcedure" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="ErrorLine" Nullable="true" />
+          <Property Type="String" Name="ErrorMessage" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="EnrollCourse_Result">
+          <Property Type="Int32" Name="ErrorNumber" Nullable="true" />
+          <Property Type="Int32" Name="ErrorSeverity" Nullable="true" />
+          <Property Type="Int32" Name="ErrorState" Nullable="true" />
+          <Property Type="String" Name="ErrorProcedure" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="ErrorLine" Nullable="true" />
+          <Property Type="String" Name="ErrorMessage" Nullable="true" MaxLength="4000" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1628,6 +1672,30 @@
               <ScalarProperty Name="ID" ColumnName="PERMISSION" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="CreateCourse" FunctionName="CloudEDUModel.Store.CreateCourse">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CloudEDUModel.CreateCourse_Result">
+                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EnrollCourse" FunctionName="CloudEDUModel.Store.EnrollCourse">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CloudEDUModel.EnrollCourse_Result">
+                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

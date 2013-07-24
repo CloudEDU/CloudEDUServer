@@ -821,6 +821,7 @@
     <Compile Include="COURSE.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CourseAccess.cs" />
     <Compile Include="COURSE_CANCEL.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
@@ -830,10 +831,16 @@
     <Compile Include="COURSE_PENDING.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CreateCourse_Result.cs">
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="CUSTOMER.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DOCUMENT.cs">
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EnrollCourse_Result.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LESSON.cs">
