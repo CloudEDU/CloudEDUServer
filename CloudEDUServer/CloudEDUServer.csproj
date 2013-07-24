@@ -868,6 +868,7 @@
     <Compile Include="adminconsole\CourseInfo.aspx.designer.cs">
       <DependentUpon>CourseInfo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CourseAccess.cs" />
     <Compile Include="COURSE_CANCEL.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>

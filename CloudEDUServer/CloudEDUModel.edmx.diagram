@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4b96ff7145c04882851d325122e8fa70" Name="关系图1">
+      <Diagram DiagramId="4b96ff7145c04882851d325122e8fa70" Name="关系图1" ZoomLevel="63">
         <EntityTypeShape EntityType="CloudEDUModel.CATEGORY" Width="1.5" PointX="3.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudEDUModel.COMMENT" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudEDUModel.COURSE" Width="1.5" PointX="6" PointY="9.5" IsExpanded="true" />
@@ -46,7 +46,7 @@
         <AssociationConnector Association="CloudEDUModel.RECO_COURSE" ManuallyRouted="false" />
         <AssociationConnector Association="CloudEDUModel.FAVORITE" ManuallyRouted="false" />
         <AssociationConnector Association="CloudEDUModel.GRANTED" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="CloudEDUModel.NOTE_SHARABLE" Width="1.5" PointX="9.2764449833316949" PointY="24.261885639402031" />
+        <EntityTypeShape EntityType="CloudEDUModel.NOTE_SHARABLE" Width="1.5" PointX="13.5" PointY="4.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -152,6 +152,69 @@ namespace CloudEDUServer
             return notes;
         }
 
+        public static NOTE_SHARABLE[] GetNoteSharableByCustomer(CUSTOMER customer)
+        {
+            NOTE_SHARABLE[] notes = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                notes = ctx.NOTE_SHARABLE.Where(n => n.CUSTOMER_ID == customer.ID).ToArray();
+            }
+            return notes;
+        }
+
+        public static COMMENT[] GetCommentsByCustomer(CUSTOMER customer)
+        {
+            COMMENT[] comments = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                comments = ctx.COMMENTs.Where(c => c.CUSTOMER_ID == customer.ID).ToArray();
+            }
+            return comments;
+        }
+
+        public static COMMENT[] GetCommentsByCourse(COURSE course)
+        {
+            COMMENT[] comments = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                comments = ctx.COMMENTs.Where(c => c.COURSE_ID == course.ID).ToArray();
+            }
+            return comments;
+        }
+
+        public static CUSTOMER[] GetCustomersAsStudentByCourse(int course_id)
+        {
+            CUSTOMER[] customers = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                var cs = ctx.COURSEs.Include("CUSTOMER_attend").Where(c => c.ID == course_id).FirstOrDefault();
+                customers = cs.CUSTOMER_attend.ToArray();
+            }
+            return customers;
+        }
+
+        public static RECOMMENDATION[] GetAllRecommendations()
+        {
+            RECOMMENDATION[] reco = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                reco = ctx.RECOMMENDATIONs.ToArray();
+            }
+            return reco;
+        }
+
+        public static COURSE[] GetCoursesByRecommendation(RECOMMENDATION reco)
+        {
+            COURSE[] courses = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                var rc = ctx.RECOMMENDATIONs.Include("COURSEs").Where(r => r.ID == reco.ID).FirstOrDefault();
+                courses = rc.COURSEs.ToArray();
+            }
+            return courses;
+        }
+
+
         #endregion
 
         #region 更新方法
@@ -206,6 +269,30 @@ namespace CloudEDUServer
             return true;
         }
 
+        public static bool AddCourseToRecommendation(COURSE course, RECOMMENDATION reco)
+        {
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                try
+                {
+                    var rc = ctx.RECOMMENDATIONs.Include("COURSEs").Where(r => r.ID == reco.ID).FirstOrDefault();
+                    rc.COURSEs.Add(course);
+                    ctx.Entry(rc).State = System.Data.EntityState.Modified;
+                    ctx.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
+                    return false;
+                }
+
+            }
+            return true;
+        }
+
+        #endregion
+
+        #region 删除方法
         #endregion
 
         #region 转换方法
