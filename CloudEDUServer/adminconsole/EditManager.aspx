@@ -118,18 +118,17 @@
                             permission += 1 << i;
                         }
                     }
-
                     password = hex_md5(password);
                     jQuery.post("EditManager.aspx", { account: account, password: password, permission:permission }, function (data) {
                         if (data == "success") {
                             isUpdate = false;
-                            alert("新的管理员添加成功");
+                            alert("管理员编辑成功");
                             window.location.href = "Default.aspx";
                             return;
                         }
                         else {
                             alert(data);
-                            isUpdata = false;
+                            isUpdate = false;
                         }
                     });
                 }
@@ -168,7 +167,7 @@
                             </td>
                             <td>
                                 <input type="text" readonly value="<%=Session["editAccount"] %>" maxlength="10" class="success" id="account"/>
-                                <%Session["editAccount"] = null; %>
+                                <% Session["editAccount"] = null; %>
                             </td>
                         </tr>
                         <tr>
