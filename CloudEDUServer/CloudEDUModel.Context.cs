@@ -42,8 +42,8 @@ namespace CloudEDUServer
         public DbSet<PERMISSION> PERMISSIONs { get; set; }
         public DbSet<TYPE> TYPEs { get; set; }
         public DbSet<SALEORDER> SALEORDERs { get; set; }
-        public DbSet<COURSE_CANCEL> COURSE_CANCEL { get; set; }
-        public DbSet<Course_OK> Course_OK { get; set; }
+        public DbSet<COURSE_OK> COURSE_OK { get; set; }
         public DbSet<COURSE_PENDING> COURSE_PENDING { get; set; }
+        public DbSet<COURSE_CANCEL> COURSE_CANCEL { get; set; }
     }
 }

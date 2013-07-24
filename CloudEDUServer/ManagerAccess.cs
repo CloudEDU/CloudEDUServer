@@ -50,7 +50,11 @@ namespace CloudEDUServer
             PERMISSION[] permissions = null;
             using (CloudEDUEntities ctx = new CloudEDUEntities())
             {
-                permissions = ctx.PERMISSIONs.Include("MANAGERs").Where(p => p.MANAGERs.Contains(manager)).ToArray<PERMISSION>();
+                MANAGER mngr = ctx.MANAGERs.Include("PERMISSIONs").Where(m => m.ID == manager.ID).FirstOrDefault();
+                permissions = mngr.PERMISSIONs.ToArray();
+                //permissions = ctx.PERMISSIONs.Include("MANAGERs")
+                //    .Where(p => p.MANAGERs.Contains(manager))
+                //    .ToArray<PERMISSION>();
             }
             return permissions;
         }

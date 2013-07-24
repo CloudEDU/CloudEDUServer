@@ -821,10 +821,11 @@
     <Compile Include="COURSE.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CourseAccess.cs" />
     <Compile Include="COURSE_CANCEL.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Course_OK.cs">
+    <Compile Include="COURSE_OK.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="COURSE_PENDING.cs">
