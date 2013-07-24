@@ -877,10 +877,16 @@
     <Compile Include="COURSE_PENDING.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CreateCourse_Result.cs">
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="CUSTOMER.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DOCUMENT.cs">
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EnrollCourse_Result.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LESSON.cs">
@@ -898,6 +904,9 @@
       <DependentUpon>Navigation.aspx</DependentUpon>
     </Compile>
     <Compile Include="NOTE.cs">
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NOTE_SHARABLE.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="OPR_LOG.cs">

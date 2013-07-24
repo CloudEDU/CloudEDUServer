@@ -36,7 +36,7 @@ namespace CloudEDUServer
         public string ICON_URL { get; set; }
         public System.DateTime START_TIME { get; set; }
     
-        public virtual CATEGORY CATEGORY1 { get; set; }
+        public virtual CATEGORY CATEGORY_navi { get; set; }
         public virtual ICollection<COMMENT> COMMENTs { get; set; }
         public virtual ICollection<SALEORDER> SALEORDERs { get; set; }
         public virtual ICollection<ATTEND> ATTENDs { get; set; }

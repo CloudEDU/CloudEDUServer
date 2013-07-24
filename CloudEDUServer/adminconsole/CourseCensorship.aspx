@@ -97,7 +97,7 @@
 							    <td style="text-align:center">100</td>
 							    <td style="text-align:center">
                                     <input type="radio" name="rd1" />Added
-                                    <input type="radio" name="rd1" />Checked
+                                    <input type="radio" name="rd1" checked="checked" />Checked
                                 </td>         					    
 						    </tr>	
                         		
@@ -113,7 +113,7 @@
     </div>
     <div id="site_info">
         <p>
-            Copyright <a href="#">BlueWhale Admin</a>. All Rights Reserved.
+            Copyright <a href="#">Cloud Edu</a>. All Rights Reserved.
         </p>
     </div>
 </body>
