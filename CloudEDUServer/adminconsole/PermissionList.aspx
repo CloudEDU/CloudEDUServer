@@ -105,7 +105,7 @@
                 return;
             }
             isOperating = true;
-            if (confirm("确认编辑该管理员吗")) {
+            if (confirm("确认查看管理员吗")) {
                 $.post("PermissionList.aspx", { operate: "edit", account: account }, function (data) {
                     if (data == "success") {
                         window.location.href = "ViewPermissionManagers.aspx";
@@ -155,15 +155,11 @@
 							    <td style="text-align:center"><%=permissions[i].ID%></td>
 							    <td style="text-align:center"><%=permissions[i].NAME%></td>
 							    <td style="text-align:center"><%=permissions[i].TYPE%></td>	
-                                <td style="text-align:center"><a href="javascript:editManager('<%=permissions[i].NAME%>')">编辑</a></td>
+                                <td style="text-align:center"><a href="javascript:editManager('<%=permissions[i].NAME%>')">查看所有拥有该权限的管理员</a></td>
 						    </tr>
                         <%}%>			
 					</tbody>
 				</table>
-                <ul style="margin-left:800px;">
-                    <li><a href="AddManager.aspx">添加管理员</a></li>
-                </ul>        
-            
                 </div>
             </div>
         </div>

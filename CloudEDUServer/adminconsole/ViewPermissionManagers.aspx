@@ -69,85 +69,58 @@
     <script language="javascript" src="js/MD5.js" type="text/javascript"></script>
 
     <script type="text/javascript">
-
         $(document).ready(function () {
             setupLeftMenu();
+            $('.datatable').dataTable({
+                "sPaginationType": "full_numbers"
+            });
             setSidebarHeight();
-            document.getElementById("type").value = "<%=Session["editType"]%>";
-            <%Session["editType"] = null;%>
         });
 
-        var isUpdate = false;
-        function addManager(permissionLength) {
-            if (isUpdate) {
-                alert("数据跟新中，请稍后");
+        var isOperating = false;
+        function deleteManager(account) {
+            if (isOperating) {
+                alert("操作中，请稍后");
                 return;
             }
-            isUpdate = true;
-
-            if (confirm("确认编辑管理员吗")) {
-                var account = document.getElementById("account").value;
-                var password = document.getElementById("password").value;
-                var confirmPassword = document.getElementById("confirmPassword").value;
-                var type = document.getElementById("type").value;
-                var isNewPassword = false;
-                if (password != "" || confirmPassword != "") isNewPassword = true;
-
-                if (account == "") {
-                    alert("账号不能为空");
-                    isUpdate = false;
-                    return;
-                }
-                if (!checkStr(account)) {
-                    alert("账号只能由大小写字母、数字、下划线组成");
-                    isUpdate = false;
-                    return;
-                }
-                if (isNewPassword && !checkStr(password)) {
-                    alert("密码只能由大小写字母、数字、下划线组成");
-                    isUpdate = false;
-                    return;
-                }
-                if (isNewPassword && password != confirmPassword) {
-                    alert("两次密码不一致");
-                    isUpdate = false;
-                    return;
-                }
-                else {
-
-                    var permission = 0;
-                    for (var i = 0; i < permissionLength; i++) {
-
-                        if (document.getElementById('permissionID' + i).checked) {
-                            permission += 1 << i;
-                        }
+            isOperating = true;
+            if (confirm("确认删除该管理员吗")) {
+                $.post("ManagerList.aspx", { operate: "delete", account: account }, function (data) {
+                    if (data == "success") {
+                        alert("删除成功");
+                        isOperating = false;
+                        window.location.href = "ManagerList.aspx";
                     }
-                    if (isNewPassword) {
-                        password = hex_md5(password);
+                    else {
+                        alert(data);
+                        isOperating = false;
                     }
-                    jQuery.post("EditManager.aspx", { account: account, password: password, permission: permission, type: type }, function (data) {
-                        if (data == "success") {
-                            isUpdate = false;
-                            alert("管理员编辑成功");
-                            window.location.href = "Default.aspx";
-                            return;
-                        }
-                        else {
-                            alert(data);
-                            isUpdate = false;
-                        }
-                    });
-                }
+                });
             }
             else {
-                isUpdate = false;
+                isOperating = false;
             }
         }
-
-        function checkStr(str) {
-            var reg = /[^A-Za-z0-9_]/;
-            if (reg.test(str)) return false;
-            else return true;
+        function editManager(account) {
+            if (isOperating) {
+                alert("操作中，请稍后");
+                return;
+            }
+            isOperating = true;
+            if (confirm("确认编辑该管理员吗")) {
+                $.post("ManagerList.aspx", { operate: "edit", account: account }, function (data) {
+                    if (data == "success") {
+                        window.location.href = "EditManager.aspx";
+                    }
+                    else {
+                        alert(data);
+                    }
+                    isOperating = false;
+                });
+            }
+            else {
+                isOperating = false;
+            }
         }
 
    </script>

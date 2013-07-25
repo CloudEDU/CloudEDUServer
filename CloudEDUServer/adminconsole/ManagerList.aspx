@@ -160,7 +160,7 @@
 						    </tr>
                         <%}%>			
 					</tbody>
-				</table>
+				    </table>
                 <ul style="margin-left:800px;">
                     <li><a href="AddManager.aspx">添加管理员</a></li>
                 </ul>        
