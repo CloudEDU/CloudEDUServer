@@ -45,6 +45,16 @@ namespace CloudEDUServer
             return permissions;
         }
 
+        public static PERMISSION GetPermissionByPermissionName(string name)
+        {
+            PERMISSION perm = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                perm = ctx.PERMISSIONs.Where(p => p.NAME == name).FirstOrDefault();
+            }
+            return perm;
+        }
+
 
         /*
          * 补充getpermissionByManager方法
