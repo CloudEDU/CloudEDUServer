@@ -18,6 +18,13 @@ namespace CloudEDUServer.adminconsole
                 string operate=Request.Params.Get("operate");
                 MANAGER selfManage = (MANAGER)Session["manager"];
 
+                if (operate.Equals("viewPermissionManager"))
+                {
+                    string permission_name = Request.Params.Get("permission");
+                    
+                }
+
+
                 if (operate.Equals("delete"))
                 {
                     string deleteManagerAccount = Request.Params.Get("account");
