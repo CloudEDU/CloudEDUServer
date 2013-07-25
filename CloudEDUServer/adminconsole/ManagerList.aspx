@@ -72,7 +72,8 @@
         $(document).ready(function () {
             setupLeftMenu();
             $('.datatable').dataTable({
-            "sPaginationType":"full_numbers"});
+                "sPaginationType": "full_numbers"
+            });
             setSidebarHeight();
         });
 
@@ -124,49 +125,51 @@
     </script>
 </head>
 <body id="Body1" runat="server">
-    <div class="container_12">    
+    <div class="container_12">
         <!--#include file="Navigation.aspx" -->
 
         <div class="grid_10">
             <div class="box round first grid">
-                <h2>
-                    Manager List
+                <h2>Manager List
                 </h2>
                 <div class="block">
-					<table class="data display datatable">
-					<thead>
-						<tr>
-							<th  style="text-align:center">Name</th>
-							<th  style="text-align:center">Permission</th>
-							<th  style="text-align:center">Type</th>
-                            <th  style="text-align:center"></th>
-                            <th  style="text-align:center"></th>
-						</tr>
-					</thead>
-					<tbody>
-                        <%
-                         MANAGER[] manager=ManagerAccess.GetAllManagers();
-                         for (int j = 0; j < 19; j++ )
-                             for (int i = 0; i < manager.Length; i++)
-                             {
+                    <table class="data display datatable" id="example">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center">Name</th>
+                                <th style="text-align: center">Permission</th>
+                                <th style="text-align: center">Type</th>
+                                <th style="text-align: center"></th>
+                                <th style="text-align: center"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                MANAGER[] manager = ManagerAccess.GetAllManagers();
+                                for (int i = 0; i < manager.Length; i++)
+                                {
                              
-                        %>
-						    <tr>
-							    <td style="text-align:center"><%=manager[i].NAME%></td>
-							    <td style="text-align:center"><%=ManagerAccess.getPermissionStringByManager(manager[i])%></td>
-							    <td style="text-align:center"><%=manager[i].MNGR_TYPE%></td>	
-                                <td style="text-align:center"><a href="javascript:editManager('<%=manager[i].NAME%>')">编辑</a></td>						    
-							    <td style="text-align:center"><a href="javascript:deleteManager('<%=manager[i].NAME%>')">删除</a></td>
-						    </tr>
-                        <%}%>			
-					</tbody>
-				</table>
-                <ul style="margin-left:800px;">
-                    <li><a href="AddManager.aspx">添加管理员</a></li>
-                </ul>        
-            
+                            %>
+                            <tr>
+                                <td style="text-align: center"><%=manager[i].NAME%></td>
+                                <td style="text-align: center"><%=ManagerAccess.getPermissionStringByManager(manager[i])%></td>
+                                <td style="text-align: center"><%=manager[i].MNGR_TYPE%></td>
+                                <td style="text-align: center"><a href="javascript:editManager('<%=manager[i].NAME%>')">编辑</a></td>
+                                <td style="text-align: center"><a href="javascript:deleteManager('<%=manager[i].NAME%>')">删除</a></td>
+                            </tr>
+                            <%}%>
+                        </tbody>
+                    </table>
+
                 </div>
+
+                <!--block div是datatable用来定位的，不要在里面放出了table以外的东西-->
+                <ul style="margin-left: 800px;">
+                    <li><a href="AddManager.aspx">添加管理员</a></li>
+                </ul>
+
             </div>
+
         </div>
         <div class="clear">
         </div>
