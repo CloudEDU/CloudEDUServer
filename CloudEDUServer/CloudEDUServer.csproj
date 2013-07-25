@@ -937,6 +937,7 @@
     <Compile Include="CustomerService.svc.cs">
       <DependentUpon>CustomerService.svc</DependentUpon>
     </Compile>
+    <Compile Include="CustomerAccess.cs" />
     <Compile Include="DOCUMENT.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
