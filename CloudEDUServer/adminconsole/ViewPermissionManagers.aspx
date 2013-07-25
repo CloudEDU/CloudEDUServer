@@ -153,86 +153,48 @@
    </script>
 </head>
 <body id="Body1" class="Body1" runat="server">
-   <div class="container_12">
+   <div class="container_12">    
         <!--#include file="Navigation.aspx" -->
+
         <div class="grid_10">
-            <div class="box round first fullpage">
+            <div class="box round first grid">
                 <h2>
-                    Form Controls</h2>
-                <div class="block ">
-                    <form>
-                    <table class="form">
-                        <tr>
-                            <td>
-                                <label>账号</label>
-                            </td>
-                            <td>
-                                <input type="text" readonly value="<%=Session["editAccount"] %>" maxlength="10" class="success" id="account"/>
-                                <% Session["editAccount"] = null; %>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>密码</label>
-                            </td>
-                            <td>
-                                <input type="password" maxlength="10"  id="password" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>确认密码</label>
-                            </td>
-                            <td>
-                                <input type="password"  maxlength="10" id="confirmPassword" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                 <label>type</label>
-                            </td>
-                            <td>
-                                <select id="type" name="select">
-                                    <%
-                                       CloudEDUServer.TYPE []allType=ManagerAccess.GetAllManagerTypes();
-                                       for (int i=0; i<allType.Length; i++)
-                                       { 
-                                    %>
-                                        <option value="<%=i %>"><%=i %></option>
-                                    <%}%>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>权限</label>
-                            </td>
-                            <td>
-                               <%
-                                PERMISSION[] permission = ManagerAccess.GetAllPermissions();
-                                PERMISSION[] managerPermision =(PERMISSION[]) Session["editPermission"];
-                                int editPermisionJ=0;
-                                for (int i=0; i<permission.Length; i++)
-                                {
-                                    if (managerPermision!=null && editPermisionJ<managerPermision.Length && managerPermision[editPermisionJ].ID == permission[i].ID)
-                                    {
-                                        editPermisionJ++;                                
-                                %>
-                                      <input type="checkbox" id='<%="permissionID"+i%>' checked="checked" /><%=permission[i].NAME %>
-                                    
-                                <% } 
-                                   else
-                                   {%>
-                                      <input type="checkbox" id="Checkbox1" /><%=permission[i].NAME %>
-                                   <%}
-                                }
-                                Session["editPermission"]=null;
-                                %>  
-                            </td>
-                        </tr>
-                    </table>  
-                    </form>
-                    <button onclick="addManager(<%=permission.Length %>)" style="margin-left:250px;">确认</button>
+                    Manager List
+                </h2>
+                <div class="block">
+					<table class="data display datatable">
+					<thead>
+						<tr>
+							<th  style="text-align:center">Name</th>
+							<th  style="text-align:center">Permission</th>
+							<th  style="text-align:center">Type</th>
+                            <th  style="text-align:center"></th>
+                            <th  style="text-align:center"></th>
+						</tr>
+					</thead>
+					<tbody>
+                        <%
+                            string permission_name = (string)Session["permission_name"];
+                            MANAGER[] manager = ManagerAccess.GetManagersByPermission(ManagerAccess.GetPermissionByPermissionName(permission_name));
+                         //for (int j = 0; j < 19; j++ )
+                             for (int i = 0; i < manager.Length; i++)
+                             {
+                             
+                        %>
+						    <tr>
+							    <td style="text-align:center"><%=manager[i].NAME%></td>
+							    <td style="text-align:center"><%=ManagerAccess.getPermissionStringByManager(manager[i])%></td>
+							    <td style="text-align:center"><%=manager[i].MNGR_TYPE%></td>	
+                                <td style="text-align:center"><a href="javascript:editManager('<%=manager[i].NAME%>')">编辑</a></td>						    
+							    <td style="text-align:center"><a href="javascript:deleteManager('<%=manager[i].NAME%>')">删除</a></td>
+						    </tr>
+                        <%}%>			
+					</tbody>
+				</table>
+                <ul style="margin-left:800px;">
+                    <li><a href="AddManager.aspx">添加管理员</a></li>
+                </ul>        
+            
                 </div>
             </div>
         </div>

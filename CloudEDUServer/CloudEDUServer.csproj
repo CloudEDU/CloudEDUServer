@@ -732,7 +732,7 @@
     <Content Include="adminconsole\Logout.aspx" />
     <Content Include="adminconsole\ManagerList.aspx" />
     <Content Include="adminconsole\Navigation.aspx" />
-    <Content Include="adminconsole\Permission.aspx" />
+    <Content Include="adminconsole\PermissionList.aspx" />
     <Content Include="adminconsole\TransactionList.aspx" />
     <Content Include="adminconsole\UserList.aspx" />
     <Content Include="adminconsole\CourseInfo.aspx" />
@@ -834,12 +834,12 @@
     <Compile Include="adminconsole\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="adminconsole\Permission.aspx.cs">
-      <DependentUpon>Permission.aspx</DependentUpon>
+    <Compile Include="adminconsole\PermissionList.aspx.cs">
+      <DependentUpon>PermissionList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="adminconsole\Permission.aspx.designer.cs">
-      <DependentUpon>Permission.aspx</DependentUpon>
+    <Compile Include="adminconsole\PermissionList.aspx.designer.cs">
+      <DependentUpon>PermissionList.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminconsole\TransactionList.aspx.cs">
       <DependentUpon>TransactionList.aspx</DependentUpon>

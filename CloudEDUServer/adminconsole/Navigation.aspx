@@ -59,7 +59,7 @@
                         <li><a class="menuitem">Manager Management</a>                            
                             <ul class="submenu">
                                 <li><a href="ManagerList.aspx">Manager list</a> </li>
-                                <li><a href="Permission.aspx">Permission list</a> </li>
+                                <li><a href="PermissionList.aspx">Permission list</a> </li>
                             </ul>
                         </li>
                         <li><a class="menuitem">Transaction Management</a>

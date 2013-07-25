@@ -1,11 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Permission.aspx.cs" Inherits="CloudEDUServer.adminconsole.Permission" %>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PermissionList.aspx.cs" Inherits="CloudEDUServer.adminconsole.PermissionList" %>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Permission | CloudEDU</title>
+    <title>Permission Management | CloudEDU</title>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
@@ -101,30 +99,6 @@
                 isOperating = false;
             }
         }
-
-        function viewManagers(permission) {
-            if (isOperating) {
-                alert("操作中，请稍后");
-                return;
-            }
-            isOperating = true;
-            if (confirm("确认查看拥有该权限的所有管理员吗？")) {
-                $.post("ManagerList.aspx", { operate: "viewPermissionManager", permission:permission }, function (data) {
-                    if (data == "success") {
-                        window.location.href = "ManagerList.aspx";
-                    }
-                    else {
-                        alert(data);
-                    }
-                    isOperating = false;
-                });
-            }
-            else {
-                isOperating = false;
-            }
-        }
-
-        
         function editManager(account) {
             if (isOperating) {
                 alert("操作中，请稍后");
@@ -132,9 +106,9 @@
             }
             isOperating = true;
             if (confirm("确认编辑该管理员吗")) {
-                $.post("ManagerList.aspx", { operate: "edit", account: account }, function (data) {
+                $.post("PermissionList.aspx", { operate: "edit", account: account }, function (data) {
                     if (data == "success") {
-                        window.location.href = "EditManager.aspx";
+                        window.location.href = "ViewPermissionManagers.aspx";
                     }
                     else {
                         alert(data);
@@ -155,25 +129,23 @@
         <div class="grid_10">
             <div class="box round first grid">
                 <h2>
-                    Permissions
+                    Manager List
                 </h2>
                 <div class="block">
 					<table class="data display datatable">
 					<thead>
 						<tr>
-							<th  style="text-align:center">ID</th>
 							<th  style="text-align:center">Name</th>
+							<th  style="text-align:center">Permission</th>
 							<th  style="text-align:center">Type</th>
+                            <th  style="text-align:center"></th>
                             <th  style="text-align:center"></th>
 						</tr>
 					</thead>
 					<tbody>
                         <%
-                            PERMISSION[] permissions = ManagerAccess.GetAllPermissions();
-                               
-                            
-                            
-                        
+                         MANAGER[] manager=ManagerAccess.GetAllManagers();
+                         PERMISSION[] permissions = ManagerAccess.GetAllPermissions();
                          //for (int j = 0; j < 19; j++ )
                              for (int i = 0; i < permissions.Length; i++)
                              {
@@ -183,7 +155,7 @@
 							    <td style="text-align:center"><%=permissions[i].ID%></td>
 							    <td style="text-align:center"><%=permissions[i].NAME%></td>
 							    <td style="text-align:center"><%=permissions[i].TYPE%></td>	
-                                <td style="text-align:center"><a href="javascript:viewManagers('<%=permissions[i].NAME%>')">查看Managers</a></td>
+                                <td style="text-align:center"><a href="javascript:editManager('<%=permissions[i].NAME%>')">编辑</a></td>
 						    </tr>
                         <%}%>			
 					</tbody>
