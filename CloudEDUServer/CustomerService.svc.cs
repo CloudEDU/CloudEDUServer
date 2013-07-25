@@ -24,6 +24,7 @@ namespace CloudEDUServer
             config.SetServiceOperationAccessRule("GetCustomersByName", ServiceOperationRights.All);
             config.SetServiceOperationAccessRule("GetAllCustomers", ServiceOperationRights.All);
             config.SetServiceOperationAccessRule("GetCustomersByNameAndPassword", ServiceOperationRights.All);
+            config.SetServiceOperationAccessRule("GetCustomersByID", ServiceOperationRights.All);
             config.DataServiceBehavior.MaxProtocolVersion = DataServiceProtocolVersion.V3;
         }
 
@@ -34,35 +35,39 @@ namespace CloudEDUServer
             {
                 throw new ArgumentNullException("name", "You must provide a name!");
             }
-            CloudEDUEntities ctx = new CloudEDUEntities();
-            try
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
             {
-                var result = from crs in ctx.CUSTOMERs
-                             where crs.NAME == name
-                             select crs;
-                return result;
-            }
-            catch (Exception ex)
-            {
-                throw new ApplicationException(string.Format(
-                    "An error occurred: {0}", ex.Message));
-            }
+                try
+                {
+                    var result = from crs in ctx.CUSTOMERs
+                                 where crs.NAME == name
+                                 select crs;
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    throw new ApplicationException(string.Format(
+                        "An error occurred: {0}", ex.Message));
+                }
+            }        
         }
 
         [WebGet]
         public IQueryable<CUSTOMER> GetAllCustomers()
         {
-            CloudEDUEntities ctx = new CloudEDUEntities();
-            try
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
             {
-                var result = ctx.CUSTOMERs;
-                return result;
-            }
-            catch (Exception ex)
-            {
-                throw new ApplicationException(string.Format(
-                    "An error occurred: {0}", ex.Message));
-            }
+                try
+                {
+                    var result = ctx.CUSTOMERs;
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    throw new ApplicationException(string.Format(
+                        "An error occurred: {0}", ex.Message));
+                }
+            }        
         }
 
         [WebGet]
@@ -72,19 +77,41 @@ namespace CloudEDUServer
             {
                 throw new ArgumentNullException("name", "You must provide a name!");
             }
-            CloudEDUEntities ctx = new CloudEDUEntities();
-            try
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
             {
-                var result = from crs in ctx.CUSTOMERs
-                             where crs.NAME == name && crs.PASSWORD == password
-                             select crs;
-                return result;
-            }
-            catch (Exception ex)
+                try
+                {
+                    var result = from crs in ctx.CUSTOMERs
+                                 where crs.NAME == name && crs.PASSWORD == password
+                                 select crs;
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    throw new ApplicationException(string.Format(
+                        "An error occurred: {0}", ex.Message));
+                }
+            }       
+        }
+
+        [WebGet]
+        public IQueryable<CUSTOMER> GetCustomerByID(int id)
+        {
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
             {
-                throw new ApplicationException(string.Format(
-                    "An error occurred: {0}", ex.Message));
-            }
+                try
+                {
+                    var result = from crs in ctx.CUSTOMERs
+                                 where crs.ID == id
+                                 select crs;
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    throw new ApplicationException(string.Format(
+                        "An error occurred: {0}", ex.Message));
+                }
+            }  
         }
     }
 }
