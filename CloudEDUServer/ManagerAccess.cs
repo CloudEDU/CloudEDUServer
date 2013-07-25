@@ -90,9 +90,11 @@ namespace CloudEDUServer
             MANAGER[] managers = null;
             using (CloudEDUEntities ctx = new CloudEDUEntities())
             {
-                managers = (from mngr in ctx.MANAGERs
-                            where mngr.PERMISSIONs.Contains<PERMISSION>(permission)
-                            select mngr).ToArray<MANAGER>();
+                PERMISSION perm = ctx.PERMISSIONs.Include("MANAGERs").Where(p => p.ID == permission.ID).FirstOrDefault();
+                managers = perm.MANAGERs.ToArray();
+                //managers = (from mngr in ctx.MANAGERs
+                //            where mngr.PERMISSIONs.Contains<PERMISSION>(permission)
+                //            select mngr).ToArray<MANAGER>();
             }
             return managers;
         }
