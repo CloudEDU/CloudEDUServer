@@ -28,6 +28,17 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="CloudEDUEntities-部署" Order="1">
+          <Destination Path="" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Data Source=SQLSERVER\MSSQLSERVER2012%3bInitial Catalog=CloudEDU%3bPersist Security Info=True%3bUser ID=webmaster%3bPassword=admin_e23lzh%3bApplication Name=EntityFramework" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Debug\AutoScripts\CloudEDUEntities-部署_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -954,6 +965,7 @@
       <DependentUpon>CloudEDUModel.edmx</DependentUpon>
       <LastGenOutput>CloudEDUModel.cs</LastGenOutput>
     </Content>
+    <None Include="Properties\PublishProfiles\lazy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

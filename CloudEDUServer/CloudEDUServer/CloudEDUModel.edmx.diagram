@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4b96ff7145c04882851d325122e8fa70" Name="关系图1">
+        <EntityTypeShape EntityType="CloudEDUModel.CATEGORY" Width="1.5" PointX="3.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.COMMENT" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.COURSE" Width="1.5" PointX="6" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.DOCUMENT" Width="1.5" PointX="10.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.LESSON" Width="1.5" PointX="8.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.PARENT_GUIDE" Width="1.5" PointX="3.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.RECOMMENDATION" Width="1.5" PointX="8.25" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.RES_TYPE" Width="1.5" PointX="8.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.RESOURCE" Width="1.5" PointX="10.5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.ATTEND" Width="1.5" PointX="13.5" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.CUSTOMER" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.NOTE" Width="1.5" PointX="10.5" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.OPR_LOG" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.MANAGER" Width="1.5" PointX="13" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.PERMISSION" Width="1.5" PointX="15.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.TYPE" Width="1.5" PointX="10.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.SALEORDER" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.COURSE_OK" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.COURSE_PENDING" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.COURSE_CANCEL" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="CloudEDUModel.FK_COURSE_CATEGORY" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudEDUModel.FK__COMMENT__CUSTOME__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudEDUModel.FK_COMMENT_COURSE" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudEDUModel.FK__SALEORDER__COURS__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudEDUModel.FK_ATTEND_COURSE" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudEDUModel.FK_COURSE_PG" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudEDUModel.FK_COURSE_TEACHER" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudEDUModel.FK_LESSON_COURSE" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudEDUModel.FK_DOCUMENT_LESSON" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudEDUModel.FK__NOTE__LESSON_ID__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudEDUModel.FK_ATTEND_CURRENTLESSON" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudEDUModel.FK_RESOURCE_LESSON" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudEDUModel.FK_RESOURCE_TYPE" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudEDUModel.FK_ATTEND_CUSTOMER" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudEDUModel.FK__NOTE__CUSTOMER_I__2334397B" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudEDUModel.FK__SALEORDER__BUYER__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudEDUModel.FK__SALEORDER__SALER__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudEDUModel.FK__MANAGER__MNGR_TY__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudEDUModel.RECO_COURSE" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudEDUModel.FAVORITE" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudEDUModel.GRANTED" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
