@@ -954,10 +954,10 @@
           <NavigationProperty Name="SALEORDERs" Relationship="CloudEDUModel.FK__SALEORDER__COURS__534D60F1" FromRole="COURSE" ToRole="SALEORDER" />
           <NavigationProperty Name="ATTENDs" Relationship="CloudEDUModel.FK_ATTEND_COURSE" FromRole="COURSE" ToRole="ATTEND" />
           <NavigationProperty Name="PARENT_GUIDE" Relationship="CloudEDUModel.FK_COURSE_PG" FromRole="COURSE" ToRole="PARENT_GUIDE" />
-          <NavigationProperty Name="CUSTOMER" Relationship="CloudEDUModel.FK_COURSE_TEACHER" FromRole="COURSE" ToRole="CUSTOMER" />
+          <NavigationProperty Name="CUSTOMER_teach" Relationship="CloudEDUModel.FK_COURSE_TEACHER" FromRole="COURSE" ToRole="CUSTOMER" />
           <NavigationProperty Name="LESSONs" Relationship="CloudEDUModel.FK_LESSON_COURSE" FromRole="COURSE" ToRole="LESSON" />
           <NavigationProperty Name="RECOMMENDATIONs" Relationship="CloudEDUModel.RECO_COURSE" FromRole="COURSE" ToRole="RECOMMENDATION" />
-          <NavigationProperty Name="CUSTOMERs" Relationship="CloudEDUModel.FAVORITE" FromRole="COURSE" ToRole="CUSTOMER" />
+          <NavigationProperty Name="CUSTOMER_attend" Relationship="CloudEDUModel.FAVORITE" FromRole="COURSE" ToRole="CUSTOMER" />
         </EntityType>
         <EntityType Name="DOCUMENT">
           <Key>
@@ -1052,12 +1052,12 @@
           <Property Name="TEACH_RATE" Type="Double" />
           <Property Name="BIRTHDAY" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="COMMENTs" Relationship="CloudEDUModel.FK__COMMENT__CUSTOME__6E01572D" FromRole="CUSTOMER" ToRole="COMMENT" />
-          <NavigationProperty Name="COURSEs" Relationship="CloudEDUModel.FK_COURSE_TEACHER" FromRole="CUSTOMER" ToRole="COURSE" />
+          <NavigationProperty Name="COURSE_asteacher" Relationship="CloudEDUModel.FK_COURSE_TEACHER" FromRole="CUSTOMER" ToRole="COURSE" />
           <NavigationProperty Name="ATTENDs" Relationship="CloudEDUModel.FK_ATTEND_CUSTOMER" FromRole="CUSTOMER" ToRole="ATTEND" />
           <NavigationProperty Name="NOTEs" Relationship="CloudEDUModel.FK__NOTE__CUSTOMER_I__2334397B" FromRole="CUSTOMER" ToRole="NOTE" />
           <NavigationProperty Name="SALEORDERs_asbuyer" Relationship="CloudEDUModel.FK__SALEORDER__BUYER__5070F446" FromRole="CUSTOMER" ToRole="SALEORDER" />
           <NavigationProperty Name="SALEORDERs_assaler" Relationship="CloudEDUModel.FK__SALEORDER__SALER__5165187F" FromRole="CUSTOMER" ToRole="SALEORDER" />
-          <NavigationProperty Name="COURSEs1" Relationship="CloudEDUModel.FAVORITE" FromRole="CUSTOMER" ToRole="COURSE" />
+          <NavigationProperty Name="COURSEs_attend" Relationship="CloudEDUModel.FAVORITE" FromRole="CUSTOMER" ToRole="COURSE" />
         </EntityType>
         <EntityType Name="NOTE">
           <Key>

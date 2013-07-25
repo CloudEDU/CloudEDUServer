@@ -10,7 +10,7 @@
 namespace CloudEDUServer.adminconsole {
     
     
-    public partial class ManagerList {
+    public partial class PermissionList {
         
         /// <summary>
         /// Head1 control.

@@ -732,9 +732,11 @@
     <Content Include="adminconsole\Logout.aspx" />
     <Content Include="adminconsole\ManagerList.aspx" />
     <Content Include="adminconsole\Navigation.aspx" />
+    <Content Include="adminconsole\PermissionList.aspx" />
     <Content Include="adminconsole\TransactionList.aspx" />
     <Content Include="adminconsole\UserList.aspx" />
     <Content Include="adminconsole\CourseInfo.aspx" />
+    <Content Include="adminconsole\ViewPermissionManagers.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -832,6 +834,13 @@
     <Compile Include="adminconsole\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="adminconsole\PermissionList.aspx.cs">
+      <DependentUpon>PermissionList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\PermissionList.aspx.designer.cs">
+      <DependentUpon>PermissionList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminconsole\TransactionList.aspx.cs">
       <DependentUpon>TransactionList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -845,6 +854,13 @@
     </Compile>
     <Compile Include="adminconsole\UserList.aspx.designer.cs">
       <DependentUpon>UserList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminconsole\ViewPermissionManagers.aspx.cs">
+      <DependentUpon>ViewPermissionManagers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\ViewPermissionManagers.aspx.designer.cs">
+      <DependentUpon>ViewPermissionManagers.aspx</DependentUpon>
     </Compile>
     <Compile Include="ATTEND.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
@@ -880,6 +896,7 @@
     <Compile Include="adminconsole\CourseInfo.aspx.designer.cs">
       <DependentUpon>CourseInfo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CourseAccess.cs" />
     <Compile Include="COURSE_CANCEL.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
@@ -895,6 +912,7 @@
     <Compile Include="CUSTOMER.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CustomerAccess.cs" />
     <Compile Include="DOCUMENT.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
@@ -956,7 +974,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="adminconsole\img\.DS_Store" />
     <Content Include="adminconsole\img\gallery\.DS_Store" />
     <Content Include="adminconsole\img\gallery\thumbs_small\Thumbs.db" />

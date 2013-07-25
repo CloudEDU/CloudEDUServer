@@ -15,6 +15,17 @@ namespace CloudEDUServer
     public class CourseAccess
     {
         #region 查询方法
+
+        public static COURSE[] GetAllCourses()
+        {
+            COURSE[] courses = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                courses = ctx.COURSEs.ToArray();
+            }
+            return courses;
+        }
+
         public static COURSE_PENDING[] GetAllPendingCourses()
         {
             COURSE_PENDING[] courses = null;
@@ -109,7 +120,7 @@ namespace CloudEDUServer
             return documents;
         }
 
-        public static RESOURCE[] GetDocumentsByLesson(LESSON lesson)
+        public static RESOURCE[] GetResourcesByLesson(LESSON lesson)
         {
             RESOURCE[] resources = null;
             using (CloudEDUEntities ctx = new CloudEDUEntities())
@@ -121,7 +132,7 @@ namespace CloudEDUServer
         }
 
 
-        public static RESOURCE[] GetDocumentsByLesson(int lesson_id)
+        public static RESOURCE[] GetResourcesByLesson(int lesson_id)
         {
             RESOURCE[] resources = null;
             using (CloudEDUEntities ctx = new CloudEDUEntities())
@@ -151,6 +162,69 @@ namespace CloudEDUServer
             }
             return notes;
         }
+
+        public static NOTE_SHARABLE[] GetNoteSharableByCustomer(CUSTOMER customer)
+        {
+            NOTE_SHARABLE[] notes = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                notes = ctx.NOTE_SHARABLE.Where(n => n.CUSTOMER_ID == customer.ID).ToArray();
+            }
+            return notes;
+        }
+
+        public static COMMENT[] GetCommentsByCustomer(CUSTOMER customer)
+        {
+            COMMENT[] comments = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                comments = ctx.COMMENTs.Where(c => c.CUSTOMER_ID == customer.ID).ToArray();
+            }
+            return comments;
+        }
+
+        public static COMMENT[] GetCommentsByCourse(COURSE course)
+        {
+            COMMENT[] comments = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                comments = ctx.COMMENTs.Where(c => c.COURSE_ID == course.ID).ToArray();
+            }
+            return comments;
+        }
+
+        public static CUSTOMER[] GetCustomersAsStudentByCourse(int course_id)
+        {
+            CUSTOMER[] customers = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                var cs = ctx.COURSEs.Include("CUSTOMER_attend").Where(c => c.ID == course_id).FirstOrDefault();
+                customers = cs.CUSTOMER_attend.ToArray();
+            }
+            return customers;
+        }
+
+        public static RECOMMENDATION[] GetAllRecommendations()
+        {
+            RECOMMENDATION[] reco = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                reco = ctx.RECOMMENDATIONs.ToArray();
+            }
+            return reco;
+        }
+
+        public static COURSE[] GetCoursesByRecommendation(RECOMMENDATION reco)
+        {
+            COURSE[] courses = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                var rc = ctx.RECOMMENDATIONs.Include("COURSEs").Where(r => r.ID == reco.ID).FirstOrDefault();
+                courses = rc.COURSEs.ToArray();
+            }
+            return courses;
+        }
+
 
         #endregion
 
@@ -182,6 +256,7 @@ namespace CloudEDUServer
             return true;
         }
 
+
         /// <summary>
         /// 用于更改课程信息，这是一个很强的方法，理论上可以更改全部信息。该方法可以覆盖UpdateCourseStatus的功能。
         /// 如果有更相应的方法不推荐使用这个方法
@@ -205,6 +280,256 @@ namespace CloudEDUServer
             }
             return true;
         }
+
+        public static bool AddCategory(CATEGORY category)
+        {
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                try
+                {
+                    ctx.Set<CATEGORY>().Add(category);
+                    ctx.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool AddRecommendation(RECOMMENDATION reco)
+        {
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                try
+                {
+                    ctx.Set<RECOMMENDATION>().Add(reco);
+                    ctx.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool AddCourseToRecommendation(COURSE course, RECOMMENDATION reco)
+        {
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                try
+                {
+                    var rc = ctx.RECOMMENDATIONs.Include("COURSEs").Where(r => r.ID == reco.ID).FirstOrDefault();
+                    var cs = ctx.COURSEs.Where(c => c.ID == course.ID).FirstOrDefault();
+                    rc.COURSEs.Add(cs);
+                    ctx.Entry(rc).State = System.Data.EntityState.Modified;
+                    ctx.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
+                    return false;
+                }
+
+            }
+            return true;
+        }
+
+        
+        private static bool AddLessonsToCourse(LESSON[] lessons, COURSE course)
+        {
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                try
+                {
+                    var cs = ctx.COURSEs.Include("LESSONs").Where(c => c.ID == course.ID).FirstOrDefault();
+                    foreach (LESSON ls in lessons)
+                        cs.LESSONs.Add(ls);
+                    ctx.Entry(cs).State = System.Data.EntityState.Modified;
+                    ctx.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private static bool AddResourcesToLesson(RESOURCE[] res, LESSON lesson)
+        {
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                var ls = ctx.LESSONs.Include("RESOURCEs").Where(l => l.ID == lesson.ID).FirstOrDefault();
+                foreach (RESOURCE rs in res)
+                    ls.RESOURCEs.Add(rs);
+                ctx.Entry(ls).State = System.Data.EntityState.Modified;
+                ctx.SaveChanges();
+            }
+            return true;
+        }
+
+        public static bool ToggleNoteSharability(NOTE note)
+        {
+            note.SHARE = !note.SHARE;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                try
+                {
+                    ctx.Set<NOTE>().Attach(note);
+                    ctx.Entry(note).State = System.Data.EntityState.Modified;
+                    ctx.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool UpdateCategory(CATEGORY category)
+        {
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                try
+                {
+                    ctx.Entry(category).State = System.Data.EntityState.Modified;
+                    ctx.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool UpdateRecommendation(RECOMMENDATION reco)
+        {
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                try
+                {
+                    ctx.Entry(reco).State = System.Data.EntityState.Modified;
+                    ctx.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        #endregion
+
+        #region 删除方法
+        public static bool RemoveLesson(LESSON lesson)
+        {
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                try
+                {
+                    ctx.Set<LESSON>().Attach(lesson);
+                    ctx.Set<LESSON>().Remove(lesson);
+                    ctx.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool RemoveResource(RESOURCE resource)
+        {
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                try
+                {
+                    ctx.Set<RESOURCE>().Attach(resource);
+                    ctx.Set<RESOURCE>().Remove(resource);
+                    ctx.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool RemoveDocument(DOCUMENT document)
+        {
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                try
+                {
+                    ctx.Set<DOCUMENT>().Attach(document);
+                    ctx.Set<DOCUMENT>().Remove(document);
+                    ctx.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool RemoveComment(COMMENT comment)
+        {
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                try
+                {
+                    ctx.Set<COMMENT>().Attach(comment);
+                    ctx.Set<COMMENT>().Remove(comment);
+                    ctx.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
+                    return false;
+                }
+            }
+            return true;
+        }
+
+
+        public static bool RemoveCategory(CATEGORY category)
+        {
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                try
+                {
+                    ctx.Set<CATEGORY>().Attach(category);
+                    ctx.Set<CATEGORY>().Remove(category);
+                    ctx.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        
 
         #endregion
 
