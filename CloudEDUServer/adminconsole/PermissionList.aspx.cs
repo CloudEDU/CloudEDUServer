@@ -4,18 +4,16 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using CloudEDUServer;
-using System.Web.Services;
 
 namespace CloudEDUServer.adminconsole
 {
-    public partial class ManagerList : System.Web.UI.Page
+    public partial class PermissionList : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-                string operate=Request.Params.Get("operate");
+                string operate = Request.Params.Get("operate");
                 MANAGER selfManage = (MANAGER)Session["manager"];
 
                 if (operate.Equals("viewPermissionManager"))
@@ -38,7 +36,7 @@ namespace CloudEDUServer.adminconsole
                     //{
                     //    Response.Write("权限不足");
                     //    Response.End();
-                        
+
                     //}
                     if (deleteManager == null)
                     {
@@ -59,11 +57,13 @@ namespace CloudEDUServer.adminconsole
 
                 if (operate.Equals("edit"))
                 {
-                    string account=Request.Params.Get("account");
-                    MANAGER editManager =null;
+                    string account = Request.Params.Get("account");
+                    PERMISSION perm = ManagerAccess.GetPermissionByPermissionName(account);
+                    
+                    MANAGER editManager = null;
                     try
                     {
-                        editManager = ManagerAccess.GetManagerByName(account);
+                        editManager = ManagerAccess.GetAllManagers()[0];
                     }
                     catch
                     {
@@ -77,20 +77,21 @@ namespace CloudEDUServer.adminconsole
                     }
                     else
                     {
-                        Session["editAccount"] = account;
-                        Session["editPermission"] = ManagerAccess.GetPermissionsByManager(ManagerAccess.GetManagerByName(account));
-                        Session["editType"] = ManagerAccess.GetManagerByName(account).MNGR_TYPE;
+                        Session["editAccount"] = editManager.NAME;
+                        Session["editPermission"] = ManagerAccess.GetPermissionsByManager(ManagerAccess.GetManagerByName(editManager.NAME));
+                        Session["editType"] = ManagerAccess.GetManagerByName(editManager.NAME).MNGR_TYPE;
+                        Session["permission_name"] = account;
                         Response.Write("success");
                         Response.End();
                     }
                 }
 
-        
+
 
             }
             catch (Exception ee)
             {
-          
+
             }
         }
     }
