@@ -896,6 +896,7 @@
     <Compile Include="CUSTOMER.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CustomerAccess.cs" />
     <Compile Include="DOCUMENT.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
