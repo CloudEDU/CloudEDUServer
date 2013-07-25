@@ -72,6 +72,10 @@
             });
             setSidebarHeight();
         });
+
+        function showCourseInfo(courseID) {
+            window.location.href = "CourseInfo.aspx?courseId="+courseID;
+        }
     </script>
 
 </head>
@@ -101,19 +105,24 @@
 						</tr>
 					</thead>
 					<tbody>
-						    <tr>
-							    <td style="text-align:center"></td>
-							    <td style="text-align:center"></td>
-							    <td style="text-align:center"></td>	
-                                <td style="text-align:center"></td>						    
-							    <td style="text-align:center"></td>
-                                <td style="text-align:center"></td>
-							    <td style="text-align:center"></td>
-							    <td style="text-align:center"></td>	
-                                <td style="text-align:center"></td>						    
-							    <td style="text-align:center"></td>
+                        <% 
+                            COURSE[] course=CourseAccess.GetAllCourses();
+                            for (int i=0; i<course.Length; i++)
+                            {
+                         %>
+						    <tr ondblclick="showCourseInfo(<%=course[i].ID %>)">
+							    <td style="text-align:center"><%=course[i].ID %></td>
+							    <td style="text-align:center"><%=course[i].PRICE %></td>
+							    <td style="text-align:center"><%=course[i].TITLE %></td>	
+                                <td style="text-align:center"><%=course[i].TEACHER %></td>						    
+							    <td style="text-align:center"><%=course[i].CATEGORY %></td>
+                                <td style="text-align:center"><%=course[i].COURSE_STATUS %></td>
+							    <td style="text-align:center"><%=course[i].PG %></td>
+							    <td style="text-align:center"><%=course[i].ICON_URL %></td>	
+                                <td style="text-align:center"><%=course[i].START_TIME %></td>						    
+							    <td style="text-align:center"><%=course[i].RATE %></td>
 						    </tr>	
-                        		
+                        <%  } %>	
 					</tbody>
 				    </table>                               
                 </div>

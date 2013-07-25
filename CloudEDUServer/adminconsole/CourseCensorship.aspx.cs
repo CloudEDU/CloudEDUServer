@@ -11,7 +11,27 @@ namespace CloudEDUServer.adminconsole
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+             try
+            {
+                int id=int.Parse(Request.Params.Get("courseId"));
+                string stateStr=Request.Params.Get("courseState");
+                if (stateStr.Equals("OK"))
+                {
+                    CourseAccess.UpdateCourseStatus(id, CourseStatus.OK);
+                }
+                else if (stateStr.Equals("Pending"))
+                {
+                    CourseAccess.UpdateCourseStatus(id, CourseStatus.PENDING);
+                }
+                else if (stateStr.Equals("Cancel"))
+                {
+                    CourseAccess.UpdateCourseStatus(id, CourseStatus.CANCEL);
+                }
+                
+            }
+            catch
+            {
+            }
         }
     }
 }

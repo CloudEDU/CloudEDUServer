@@ -5,7 +5,9 @@
        if (Session["manager"] == null)
        {
            Response.Redirect("Login.aspx");
+           Response.End();
        }
+
     %>
         <div class="grid_12 header-repeat">
             <div id="branding">

@@ -10,7 +10,7 @@ namespace CloudEDUServer
         PENDING,
         OK,
         CANCEL
-    }
+    };
 
     public class CourseAccess
     {
@@ -64,6 +64,17 @@ namespace CloudEDUServer
                 categories = ctx.CATEGORies.ToArray();
             }
             return categories;
+        }
+
+        public static COURSE GetCourseById(int course_id)
+        {
+            COURSE course = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+            
+                course=ctx.COURSEs.Where(c=>c.ID==course_id).FirstOrDefault();
+            }
+            return course;
         }
 
         public static COURSE[] GetCoursesByCategory(CATEGORY category)

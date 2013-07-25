@@ -139,14 +139,12 @@
 							<th  style="text-align:center">Permission</th>
 							<th  style="text-align:center">Type</th>
                             <th  style="text-align:center"></th>
-                            <th  style="text-align:center"></th>
 						</tr>
 					</thead>
 					<tbody>
                         <%
                          MANAGER[] manager=ManagerAccess.GetAllManagers();
                          PERMISSION[] permissions = ManagerAccess.GetAllPermissions();
-                         //for (int j = 0; j < 19; j++ )
                              for (int i = 0; i < permissions.Length; i++)
                              {
                              

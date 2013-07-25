@@ -71,6 +71,11 @@
             setupLeftMenu();
             setSidebarHeight();
         });
+
+        function changeCourseState(ele) {
+            jQuery.post("CourseCensorship.aspx", { courseId: ele.name, courseState: ele.value }, function (data) {
+            });
+        }
     </script>
 
 </head>
@@ -86,21 +91,50 @@
 					<table class="data display datatable">
 					<thead>
 						<tr>
+                            <th style="text-align:center">Course Title</th>
 							<th style="text-align:center">Course Time</th>
 							<th style="text-align:center">Teacher</th>
 							<th style="text-align:center">State</th>                        
 						</tr>
 					</thead>
 					<tbody>
+                        <%
+                            COURSE[] course = CourseAccess.GetAllCourses();
+                            for (int i=0; i<course.Length; i++)
+                            {
+                        %>
 						    <tr>
-							    <td style="text-align:center">VioletHill</td>
-							    <td style="text-align:center">100</td>
+                                <td style="text-align:center"><%=course[i].TITLE %></td>
+							    <td style="text-align:center"><%=course[i].START_TIME %></td>
+							    <td style="text-align:center"><%=course[i].TEACHER %></td>
 							    <td style="text-align:center">
-                                    <input type="radio" name="rd1" />Added
-                                    <input type="radio" name="rd1" checked="checked" />Checked
+                                    <%
+                                        if (course[i].COURSE_STATUS.Substring(0,2).Equals("OK"))
+                                        {
+                                    %>
+                                            <input type="radio" name="<%=course[i].ID %>" checked="checked" value="OK" onchange="changeCourseState(this)" />OK
+                                            <input type="radio" name="<%=course[i].ID %>" value="Cancel" onchange="changeCourseState(this)" />Cancel
+                                            <input type="radio" name="<%=course[i].ID %>" value="Pending"  onchange="changeCourseState(this)" />Pending
+                                  
+                                    <%         
+                                        }
+                                        else if (course[i].COURSE_STATUS.Substring(0,6).Equals("CANCEL"))
+                                        {
+                                    %>
+                                            <input type="radio" name="<%=course[i].ID %>" value="OK"  onchange="changeCourseState(this)" />OK
+                                            <input type="radio" name="<%=course[i].ID %>" checked="checked" value="Cancel"  onchange="changeCourseState(this)"  />Cancel
+                                            <input type="radio" name="<%=course[i].ID %>" value="Pending"  onchange="changeCourseState(this)" />Pending
+                                    <%  }   
+                                        else
+                                        {
+                                    %>      
+                                            <input type="radio" name="<%=course[i].ID %>" value="OK"  onchange="changeCourseState(this)"/>OK
+                                            <input type="radio" name="<%=course[i].ID %>" value="Cancel" onchange="changeCourseState(this)" />Cancel
+                                            <input type="radio" name="<%=course[i].ID %>" checked="checked" value="Pending" onchange="changeCourseState(this)"  />Pending
+                                    <%  } %>
                                 </td>         					    
 						    </tr>	
-                        		
+                        <%  } %>	
 					</tbody>
 				    </table>                               
                 </div>
