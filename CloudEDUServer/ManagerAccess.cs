@@ -45,6 +45,22 @@ namespace CloudEDUServer
             return permissions;
         }
 
+
+        /*
+         * 补充getpermissionByManager方法
+         * 返回将permission[]转化为一个string，用于前台显示
+         */
+        public static string getPermissionStringByManager(MANAGER manager)
+        {
+            PERMISSION[] permissions = GetPermissionsByManager(manager);
+            string permissionString="";
+            for (int i = 0; i < permissions.Length; i++)
+            {
+                permissionString += permissions[i].NAME + ' ';
+            }
+            return permissionString;
+        }
+
         public static PERMISSION[] GetPermissionsByManager(MANAGER manager)
         {
             PERMISSION[] permissions = null;

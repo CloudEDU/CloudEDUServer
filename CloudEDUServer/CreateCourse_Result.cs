@@ -10,18 +10,14 @@
 namespace CloudEDUServer
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class COMMENT
+    public partial class CreateCourse_Result
     {
-        public int ID { get; set; }
-        public int CUSTOMER_ID { get; set; }
-        public int COURSE_ID { get; set; }
-        public string CONTENT { get; set; }
-        public string TITLE { get; set; }
-        public System.DateTime TIME { get; set; }
-    
-        public virtual CUSTOMER CUSTOMER { get; set; }
-        public virtual COURSE COURSE { get; set; }
+        public Nullable<int> ErrorNumber { get; set; }
+        public Nullable<int> ErrorSeverity { get; set; }
+        public Nullable<int> ErrorState { get; set; }
+        public string ErrorProcedure { get; set; }
+        public Nullable<int> ErrorLine { get; set; }
+        public string ErrorMessage { get; set; }
     }
 }

@@ -1,15 +1,13 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="userlist.aspx.cs" Inherits="cloudEdu.userlist" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UserList.aspx.cs" Inherits="CloudEDUServer.adminconsole.UserList" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Typography | BlueWhale Admin</title>
+<head id="Head1" runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
 
-      <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-
-        <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
+     <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
@@ -64,69 +62,55 @@
     <!-- Load TinyMCE -->
     <script src="js/tiny-mce/jquery.tinymce.js" type="text/javascript"></script>
 
-    <script type="text/javascript" src="js/table/table.js"></script>
     <script src="js/setup.js" type="text/javascript"></script>
 
     <script type="text/javascript">
-
         $(document).ready(function () {
-            setupLeftMenu();
-
-           // $('.datatable').dataTable();
-            //setSidebarHeight();
-        });
-
-        var isOperating=false;
-        function deleteManage(account) {
-            if (isOperating) {
-                alert("操作中，请稍后");
-                return;
-            }
-            isOperating = true;
-            $.post("userlist.aspx", { operate: "delete", account: account }, function () {
-
-                isOperating = false;
+            $('.datatable').dataTable({
+                "sPaginationType": "full_numbers"
             });
-        }
+            setupLeftMenu();
+            setSidebarHeight();
+        });
     </script>
+
 </head>
-<body runat="server">
+<body id="Body1" runat="server">
     <div class="container_12">    
         <!--#include file="Navigation.aspx" -->
 
         <div class="grid_10">
             <div class="box round first grid">
-                <h2>
-                    Tables & Grids</h2>
+                <h2>User List</h2>
                 <div class="block">
                     
 					<table class="data display datatable">
 					<thead>
 						<tr>
-							<th>name</th>
-							<th>permission</th>
-							<th>type</th>
-                            <th>delete</th>
+							<th style="text-align:center">Name</th>
+							<th style="text-align:center">Balance</th>
+							<th style="text-align:center">Email</th>
+                            <th style="text-align:center">Degree</th>
+                            <th style="text-align:center">Learn Rate</th>
+                            <th style="text-align:center">Teach Rate</th>
+                            <th style="text-align:center">Birthday</th>
+                            <th style="text-align:center">Delete</th>
 						</tr>
 					</thead>
 					<tbody>
-                        <%
-                           MANAGER[] mangage=ManagerAccess.GetAllManagers();
-                           for (int i=0; i<mangage.Length; i++)
-                           {
-                        %>
 						    <tr>
-							    <td><%=mangage[i].NAME %></td>
-							    <td><%=mangage[i].PERMISSIONs %></td>
-							    <td><%=mangage[i].MNGR_TYPE %>></td>							    
-							    <td onclick="deleteManage(<%=mangage[i].NAME %>)">删除管理员</td>
-						    </tr>
-                        <%}%>						
+							    <td style="text-align:center">VioletHill</td>
+							    <td style="text-align:center">100</td>
+							    <td style="text-align:center">mailqiufeng@gmail.com</td>	
+                                <td style="text-align:center">dafa</td>						    
+							    <td style="text-align:center">fda</td>
+                                <td style="text-align:center">fasdfasdfasdfasdfasdfadsfasd</td>
+                                <td style="text-align:center">dddddddddddddddddd</td>
+                                <td style="text-align:center">删除</td>
+						    </tr>	
+                        		
 					</tbody>
-				</table>
-                    
-                    
-                    
+				    </table>                               
                 </div>
             </div>
         </div>
@@ -137,7 +121,7 @@
     </div>
     <div id="site_info">
         <p>
-            Copyright <a href="#">BlueWhale Admin</a>. All Rights Reserved.
+            Copyright <a href="#">Cloud Edu</a>. All Rights Reserved.
         </p>
     </div>
 </body>

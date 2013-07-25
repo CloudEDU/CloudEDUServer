@@ -76,7 +76,7 @@
         });
 
         var isUpdate = false;
-        function addManager() {
+        function addManager(permissionLength) {
             if (isUpdate) {
                 alert("数据跟新中，请稍后");
                 return ;
@@ -87,6 +87,7 @@
                 var account = document.getElementById("account").value;
                 var password = document.getElementById("password").value;
                 var confirmPassword = document.getElementById("confirmPassword").value;
+                var type = document.getElementById("type").value;
                 if (account == "") {
                     alert("账号不能为空");
                     isUpdate = false;
@@ -108,8 +109,18 @@
                     return;
                 }
                 if (password == confirmPassword) {
+
+                    var permission = 0;
+                    for (var i = 0; i < permissionLength; i++) {
+
+                        if (document.getElementById('permissionID' + i).checked) {
+                            permission += 1 << i;
+                        }
+                    }
+
                     password = hex_md5(password);
-                    jQuery.post("AddManager.aspx", { account: account, password: password }, function (data) {
+
+                    jQuery.post("AddManager.aspx", { account: account, password: password, permission:permission,type:type }, function (data) {
                         if (data == "success") {
                             isUpdate = false;
                             alert("新的管理员添加成功");
@@ -118,7 +129,7 @@
                         }
                         else {
                             alert(data);
-                            isUpdata = false;
+                            isUpdate = false;
                         }
                     });
                 }
@@ -153,7 +164,7 @@
                     <table class="form">
                         <tr>
                             <td>
-                                <label>账号</label>
+                                <label>account</label>
                             </td>
                             <td>
                                 <input type="text"  maxlength="10" class="success" id="account"/>
@@ -161,7 +172,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label>密码</label>
+                                <label>password</label>
                             </td>
                             <td>
                                 <input type="password" maxlength="10"  id="password" />
@@ -169,7 +180,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label>确认密码</label>
+                                <label>confirm password</label>
                             </td>
                             <td>
                                 <input type="password"  maxlength="10" id="confirmPassword" />
@@ -177,19 +188,37 @@
                         </tr>
                         <tr>
                             <td>
-                                <label>权限</label>
+                                 <label>type</label>
                             </td>
                             <td>
-                                <select id="select" name="select">
-                                    <option value="1">Value 1</option>
-                                    <option value="2">Value 2</option>
-                                    <option value="3">Value 3</option>
+                                <select id="type" name="select">
+                                    <%
+                                       CloudEDUServer.TYPE []allType=ManagerAccess.GetAllManagerTypes();
+                                       for (int i=0; i<allType.Length; i++)
+                                       { 
+                                    %>
+                                        <option value="<%=i %>"><%=i %></option>
+                                    <%}%>
                                 </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>permission</label>
+                            </td>
+                            <td>
+                                <%
+                                PERMISSION[] permission = ManagerAccess.GetAllPermissions();
+                                for (int i=0; i<permission.Length; i++)
+                                {                          
+                                %>
+                                    <input type="checkbox" id="<%="permissionID"+i %>" /><%=permission[i].NAME %>
+                               <%}%>           
                             </td>
                         </tr>
                     </table>  
                     </form>
-                    <button onclick="addManager()" style="margin-left:250px;">确认</button>
+                    <button onclick="addManager(<%=permission.Length %>)" style="margin-left:250px;">确认</button>
                 </div>
             </div>
         </div>
@@ -200,7 +229,7 @@
     </div>
     <div id="site_info">
         <p>
-            Copyright <a href="#">BlueWhale Admin</a>. All Rights Reserved.
+            Copyright <a href="#">Cloud Edu</a>. All Rights Reserved.
         </p>
     </div>
 </body>

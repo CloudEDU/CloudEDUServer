@@ -73,27 +73,28 @@
         $(document).ready(function () {
             setupLeftMenu();
             setSidebarHeight();
+            document.getElementById("type").value="<%=Session["editType"]%>" ;
+            <%Session["editType"] = null;%>
         });
 
         var isUpdate = false;
-        function addManager() {
+        function addManager(permissionLength) {
             if (isUpdate) {
                 alert("数据跟新中，请稍后");
                 return;
             }
             isUpdate = true;
 
-            if (confirm("确认添加新的管理员吗")) {
+            if (confirm("确认编辑管理员吗")) {
                 var account = document.getElementById("account").value;
                 var password = document.getElementById("password").value;
                 var confirmPassword = document.getElementById("confirmPassword").value;
+                var type = document.getElementById("type").value;
+                var isNewPassword = false;
+                if (password != "" || confirmPassword != "") isNewPassword = true;
+
                 if (account == "") {
                     alert("账号不能为空");
-                    isUpdate = false;
-                    return;
-                }
-                if (password == "") {
-                    alert("密码不能为空");
                     isUpdate = false;
                     return;
                 }
@@ -102,30 +103,40 @@
                     isUpdate = false;
                     return;
                 }
-                if (!checkStr(password)) {
+                if (isNewPassword && !checkStr(password)) {
                     alert("密码只能由大小写字母、数字、下划线组成");
                     isUpdate = false;
                     return;
                 }
-                if (password == confirmPassword) {
-                    password = hex_md5(password);
-                    jQuery.post("AddManager.aspx", { account: account, password: password }, function (data) {
+                if (isNewPassword && password != confirmPassword) {
+                    alert("两次密码不一致");
+                    isUpdate = false;
+                    return;
+                }
+                else{
+
+                    var permission = 0;
+                    for (var i = 0; i < permissionLength; i++) {
+                        
+                        if (document.getElementById('permissionID' + i).checked) {
+                            permission += 1 << i;
+                        }
+                    }
+                    if (isNewPassword) {
+                        password = hex_md5(password);
+                    }
+                    jQuery.post("EditManager.aspx", { account: account, password: password, permission:permission,type:type }, function (data) {
                         if (data == "success") {
                             isUpdate = false;
-                            alert("新的管理员添加成功");
+                            alert("管理员编辑成功");
                             window.location.href = "Default.aspx";
                             return;
                         }
                         else {
                             alert(data);
-                            isUpdata = false;
+                            isUpdate = false;
                         }
                     });
-                }
-                else {
-                    alert("两次密码不一致");
-                    isUpdate = false;
-                    return;
                 }
             }
             else {
@@ -157,7 +168,7 @@
                             </td>
                             <td>
                                 <input type="text" readonly value="<%=Session["editAccount"] %>" maxlength="10" class="success" id="account"/>
-                                <%Session["editAccount"] = null; %>
+                                <% Session["editAccount"] = null; %>
                             </td>
                         </tr>
                         <tr>
@@ -178,19 +189,50 @@
                         </tr>
                         <tr>
                             <td>
+                                 <label>type</label>
+                            </td>
+                            <td>
+                                <select id="type" name="select">
+                                    <%
+                                       CloudEDUServer.TYPE []allType=ManagerAccess.GetAllManagerTypes();
+                                       for (int i=0; i<allType.Length; i++)
+                                       { 
+                                    %>
+                                        <option value="<%=i %>"><%=i %></option>
+                                    <%}%>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 <label>权限</label>
                             </td>
                             <td>
-                                <select id="select" name="select">
-                                    <option value="1">Value 1</option>
-                                    <option value="2">Value 2</option>
-                                    <option value="3">Value 3</option>
-                                </select>
+                               <%
+                                PERMISSION[] permission = ManagerAccess.GetAllPermissions();
+                                PERMISSION[] managerPermision =(PERMISSION[]) Session["editPermission"];
+                                int editPermisionJ=0;
+                                for (int i=0; i<permission.Length; i++)
+                                {
+                                    if (managerPermision!=null && editPermisionJ<managerPermision.Length && managerPermision[editPermisionJ].ID == permission[i].ID)
+                                    {
+                                        editPermisionJ++;                                
+                                %>
+                                      <input type="checkbox" id="<%="permissionID"+i%>" checked="checked" /><%=permission[i].NAME %>
+                                    
+                                <% } 
+                                   else
+                                   {%>
+                                      <input type="checkbox" id="<%="permissionID"+i%>" /><%=permission[i].NAME %>
+                                   <%}
+                                }
+                                Session["editPermission"]=null;
+                                %>  
                             </td>
                         </tr>
                     </table>  
                     </form>
-                    <button onclick="addManager()" style="margin-left:250px;">确认</button>
+                    <button onclick="addManager(<%=permission.Length %>)" style="margin-left:250px;">确认</button>
                 </div>
             </div>
         </div>
@@ -201,7 +243,7 @@
     </div>
     <div id="site_info">
         <p>
-            Copyright <a href="#">BlueWhale Admin</a>. All Rights Reserved.
+            Copyright <a href="#">Cloud Edu</a>. All Rights Reserved.
         </p>
     </div>
 </body>

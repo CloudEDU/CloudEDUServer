@@ -26,6 +26,7 @@ namespace CloudEDUServer
         public int ID { get; set; }
         public string CONTENT { get; set; }
         public string TITLE { get; set; }
+        public int NUMBER { get; set; }
     
         public virtual COURSE COURSE { get; set; }
         public virtual ICollection<DOCUMENT> DOCUMENTs { get; set; }
