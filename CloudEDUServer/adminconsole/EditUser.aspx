@@ -109,11 +109,7 @@
                         isUpdate = false;
                         return;
                     }
-                    if (!checkBirthday(birthday)) {
-                        alert("日期格式错误");
-                        isUpdata = false;
-                        return;
-                    }
+
                     if (isNewPassword) {
                         password = hex_md5(password);
                     }
@@ -150,42 +146,6 @@
             else return true;
         }
 
-        function checkBirthday(str) {
-            try{
-                var year =parseInt( str.substr(0, 4) );
-                    
-                if (year<1900 || year>2013) return false;
-
-                var month;
-                if (str[6]== '/') month = str[5];
-                else month =parseInt( str.substr(5, 2) );
-                if (month<1 || month>12) return false;
-
-                var day;
-                if (str[str.length - 2] == '/')  day =parseInt( str[str.length - 1]);
-                else day = parseInt(str.substr(str.length - 2, 2));
-
-                switch (month)
-                {
-                    case 1, 3, 5, 7, 8, 10, 12:
-                        if (day > 31) return false;
-                        break;
-                    case 4, 6, 9, 11:
-                        if (day > 30) return false;
-                    case 2:
-                        if (year % 400 == 0 || (year % 400 != 0 && year % 4 == 0)) {
-                            if (day > 29) return false;
-                        }
-                        else if (day > 28) return false;
-                }
-
-                if (day < 0) return false;
-                return true;
-            }
-            catch (e) {
-                return false;
-            }
-        }
     </script>
 
 </head>

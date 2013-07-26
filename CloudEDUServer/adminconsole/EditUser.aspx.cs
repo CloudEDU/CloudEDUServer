@@ -46,12 +46,31 @@ namespace CloudEDUServer.adminconsole
                 }
                 customer.EMAIL = email;
                 customer.DEGREE = degree;
-              //  DateTime dt = DateTime.ParseExact(birthday, "yyyy-MM-dd");
-                DateTime dt2=Convert.ToDateTime(birthday);
-                customer.BIRTHDAY = dt2;
-                CustomerAccess.UpdateCustomer(customer);
+
+                try
+                {
+                    if (birthday[6] == '/') birthday=birthday.Insert(5, "0");
+                    if (birthday.Length < 10) birthday = birthday.Insert(8,"0");
+                    DateTime dt=Convert.ToDateTime(birthday);
+                    customer.BIRTHDAY = dt;
+                   
+                }
+                catch{
+                    Response.Write("日期有误");
+                    Response.End();
+                }
+                try
+                {
+                    CustomerAccess.UpdateCustomer(customer);
+                }
+                catch
+                {
+                    Response.Write("编辑错误");
+                    Response.End();
+                }
                 Response.Write("success");
                 Response.End();
+
             }
             catch
             {
