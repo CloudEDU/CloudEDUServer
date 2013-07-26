@@ -14,6 +14,11 @@ namespace CloudEDUServer
             return ctx.CUSTOMERs.ToArray();
         }
 
+        public static CUSTOMER GetCustomerByID(int customer_id)
+        {
+            return ctx.CUSTOMERs.Where(c => c.ID == customer_id).FirstOrDefault();
+        }
+
         public static bool UpdateCustomer(CUSTOMER customer)
         {
             try
