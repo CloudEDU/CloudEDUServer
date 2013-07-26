@@ -148,6 +148,7 @@
     <Content Include="adminconsole\DatabaseLog.aspx" />
     <Content Include="adminconsole\Default.aspx" />
     <Content Include="adminconsole\EditManager.aspx" />
+    <Content Include="adminconsole\EditUser.aspx" />
     <Content Include="adminconsole\Global.asax" />
     <Content Include="adminconsole\img\0.png" />
     <Content Include="adminconsole\img\a.jpg" />
@@ -795,6 +796,13 @@
     </Compile>
     <Compile Include="adminconsole\EditManager.aspx.designer.cs">
       <DependentUpon>EditManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminconsole\EditUser.aspx.cs">
+      <DependentUpon>EditUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\EditUser.aspx.designer.cs">
+      <DependentUpon>EditUser.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminconsole\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

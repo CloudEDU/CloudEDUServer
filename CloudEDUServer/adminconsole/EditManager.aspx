@@ -64,7 +64,7 @@
 
     <script type="text/javascript" src="js/table/table.js"></script>
     <script src="js/setup.js" type="text/javascript"></script>
-    <script language="javascript" src="js/MD5.js" type="text/javascript"></script>
+    <script src="js/MD5.js" type="text/javascript"></script>
 
     <script type="text/javascript">
 

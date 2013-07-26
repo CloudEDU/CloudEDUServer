@@ -102,9 +102,9 @@
                          %>
 						    <tr>
 							    <td style="text-align:center"><%=saleorder[i].ID %></td>
-							    <td style="text-align:center"><%=saleorder[i].BUYER %></td>
-							    <td style="text-align:center"><%=saleorder[i].SALER %></td>	
-                                <td style="text-align:center"><%=saleorder[i].COURSE %></td>						    
+							    <td style="text-align:center"><%=CustomerAccess.GetCustomerByID(saleorder[i].BUYER).NAME %></td>
+							    <td style="text-align:center"><%=CustomerAccess.GetCustomerByID(saleorder[i].SALER).NAME %></td>	
+                                <td style="text-align:center"><%=CourseAccess.GetCourseById(saleorder[i].COURSE).TITLE %></td>						    
 							    <td style="text-align:center"><%=saleorder[i].TIME %></td>
 						    </tr>	
                         <% }%>

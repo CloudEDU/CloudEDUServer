@@ -72,6 +72,10 @@
             setupLeftMenu();
             setSidebarHeight();
         });
+
+        function editUser(id) {
+            window.location.href = "EditUser.aspx?id=" + id;
+        }
     </script>
 
 </head>
@@ -94,21 +98,24 @@
                             <th style="text-align:center">Learn Rate</th>
                             <th style="text-align:center">Teach Rate</th>
                             <th style="text-align:center">Birthday</th>
-                            <th style="text-align:center">Delete</th>
 						</tr>
 					</thead>
 					<tbody>
-						    <tr>
-							    <td style="text-align:center">VioletHill</td>
-							    <td style="text-align:center">100</td>
-							    <td style="text-align:center">mailqiufeng@gmail.com</td>	
-                                <td style="text-align:center">dafa</td>						    
-							    <td style="text-align:center">fda</td>
-                                <td style="text-align:center">fasdfasdfasdfasdfasdfadsfasd</td>
-                                <td style="text-align:center">dddddddddddddddddd</td>
-                                <td style="text-align:center">删除</td>
+                        <%
+                            CUSTOMER[] user=CustomerAccess.GetAllCustomers();
+                            for (int i=0; i<user.Length; i++)
+                            { 
+                         %>
+						    <tr onclick="editUser(<%=user[i].ID %>)">
+							    <td style="text-align:center"><%=user[i].NAME %></td>
+							    <td style="text-align:center"><%=user[i].BALANCE %></td>
+							    <td style="text-align:center"><%=user[i].EMAIL %></td>	
+                                <td style="text-align:center; text-transform:capitalize"><%=user[i].DEGREE %></td>						    
+							    <td style="text-align:center"><%=user[i].LEARN_RATE %></td>
+                                <td style="text-align:center"><%=user[i].TEACH_RATE %></td>
+                                <td style="text-align:center"><%=user[i].BIRTHDAY.ToLongDateString() %></td>
 						    </tr>	
-                        		
+                        <%  } %>	
 					</tbody>
 				    </table>                               
                 </div>

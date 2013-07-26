@@ -75,8 +75,8 @@
         <div class="clear">
         </div>
         <div style="width:200px; margin-left:auto; margin-right:auto; margin-top:200px">
-            <input type="text" id="account" class="loginText" placeholder="account" class="LoginSpan"/> <br /><br />
-            <input type="password" id="password" class="loginText" placeholder="password" /> <br /><br />
+            <input type="text" id="account" class="loginText" placeholder="Account" class="LoginSpan"/> <br /><br />
+            <input type="password" id="password" class="loginText" placeholder="Password" /> <br /><br />
             <input type="button" value="登陆" onclick="login()"/><br />
         </div>
         <div style="height:200px"></div>
