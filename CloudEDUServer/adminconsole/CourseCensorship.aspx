@@ -76,6 +76,10 @@
             jQuery.post("CourseCensorship.aspx", { courseId: ele.name, courseState: ele.value }, function (data) {
             });
         }
+
+        function showCourseInfo(courseID) {
+            window.location.href = "CourseInfo.aspx?courseId=" + courseID;
+        }
     </script>
 
 </head>
@@ -103,7 +107,7 @@
                             for (int i=0; i<course.Length; i++)
                             {
                         %>
-						    <tr>
+						    <tr  ondblclick="showCourseInfo(<%=course[i].ID %>)">
                                 <td style="text-align:center"><%=course[i].TITLE %></td>
 							    <td style="text-align:center"><%=course[i].START_TIME %></td>
 							    <td style="text-align:center"><%=course[i].TEACHER %></td>

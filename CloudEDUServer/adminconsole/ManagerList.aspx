@@ -140,7 +140,6 @@
                                 <th style="text-align: center">Permission</th>
                                 <th style="text-align: center">Type</th>
                                 <th style="text-align: center"></th>
-                                <th style="text-align: center"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -150,11 +149,10 @@
                                 {
                              
                             %>
-                            <tr>
+                            <tr ondblclick="editManager('<%=manager[i].NAME%>')">
                                 <td style="text-align: center"><%=manager[i].NAME%></td>
                                 <td style="text-align: center"><%=ManagerAccess.getPermissionStringByManager(manager[i])%></td>
                                 <td style="text-align: center"><%=manager[i].MNGR_TYPE%></td>
-                                <td style="text-align: center"><a href="javascript:editManager('<%=manager[i].NAME%>')">编辑</a></td>
                                 <td style="text-align: center"><a href="javascript:deleteManager('<%=manager[i].NAME%>')">删除</a></td>
                             </tr>
                             <%}%>
