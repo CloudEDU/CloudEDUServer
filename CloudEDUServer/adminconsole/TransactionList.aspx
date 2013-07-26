@@ -89,8 +89,9 @@
 						<tr>
 							<th style="text-align:center">Id</th>
 							<th style="text-align:center">Buyer</th>
-							<th style="text-align:center">Order</th>
-                            <th style="text-align:center">Saler</th>
+							<th style="text-align:center">Saler</th>
+                            <th style="text-align:center">Course</th>
+                            <th style="text-align:center">Time</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -101,10 +102,10 @@
                          %>
 						    <tr>
 							    <td style="text-align:center"><%=saleorder[i].ID %></td>
-							    <td style="text-align:center"><%=saleorder[i].CUSTOMER_buyer %></td>
-							    <td style="text-align:center"><%=saleorder[i].CUSTOMER_saler %></td>	
+							    <td style="text-align:center"><%=saleorder[i].BUYER %></td>
+							    <td style="text-align:center"><%=saleorder[i].SALER %></td>	
                                 <td style="text-align:center"><%=saleorder[i].COURSE %></td>						    
-							    <td style="text-align:center"></td>
+							    <td style="text-align:center"><%=saleorder[i].TIME %></td>
 						    </tr>	
                         <% }%>
 					</tbody>
