@@ -26,6 +26,7 @@ namespace CloudEDUServer
             config.SetServiceOperationAccessRule("GetCoursesByDate", ServiceOperationRights.All);
             config.SetServiceOperationAccessRule("GetCoursesByAttendance", ServiceOperationRights.All);
             config.SetServiceOperationAccessRule("GetAllCategory", ServiceOperationRights.All);
+            config.SetServiceOperationAccessRule("GetCourseByAttendance", ServiceOperationRights.All);
             config.DataServiceBehavior.MaxProtocolVersion = DataServiceProtocolVersion.V3;
         }
 
