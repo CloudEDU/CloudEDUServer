@@ -66,6 +66,16 @@ namespace CloudEDUServer
             return categories;
         }
 
+        public static int GetDownloadTimeByCourseID(int course_id)
+        {
+            int count = 0;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                count = ctx.ATTENDs.Where(a => a.COURSE_ID == course_id).Count();
+            }
+            return count;
+        }
+
         public static COURSE GetCourseById(int course_id)
         {
             COURSE course = null;
