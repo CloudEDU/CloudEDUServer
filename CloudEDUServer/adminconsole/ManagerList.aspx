@@ -162,7 +162,7 @@
                 </div>
 
                 <!--block div是datatable用来定位的，不要在里面放出了table以外的东西-->
-                <ul style="margin-left: 800px;">
+                <ul style="float:right">
                     <li><a href="AddManager.aspx">添加管理员</a></li>
                 </ul>
 

@@ -120,7 +120,7 @@
 							    <td style="text-align:center"><%=course[i].PG %></td>
 							    <td style="text-align:center"><%=course[i].ICON_URL %></td>	
                                 <td style="text-align:center"><%=course[i].START_TIME %></td>						    
-							    <td style="text-align:center"><%=course[i].RATE %></td>
+							    <td style="text-align:center"><%=course[i] %></td>
 						    </tr>	
                         <%  } %>	
 					</tbody>

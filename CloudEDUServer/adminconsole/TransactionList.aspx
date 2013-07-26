@@ -94,14 +94,19 @@
 						</tr>
 					</thead>
 					<tbody>
+                        <%
+                            SALEORDER[] saleorder=TransactionAccess.GetAllSaleOrder();
+                            for (int i=0; i<saleorder.Length; i++)
+                            {
+                         %>
 						    <tr>
-							    <td style="text-align:center"></td>
-							    <td style="text-align:center"></td>
-							    <td style="text-align:center"></td>	
-                                <td style="text-align:center"></td>						    
+							    <td style="text-align:center"><%=saleorder[i].ID %></td>
+							    <td style="text-align:center"><%=saleorder[i].CUSTOMER_buyer %></td>
+							    <td style="text-align:center"><%=saleorder[i].CUSTOMER_saler %></td>	
+                                <td style="text-align:center"><%=saleorder[i].COURSE %></td>						    
 							    <td style="text-align:center"></td>
 						    </tr>	
-                        		
+                        <% }%>
 					</tbody>
 				    </table>                               
                 </div>
