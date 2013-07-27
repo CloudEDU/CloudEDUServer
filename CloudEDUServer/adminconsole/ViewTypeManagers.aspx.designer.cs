@@ -10,7 +10,7 @@
 namespace CloudEDUServer.adminconsole {
     
     
-    public partial class ViewPermissionManagers {
+    public partial class ViewTypeManagers {
         
         /// <summary>
         /// Head1 控件。

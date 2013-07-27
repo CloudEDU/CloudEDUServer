@@ -76,6 +76,13 @@
         function showCourseInfo(courseID) {
             window.location.href = "CourseInfo.aspx?courseId="+courseID;
         }
+
+        function courseListSelect() {
+            alert(document.getElementById("CourseListSelect").value);
+            jQuery.post("CourseList.aspx", { operate: "select", value: document.getElementById("CourseListSelect").value }, function () {
+                window.location.href = "CourseList.aspx";
+            })
+        }
     </script>
 
 </head>
@@ -85,7 +92,24 @@
 
         <div class="grid_10">
             <div class="box round first grid">
-                <h2>Course List</h2>
+                <h2>
+                    <select id="CourseListSelect">
+                        <option value="all" onchange="courseListSelect()">All Course</option>
+                        <option value="pending" onchange="courseListSelect()">Pending Course</option>
+                        <option value="ok" onchange="courseListSelect()">OK Course </option>
+                        <option value="cancel" onchange="courseListSelect()">Cancel Course</option>
+                    </select>
+                    <%
+                        if (Session["CourseListSelect"] == null)
+                        {
+                            Session["CourseListSelect"] = "all";
+                        }; 
+                    %>
+                    <script>
+                        document.getElementById('CourseListSelect').value = "<%=Session["CourseListSelect"]%>";
+                    </script>
+                </h2>
+               
                 <div class="block">
                     
 					<table class="data display datatable">
@@ -106,7 +130,25 @@
 					</thead>
 					<tbody>
                         <% 
-                            COURSE[] course=CourseAccess.GetAllCourses();
+                            COURSE[] course =null;
+                            
+                            if (Session["CourseListSelcet"].Equals("pending"))
+                            {
+                                course = CourseAccess.GetAllPendingCourses();
+                            }
+                            else if (Session["CourseListSelect"].Equals("cancel"))
+                            {
+                                course = CourseAccess.GetAllCancelCourses();
+                            }
+                            else if (Session["CourseListSelect"].Equals("ok"))
+                            {
+                                course = CourseAccess.GetAllOKCourses();
+                            }
+                            else
+                            {
+                                course = CourseAccess.GetAllCourses();
+                            }
+                                          
                             for (int i=0; i<course.Length; i++)
                             {
                          %>

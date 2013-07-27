@@ -96,10 +96,10 @@
 					</thead>
 					<tbody>
                         <% 
-                           
+                          
                          %>
 						    <tr>
-							    <td style="text-align:center">VioletHill</td>
+							    <td style="text-align:center"></td>
 							    <td style="text-align:center">100</td>
 							    <td style="text-align:center">mailqiufeng@gmail.com</td>	
                                 <td style="text-align:center">dafa</td>						    

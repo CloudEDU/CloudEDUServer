@@ -1,9 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PermissionList.aspx.cs" Inherits="CloudEDUServer.adminconsole.PermissionList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewTypeManagers.aspx.cs" Inherits="CloudEDUServer.adminconsole.ViewTypeManagers" %>
+
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Permission Management | CloudEDU</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
@@ -64,9 +66,9 @@
 
     <script type="text/javascript" src="js/table/table.js"></script>
     <script src="js/setup.js" type="text/javascript"></script>
+    <script language="javascript" src="js/MD5.js" type="text/javascript"></script>
 
     <script type="text/javascript">
-
         $(document).ready(function () {
             setupLeftMenu();
             $('.datatable').dataTable({
@@ -105,10 +107,10 @@
                 return;
             }
             isOperating = true;
-            if (confirm("确认查看管理员吗")) {
-                $.post("PermissionList.aspx", { operate: "edit", account: account }, function (data) {
+            if (confirm("确认编辑该管理员吗")) {
+                $.post("ManagerList.aspx", { operate: "edit", account: account }, function (data) {
                     if (data == "success") {
-                        window.location.href = "ViewPermissionManagers.aspx";
+                        window.location.href = "EditManager.aspx";
                     }
                     else {
                         alert(data);
@@ -120,10 +122,11 @@
                 isOperating = false;
             }
         }
-    </script>
+
+   </script>
 </head>
-<body id="Body1" runat="server">
-    <div class="container_12">    
+<body id="Body1" class="Body1" runat="server">
+   <div class="container_12">    
         <!--#include file="Navigation.aspx" -->
 
         <div class="grid_10">
@@ -143,21 +146,25 @@
 					</thead>
 					<tbody>
                         <%
-                         MANAGER[] manager=ManagerAccess.GetAllManagers();
+                            MANAGER type=(MANAGER)Session["type"];
+                            MANAGER[] manager = ManagerAccess.GetManagersByManagerType(type.MNGR_TYPE);
                              for (int i = 0; i < manager.Length; i++)
                              {
-                                 
+                             
                         %>
-						    <tr>
+						    <tr ondblclick="editManager('<%=manager[i].NAME%>')">
 							    <td style="text-align:center"><%=manager[i].NAME%></td>
 							    <td style="text-align:center"><%=ManagerAccess.getPermissionStringByManager(manager[i])%></td>
-							    <td style="text-align:center"><%=manager[i].MNGR_TYPE%></td>	
-                                <td style="text-align:center"><a href="javascript:editManager('<%=manager[i].NAME%>')">查看所有拥有该权限的管理员</a></td>
+							    <td style="text-align:center"><%=manager[i].MNGR_TYPE%></td>						    
+							    <td style="text-align:center"><a href="javascript:deleteManager('<%=manager[i].NAME%>')">删除</a></td>
 						    </tr>
                         <%}%>			
 					</tbody>
-				</table>
+				</table>      
                 </div>
+                     <ul style="margin-left:800px;">
+                    <li><a href="AddManager.aspx">添加管理员</a></li>
+                </ul>  
             </div>
         </div>
         <div class="clear">

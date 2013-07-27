@@ -142,33 +142,29 @@
 							<th  style="text-align:center">Permission</th>
 							<th  style="text-align:center">Type</th>
                             <th  style="text-align:center"></th>
-                            <th  style="text-align:center"></th>
 						</tr>
 					</thead>
 					<tbody>
                         <%
-                            string permission_name = (string)Session["permission_name"];
-                            MANAGER[] manager = ManagerAccess.GetManagersByPermission(ManagerAccess.GetPermissionByPermissionName(permission_name));
-                         //for (int j = 0; j < 19; j++ )
+                            PERMISSION[] permission_name =(PERMISSION[]) Session["permission_name"];
+                            MANAGER[] manager = ManagerAccess.GetManagersByPermission(permission_name[0]);
                              for (int i = 0; i < manager.Length; i++)
                              {
                              
                         %>
-						    <tr>
+						    <tr ondblclick="editManager('<%=manager[i].NAME%>')">
 							    <td style="text-align:center"><%=manager[i].NAME%></td>
 							    <td style="text-align:center"><%=ManagerAccess.getPermissionStringByManager(manager[i])%></td>
-							    <td style="text-align:center"><%=manager[i].MNGR_TYPE%></td>	
-                                <td style="text-align:center"><a href="javascript:editManager('<%=manager[i].NAME%>')">编辑</a></td>						    
+							    <td style="text-align:center"><%=manager[i].MNGR_TYPE%></td>						    
 							    <td style="text-align:center"><a href="javascript:deleteManager('<%=manager[i].NAME%>')">删除</a></td>
 						    </tr>
                         <%}%>			
 					</tbody>
-				</table>
-                <ul style="margin-left:800px;">
-                    <li><a href="AddManager.aspx">添加管理员</a></li>
-                </ul>        
-            
+				</table>      
                 </div>
+                     <ul style="margin-left:800px;">
+                    <li><a href="AddManager.aspx">添加管理员</a></li>
+                </ul>  
             </div>
         </div>
         <div class="clear">

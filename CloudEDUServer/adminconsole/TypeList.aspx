@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PermissionList.aspx.cs" Inherits="CloudEDUServer.adminconsole.PermissionList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TypeList.aspx.cs" Inherits="CloudEDUServer.adminconsole.TypeList" %>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
@@ -106,9 +106,9 @@
             }
             isOperating = true;
             if (confirm("确认查看管理员吗")) {
-                $.post("PermissionList.aspx", { operate: "edit", account: account }, function (data) {
+                $.post("TypeList.aspx", { operate: "edit", account: account }, function (data) {
                     if (data == "success") {
-                        window.location.href = "ViewPermissionManagers.aspx";
+                        window.location.href = "ViewTypeManagers.aspx";
                     }
                     else {
                         alert(data);
@@ -146,13 +146,13 @@
                          MANAGER[] manager=ManagerAccess.GetAllManagers();
                              for (int i = 0; i < manager.Length; i++)
                              {
-                                 
+                             
                         %>
 						    <tr>
 							    <td style="text-align:center"><%=manager[i].NAME%></td>
 							    <td style="text-align:center"><%=ManagerAccess.getPermissionStringByManager(manager[i])%></td>
 							    <td style="text-align:center"><%=manager[i].MNGR_TYPE%></td>	
-                                <td style="text-align:center"><a href="javascript:editManager('<%=manager[i].NAME%>')">查看所有拥有该权限的管理员</a></td>
+                                <td style="text-align:center"><a href="javascript:editManager('<%=manager[i].NAME%>')">查看所有该类型的管理员</a></td>
 						    </tr>
                         <%}%>			
 					</tbody>

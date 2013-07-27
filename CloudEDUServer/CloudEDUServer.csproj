@@ -735,9 +735,11 @@
     <Content Include="adminconsole\Navigation.aspx" />
     <Content Include="adminconsole\PermissionList.aspx" />
     <Content Include="adminconsole\TransactionList.aspx" />
+    <Content Include="adminconsole\TypeList.aspx" />
     <Content Include="adminconsole\UserList.aspx" />
     <Content Include="adminconsole\CourseInfo.aspx" />
     <Content Include="adminconsole\ViewPermissionManagers.aspx" />
+    <Content Include="adminconsole\ViewTypeManagers.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -856,6 +858,13 @@
     <Compile Include="adminconsole\TransactionList.aspx.designer.cs">
       <DependentUpon>TransactionList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="adminconsole\TypeList.aspx.cs">
+      <DependentUpon>TypeList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\TypeList.aspx.designer.cs">
+      <DependentUpon>TypeList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminconsole\UserList.aspx.cs">
       <DependentUpon>UserList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -869,6 +878,13 @@
     </Compile>
     <Compile Include="adminconsole\ViewPermissionManagers.aspx.designer.cs">
       <DependentUpon>ViewPermissionManagers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminconsole\ViewTypeManagers.aspx.cs">
+      <DependentUpon>ViewTypeManagers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\ViewTypeManagers.aspx.designer.cs">
+      <DependentUpon>ViewTypeManagers.aspx</DependentUpon>
     </Compile>
     <Compile Include="ATTEND.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
