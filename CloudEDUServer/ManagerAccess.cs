@@ -109,14 +109,12 @@ namespace CloudEDUServer
             return types;
         }
 
-        public static MANAGER[] GetManagersByManagerType(TYPE type)
+        public static MANAGER[] GetManagersByManagerType(int manager_type)
         {
             MANAGER[] managers = null;
             using (CloudEDUEntities ctx = new CloudEDUEntities())
             {
-                managers = (from mngr in ctx.MANAGERs
-                            where mngr.TYPE.Equals(type)
-                            select mngr).ToArray<MANAGER>();
+                managers = ctx.MANAGERs.Where(c => c.MNGR_TYPE == manager_type).ToArray();
             }
             return managers;
         }

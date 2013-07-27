@@ -78,7 +78,6 @@
         }
 
         function courseListSelect() {
-            alert(document.getElementById("CourseListSelect").value);
             jQuery.post("CourseList.aspx", { operate: "select", value: document.getElementById("CourseListSelect").value }, function () {
                 window.location.href = "CourseList.aspx";
             })
@@ -93,14 +92,14 @@
         <div class="grid_10">
             <div class="box round first grid">
                 <h2>
-                    <select id="CourseListSelect">
-                        <option value="all" onchange="courseListSelect()">All Course</option>
-                        <option value="pending" onchange="courseListSelect()">Pending Course</option>
-                        <option value="ok" onchange="courseListSelect()">OK Course </option>
-                        <option value="cancel" onchange="courseListSelect()">Cancel Course</option>
+                    <select id="CourseListSelect" onchange="courseListSelect()">
+                        <option value="all">All Course</option>
+                        <option value="pending">Pending Course</option>
+                        <option value="ok">OK Course </option>
+                        <option value="cancel">Cancel Course</option>
                     </select>
                     <%
-                        if (Session["CourseListSelect"] == null)
+                        if (Session["CourseListSelect"]==null)
                         {
                             Session["CourseListSelect"] = "all";
                         }; 
@@ -132,7 +131,7 @@
                         <% 
                             COURSE[] course =null;
                             
-                            if (Session["CourseListSelcet"].Equals("pending"))
+                            if (Session["CourseListSelect"].Equals("pending"))
                             {
                                 course = CourseAccess.GetAllPendingCourses();
                             }

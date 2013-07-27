@@ -147,7 +147,7 @@
 					<tbody>
                         <%
                             MANAGER type=(MANAGER)Session["type"];
-                            MANAGER[] manager = ManagerAccess.GetManagersByManagerType(type.MNGR_TYPE);
+                            MANAGER[] manager = ManagerAccess.GetManagersByManagerType((int)type.MNGR_TYPE);
                              for (int i = 0; i < manager.Length; i++)
                              {
                              

@@ -13,7 +13,7 @@ namespace CloudEDUServer.adminconsole
         {
             string operate = Request.Params.Get("operate");
             string value = Request.Params.Get("value");
-            if (operate.Equals("select"))
+            if (operate!=null && operate.Equals("select"))
             {
                 Session["CourseListSelect"] = value;
             }
