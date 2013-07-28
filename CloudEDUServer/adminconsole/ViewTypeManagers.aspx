@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewPermissionManagers.aspx.cs" Inherits="CloudEDUServer.adminconsole.ViewPermissionManagers" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewTypeManagers.aspx.cs" Inherits="CloudEDUServer.adminconsole.ViewTypeManagers" %>
 
 <!DOCTYPE html>
 
@@ -107,7 +107,7 @@
                 return;
             }
             isOperating = true;
-    
+
             $.post("ManagerList.aspx", { operate: "edit", account: account }, function (data) {
                 if (data == "success") {
                     window.location.href = "EditManager.aspx";
@@ -141,8 +141,8 @@
                         </thead>
                         <tbody>
                             <%
-                                PERMISSION[] permission_name = (PERMISSION[])Session["permission_name"];
-                                MANAGER[] manager = ManagerAccess.GetManagersByPermission(permission_name[0]);
+                                MANAGER type = (MANAGER)Session["type"];
+                                MANAGER[] manager = ManagerAccess.GetManagersByManagerType((int)type.MNGR_TYPE);
                                 for (int i = 0; i < manager.Length; i++)
                                 {
                              
@@ -157,7 +157,7 @@
                         </tbody>
                     </table>
                 </div>
-                <ul style="margin-left: 800px;">
+                <ul style="float: right;">
                     <li><a href="AddManager.aspx">添加管理员</a></li>
                 </ul>
             </div>

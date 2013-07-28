@@ -42,9 +42,31 @@
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Data.Edm, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Data.Edm.5.0.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Data.OData.5.0.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Services, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Data.Services.5.0.0\lib\net40\Microsoft.Data.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Services.Client, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Data.Services.Client.5.0.0\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Spatial, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\System.Spatial.5.0.0\lib\net40\System.Spatial.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -69,6 +91,7 @@
     <Content Include="adminconsole\CourseComment.aspx" />
     <Content Include="adminconsole\courseinformation.aspx" />
     <Content Include="adminconsole\CourseList.aspx" />
+    <Content Include="adminconsole\CourseStore.aspx" />
     <Content Include="adminconsole\css\960.css" />
     <Content Include="adminconsole\css\facebox.css" />
     <Content Include="adminconsole\css\fancy-button\fancy-button.css" />
@@ -147,8 +170,10 @@
     <Content Include="adminconsole\DatabaseLog.aspx" />
     <Content Include="adminconsole\Default.aspx" />
     <Content Include="adminconsole\EditManager.aspx" />
+    <Content Include="adminconsole\EditUser.aspx" />
     <Content Include="adminconsole\Global.asax" />
     <Content Include="adminconsole\img\0.png" />
+    <Content Include="adminconsole\img\a.jpg" />
     <Content Include="adminconsole\img\accordian_bg.png" />
     <Content Include="adminconsole\img\ajax-loader.gif" />
     <Content Include="adminconsole\img\application_double.png" />
@@ -156,6 +181,7 @@
     <Content Include="adminconsole\img\arrow-both.png" />
     <Content Include="adminconsole\img\arrow-desc.png" />
     <Content Include="adminconsole\img\arrow.png" />
+    <Content Include="adminconsole\img\b.jpg" />
     <Content Include="adminconsole\img\bar.gif" />
     <Content Include="adminconsole\img\bg-dark.png" />
     <Content Include="adminconsole\img\bg-input-focus.png" />
@@ -172,6 +198,7 @@
     <Content Include="adminconsole\img\button_highlight.png" />
     <Content Include="adminconsole\img\button_highlight_selected.png" />
     <Content Include="adminconsole\img\button_home.png" />
+    <Content Include="adminconsole\img\c.jpg" />
     <Content Include="adminconsole\img\calendar.gif" />
     <Content Include="adminconsole\img\chart.jpg" />
     <Content Include="adminconsole\img\checkbox.png" />
@@ -180,6 +207,7 @@
     <Content Include="adminconsole\img\chekbox_on.png" />
     <Content Include="adminconsole\img\cog.png" />
     <Content Include="adminconsole\img\cross.png" />
+    <Content Include="adminconsole\img\d.jpg" />
     <Content Include="adminconsole\img\dark-bg.png" />
     <Content Include="adminconsole\img\down.png" />
     <Content Include="adminconsole\img\fancy-button\chekbox_off.png" />
@@ -727,9 +755,18 @@
     <Content Include="adminconsole\Logout.aspx" />
     <Content Include="adminconsole\ManagerList.aspx" />
     <Content Include="adminconsole\Navigation.aspx" />
+    <Content Include="adminconsole\PermissionList.aspx" />
     <Content Include="adminconsole\TransactionList.aspx" />
+    <Content Include="adminconsole\TypeList.aspx" />
     <Content Include="adminconsole\UserList.aspx" />
     <Content Include="adminconsole\CourseInfo.aspx" />
+    <Content Include="adminconsole\ViewPermissionManagers.aspx" />
+<<<<<<< HEAD
+    <Content Include="adminconsole\ViewTypeManagers.aspx" />
+=======
+    <Content Include="CourseService.svc" />
+    <Content Include="CustomerService.svc" />
+>>>>>>> 95eabaccfe8666a60127badeb6afb887962eb533
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -768,6 +805,13 @@
     <Compile Include="adminconsole\CourseList.aspx.designer.cs">
       <DependentUpon>CourseList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="adminconsole\CourseStore.aspx.cs">
+      <DependentUpon>CourseStore.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\CourseStore.aspx.designer.cs">
+      <DependentUpon>CourseStore.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminconsole\DatabaseLog.aspx.cs">
       <DependentUpon>DatabaseLog.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -781,6 +825,13 @@
     </Compile>
     <Compile Include="adminconsole\EditManager.aspx.designer.cs">
       <DependentUpon>EditManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminconsole\EditUser.aspx.cs">
+      <DependentUpon>EditUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\EditUser.aspx.designer.cs">
+      <DependentUpon>EditUser.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminconsole\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -820,6 +871,13 @@
     <Compile Include="adminconsole\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="adminconsole\PermissionList.aspx.cs">
+      <DependentUpon>PermissionList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\PermissionList.aspx.designer.cs">
+      <DependentUpon>PermissionList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminconsole\TransactionList.aspx.cs">
       <DependentUpon>TransactionList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -827,12 +885,33 @@
     <Compile Include="adminconsole\TransactionList.aspx.designer.cs">
       <DependentUpon>TransactionList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="adminconsole\TypeList.aspx.cs">
+      <DependentUpon>TypeList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\TypeList.aspx.designer.cs">
+      <DependentUpon>TypeList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminconsole\UserList.aspx.cs">
       <DependentUpon>UserList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="adminconsole\UserList.aspx.designer.cs">
       <DependentUpon>UserList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminconsole\ViewPermissionManagers.aspx.cs">
+      <DependentUpon>ViewPermissionManagers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\ViewPermissionManagers.aspx.designer.cs">
+      <DependentUpon>ViewPermissionManagers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminconsole\ViewTypeManagers.aspx.cs">
+      <DependentUpon>ViewTypeManagers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\ViewTypeManagers.aspx.designer.cs">
+      <DependentUpon>ViewTypeManagers.aspx</DependentUpon>
     </Compile>
     <Compile Include="ATTEND.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
@@ -861,7 +940,6 @@
     <Compile Include="COURSE.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="adminconsole\CourseInfo.aspx.cs">
       <DependentUpon>CourseInfo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -869,9 +947,10 @@
     <Compile Include="adminconsole\CourseInfo.aspx.designer.cs">
       <DependentUpon>CourseInfo.aspx</DependentUpon>
     </Compile>
-=======
     <Compile Include="CourseAccess.cs" />
->>>>>>> 6ca250dbce722e652c1288d603c8caf76c146079
+    <Compile Include="CourseService.svc.cs">
+      <DependentUpon>CourseService.svc</DependentUpon>
+    </Compile>
     <Compile Include="COURSE_CANCEL.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
@@ -886,6 +965,10 @@
     </Compile>
     <Compile Include="CUSTOMER.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerAccess.cs" />
+    <Compile Include="CustomerService.svc.cs">
+      <DependentUpon>CustomerService.svc</DependentUpon>
     </Compile>
     <Compile Include="DOCUMENT.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
@@ -948,7 +1031,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="adminconsole\img\.DS_Store" />
     <Content Include="adminconsole\img\gallery\.DS_Store" />
     <Content Include="adminconsole\img\gallery\thumbs_small\Thumbs.db" />

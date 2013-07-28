@@ -26,34 +26,50 @@ namespace CloudEDUServer
             return courses;
         }
 
-        public static COURSE_PENDING[] GetAllPendingCourses()
+        public static COURSE[] GetAllPendingCourses()
         {
             COURSE_PENDING[] courses = null;
             using (CloudEDUEntities ctx = new CloudEDUEntities())
             {
                 courses = ctx.COURSE_PENDING.ToArray();
             }
-            return courses;
+
+            COURSE[] returnCourse=new COURSE[courses.Length];
+            for (int i = 0; i < courses.Length; i++)
+            {
+                returnCourse[i] = ConvertToCourse(courses[i]);
+            }
+            return returnCourse;
         }
 
-        public static COURSE_CANCEL[] GetAllCancelCourses()
+        public static COURSE[] GetAllCancelCourses()
         {
             COURSE_CANCEL[] courses = null;
             using (CloudEDUEntities ctx = new CloudEDUEntities())
             {
                 courses = ctx.COURSE_CANCEL.ToArray();
             }
-            return courses;
+            COURSE[] returnCourse = new COURSE[courses.Length];
+            for (int i = 0; i < courses.Length; i++)
+            {
+                returnCourse[i] = ConvertToCourse(courses[i]);
+            }
+            return returnCourse;
         }
 
-        public static COURSE_OK[] GetAllOKCourses()
+        public static COURSE[] GetAllOKCourses()
         {
             COURSE_OK[] courses = null;
             using (CloudEDUEntities ctx = new CloudEDUEntities())
             {
                 courses = ctx.COURSE_OK.ToArray();
             }
-            return courses;
+            COURSE[] returnCourse = new COURSE[courses.Length];
+            for (int i = 0; i < courses.Length; i++)
+            {
+                returnCourse[i] = ConvertToCourse(courses[i]);
+            }
+            return returnCourse;
         }
 
         public static CATEGORY[] GetAllCategories()

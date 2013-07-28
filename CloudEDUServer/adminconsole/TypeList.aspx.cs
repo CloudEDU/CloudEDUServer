@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace CloudEDUServer.adminconsole
 {
-    public partial class PermissionList : System.Web.UI.Page
+    public partial class TypeList : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -58,8 +58,8 @@ namespace CloudEDUServer.adminconsole
                 if (operate.Equals("edit"))
                 {
                     string account = Request.Params.Get("account");
-                   
-                    
+
+
                     MANAGER editManager = null;
                     try
                     {
@@ -77,8 +77,8 @@ namespace CloudEDUServer.adminconsole
                     }
                     else
                     {
-                        PERMISSION[] perm = ManagerAccess.GetPermissionsByManager(editManager);
-                        Session["permission_name"] = perm;
+                        
+                        Session["type"] = editManager;
                         Response.Write("success");
                         Response.End();
                     }

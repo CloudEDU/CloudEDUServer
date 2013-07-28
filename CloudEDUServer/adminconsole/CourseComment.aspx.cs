@@ -11,7 +11,25 @@ namespace CloudEDUServer.adminconsole
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            try
+            {
+                string userId = Request.Params.Get("user");
+                if (userId != null)
+                {
+                    Session["userComment"] = CustomerAccess.GetCustomerByID(int.Parse(userId));
+                    Response.End();
+                }
+                string course = Request.Params.Get("course");
+                if (course != null)
+                {
+                    Session["courseComment"] = CourseAccess.GetCourseById(int.Parse(course));
+                    Response.End();
+                }
+            }
+            catch
+            {
+            }
+         
         }
     }
 }

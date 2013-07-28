@@ -76,6 +76,18 @@
         function showCourseInfo(courseID) {
             window.location.href = "CourseInfo.aspx?courseId="+courseID;
         }
+
+        function courseListSelect() {
+            jQuery.post("CourseList.aspx", { operate: "select", value: document.getElementById("CourseListSelect").value }, function () {
+                window.location.href = "CourseList.aspx";
+            })
+        }
+
+        function showComment(courseId) {
+            jQuery.post("CourseComment.aspx", { course: courseId }, function () {
+                window.location.href = "CourseComment.aspx";
+            });
+        }
     </script>
 
 </head>
@@ -85,7 +97,24 @@
 
         <div class="grid_10">
             <div class="box round first grid">
-                <h2>Course List</h2>
+                <h2>
+                    <select id="CourseListSelect" onchange="courseListSelect()">
+                        <option value="all">All Course</option>
+                        <option value="pending">Pending Course</option>
+                        <option value="ok">OK Course </option>
+                        <option value="cancel">Cancel Course</option>
+                    </select>
+                    <%
+                        if (Session["CourseListSelect"]==null)
+                        {
+                            Session["CourseListSelect"] = "all";
+                        }; 
+                    %>
+                    <script>
+                        document.getElementById('CourseListSelect').value = "<%=Session["CourseListSelect"]%>";
+                    </script>
+                </h2>
+               
                 <div class="block">
                     
 					<table class="data display datatable">
@@ -101,12 +130,30 @@
                             <th style="text-align:center">Iconurl</th>
                             <th style="text-align:center">startTime</th>
                             <th style="text-align:center">download</th>
-         
+                            <th style="text-align:center">comment</th>
 						</tr>
 					</thead>
 					<tbody>
                         <% 
-                            COURSE[] course=CourseAccess.GetAllCourses();
+                            COURSE[] course =null;
+                            
+                            if (Session["CourseListSelect"].Equals("pending"))
+                            {
+                                course = CourseAccess.GetAllPendingCourses();
+                            }
+                            else if (Session["CourseListSelect"].Equals("cancel"))
+                            {
+                                course = CourseAccess.GetAllCancelCourses();
+                            }
+                            else if (Session["CourseListSelect"].Equals("ok"))
+                            {
+                                course = CourseAccess.GetAllOKCourses();
+                            }
+                            else
+                            {
+                                course = CourseAccess.GetAllCourses();
+                            }
+                                          
                             for (int i=0; i<course.Length; i++)
                             {
                          %>
@@ -121,6 +168,7 @@
 							    <td style="text-align:center"><%=course[i].ICON_URL %></td>	
                                 <td style="text-align:center"><%=course[i].START_TIME %></td>						    
 							    <td style="text-align:center"><%=CourseAccess.GetDownloadTimeByCourseID(course[i].ID) %></td>
+                                <td style="text-align:center"><a href="#" onclick="showComment('<%=course[i].ID %>')">查看评论</a></td>
 						    </tr>	
                         <%  } %>	
 					</tbody>

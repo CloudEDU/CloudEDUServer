@@ -220,7 +220,15 @@
                                             <option value="junior high">Junior High</option>
                                             <option value="primaryschool">Primary School</option>
                                             <option value="lower">Lower</option>
+                                            <option value=""></option>
                                         </select>
+                                        <%
+                                            if (customer.DEGREE == null)
+                                            {
+                                                customer.DEGREE = "";
+                                            }
+                                            
+                                        %>
                                         <script>
                                             document.getElementById("degree").value = '<%=customer.DEGREE.Trim().ToLower() %>';     
                                         </script>

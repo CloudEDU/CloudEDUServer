@@ -107,8 +107,7 @@
                 return;
             }
             isOperating = true;
-            if (confirm("确认编辑该管理员吗")) {
-                $.post("ManagerList.aspx", { operate: "edit", account: account }, function (data) {
+            $.post("ManagerList.aspx", { operate: "edit", account: account }, function (data) {
                     if (data == "success") {
                         window.location.href = "EditManager.aspx";
                     }
@@ -117,10 +116,6 @@
                     }
                     isOperating = false;
                 });
-            }
-            else {
-                isOperating = false;
-            }
         }
     </script>
 </head>

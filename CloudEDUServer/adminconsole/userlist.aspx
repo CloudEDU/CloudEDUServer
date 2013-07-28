@@ -76,6 +76,12 @@
         function editUser(id) {
             window.location.href = "EditUser.aspx?id=" + id;
         }
+
+        function showUserComment(userId) {
+            jQuery.post("CourseComment.aspx", { user: userId }, function () {
+                window.location.href = "CourseComment.aspx";
+            });
+        }
     </script>
 
 </head>
@@ -98,6 +104,7 @@
                             <th style="text-align:center">Learn Rate</th>
                             <th style="text-align:center">Teach Rate</th>
                             <th style="text-align:center">Birthday</th>
+                            <th style="text-align:center">Comment</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -114,6 +121,7 @@
 							    <td style="text-align:center"><%=user[i].LEARN_RATE %></td>
                                 <td style="text-align:center"><%=user[i].TEACH_RATE %></td>
                                 <td style="text-align:center"><%=user[i].BIRTHDAY.ToLongDateString() %></td>
+                                <td style="text-align:center"><a href="#" onclick="showUserComment('<%=user[i].ID %>')">查看该用户所有评论</a></td>
 						    </tr>	
                         <%  } %>	
 					</tbody>

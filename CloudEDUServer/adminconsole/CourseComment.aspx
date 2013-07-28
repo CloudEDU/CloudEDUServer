@@ -4,10 +4,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
 
-     <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
@@ -76,38 +76,82 @@
 
 </head>
 <body id="Body1" runat="server">
-    <div class="container_12">    
+    <div class="container_12">
         <!--#include file="Navigation.aspx" -->
 
         <div class="grid_10">
             <div class="box round first grid">
                 <h2>User List</h2>
                 <div class="block">
-                    
-					<table class="data display datatable">
-					<thead>
-						<tr>
-							<th style="text-align:center">Title</th>
-                            <th style="text-align:center">User Name</th>
-							<th style="text-align:center">Content</th>
-                            <th style="text-align:center">Rate</th>
-                            <th style="text-align:center">Time</th>
-						</tr>
-					</thead>
-					<tbody>
-                        <% 
-                           
-                         %>
-						    <tr>
-							    <td style="text-align:center">VioletHill</td>
-							    <td style="text-align:center">100</td>
-							    <td style="text-align:center">mailqiufeng@gmail.com</td>	
-                                <td style="text-align:center">dafa</td>						    
-							    <td style="text-align:center">fda</td>
-						    </tr>	
-                        		
-					</tbody>
-				    </table>                               
+
+                    <table class="data display datatable">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center">Course Title</th>
+                                <th style="text-align: center">Title</th>
+                                <th style="text-align: center">User Name</th>
+                                <th style="text-align: center">Content</th>
+                                <%--     <th style="text-align:center">Rate</th>--%>
+                                <th style="text-align: center">Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% 
+                            COURSE course = (COURSE)Session["courseComment"];
+                            CUSTOMER user=(CUSTOMER)Session["userComment"];
+                            COMMENT[] comment=null;
+                            
+                            if (course!=null || user!=null)
+                            {
+                                if (course!=null)
+                                {
+                                    comment=CourseAccess.GetCommentsByCourse(course);
+                                    Session["course"]=null;
+                                }
+                                else if (user!=null)
+                                {
+                                    comment=CourseAccess.GetCommentsByCustomer(user);
+                                    Session["userComment"]=null;
+                                }
+                            
+                                ////////////////////show comment
+                                for (int i=0; i<comment.Length; i++)
+                                {
+                                %>
+                                <tr>
+                                    <td style="text-align: center"><%=comment[i].COURSE.TITLE %></td>
+                                    <td style="text-align: center"><%=comment[i].TITLE %></td>
+                                    <td style="text-align: center"><%=comment[i].CUSTOMER.NAME %></td>
+                                    <td style="text-align: center"><%=comment[i].CONTENT %></td>
+                                    <td style="text-align: center"><%=comment[i].TIME %></td>
+                                </tr>
+                                <%
+                                }
+                            }
+                            else
+                            {
+                                COURSE[] allCourse = CourseAccess.GetAllCourses();
+                                for (int j=0; j<allCourse.Length; j++)
+                                {
+                                    COMMENT[] allComment = CourseAccess.GetCommentsByCourse(allCourse[j]);
+                                    for (int i = 0; i < allComment.Length; i++)
+                                    {
+                                    %>
+                                        <tr>
+                                            <td style="text-align: center"><%=comment[i].COURSE.TITLE %></td>
+                                            <td style="text-align: center"><%=comment[i].TITLE %></td>
+                                            <td style="text-align: center"><%=comment[i].CUSTOMER.NAME %></td>
+                                            <td style="text-align: center"><%=comment[i].CONTENT %></td>
+                                            <td style="text-align: center"><%=comment[i].TIME %></td>
+                                        </tr>
+                                    <%
+                                    }
+                                }
+                            }
+                            %>
+                        </tbody>
+
+                    </table>
                 </div>
             </div>
         </div>
