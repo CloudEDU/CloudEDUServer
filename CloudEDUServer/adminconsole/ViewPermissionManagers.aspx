@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -107,64 +107,59 @@
                 return;
             }
             isOperating = true;
-            if (confirm("确认编辑该管理员吗")) {
-                $.post("ManagerList.aspx", { operate: "edit", account: account }, function (data) {
-                    if (data == "success") {
-                        window.location.href = "EditManager.aspx";
-                    }
-                    else {
-                        alert(data);
-                    }
-                    isOperating = false;
-                });
-            }
-            else {
+    
+            $.post("ManagerList.aspx", { operate: "edit", account: account }, function (data) {
+                if (data == "success") {
+                    window.location.href = "EditManager.aspx";
+                }
+                else {
+                    alert(data);
+                }
                 isOperating = false;
-            }
+            });
         }
 
-   </script>
+    </script>
 </head>
 <body id="Body1" class="Body1" runat="server">
-   <div class="container_12">    
+    <div class="container_12">
         <!--#include file="Navigation.aspx" -->
 
         <div class="grid_10">
             <div class="box round first grid">
-                <h2>
-                    Manager List
+                <h2>Manager List
                 </h2>
                 <div class="block">
-					<table class="data display datatable">
-					<thead>
-						<tr>
-							<th  style="text-align:center">Name</th>
-							<th  style="text-align:center">Permission</th>
-							<th  style="text-align:center">Type</th>
-                            <th  style="text-align:center"></th>
-						</tr>
-					</thead>
-					<tbody>
-                        <%
-                            PERMISSION[] permission_name =(PERMISSION[]) Session["permission_name"];
-                            MANAGER[] manager = ManagerAccess.GetManagersByPermission(permission_name[0]);
-                             for (int i = 0; i < manager.Length; i++)
-                             {
+                    <table class="data display datatable">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center">Name</th>
+                                <th style="text-align: center">Permission</th>
+                                <th style="text-align: center">Type</th>
+                                <th style="text-align: center"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                PERMISSION[] permission_name = (PERMISSION[])Session["permission_name"];
+                                MANAGER[] manager = ManagerAccess.GetManagersByPermission(permission_name[0]);
+                                for (int i = 0; i < manager.Length; i++)
+                                {
                              
-                        %>
-						    <tr ondblclick="editManager('<%=manager[i].NAME%>')">
-							    <td style="text-align:center"><%=manager[i].NAME%></td>
-							    <td style="text-align:center"><%=ManagerAccess.getPermissionStringByManager(manager[i])%></td>
-							    <td style="text-align:center"><%=manager[i].MNGR_TYPE%></td>						    
-							    <td style="text-align:center"><a href="javascript:deleteManager('<%=manager[i].NAME%>')">删除</a></td>
-						    </tr>
-                        <%}%>			
-					</tbody>
-				</table>      
+                            %>
+                            <tr ondblclick="editManager('<%=manager[i].NAME%>')">
+                                <td style="text-align: center"><%=manager[i].NAME%></td>
+                                <td style="text-align: center"><%=ManagerAccess.getPermissionStringByManager(manager[i])%></td>
+                                <td style="text-align: center"><%=manager[i].MNGR_TYPE%></td>
+                                <td style="text-align: center"><a href="javascript:deleteManager('<%=manager[i].NAME%>')">删除</a></td>
+                            </tr>
+                            <%}%>
+                        </tbody>
+                    </table>
                 </div>
-                     <ul style="margin-left:800px;">
+                <ul style="margin-left: 800px;">
                     <li><a href="AddManager.aspx">添加管理员</a></li>
-                </ul>  
+                </ul>
             </div>
         </div>
         <div class="clear">

@@ -82,6 +82,12 @@
                 window.location.href = "CourseList.aspx";
             })
         }
+
+        function showComment(courseId) {
+            jQuery.post("CourseComment.aspx", { course: courseId }, function () {
+                window.location.href = "CourseComment.aspx";
+            });
+        }
     </script>
 
 </head>
@@ -124,7 +130,7 @@
                             <th style="text-align:center">Iconurl</th>
                             <th style="text-align:center">startTime</th>
                             <th style="text-align:center">download</th>
-         
+                            <th style="text-align:center">comment</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -162,6 +168,7 @@
 							    <td style="text-align:center"><%=course[i].ICON_URL %></td>	
                                 <td style="text-align:center"><%=course[i].START_TIME %></td>						    
 							    <td style="text-align:center"><%=CourseAccess.GetDownloadTimeByCourseID(course[i].ID) %></td>
+                                <td style="text-align:center"><a href="#" onclick="showComment('<%=course[i].ID %>')">查看评论</a></td>
 						    </tr>	
                         <%  } %>	
 					</tbody>

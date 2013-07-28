@@ -105,58 +105,53 @@
                 return;
             }
             isOperating = true;
-            if (confirm("确认查看管理员吗")) {
-                $.post("TypeList.aspx", { operate: "edit", account: account }, function (data) {
-                    if (data == "success") {
-                        window.location.href = "ViewTypeManagers.aspx";
-                    }
-                    else {
-                        alert(data);
-                    }
-                    isOperating = false;
-                });
-            }
-            else {
+
+            $.post("TypeList.aspx", { operate: "edit", account: account }, function (data) {
+                if (data == "success") {
+                    window.location.href = "ViewTypeManagers.aspx";
+                }
+                else {
+                    alert(data);
+                }
                 isOperating = false;
-            }
+            });
         }
     </script>
 </head>
 <body id="Body1" runat="server">
-    <div class="container_12">    
+    <div class="container_12">
         <!--#include file="Navigation.aspx" -->
 
         <div class="grid_10">
             <div class="box round first grid">
-                <h2>
-                    Manager List
+                <h2>Manager List
                 </h2>
                 <div class="block">
-					<table class="data display datatable">
-					<thead>
-						<tr>
-							<th  style="text-align:center">Name</th>
-							<th  style="text-align:center">Permission</th>
-							<th  style="text-align:center">Type</th>
-                            <th  style="text-align:center"></th>
-						</tr>
-					</thead>
-					<tbody>
-                        <%
-                         MANAGER[] manager=ManagerAccess.GetAllManagers();
-                             for (int i = 0; i < manager.Length; i++)
-                             {
+                    <table class="data display datatable">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center">Name</th>
+                                <th style="text-align: center">Permission</th>
+                                <th style="text-align: center">Type</th>
+                                <th style="text-align: center"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                MANAGER[] manager = ManagerAccess.GetAllManagers();
+                                for (int i = 0; i < manager.Length; i++)
+                                {
                              
-                        %>
-						    <tr>
-							    <td style="text-align:center"><%=manager[i].NAME%></td>
-							    <td style="text-align:center"><%=ManagerAccess.getPermissionStringByManager(manager[i])%></td>
-							    <td style="text-align:center"><%=manager[i].MNGR_TYPE%></td>	
-                                <td style="text-align:center"><a href="javascript:editManager('<%=manager[i].NAME%>')">查看所有该类型的管理员</a></td>
-						    </tr>
-                        <%}%>			
-					</tbody>
-				</table>
+                            %>
+                            <tr>
+                                <td style="text-align: center"><%=manager[i].NAME%></td>
+                                <td style="text-align: center"><%=ManagerAccess.getPermissionStringByManager(manager[i])%></td>
+                                <td style="text-align: center"><%=manager[i].MNGR_TYPE%></td>
+                                <td style="text-align: center"><a href="javascript:editManager('<%=manager[i].NAME%>')">查看所有该类型的管理员</a></td>
+                            </tr>
+                            <%}%>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
