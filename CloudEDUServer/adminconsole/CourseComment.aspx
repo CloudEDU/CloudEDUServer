@@ -106,7 +106,7 @@
                                 if (course!=null)
                                 {
                                     comment=CourseAccess.GetCommentsByCourse(course);
-                                    Session["course"]=null;
+                                    Session["courseComment"]=null;
                                 }
                                 else if (user!=null)
                                 {
@@ -119,9 +119,9 @@
                                 {
                                 %>
                                 <tr>
-                                    <td style="text-align: center"><%=comment[i].COURSE.TITLE %></td>
+                                    <td style="text-align: center"><%=CourseAccess.GetCourseById(comment[i].COURSE_ID).TITLE %></td>
                                     <td style="text-align: center"><%=comment[i].TITLE %></td>
-                                    <td style="text-align: center"><%=comment[i].CUSTOMER.NAME %></td>
+                                    <td style="text-align: center"><%=CustomerAccess.GetCustomerByID( comment[i].CUSTOMER_ID).NAME %></td>
                                     <td style="text-align: center"><%=comment[i].CONTENT %></td>
                                     <td style="text-align: center"><%=comment[i].TIME %></td>
                                 </tr>
@@ -138,11 +138,11 @@
                                     {
                                     %>
                                         <tr>
-                                            <td style="text-align: center"><%=comment[i].COURSE.TITLE %></td>
-                                            <td style="text-align: center"><%=comment[i].TITLE %></td>
-                                            <td style="text-align: center"><%=comment[i].CUSTOMER.NAME %></td>
-                                            <td style="text-align: center"><%=comment[i].CONTENT %></td>
-                                            <td style="text-align: center"><%=comment[i].TIME %></td>
+                                            <td style="text-align: center"><%=allCourse[j].TITLE %></td>
+                                            <td style="text-align: center"><%=allComment[i].TITLE %></td>
+                                            <td style="text-align: center"><%=CustomerAccess.GetCustomerByID( allComment[i].CUSTOMER_ID).NAME %></td>
+                                            <td style="text-align: center"><%=allComment[i].CONTENT %></td>
+                                            <td style="text-align: center"><%=allComment[i].TIME %></td>
                                         </tr>
                                     <%
                                     }

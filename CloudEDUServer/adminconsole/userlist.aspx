@@ -113,15 +113,15 @@
                             for (int i=0; i<user.Length; i++)
                             { 
                          %>
-						    <tr onclick="editUser(<%=user[i].ID %>)">
+						    <tr ondblclick="editUser(<%=user[i].ID %>)">
 							    <td style="text-align:center"><%=user[i].NAME %></td>
 							    <td style="text-align:center"><%=user[i].BALANCE %></td>
 							    <td style="text-align:center"><%=user[i].EMAIL %></td>	
                                 <td style="text-align:center; text-transform:capitalize"><%=user[i].DEGREE %></td>						    
 							    <td style="text-align:center"><%=user[i].LEARN_RATE %></td>
                                 <td style="text-align:center"><%=user[i].TEACH_RATE %></td>
-                                <td style="text-align:center"><%=user[i].BIRTHDAY.ToLongDateString() %></td>
-                                <td style="text-align:center"><a href="#" onclick="showUserComment('<%=user[i].ID %>')">查看该用户所有评论</a></td>
+                                <td style="text-align:center"><%=user[i].BIRTHDAY.ToShortDateString() %></td>
+                                <td style="text-align:center"><a href="javascript:showUserComment('<%=user[i].ID %>')">查看该用户所有评论</a></td>
 						    </tr>	
                         <%  } %>	
 					</tbody>
