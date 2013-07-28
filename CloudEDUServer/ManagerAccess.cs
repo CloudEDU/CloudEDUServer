@@ -127,7 +127,7 @@ namespace CloudEDUServer
                 IQueryable<MANAGER> mgr = ctx.MANAGERs.Include("PERMISSIONs");
                 foreach (PERMISSION p in perms)
                 {
-                    mgr = mgr.Where(m => m.PERMISSIONs.Contains(p));
+                    mgr = mgr.Where(m => m.PERMISSIONs.Select(pe => pe.ID).Contains(p.ID));
                 }
                 managers = mgr.ToArray();
             }
