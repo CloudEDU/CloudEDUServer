@@ -22,34 +22,36 @@ namespace CloudEDUServer
             // Examples:
             // config.SetEntitySetAccessRule("MyEntityset", EntitySetRights.AllRead);
             // config.SetServiceOperationAccessRule("MyServiceOperation", ServiceOperationRights.All);
+            config.UseVerboseErrors = true;
             config.SetEntitySetAccessRule("*", EntitySetRights.AllRead);
             config.SetServiceOperationAccessRule("GetAllCourses", ServiceOperationRights.All);
             config.SetServiceOperationAccessRule("GetCoursesByName", ServiceOperationRights.All);
             config.SetServiceOperationAccessRule("GetCoursesByDate", ServiceOperationRights.All);
-            config.SetServiceOperationAccessRule("GetAllCategory", ServiceOperationRights.All);
+            config.SetServiceOperationAccessRule("GetAllCategories", ServiceOperationRights.All);
             //config.SetServiceOperationAccessRule("GetCoursesByCategory", ServiceOperationRights.All);
             //config.SetServiceOperationAccessRule("GetAttendanceByCustomer", ServiceOperationRights.All);
             //config.SetServiceOperationAccessRule("GetCourseByAttendance", ServiceOperationRights.All);
             config.DataServiceBehavior.MaxProtocolVersion = DataServiceProtocolVersion.V3;
         }
 
+        public static CloudEDUEntities ctx = new CloudEDUEntities();
+
         [WebGet]
         public IQueryable<COURSE_OK> GetAllCourses()
         {
             // Get the ObjectContext that is the data source for the service.
-            using (CloudEDUEntities ctx = new CloudEDUEntities())
+
+            try
             {
-                try
-                {
-                    var result = ctx.COURSE_OK;
-                    return result;
-                }
-                catch (Exception ex)
-                {
-                    throw new ApplicationException(string.Format(
-                        "An error occurred: {0}", ex.Message));
-                }
+                var result = ctx.COURSE_OK;
+                return result;
             }
+            catch (Exception ex)
+            {
+                throw new ApplicationException(string.Format(
+                    "An error occurred: {0}", ex.Message));
+            }
+
         }
 
         [WebGet]
@@ -59,58 +61,53 @@ namespace CloudEDUServer
             {
                 throw new ArgumentNullException("name", "You must provide a name!");
             }
-            using (CloudEDUEntities ctx = new CloudEDUEntities())
+
+            //CloudEDUEntities ctx = new CloudEDUEntities();
+            try
             {
-                try
-                {
-                    var result = from crs in ctx.COURSE_OK
-                                 where crs.TITLE == name
-                                 select crs;
-                    return result;
-                }
-                catch (Exception ex)
-                {
-                    throw new ApplicationException(string.Format(
-                        "An error occurred: {0}", ex.Message));
-                }
+                var result = from crs in ctx.COURSE_OK
+                             where crs.TITLE == name
+                             select crs;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException(string.Format(
+                    "An error occurred: {0}", ex.Message));
             }
         }
 
         [WebGet]
         public IQueryable<COURSE_OK> GetCoursesByDate()
         {
-            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            //CloudEDUEntities ctx = new CloudEDUEntities();
+            try
             {
-                try
-                {
-                    var result = from crs in ctx.COURSE_OK
-                                 orderby crs.START_TIME
-                                 select crs;
-                    return result;
-                }
-                catch (Exception ex)
-                {
-                    throw new ApplicationException(string.Format(
-                        "An error occurred: {0}", ex.Message));
-                }
+                var result = from crs in ctx.COURSE_OK
+                             orderby crs.START_TIME
+                             select crs;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException(string.Format(
+                    "An error occurred: {0}", ex.Message));
             }
         }
 
         [WebGet]
-        public IQueryable<CATEGORY> GetAllCategory()
+        public IQueryable<CATEGORY> GetAllCategories()
         {
-            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            //CloudEDUEntities ctx = new CloudEDUEntities();
+            try
             {
-                try
-                {
-                    var result = ctx.CATEGORies;
-                    return result;
-                }
-                catch (Exception ex)
-                {
-                    throw new ApplicationException(string.Format(
-                        "An error occurred: {0}", ex.Message));
-                }
+                var result = ctx.CATEGORies;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException(string.Format(
+                    "An error occurred: {0}", ex.Message));
             }
         }
 

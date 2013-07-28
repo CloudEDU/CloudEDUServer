@@ -763,7 +763,10 @@
     <Content Include="adminconsole\ViewPermissionManagers.aspx" />
     <Content Include="adminconsole\ViewTypeManagers.aspx" />
     <Content Include="CustomerService.svc" />
-    <Content Include="Web.config" />
+    <Content Include="test.svc" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="adminconsole\addcourse.aspx.cs">
@@ -1021,6 +1024,9 @@
     <Compile Include="SALEORDER.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="test.svc.cs">
+      <DependentUpon>test.svc</DependentUpon>
+    </Compile>
     <Compile Include="TransactionAccess.cs" />
     <Compile Include="TYPE.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
@@ -1058,6 +1064,7 @@
       <DependentUpon>CloudEDUModel.edmx</DependentUpon>
       <LastGenOutput>CloudEDUModel.cs</LastGenOutput>
     </Content>
+    <None Include="Properties\PublishProfiles\Server.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

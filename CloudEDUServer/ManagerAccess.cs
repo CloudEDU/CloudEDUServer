@@ -119,6 +119,21 @@ namespace CloudEDUServer
             return managers;
         }
 
+        public static MANAGER[] GetManagersByPermissions(PERMISSION[] perms)
+        {
+            MANAGER[] managers = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                IQueryable<MANAGER> mgr = ctx.MANAGERs.Include("PERMISSIONs");
+                foreach (PERMISSION p in perms)
+                {
+                    mgr = mgr.Where(m => m.PERMISSIONs.Contains(p));
+                }
+                managers = mgr.ToArray();
+            }
+            return managers;
+        }
+
         /// <summary>
         /// 创建新的ManagerType，注意ManagerType和Type在当前语义下表示意义相同，均表示Manager的类型
         /// </summary>
