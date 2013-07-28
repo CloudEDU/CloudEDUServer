@@ -247,7 +247,7 @@
                                         <label>Birthday</label>
                                     </td>
                                     <td>
-                                        <input type="text" id="birthday" value="<%=customer.BIRTHDAY.Year.ToString()+'/'+customer.BIRTHDAY.Month.ToString()+'/'+customer.BIRTHDAY.Day.ToString() %>"/>
+                                        <input type="text" id="birthday" value="<%=customer.BIRTHDAY.ToShortDateString() %>"/>
                                     </td>
                                 </tr>
                             </table>  
