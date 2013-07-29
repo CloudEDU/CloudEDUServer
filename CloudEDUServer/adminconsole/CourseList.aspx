@@ -136,7 +136,7 @@
 					<tbody>
                         <% 
                             COURSE[] course =null;
-                            
+                    
                             if (Session["CourseListSelect"].Equals("pending"))
                             {
                                 course = CourseAccess.GetAllPendingCourses();

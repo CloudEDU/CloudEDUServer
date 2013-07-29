@@ -14,46 +14,49 @@ namespace CloudEDUServer.adminconsole
             try
             {
                 string operate = Request.Params.Get("operate");
-                MANAGER selfManage = (MANAGER)Session["manager"];
+              
 
-                if (operate.Equals("viewPermissionManager"))
+         
+
+
+                if (operate!=null && operate.Equals("search"))
                 {
-                    string permission_name = Request.Params.Get("permission");
-                    PERMISSION p = ManagerAccess.GetPermissionByPermissionName(permission_name);
-                    MANAGER[] managers = ManagerAccess.GetManagersByPermission(p);
-                    Session["viewPermissionManagers"] = managers;
+                    try
+                    {
+                        int result = int.Parse(Request.Params.Get("result"));
+                        
+                        PERMISSION[] allPermission = ManagerAccess.GetAllPermissions();
+                        PERMISSION[] perm;
+                        int searchCount=0;
+                        for (int i = 0; i < allPermission.Length; i++)
+                        {
+                            if (  (result & (1 << i)) != 0) 
+                            {
+                                searchCount++;
+                            }
+                        }
+                        perm = new PERMISSION[searchCount];
+
+                        for (int i = 0; result != 0; i++)
+                        {
+                            if ((result & (1 << i)) != 0)
+                            {
+                                perm[--searchCount] = allPermission[i];
+                                result -= (1 << i);
+                            }
+                        }
+                        Session["permission_name"] = perm;
+                        
+                    }
+                    catch
+                    {
+                        Response.Write("数据传输错误");
+                        Response.End();
+                    }
                     Response.Write("success");
                     Response.End();
-
                 }
-
-
-                if (operate.Equals("delete"))
-                {
-                    string deleteManagerAccount = Request.Params.Get("account");
-                    MANAGER deleteManager = ManagerAccess.GetManagerByName(deleteManagerAccount);
-                    //if (selfManage.PERMISSIONs <= deleteManager.PERMISSIONs)
-                    //{
-                    //    Response.Write("权限不足");
-                    //    Response.End();
-
-                    //}
-                    if (deleteManager == null)
-                    {
-                        Response.Write("管理员不存在");
-                        Response.End();
-                    }
-                    if (ManagerAccess.RemoveManager(deleteManager.ID))
-                    {
-                        Response.Write("success");
-                        Response.End();
-                    }
-                    else
-                    {
-                        Response.Write("删除错误，请重试");
-                        Response.End();
-                    }
-                }
+                
 
                 if (operate.Equals("edit"))
                 {
@@ -77,8 +80,7 @@ namespace CloudEDUServer.adminconsole
                     }
                     else
                     {
-                        PERMISSION[] perm = ManagerAccess.GetPermissionsByManager(editManager);
-                        Session["permission_name"] = perm;
+                      
                         Response.Write("success");
                         Response.End();
                     }

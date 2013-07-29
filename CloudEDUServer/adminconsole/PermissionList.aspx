@@ -76,36 +76,23 @@
         });
 
         var isOperating = false;
-        function deleteManager(account) {
+       
+        function searchManager(length) {
             if (isOperating) {
                 alert("操作中，请稍后");
                 return;
             }
             isOperating = true;
-            if (confirm("确认删除该管理员吗")) {
-                $.post("ManagerList.aspx", { operate: "delete", account: account }, function (data) {
-                    if (data == "success") {
-                        alert("删除成功");
-                        isOperating = false;
-                        window.location.href = "ManagerList.aspx";
-                    }
-                    else {
-                        alert(data);
-                        isOperating = false;
-                    }
-                });
+            length=parseInt(length);
+            var result=0;
+            for (var i = 0; i < length; i++) {
+                if (document.getElementById('permissionCheckbox' + i).checked) {
+                    document.getElementById('permissionCheckbox' + i).checked = false;
+                    result += 1 << i;
+                }
             }
-            else {
-                isOperating = false;
-            }
-        }
-        function editManager(account) {
-            if (isOperating) {
-                alert("操作中，请稍后");
-                return;
-            }
-            isOperating = true;
-            $.post("PermissionList.aspx", { operate: "edit", account: account }, function (data) {
+  
+            $.post("PermissionList.aspx", { operate: "search", result:result }, function (data) {
                 if (data == "success") {
                     window.location.href = "ViewPermissionManagers.aspx";
                 }
@@ -130,28 +117,24 @@
                         <thead>
                             <tr>
                                 <th style="text-align: center">Name</th>
-                                <th style="text-align: center">Permission</th>
-                                <th style="text-align: center">Type</th>
                                 <th style="text-align: center"></th>
                             </tr>
                         </thead>
                         <tbody>
                             <%
-                                MANAGER[] manager = ManagerAccess.GetAllManagers();
-                                for (int i = 0; i < manager.Length; i++)
-                                {
-                                 
+                                PERMISSION[] permission = ManagerAccess.GetAllPermissions();
+                                for (int i = 0; i < permission.Length; i++)
+                                {                                 
                             %>
                             <tr>
-                                <td style="text-align: center"><%=manager[i].NAME%></td>
-                                <td style="text-align: center"><%=ManagerAccess.getPermissionStringByManager(manager[i])%></td>
-                                <td style="text-align: center"><%=manager[i].MNGR_TYPE%></td>
-                                <td style="text-align: center"><a href="javascript:editManager('<%=manager[i].NAME%>')">查看所有拥有该权限的管理员</a></td>
+                                <td style="text-align: center"><%=permission[i].NAME%></td>
+                                <td style="text-align: center"><input type="checkbox" id="permissionCheckbox<%=i %>"/>Choose</td>
                             </tr>
                             <%}%>
                         </tbody>
                     </table>
                 </div>
+                <button onclick="searchManager('<%=permission.Length %>')">搜索</button>
             </div>
         </div>
         <div class="clear">

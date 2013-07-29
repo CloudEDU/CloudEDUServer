@@ -62,7 +62,7 @@
                             <ul class="submenu">
                                 <li><a href="ManagerList.aspx">Manager list</a> </li>
                                 <li><a href="PermissionList.aspx">Permission list</a> </li>
-                                <li><a href="TypeList.aspx">Type list</a> </li>
+<%--                                <li><a href="TypeList.aspx">Type list</a> </li>--%>
                             </ul>
                         </li>
                         <li><a class="menuitem">Transaction Management</a>
