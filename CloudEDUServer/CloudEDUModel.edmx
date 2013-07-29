@@ -26,6 +26,20 @@
           <EntitySet Name="PERMISSION" EntityType="CloudEDUModel.Store.PERMISSION" store:Type="Tables" Schema="MANAGER" />
           <EntitySet Name="TYPE" EntityType="CloudEDUModel.Store.TYPE" store:Type="Tables" Schema="MANAGER" />
           <EntitySet Name="SALEORDER" EntityType="CloudEDUModel.Store.SALEORDER" store:Type="Tables" Schema="TRSACTION" />
+          <EntitySet Name="COURSE_AVAIL" EntityType="CloudEDUModel.Store.COURSE_AVAIL" store:Type="Views" store:Schema="COURSE" store:Name="COURSE_AVAIL">
+            <DefiningQuery>SELECT 
+      [COURSE_AVAIL].[ID] AS [ID], 
+      [COURSE_AVAIL].[PRICE] AS [PRICE], 
+      [COURSE_AVAIL].[RATE] AS [RATE], 
+      [COURSE_AVAIL].[TITLE] AS [TITLE], 
+      [COURSE_AVAIL].[INTRO] AS [INTRO], 
+      [COURSE_AVAIL].[NAME] AS [NAME], 
+      [COURSE_AVAIL].[CATE_NAME] AS [CATE_NAME], 
+      [COURSE_AVAIL].[RESTRICT_AGE] AS [RESTRICT_AGE], 
+      [COURSE_AVAIL].[PG_DESCRIPTION] AS [PG_DESCRIPTION], 
+      [COURSE_AVAIL].[ICON_URL] AS [ICON_URL]
+      FROM [COURSE].[COURSE_AVAIL] AS [COURSE_AVAIL]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="COURSE_OK" EntityType="CloudEDUModel.Store.COURSE_OK" store:Type="Views" store:Schema="COURSE" store:Name="COURSE_OK">
             <DefiningQuery>SELECT 
       [COURSE_OK].[ID] AS [ID], 
@@ -371,6 +385,26 @@
           <Property Name="COURSE" Type="int" Nullable="false" />
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="TIME" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+      警告 6002: 表/视图“CloudEDU.COURSE.COURSE_AVAIL”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+        <EntityType Name="COURSE_AVAIL">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PRICE" />
+            <PropertyRef Name="TITLE" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="PRICE" Type="money" Nullable="false" />
+          <Property Name="RATE" Type="float" />
+          <Property Name="TITLE" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="INTRO" Type="text" />
+          <Property Name="NAME" Type="varchar" MaxLength="50" />
+          <Property Name="CATE_NAME" Type="nchar" MaxLength="10" />
+          <Property Name="RESTRICT_AGE" Type="int" />
+          <Property Name="PG_DESCRIPTION" Type="nvarchar" MaxLength="100" />
+          <Property Name="ICON_URL" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <!--生成过程中发现错误:
       警告 6002: 表/视图“CloudEDU.COURSE.COURSE_OK”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
@@ -912,6 +946,7 @@
             <Parameter Name="customer_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="NOTE_SHARABLE" EntityType="CloudEDUModel.NOTE_SHARABLE" />
+          <EntitySet Name="COURSE_AVAIL" EntityType="CloudEDUModel.COURSE_AVAIL" />
         </EntityContainer>
         <EntityType Name="CATEGORY">
           <Key>
@@ -1459,6 +1494,23 @@
           <Property Type="Int32" Name="CUSTOMER_ID" />
           <Property Type="Boolean" Name="SHARE" Nullable="false" />
         </EntityType>
+        <EntityType Name="COURSE_AVAIL">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PRICE" />
+            <PropertyRef Name="TITLE" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Decimal" Name="PRICE" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Double" Name="RATE" />
+          <Property Type="String" Name="TITLE" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="INTRO" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NAME" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CATE_NAME" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="Int32" Name="RESTRICT_AGE" />
+          <Property Type="String" Name="PG_DESCRIPTION" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ICON_URL" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1759,6 +1811,22 @@
                 <ScalarProperty Name="LESSON_ID" ColumnName="LESSON_ID" />
                 <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
                 <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COURSE_AVAIL">
+            <EntityTypeMapping TypeName="CloudEDUModel.COURSE_AVAIL">
+              <MappingFragment StoreEntitySet="COURSE_AVAIL">
+                <ScalarProperty Name="ICON_URL" ColumnName="ICON_URL" />
+                <ScalarProperty Name="PG_DESCRIPTION" ColumnName="PG_DESCRIPTION" />
+                <ScalarProperty Name="RESTRICT_AGE" ColumnName="RESTRICT_AGE" />
+                <ScalarProperty Name="CATE_NAME" ColumnName="CATE_NAME" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="INTRO" ColumnName="INTRO" />
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="RATE" ColumnName="RATE" />
+                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -49,6 +49,7 @@ namespace CloudEDUServer
         public DbSet<COURSE_PENDING> COURSE_PENDING { get; set; }
         public DbSet<COURSE_CANCEL> COURSE_CANCEL { get; set; }
         public DbSet<NOTE_SHARABLE> NOTE_SHARABLE { get; set; }
+        public DbSet<COURSE_AVAIL> COURSE_AVAIL { get; set; }
     
         public virtual ObjectResult<CreateCourse_Result> CreateCourse(Nullable<int> teacher, string title, string intro, Nullable<int> category, Nullable<decimal> price, Nullable<int> pg, string icon_url)
         {
