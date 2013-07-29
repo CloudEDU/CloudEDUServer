@@ -72,6 +72,10 @@
             setupLeftMenu();
             setSidebarHeight();
         });
+
+        function recommandCourse() {
+            window.location.href = "RecommendationCourse.aspx";
+        }
     </script>
 
 </head>
@@ -85,8 +89,8 @@
                 <div class="block">
                     <div style="margin-left:auto; margin-right:auto">
                         <span>
-                             <button style="margin-left:300px; width:155px; height:136px; background-image:url(img/a.jpg)"></button>
-                             <p style="margin-left:350px">精品课程</p>   
+                             <button style="margin-left:300px; width:155px; height:136px; background-image:url(img/a.jpg)" onclick="recommandCourse()"></button>
+                             <p style="margin-left:350px"> 精品课程</p>  
                         </span> 
                           
                         <span>

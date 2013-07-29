@@ -1,9 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CourseList.aspx.cs" Inherits="CloudEDUServer.adminconsole.CourseList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RecommendationCourseList.aspx.cs" Inherits="CloudEDUServer.adminconsole.RecommendationCourseList" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head id="Head1" runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
 
@@ -74,7 +74,7 @@
         });
 
         function showCourseInfo(courseID) {
-            window.location.href = "CourseInfo.aspx?courseId="+courseID;
+            window.location.href = "CourseInfo.aspx?courseId=" + courseID;
         }
 
         function courseListSelect() {
@@ -98,21 +98,7 @@
         <div class="grid_10">
             <div class="box round first grid">
                 <h2>
-                    <select id="CourseListSelect" onchange="courseListSelect()">
-                        <option value="all">All Course</option>
-                        <option value="pending">Pending Course</option>
-                        <option value="ok">OK Course </option>
-                        <option value="cancel">Cancel Course</option>
-                    </select>
-                    <%
-                        if (Session["CourseListSelect"]==null)
-                        {
-                            Session["CourseListSelect"] = "all";
-                        }; 
-                    %>
-                    <script>
-                        document.getElementById('CourseListSelect').value = "<%=Session["CourseListSelect"]%>";
-                    </script>
+                   Recommendation List
                 </h2>
                
                 <div class="block">
@@ -121,8 +107,7 @@
 					<thead>
 						<tr>
 				            <th style="text-align:center">Title</th>
-							<th style="text-align:center">Price</th>
-							
+							<th style="text-align:center">Price</th>							
                             <th style="text-align:center">Teacher</th>
                             <th style="text-align:center">Category</th>
                             <th style="text-align:center">Status</th>
@@ -136,30 +121,20 @@
 					<tbody>
                         <% 
                             COURSE[] course =null;
-                    
-                            if (Session["CourseListSelect"].Equals("pending"))
+                            try
                             {
-                                course = CourseAccess.GetAllPendingCourses();
+                                course=CourseAccess.GetCoursesByRecommendation(CourseAccess.GetRecommendationByID(int.Parse(Request.Params.Get("id"))));
                             }
-                            else if (Session["CourseListSelect"].Equals("cancel"))
+                            catch
                             {
-                                course = CourseAccess.GetAllCancelCourses();
+                                course=CourseAccess.GetAllCourses();
                             }
-                            else if (Session["CourseListSelect"].Equals("ok"))
-                            {
-                                course = CourseAccess.GetAllOKCourses();
-                            }
-                            else
-                            {
-                                course = CourseAccess.GetAllCourses();
-                            }
-                                          
-                            for (int i=0; i<course.Length; i++)
+                            for (int i=0; i<course.Length; i++) 
                             {
                          %>
 						    <tr ondblclick="showCourseInfo(<%=course[i].ID %>)">
 							    <td style="text-align:center"><%=course[i].TITLE %></td>	
-							    <td style="text-align:center"><%=course[i].PRICE.ToString().Substring(0,course[i].PRICE.ToString().Length-2) %></td>
+							    <td style="text-align:center"><%=course[i].PRICE.ToString().Substring(0,course[i].PRICE.ToString().Length-2) %></td>							    
                                 <td style="text-align:center"><%=course[i].TEACHER %></td>						    
 							    <td style="text-align:center"><%=course[i].CATEGORY %></td>
                                 <td style="text-align:center"><%=course[i].COURSE_STATUS %></td>
