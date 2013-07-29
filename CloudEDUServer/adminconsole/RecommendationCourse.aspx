@@ -83,22 +83,24 @@
 
         var isDelete = false;
         function deleteRecommendation(id) {
-            if (isDelete) {
-                alert("删除中，请稍后");
-                return;
+            if (confirm("确认删除吗")) {
+                if (isDelete) {
+                    alert("删除中，请稍后");
+                    return;
+                }
+                isDelete = true;
+                jQuery.post("RecommendationCourse.aspx", { operate: "deleteRecommendation", id: id }, function (data) {
+                    if (data == "success") {
+                        alert("删除成功");
+                        isDelete = false;
+                        window.location.href = "RecommendationCourse.aspx";
+                    }
+                    else {
+                        alert(data);
+                        isDelete = false;
+                    }
+                });
             }
-            isDelete = true;
-            jQuery.post("RecommendationCourse.aspx", { operate: "deleteRecommendation", id: id }, function (data) {
-                if (data == "success") {
-                    alert("删除成功");
-                    isDelete = false;
-                    window.location.href = "RecommendationCourse.aspx";
-                }
-                else {
-                    alert(data);
-                    isDelete = false;
-                }
-            });
         }
 
         function showRecommendation(id) {
@@ -109,10 +111,12 @@
         function showNewRecommendation() {
             if (isShow) {
                 $("#NewRecommendation").hide();
+                document.getElementById('showNewRecommendationButton').innerHTML = "Add Recommendation";
                 isShow = false;
             }
             else {
                 $("#NewRecommendation").show();
+                document.getElementById('showNewRecommendationButton').innerHTML = "Cancel Recommendation";
                 isShow = true;
             }
         }
@@ -149,10 +153,10 @@
                     Recommendation List                   
                 </h2>
                 <br />
-                 <button onclick="showNewRecommendation()" style="float:right">Add Recommendation</button>
+                 <button onclick="showNewRecommendation()" style="float:right" id="showNewRecommendationButton">Add Recommendation</button>
                 <br/>
                 <br />
-                <table id="NewRecommendation" style="float:right; display:none; z-index:100; background-color:rgb(27, 84, 141)">
+                <table id="NewRecommendation" style="float:right; display:none; z-index:100;">
                     <tr>
                         <td class="col1">
                             <label>Title</label>
@@ -171,6 +175,8 @@
                     </tr>
                     <tr>
                         <td>
+                        </td>
+                        <td style="text-align:right">
                             <button onclick="submitNewRecommendation()">确认</button>
                         </td>
                     </tr>

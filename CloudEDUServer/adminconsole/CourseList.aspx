@@ -88,6 +88,18 @@
                 window.location.href = "CourseComment.aspx";
             });
         }
+
+        function editCourse(courseId) {
+            jQuery.post("CourseList.aspx", { operate: "edit", courseId: courseId }, function (data) {
+                if (data == "success") {
+
+                    window.location.href = "EditCourse.aspx";
+                }
+                else {
+                    alert(data);
+                }
+            });
+        }
     </script>
 
 </head>
@@ -128,9 +140,10 @@
                             <th style="text-align:center">Status</th>
                             <th style="text-align:center">Pg</th>
                             <th style="text-align:center">Iconurl</th>
-                            <th style="text-align:center">startTime</th>
-                            <th style="text-align:center">download</th>
-                            <th style="text-align:center">comment</th>
+                            <th style="text-align:center">StartTime</th>
+                            <th style="text-align:center">Download</th>
+                            <th style="text-align:center">Infor</th>
+                            <th style="text-align:center">Comment</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -157,7 +170,7 @@
                             for (int i=0; i<course.Length; i++)
                             {
                          %>
-						    <tr ondblclick="showCourseInfo(<%=course[i].ID %>)">
+						    <tr ondblclick="editCourse('<%=course[i].ID %>')">
 							    <td style="text-align:center"><%=course[i].TITLE %></td>	
 							    <td style="text-align:center"><%=course[i].PRICE.ToString().Substring(0,course[i].PRICE.ToString().Length-2) %></td>
                                 <td style="text-align:center"><%=course[i].TEACHER %></td>						    
@@ -167,6 +180,7 @@
 							    <td style="text-align:center"><%=course[i].ICON_URL %></td>	
                                 <td style="text-align:center"><%=course[i].START_TIME %></td>						    
 							    <td style="text-align:center"><%=CourseAccess.GetDownloadTimeByCourseID(course[i].ID) %></td>
+                                <td style="text-align:center"><a href="#" onclick="showCourseInfo(<%=course[i].ID%>)">more</a></td>
                                 <td style="text-align:center"><a href="#" onclick="showComment('<%=course[i].ID %>')">查看评论</a></td>
 						    </tr>	
                         <%  } %>	
