@@ -47,6 +47,7 @@
         <AssociationConnector Association="CloudEDUModel.FAVORITE" ManuallyRouted="false" />
         <AssociationConnector Association="CloudEDUModel.GRANTED" ManuallyRouted="false" />
         <EntityTypeShape EntityType="CloudEDUModel.NOTE_SHARABLE" Width="1.5" PointX="13.5" PointY="4.875" />
+        <EntityTypeShape EntityType="CloudEDUModel.COURSE_AVAIL" Width="1.5" PointX="0.5" PointY="15.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

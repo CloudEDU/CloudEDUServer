@@ -950,6 +950,9 @@
     <Compile Include="CourseService.svc.cs">
       <DependentUpon>CourseService.svc</DependentUpon>
     </Compile>
+    <Compile Include="COURSE_AVAIL.cs">
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="COURSE_CANCEL.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
