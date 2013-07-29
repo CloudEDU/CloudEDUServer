@@ -22,7 +22,7 @@ namespace CloudEDUServer
         public System.DateTime TIME { get; set; }
     
         public virtual COURSE COURSE1 { get; set; }
-        public virtual CUSTOMER CUSTOMER_buyer { get; set; }
-        public virtual CUSTOMER CUSTOMER_saler { get; set; }
+        public virtual CUSTOMER CUSTOMER { get; set; }
+        public virtual CUSTOMER CUSTOMER1 { get; set; }
     }
 }

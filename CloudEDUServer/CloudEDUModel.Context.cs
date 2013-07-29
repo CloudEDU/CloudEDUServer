@@ -45,13 +45,18 @@ namespace CloudEDUServer
         public DbSet<PERMISSION> PERMISSIONs { get; set; }
         public DbSet<TYPE> TYPEs { get; set; }
         public DbSet<SALEORDER> SALEORDERs { get; set; }
+        public DbSet<COURSE_AVAIL> COURSE_AVAIL { get; set; }
         public DbSet<COURSE_OK> COURSE_OK { get; set; }
         public DbSet<COURSE_PENDING> COURSE_PENDING { get; set; }
-        public DbSet<COURSE_CANCEL> COURSE_CANCEL { get; set; }
         public DbSet<NOTE_SHARABLE> NOTE_SHARABLE { get; set; }
-        public DbSet<COURSE_AVAIL> COURSE_AVAIL { get; set; }
+        public DbSet<COURSE_CANCEL> COURSE_CANCEL { get; set; }
     
-        public virtual ObjectResult<CreateCourse_Result> CreateCourse(Nullable<int> teacher, string title, string intro, Nullable<int> category, Nullable<decimal> price, Nullable<int> pg, string icon_url)
+        public virtual ObjectResult<COURSE_HOTRANK_Result> COURSE_HOTRANK()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<COURSE_HOTRANK_Result>("COURSE_HOTRANK");
+        }
+    
+        public virtual ObjectResult<Nullable<int>> CreateCourse(Nullable<int> teacher, string title, string intro, Nullable<int> category, Nullable<decimal> price, Nullable<int> pg, string icon_url)
         {
             var teacherParameter = teacher.HasValue ?
                 new ObjectParameter("teacher", teacher) :
@@ -81,10 +86,10 @@ namespace CloudEDUServer
                 new ObjectParameter("icon_url", icon_url) :
                 new ObjectParameter("icon_url", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CreateCourse_Result>("CreateCourse", teacherParameter, titleParameter, introParameter, categoryParameter, priceParameter, pgParameter, icon_urlParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("CreateCourse", teacherParameter, titleParameter, introParameter, categoryParameter, priceParameter, pgParameter, icon_urlParameter);
         }
     
-        public virtual ObjectResult<EnrollCourse_Result> EnrollCourse(Nullable<int> course_id, Nullable<int> customer_id)
+        public virtual ObjectResult<Nullable<int>> EnrollCourse(Nullable<int> course_id, Nullable<int> customer_id)
         {
             var course_idParameter = course_id.HasValue ?
                 new ObjectParameter("course_id", course_id) :
@@ -94,12 +99,7 @@ namespace CloudEDUServer
                 new ObjectParameter("customer_id", customer_id) :
                 new ObjectParameter("customer_id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EnrollCourse_Result>("EnrollCourse", course_idParameter, customer_idParameter);
-        }
-    
-        public virtual ObjectResult<COURSE_HOTRANK_Result> COURSE_HOTRANK()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<COURSE_HOTRANK_Result>("COURSE_HOTRANK");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("EnrollCourse", course_idParameter, customer_idParameter);
         }
     }
 }

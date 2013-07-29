@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CloudEDUModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CloudEDUModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="CloudEDUModelStoreContainer">
           <EntitySet Name="CATEGORY" EntityType="CloudEDUModel.Store.CATEGORY" store:Type="Tables" Schema="COURSE" />
           <EntitySet Name="COMMENT" EntityType="CloudEDUModel.Store.COMMENT" store:Type="Tables" Schema="COURSE" />
@@ -824,7 +824,8 @@
         <Function Name="GetCustomerAgeForID" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="CUSTOMER">
           <Parameter Name="customer_id" Type="int" Mode="In" />
         </Function>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CloudEDUModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -846,8 +847,10 @@
           <EntitySet Name="PERMISSIONs" EntityType="CloudEDUModel.PERMISSION" />
           <EntitySet Name="TYPEs" EntityType="CloudEDUModel.TYPE" />
           <EntitySet Name="SALEORDERs" EntityType="CloudEDUModel.SALEORDER" />
+          <EntitySet Name="COURSE_AVAIL" EntityType="CloudEDUModel.COURSE_AVAIL" />
           <EntitySet Name="COURSE_OK" EntityType="CloudEDUModel.COURSE_OK" />
           <EntitySet Name="COURSE_PENDING" EntityType="CloudEDUModel.COURSE_PENDING" />
+          <EntitySet Name="NOTE_SHARABLE" EntityType="CloudEDUModel.NOTE_SHARABLE" />
           <EntitySet Name="COURSE_CANCEL" EntityType="CloudEDUModel.COURSE_CANCEL" />
           <AssociationSet Name="FK_COURSE_CATEGORY" Association="CloudEDUModel.FK_COURSE_CATEGORY">
             <End Role="CATEGORY" EntitySet="CATEGORies" />
@@ -933,7 +936,8 @@
             <End Role="MANAGER" EntitySet="MANAGERs" />
             <End Role="PERMISSION" EntitySet="PERMISSIONs" />
           </AssociationSet>
-          <FunctionImport Name="CreateCourse" ReturnType="Collection(CloudEDUModel.CreateCourse_Result)">
+          <FunctionImport Name="COURSE_HOTRANK" ReturnType="Collection(CloudEDUModel.COURSE_HOTRANK_Result)" />
+          <FunctionImport Name="CreateCourse" ReturnType="Collection(Int32)">
             <Parameter Name="teacher" Mode="In" Type="Int32" />
             <Parameter Name="title" Mode="In" Type="String" />
             <Parameter Name="intro" Mode="In" Type="String" />
@@ -942,13 +946,10 @@
             <Parameter Name="pg" Mode="In" Type="Int32" />
             <Parameter Name="icon_url" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="EnrollCourse" ReturnType="Collection(CloudEDUModel.EnrollCourse_Result)">
+          <FunctionImport Name="EnrollCourse" ReturnType="Collection(Int32)">
             <Parameter Name="course_id" Mode="In" Type="Int32" />
             <Parameter Name="customer_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="NOTE_SHARABLE" EntityType="CloudEDUModel.NOTE_SHARABLE" />
-          <EntitySet Name="COURSE_AVAIL" EntityType="CloudEDUModel.COURSE_AVAIL" />
-          <FunctionImport Name="COURSE_HOTRANK" ReturnType="Collection(CloudEDUModel.COURSE_HOTRANK_Result)" />
         </EntityContainer>
         <EntityType Name="CATEGORY">
           <Key>
@@ -967,9 +968,9 @@
           <Property Name="COURSE_ID" Type="Int32" Nullable="false" />
           <Property Name="CONTENT" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="TITLE" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="TIME" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="CUSTOMER" Relationship="CloudEDUModel.FK__COMMENT__CUSTOME__6E01572D" FromRole="COMMENT" ToRole="CUSTOMER" />
           <NavigationProperty Name="COURSE" Relationship="CloudEDUModel.FK_COMMENT_COURSE" FromRole="COMMENT" ToRole="COURSE" />
-          <Property Type="DateTime" Name="TIME" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="COURSE">
           <Key>
@@ -986,12 +987,12 @@
           <Property Name="PG" Type="Int32" />
           <Property Name="ICON_URL" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="START_TIME" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="CATEGORY_navi" Relationship="CloudEDUModel.FK_COURSE_CATEGORY" FromRole="COURSE" ToRole="CATEGORY" />
+          <NavigationProperty Name="CATEGORY1" Relationship="CloudEDUModel.FK_COURSE_CATEGORY" FromRole="COURSE" ToRole="CATEGORY" />
           <NavigationProperty Name="COMMENTs" Relationship="CloudEDUModel.FK_COMMENT_COURSE" FromRole="COURSE" ToRole="COMMENT" />
           <NavigationProperty Name="SALEORDERs" Relationship="CloudEDUModel.FK__SALEORDER__COURS__534D60F1" FromRole="COURSE" ToRole="SALEORDER" />
           <NavigationProperty Name="ATTENDs" Relationship="CloudEDUModel.FK_ATTEND_COURSE" FromRole="COURSE" ToRole="ATTEND" />
           <NavigationProperty Name="PARENT_GUIDE" Relationship="CloudEDUModel.FK_COURSE_PG" FromRole="COURSE" ToRole="PARENT_GUIDE" />
-          <NavigationProperty Name="CUSTOMER_teach" Relationship="CloudEDUModel.FK_COURSE_TEACHER" FromRole="COURSE" ToRole="CUSTOMER" />
+          <NavigationProperty Name="CUSTOMER" Relationship="CloudEDUModel.FK_COURSE_TEACHER" FromRole="COURSE" ToRole="CUSTOMER" />
           <NavigationProperty Name="LESSONs" Relationship="CloudEDUModel.FK_LESSON_COURSE" FromRole="COURSE" ToRole="LESSON" />
           <NavigationProperty Name="RECOMMENDATIONs" Relationship="CloudEDUModel.RECO_COURSE" FromRole="COURSE" ToRole="RECOMMENDATION" />
           <NavigationProperty Name="CUSTOMER_attend" Relationship="CloudEDUModel.FAVORITE" FromRole="COURSE" ToRole="CUSTOMER" />
@@ -1015,12 +1016,12 @@
           <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="CONTENT" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="TITLE" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="NUMBER" Type="Int32" Nullable="false" />
           <NavigationProperty Name="COURSE" Relationship="CloudEDUModel.FK_LESSON_COURSE" FromRole="LESSON" ToRole="COURSE" />
           <NavigationProperty Name="DOCUMENTs" Relationship="CloudEDUModel.FK_DOCUMENT_LESSON" FromRole="LESSON" ToRole="DOCUMENT" />
           <NavigationProperty Name="NOTEs" Relationship="CloudEDUModel.FK__NOTE__LESSON_ID__3A81B327" FromRole="LESSON" ToRole="NOTE" />
           <NavigationProperty Name="ATTENDs" Relationship="CloudEDUModel.FK_ATTEND_CURRENTLESSON" FromRole="LESSON" ToRole="ATTEND" />
           <NavigationProperty Name="RESOURCEs" Relationship="CloudEDUModel.FK_RESOURCE_LESSON" FromRole="LESSON" ToRole="RESOURCE" />
-          <Property Type="Int32" Name="NUMBER" Nullable="false" />
         </EntityType>
         <EntityType Name="PARENT_GUIDE">
           <Key>
@@ -1089,12 +1090,12 @@
           <Property Name="TEACH_RATE" Type="Double" />
           <Property Name="BIRTHDAY" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="COMMENTs" Relationship="CloudEDUModel.FK__COMMENT__CUSTOME__6E01572D" FromRole="CUSTOMER" ToRole="COMMENT" />
-          <NavigationProperty Name="COURSE_asteacher" Relationship="CloudEDUModel.FK_COURSE_TEACHER" FromRole="CUSTOMER" ToRole="COURSE" />
+          <NavigationProperty Name="COURSEs" Relationship="CloudEDUModel.FK_COURSE_TEACHER" FromRole="CUSTOMER" ToRole="COURSE" />
           <NavigationProperty Name="ATTENDs" Relationship="CloudEDUModel.FK_ATTEND_CUSTOMER" FromRole="CUSTOMER" ToRole="ATTEND" />
           <NavigationProperty Name="NOTEs" Relationship="CloudEDUModel.FK__NOTE__CUSTOMER_I__2334397B" FromRole="CUSTOMER" ToRole="NOTE" />
-          <NavigationProperty Name="SALEORDERs_asbuyer" Relationship="CloudEDUModel.FK__SALEORDER__BUYER__5070F446" FromRole="CUSTOMER" ToRole="SALEORDER" />
-          <NavigationProperty Name="SALEORDERs_assaler" Relationship="CloudEDUModel.FK__SALEORDER__SALER__5165187F" FromRole="CUSTOMER" ToRole="SALEORDER" />
-          <NavigationProperty Name="COURSEs_attend" Relationship="CloudEDUModel.FAVORITE" FromRole="CUSTOMER" ToRole="COURSE" />
+          <NavigationProperty Name="SALEORDERs" Relationship="CloudEDUModel.FK__SALEORDER__BUYER__5070F446" FromRole="CUSTOMER" ToRole="SALEORDER" />
+          <NavigationProperty Name="SALEORDERs1" Relationship="CloudEDUModel.FK__SALEORDER__SALER__5165187F" FromRole="CUSTOMER" ToRole="SALEORDER" />
+          <NavigationProperty Name="COURSEs1" Relationship="CloudEDUModel.FAVORITE" FromRole="CUSTOMER" ToRole="COURSE" />
         </EntityType>
         <EntityType Name="NOTE">
           <Key>
@@ -1158,8 +1159,25 @@
           <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="TIME" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="COURSE1" Relationship="CloudEDUModel.FK__SALEORDER__COURS__534D60F1" FromRole="SALEORDER" ToRole="COURSE" />
-          <NavigationProperty Name="CUSTOMER_buyer" Relationship="CloudEDUModel.FK__SALEORDER__BUYER__5070F446" FromRole="SALEORDER" ToRole="CUSTOMER" />
-          <NavigationProperty Name="CUSTOMER_saler" Relationship="CloudEDUModel.FK__SALEORDER__SALER__5165187F" FromRole="SALEORDER" ToRole="CUSTOMER" />
+          <NavigationProperty Name="CUSTOMER" Relationship="CloudEDUModel.FK__SALEORDER__BUYER__5070F446" FromRole="SALEORDER" ToRole="CUSTOMER" />
+          <NavigationProperty Name="CUSTOMER1" Relationship="CloudEDUModel.FK__SALEORDER__SALER__5165187F" FromRole="SALEORDER" ToRole="CUSTOMER" />
+        </EntityType>
+        <EntityType Name="COURSE_AVAIL">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PRICE" />
+            <PropertyRef Name="TITLE" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="PRICE" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="RATE" Type="Double" />
+          <Property Name="TITLE" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="INTRO" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="NAME" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CATE_NAME" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="RESTRICT_AGE" Type="Int32" />
+          <Property Name="PG_DESCRIPTION" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="ICON_URL" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
         </EntityType>
         <EntityType Name="COURSE_OK">
           <Key>
@@ -1202,6 +1220,22 @@
           <Property Name="PG" Type="Int32" />
           <Property Name="ICON_URL" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="START_TIME" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="NOTE_SHARABLE">
+          <Key>
+            <PropertyRef Name="CONTENT" />
+            <PropertyRef Name="LESSON_ID" />
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="DATE" />
+            <PropertyRef Name="SHARE" />
+          </Key>
+          <Property Name="TITLE" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CONTENT" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="LESSON_ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CUSTOMER_ID" Type="Int32" />
+          <Property Name="SHARE" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="COURSE_CANCEL">
           <Key>
@@ -1464,55 +1498,6 @@
           <End Role="MANAGER" Type="CloudEDUModel.MANAGER" Multiplicity="*" />
           <End Role="PERMISSION" Type="CloudEDUModel.PERMISSION" Multiplicity="*" />
         </Association>
-        <ComplexType Name="CreateCourse_Result">
-          <Property Type="Int32" Name="ErrorNumber" Nullable="true" />
-          <Property Type="Int32" Name="ErrorSeverity" Nullable="true" />
-          <Property Type="Int32" Name="ErrorState" Nullable="true" />
-          <Property Type="String" Name="ErrorProcedure" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="ErrorLine" Nullable="true" />
-          <Property Type="String" Name="ErrorMessage" Nullable="true" MaxLength="4000" />
-        </ComplexType>
-        <ComplexType Name="EnrollCourse_Result">
-          <Property Type="Int32" Name="ErrorNumber" Nullable="true" />
-          <Property Type="Int32" Name="ErrorSeverity" Nullable="true" />
-          <Property Type="Int32" Name="ErrorState" Nullable="true" />
-          <Property Type="String" Name="ErrorProcedure" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="ErrorLine" Nullable="true" />
-          <Property Type="String" Name="ErrorMessage" Nullable="true" MaxLength="4000" />
-        </ComplexType>
-        <EntityType Name="NOTE_SHARABLE">
-          <Key>
-            <PropertyRef Name="CONTENT" />
-            <PropertyRef Name="LESSON_ID" />
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="DATE" />
-            <PropertyRef Name="SHARE" />
-          </Key>
-          <Property Type="String" Name="TITLE" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="CONTENT" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="LESSON_ID" Nullable="false" />
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="DateTime" Name="DATE" Nullable="false" Precision="3" />
-          <Property Type="Int32" Name="CUSTOMER_ID" />
-          <Property Type="Boolean" Name="SHARE" Nullable="false" />
-        </EntityType>
-        <EntityType Name="COURSE_AVAIL">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="PRICE" />
-            <PropertyRef Name="TITLE" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="Decimal" Name="PRICE" Nullable="false" Precision="19" Scale="4" />
-          <Property Type="Double" Name="RATE" />
-          <Property Type="String" Name="TITLE" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="INTRO" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="NAME" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="CATE_NAME" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Type="Int32" Name="RESTRICT_AGE" />
-          <Property Type="String" Name="PG_DESCRIPTION" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="ICON_URL" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
         <ComplexType Name="COURSE_HOTRANK_Result">
           <Property Type="Int32" Name="COURSE_ID" Nullable="false" />
           <Property Type="Int32" Name="STUDENTS" Nullable="true" />
@@ -1534,12 +1519,12 @@
           <EntitySetMapping Name="COMMENTs">
             <EntityTypeMapping TypeName="CloudEDUModel.COMMENT">
               <MappingFragment StoreEntitySet="COMMENT">
-                <ScalarProperty Name="TIME" ColumnName="TIME" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
                 <ScalarProperty Name="COURSE_ID" ColumnName="COURSE_ID" />
                 <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
                 <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="TIME" ColumnName="TIME" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1574,11 +1559,11 @@
           <EntitySetMapping Name="LESSONs">
             <EntityTypeMapping TypeName="CloudEDUModel.LESSON">
               <MappingFragment StoreEntitySet="LESSON">
-                <ScalarProperty Name="NUMBER" ColumnName="NUMBER" />
                 <ScalarProperty Name="COURSE_ID" ColumnName="COURSE_ID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
                 <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="NUMBER" ColumnName="NUMBER" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1708,6 +1693,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="COURSE_AVAIL">
+            <EntityTypeMapping TypeName="CloudEDUModel.COURSE_AVAIL">
+              <MappingFragment StoreEntitySet="COURSE_AVAIL">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+                <ScalarProperty Name="RATE" ColumnName="RATE" />
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="INTRO" ColumnName="INTRO" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="CATE_NAME" ColumnName="CATE_NAME" />
+                <ScalarProperty Name="RESTRICT_AGE" ColumnName="RESTRICT_AGE" />
+                <ScalarProperty Name="PG_DESCRIPTION" ColumnName="PG_DESCRIPTION" />
+                <ScalarProperty Name="ICON_URL" ColumnName="ICON_URL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="COURSE_OK">
             <EntityTypeMapping TypeName="CloudEDUModel.COURSE_OK">
               <MappingFragment StoreEntitySet="COURSE_OK">
@@ -1739,6 +1740,19 @@
                 <ScalarProperty Name="PG" ColumnName="PG" />
                 <ScalarProperty Name="ICON_URL" ColumnName="ICON_URL" />
                 <ScalarProperty Name="START_TIME" ColumnName="START_TIME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NOTE_SHARABLE">
+            <EntityTypeMapping TypeName="CloudEDUModel.NOTE_SHARABLE">
+              <MappingFragment StoreEntitySet="NOTE_SHARABLE">
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+                <ScalarProperty Name="LESSON_ID" ColumnName="LESSON_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+                <ScalarProperty Name="SHARE" ColumnName="SHARE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1783,59 +1797,6 @@
               <ScalarProperty Name="ID" ColumnName="PERMISSION" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="CreateCourse" FunctionName="CloudEDUModel.Store.CreateCourse">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CloudEDUModel.CreateCourse_Result">
-                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
-                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
-                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
-                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
-                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
-                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="EnrollCourse" FunctionName="CloudEDUModel.Store.EnrollCourse">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CloudEDUModel.EnrollCourse_Result">
-                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
-                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
-                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
-                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
-                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
-                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <EntitySetMapping Name="NOTE_SHARABLE">
-            <EntityTypeMapping TypeName="CloudEDUModel.NOTE_SHARABLE">
-              <MappingFragment StoreEntitySet="NOTE_SHARABLE">
-                <ScalarProperty Name="SHARE" ColumnName="SHARE" />
-                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
-                <ScalarProperty Name="DATE" ColumnName="DATE" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="LESSON_ID" ColumnName="LESSON_ID" />
-                <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
-                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="COURSE_AVAIL">
-            <EntityTypeMapping TypeName="CloudEDUModel.COURSE_AVAIL">
-              <MappingFragment StoreEntitySet="COURSE_AVAIL">
-                <ScalarProperty Name="ICON_URL" ColumnName="ICON_URL" />
-                <ScalarProperty Name="PG_DESCRIPTION" ColumnName="PG_DESCRIPTION" />
-                <ScalarProperty Name="RESTRICT_AGE" ColumnName="RESTRICT_AGE" />
-                <ScalarProperty Name="CATE_NAME" ColumnName="CATE_NAME" />
-                <ScalarProperty Name="NAME" ColumnName="NAME" />
-                <ScalarProperty Name="INTRO" ColumnName="INTRO" />
-                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
-                <ScalarProperty Name="RATE" ColumnName="RATE" />
-                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="COURSE_HOTRANK" FunctionName="CloudEDUModel.Store.COURSE_HOTRANK">
             <ResultMapping>
               <ComplexTypeMapping TypeName="CloudEDUModel.COURSE_HOTRANK_Result">
@@ -1844,6 +1805,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CreateCourse" FunctionName="CloudEDUModel.Store.CreateCourse" />
+          <FunctionImportMapping FunctionImportName="EnrollCourse" FunctionName="CloudEDUModel.Store.EnrollCourse" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

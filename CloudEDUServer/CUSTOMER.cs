@@ -17,12 +17,12 @@ namespace CloudEDUServer
         public CUSTOMER()
         {
             this.COMMENTs = new HashSet<COMMENT>();
-            this.COURSE_asteacher = new HashSet<COURSE>();
+            this.COURSEs = new HashSet<COURSE>();
             this.ATTENDs = new HashSet<ATTEND>();
             this.NOTEs = new HashSet<NOTE>();
-            this.SALEORDERs_asbuyer = new HashSet<SALEORDER>();
-            this.SALEORDERs_assaler = new HashSet<SALEORDER>();
-            this.COURSEs_attend = new HashSet<COURSE>();
+            this.SALEORDERs = new HashSet<SALEORDER>();
+            this.SALEORDERs1 = new HashSet<SALEORDER>();
+            this.COURSEs1 = new HashSet<COURSE>();
         }
     
         public int ID { get; set; }
@@ -36,11 +36,11 @@ namespace CloudEDUServer
         public System.DateTime BIRTHDAY { get; set; }
     
         public virtual ICollection<COMMENT> COMMENTs { get; set; }
-        public virtual ICollection<COURSE> COURSE_asteacher { get; set; }
+        public virtual ICollection<COURSE> COURSEs { get; set; }
         public virtual ICollection<ATTEND> ATTENDs { get; set; }
         public virtual ICollection<NOTE> NOTEs { get; set; }
-        public virtual ICollection<SALEORDER> SALEORDERs_asbuyer { get; set; }
-        public virtual ICollection<SALEORDER> SALEORDERs_assaler { get; set; }
-        public virtual ICollection<COURSE> COURSEs_attend { get; set; }
+        public virtual ICollection<SALEORDER> SALEORDERs { get; set; }
+        public virtual ICollection<SALEORDER> SALEORDERs1 { get; set; }
+        public virtual ICollection<COURSE> COURSEs1 { get; set; }
     }
 }
