@@ -261,14 +261,15 @@ namespace CloudEDUServer
             return reco;
         }
 
-        //public static COURSE_HOTRANK_Result[] GetHotRankOfCourses()
-        //{
-        //    COURSE_HOTRANK_Result[] hotrank = null;
-        //    using (CloudEDUEntities ctx = new CloudEDUEntities())
-        //    {
-        //        hotrank = 
-        //    }
-        //}
+        public static COURSE_HOTRANK_Result[] GetHotRankOfCourses()
+        {
+            COURSE_HOTRANK_Result[] hotrank = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                hotrank = ctx.COURSE_HOTRANK().ToArray();
+            }
+            return hotrank;
+        }
 
         public static RECOMMENDATION GetRecommendationByID(int reco_id)
         {
@@ -583,6 +584,26 @@ namespace CloudEDUServer
                 {
                     ctx.Set<CATEGORY>().Attach(category);
                     ctx.Set<CATEGORY>().Remove(category);
+                    ctx.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool RemoveCourseFromRecommendation(COURSE course, RECOMMENDATION reco)
+        {
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                try
+                {
+                    ctx.RECOMMENDATIONs.Attach(reco);
+                    ctx.COURSEs.Attach(course);
+                    reco.COURSEs.Remove(course);
                     ctx.SaveChanges();
                 }
                 catch (Exception e)
