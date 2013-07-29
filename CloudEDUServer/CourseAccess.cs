@@ -595,6 +595,26 @@ namespace CloudEDUServer
             return true;
         }
 
+        public static bool RemoveCourseFromRecommendation(COURSE course, RECOMMENDATION reco)
+        {
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                try
+                {
+                    ctx.RECOMMENDATIONs.Attach(reco);
+                    ctx.COURSEs.Attach(course);
+                    reco.COURSEs.Remove(course);
+                    ctx.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
+                    return false;
+                }
+            }
+            return true;
+        }
+
         
 
         #endregion
