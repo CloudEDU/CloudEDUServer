@@ -81,8 +81,61 @@
             });
         }
 
+        var isDelete = false;
+        function deleteRecommendation(id) {
+            if (isDelete) {
+                alert("删除中，请稍后");
+                return;
+            }
+            isDelete = true;
+            jQuery.post("RecommendationCourse.aspx", { operate: "deleteRecommendation", id: id }, function (data) {
+                if (data == "success") {
+                    alert("删除成功");
+                    isDelete = false;
+                    window.location.href = "RecommendationCourse.aspx";
+                }
+                else {
+                    alert(data);
+                    isDelete = false;
+                }
+            });
+        }
+
         function showRecommendation(id) {
             window.location.href = "RecommendationCourseList.aspx?id=" + id;
+        }
+
+        var isShow = false;
+        function showNewRecommendation() {
+            if (isShow) {
+                $("#NewRecommendation").hide();
+                isShow = false;
+            }
+            else {
+                $("#NewRecommendation").show();
+                isShow = true;
+            }
+        }
+
+        var isPost = false;
+        function submitNewRecommendation() {
+            if (isPost) {
+                alert("正在更新中，请稍后");
+                return;
+            }
+            isPost = true;
+            jQuery.post("RecommendationCourse.aspx", { operate: "new", title: document.getElementById("NewRecommendationTitle").value, description: document.getElementById("NewRecommendationDescription").value }, function (data) {
+                if (data == "success") {
+                    document.getElementById("NewRecommendationTitle").value = "";
+                    document.getElementById("NewRecommendationDescription").value = "";
+                    alert("新建成功");
+                    window.location.href = "RecommendationCourse.aspx";
+                }
+                else {
+                    alert(data);
+                }
+                isPost = false;
+            })
         }
     </script>
 </head>
@@ -92,14 +145,42 @@
 
         <div class="grid_10">
             <div class="box round first grid">
-                <h2>Recommendation List
+                <h2>
+                    Recommendation List                   
                 </h2>
+                <br />
+                 <button onclick="showNewRecommendation()" style="float:right">Add Recommendation</button>
+                <br/>
+                <br />
+                <table id="NewRecommendation" style="float:right; display:none; z-index:100; background-color:rgb(27, 84, 141)">
+                    <tr>
+                        <td class="col1">
+                            <label>Title</label>
+                        </td>
+                        <td class="col2">
+                            <input type="text" id="NewRecommendationTitle" />
+                        </td>
+                    </tr>
+                   <tr>
+                       <td class="col1">
+                           <label>Description</label>
+                        </td>
+                        <td class="col2">
+                            <input type="text" id="NewRecommendationDescription" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button onclick="submitNewRecommendation()">确认</button>
+                        </td>
+                    </tr>
+                </table>
                 <div class="block">
                     <table class="data display datatable" id="example">
                         <thead>
                             <tr>
                                 <th style="text-align: center">Title</th>
-                                <th style="text-align: center">Icon</th>
+                                <th style="text-align: center">Description</th>
                                 <th style="text-align: center">Edit Recomendation</th>
                                 <th style="text-align: center">Delete Recommendation</th>
                             </tr>
@@ -113,7 +194,7 @@
                             %>
                             <tr ondblclick="showRecommendation('<%=recommendation[i].ID%>')">
                                 <td style="text-align: center"><%=recommendation[i].TITLE %></td>
-                                <td style="text-align: center"><img src="<%=recommendation[i].ICON_URL %>"/></td>
+                                <td style="text-align: center"><%=recommendation[i].DESCRIPTION %></td>
                                 <td style="text-align: center"><a href="javascript:editRecommendation('<%=recommendation[i].ID %>')">edit</a></td>
                                 <td style="text-align: center"><a href="javascript:deleteRecommendation('<%=recommendation[i].ID %>')">delete</a></td>
                             </tr>
@@ -124,9 +205,6 @@
                 </div>
 
                 <!--block div是datatable用来定位的，不要在里面放出了table以外的东西-->
-                <ul style="float:right">
-                    <li><a href="AddManager.aspx">添加管理员</a></li>
-                </ul>
 
             </div>
 

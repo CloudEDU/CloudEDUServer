@@ -26,9 +26,9 @@ namespace CloudEDUServer.adminconsole
                 {
                     CourseAccess.AddCourseToRecommendation(CourseAccess.GetCourseById(courseId), CourseAccess.GetRecommendationByID(recId));
                 }
-                else
+                else if (operate.Equals("no"))
                 {
-                   
+                    CourseAccess.RemoveCourseFromRecommendation(CourseAccess.GetCourseById(courseId), CourseAccess.GetRecommendationByID(recId));
                 }
             }
             catch

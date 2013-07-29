@@ -98,7 +98,7 @@
         <div class="grid_10">
             <div class="box round first grid">
                 <h2>
-                   
+                   Recommendation List
                 </h2>
                
                 <div class="block">
@@ -106,9 +106,8 @@
 					<table class="data display datatable">
 					<thead>
 						<tr>
-							<th style="text-align:center">Id</th>
-							<th style="text-align:center">Price</th>
-							<th style="text-align:center">Title</th>
+				            <th style="text-align:center">Title</th>
+							<th style="text-align:center">Price</th>							
                             <th style="text-align:center">Teacher</th>
                             <th style="text-align:center">Category</th>
                             <th style="text-align:center">Status</th>
@@ -134,9 +133,8 @@
                             {
                          %>
 						    <tr ondblclick="showCourseInfo(<%=course[i].ID %>)">
-							    <td style="text-align:center"><%=course[i].ID %></td>
-							    <td style="text-align:center"><%=course[i].PRICE %></td>
 							    <td style="text-align:center"><%=course[i].TITLE %></td>	
+							    <td style="text-align:center"><%=course[i].PRICE.ToString().Substring(0,course[i].PRICE.ToString().Length-2) %></td>							    
                                 <td style="text-align:center"><%=course[i].TEACHER %></td>						    
 							    <td style="text-align:center"><%=course[i].CATEGORY %></td>
                                 <td style="text-align:center"><%=course[i].COURSE_STATUS %></td>
