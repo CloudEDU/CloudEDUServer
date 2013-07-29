@@ -1,13 +1,17 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CourseStore.aspx.cs" Inherits="CloudEDUServer.adminconsole.CourseStore" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RecommendationCourse.aspx.cs" Inherits="CloudEDUServer.adminconsole.RecommendationCourse" %>
 
 <!DOCTYPE html>
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Typography | BlueWhale Admin</title>
 
-     <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
@@ -62,44 +66,68 @@
     <!-- Load TinyMCE -->
     <script src="js/tiny-mce/jquery.tinymce.js" type="text/javascript"></script>
 
+    <script type="text/javascript" src="js/table/table.js"></script>
     <script src="js/setup.js" type="text/javascript"></script>
 
     <script type="text/javascript">
+
         $(document).ready(function () {
+            setupLeftMenu();
             $('.datatable').dataTable({
                 "sPaginationType": "full_numbers"
             });
-            setupLeftMenu();
             setSidebarHeight();
         });
 
-        function recommandCourse() {
-            window.location.href = "RecommendationCourse.aspx";
+        function editRecommendation(id) {
+            window.showModalDialog("ShowRecommendationCourse.aspx");
         }
     </script>
-
 </head>
 <body id="Body1" runat="server">
-    <div class="container_12">    
+    <div class="container_12">
         <!--#include file="Navigation.aspx" -->
 
         <div class="grid_10">
             <div class="box round first grid">
-                <h2>Course Store</h2>
+                <h2>Recommendation List
+                </h2>
                 <div class="block">
-                    <div style="margin-left:auto; margin-right:auto">
-                        <span>
-                             <button style="margin-left:300px; width:155px; height:136px; background-image:url(img/a.jpg)" onclick="recommandCourse()"></button>
-                             <p style="margin-left:350px"> 精品课程</p>  
-                        </span> 
-                          
-                        <span>
-                            <button style="margin-left:300px; width:155px; height:136px;  background-image:url(img/b.jpg)"></button> 
-                             <p style="margin-left:350px">热门课程</p>   
-                         </span>
-                    </div>              
+                    <table class="data display datatable" id="example">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center">Title</th>
+                                <th style="text-align: center">Icon</th>
+                                <th style="text-align: center">Edit Recomendation</th>
+                                <th style="text-align: center">Delete Recommendation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                RECOMMENDATION[] recommendation = CourseAccess.GetAllRecommendations();
+                                for (int i = 0; i < recommendation.Length; i++)
+                                {
+                             
+                            %>
+                            <tr ondblclick="showRecommendation('<%=recommendation[i].ID%>')">
+                                <td style="text-align: center"><%=recommendation[i].TITLE %></td>
+                                <td style="text-align: center"><img src="<%=recommendation[i].ICON_URL %>"/></td>
+                                <td style="text-align: center"><a href="javascript:editRecommendation('<%=recommendation[i].ID %>')">edit</a></td>
+                                <td style="text-align: center"><a href="javascript:deleteRecommendation('<%=recommendation[i].ID %>')">delete</a></td>
+                            </tr>
+                            <%}%>
+                        </tbody>
+                    </table>
+
                 </div>
+
+                <!--block div是datatable用来定位的，不要在里面放出了table以外的东西-->
+                <ul style="float:right">
+                    <li><a href="AddManager.aspx">添加管理员</a></li>
+                </ul>
+
             </div>
+
         </div>
         <div class="clear">
         </div>
