@@ -13,8 +13,11 @@
 
     <script>
         function changeState(id,recId){
-            if (document.getElementById('course'+id).checked == true) {
-                jQuery.post("ShowRecommendationCourse.asxp", { operate: "yes", id: ele.id,recId:recId });
+            if (document.getElementById('course' + id).checked == true) {
+                jQuery.post("ShowRecommendationCourse.aspx", { operate: "yes", id: id, recId: recId });
+            }
+            else if (document.getElementById('course' + id).checked == false) {
+                jQuery.post("ShowRecommendationCourse.aspx", { operate: "no", id: id, recId: recId });
             }
         }
     </script>
@@ -27,17 +30,18 @@
         <%
             try
             {
-                // RECOMMENDATION recommendation = CourseAccess.GetRecommendationById(int.Parse(Request.Params.Get("recommendationId")));
-                RECOMMENDATION recommendation = CourseAccess.GetAllRecommendations()[0];
+                if (Session["recommendationId"] == null) throw new Exception();
+                RECOMMENDATION recommendation = CourseAccess.GetRecommendationByID(int.Parse((string)Session["recommendationId"]));
+                Session["recommendationId"] = null;
                 COURSE[] recommendationCourse = CourseAccess.GetCoursesByRecommendation(recommendation);
                 COURSE[] allCourse = CourseAccess.GetAllCourses();
                 for (int i = 0; i < allCourse.Length; i++)
                 {
             %>
-                    <input type="checkbox" id="course<%=allCourse[i].ID%>" onchange="changeState(<%=allCourse[i].ID%>)"  style="margin-left:20px;"/><%=allCourse[i].TITLE%>
+                    <input type="checkbox" id="course<%=allCourse[i].ID%>" onchange="changeState('<%=allCourse[i].ID%>','<%=recommendation.ID %>')"  style="margin-left:30px;"/><%=allCourse[i].TITLE%>
                     
                     <script>
-                        document.getElementById('course<%=allCourse[i].ID%>','<%=recommendation.ID %>').checked=false;
+                        document.getElementById('course<%=allCourse[i].ID%>').checked=false;
                     </script>
             <%
                     for (int j = 0; j < recommendationCourse.Length; j++)
@@ -53,7 +57,7 @@
                             break;
                         }
                     }
-                    if (i % 3 == 2)
+                    if (i % 2 == 1)
                     {
                         %>
                             <br />

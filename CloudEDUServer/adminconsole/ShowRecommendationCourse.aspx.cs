@@ -14,12 +14,22 @@ namespace CloudEDUServer.adminconsole
             try
             {
                 string operate=Request.Params.Get("operate");
-                
-                if (operate == null || operate == "") Response.End();
+
+                if (operate == null || operate == "")
+                {
+                    return;
+                }
 
                 int courseId = int.Parse(Request.Params.Get("id"));
                 int recId=int.Parse(Request.Params.Get("recId"));
-                CourseAccess.AddCourseToRecommendation(CourseAccess.GetCourseById(course_id),);
+                if (operate.Equals("yes"))
+                {
+                    CourseAccess.AddCourseToRecommendation(CourseAccess.GetCourseById(courseId), CourseAccess.GetRecommendationByID(recId));
+                }
+                else
+                {
+                   
+                }
             }
             catch
             {

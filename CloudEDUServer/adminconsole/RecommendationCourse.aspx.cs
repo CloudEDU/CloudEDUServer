@@ -11,7 +11,21 @@ namespace CloudEDUServer.adminconsole
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            try
+            {
+                string operate = Request.Params.Get("operate");
+                if (operate == null || operate.Equals(""))
+                {
+                    return ;
+                }
+                if (operate.Equals("editRecommendation"))
+                {
+                    Session["recommendationId"] = Request.Params.Get("id");
+                }
+            }
+            catch
+            {
+            }
         }
     }
 }

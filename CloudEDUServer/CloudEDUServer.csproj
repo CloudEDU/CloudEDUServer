@@ -757,6 +757,7 @@
     <Content Include="adminconsole\Navigation.aspx" />
     <Content Include="adminconsole\PermissionList.aspx" />
     <Content Include="adminconsole\RecommendationCourse.aspx" />
+    <Content Include="adminconsole\RecommendationCourseList.aspx" />
     <Content Include="adminconsole\ShowRecommendationCourse.aspx" />
     <Content Include="adminconsole\TransactionList.aspx" />
     <Content Include="adminconsole\TypeList.aspx" />
@@ -885,6 +886,13 @@
     </Compile>
     <Compile Include="adminconsole\RecommendationCourse.aspx.designer.cs">
       <DependentUpon>RecommendationCourse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminconsole\RecommendationCourseList.aspx.cs">
+      <DependentUpon>RecommendationCourseList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\RecommendationCourseList.aspx.designer.cs">
+      <DependentUpon>RecommendationCourseList.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminconsole\ShowRecommendationCourse.aspx.cs">
       <DependentUpon>ShowRecommendationCourse.aspx</DependentUpon>

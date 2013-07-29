@@ -1,13 +1,13 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RecommendationCourse.aspx.cs" Inherits="CloudEDUServer.adminconsole.RecommendationCourse" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RecommendationCourseList.aspx.cs" Inherits="CloudEDUServer.adminconsole.RecommendationCourseList" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Typography | BlueWhale Admin</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
 
-    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
+     <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
@@ -62,11 +62,9 @@
     <!-- Load TinyMCE -->
     <script src="js/tiny-mce/jquery.tinymce.js" type="text/javascript"></script>
 
-    <script type="text/javascript" src="js/table/table.js"></script>
     <script src="js/setup.js" type="text/javascript"></script>
 
     <script type="text/javascript">
-
         $(document).ready(function () {
             setupLeftMenu();
             $('.datatable').dataTable({
@@ -75,61 +73,84 @@
             setSidebarHeight();
         });
 
-        function editRecommendation(id) {
-            jQuery.post("RecommendationCourse.aspx", {operate:"editRecommendation", id: id }, function () {
-                window.showModalDialog("ShowRecommendationCourse.aspx");
-            });
+        function showCourseInfo(courseID) {
+            window.location.href = "CourseInfo.aspx?courseId=" + courseID;
         }
 
-        function showRecommendation(id) {
-            window.location.href = "RecommendationCourseList.aspx?id=" + id;
+        function courseListSelect() {
+            jQuery.post("CourseList.aspx", { operate: "select", value: document.getElementById("CourseListSelect").value }, function () {
+                window.location.href = "CourseList.aspx";
+            })
+        }
+
+        function showComment(courseId) {
+            jQuery.post("CourseComment.aspx", { course: courseId }, function () {
+                window.location.href = "CourseComment.aspx";
+            });
         }
     </script>
+
 </head>
 <body id="Body1" runat="server">
-    <div class="container_12">
+    <div class="container_12">    
         <!--#include file="Navigation.aspx" -->
 
         <div class="grid_10">
             <div class="box round first grid">
-                <h2>Recommendation List
+                <h2>
+                   
                 </h2>
+               
                 <div class="block">
-                    <table class="data display datatable" id="example">
-                        <thead>
-                            <tr>
-                                <th style="text-align: center">Title</th>
-                                <th style="text-align: center">Icon</th>
-                                <th style="text-align: center">Edit Recomendation</th>
-                                <th style="text-align: center">Delete Recommendation</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%
-                                RECOMMENDATION[] recommendation = CourseAccess.GetAllRecommendations();
-                                for (int i = 0; i < recommendation.Length; i++)
-                                {
-                             
-                            %>
-                            <tr ondblclick="showRecommendation('<%=recommendation[i].ID%>')">
-                                <td style="text-align: center"><%=recommendation[i].TITLE %></td>
-                                <td style="text-align: center"><img src="<%=recommendation[i].ICON_URL %>"/></td>
-                                <td style="text-align: center"><a href="javascript:editRecommendation('<%=recommendation[i].ID %>')">edit</a></td>
-                                <td style="text-align: center"><a href="javascript:deleteRecommendation('<%=recommendation[i].ID %>')">delete</a></td>
-                            </tr>
-                            <%}%>
-                        </tbody>
-                    </table>
-
+                    
+					<table class="data display datatable">
+					<thead>
+						<tr>
+							<th style="text-align:center">Id</th>
+							<th style="text-align:center">Price</th>
+							<th style="text-align:center">Title</th>
+                            <th style="text-align:center">Teacher</th>
+                            <th style="text-align:center">Category</th>
+                            <th style="text-align:center">Status</th>
+                            <th style="text-align:center">Pg</th>
+                            <th style="text-align:center">Iconurl</th>
+                            <th style="text-align:center">startTime</th>
+                            <th style="text-align:center">download</th>
+                            <th style="text-align:center">comment</th>
+						</tr>
+					</thead>
+					<tbody>
+                        <% 
+                            COURSE[] course =null;
+                            try
+                            {
+                                course=CourseAccess.GetCoursesByRecommendation(CourseAccess.GetRecommendationByID(int.Parse(Request.Params.Get("id"))));
+                            }
+                            catch
+                            {
+                                course=CourseAccess.GetAllCourses();
+                            }
+                            for (int i=0; i<course.Length; i++) 
+                            {
+                         %>
+						    <tr ondblclick="showCourseInfo(<%=course[i].ID %>)">
+							    <td style="text-align:center"><%=course[i].ID %></td>
+							    <td style="text-align:center"><%=course[i].PRICE %></td>
+							    <td style="text-align:center"><%=course[i].TITLE %></td>	
+                                <td style="text-align:center"><%=course[i].TEACHER %></td>						    
+							    <td style="text-align:center"><%=course[i].CATEGORY %></td>
+                                <td style="text-align:center"><%=course[i].COURSE_STATUS %></td>
+							    <td style="text-align:center"><%=course[i].PG %></td>
+							    <td style="text-align:center"><%=course[i].ICON_URL %></td>	
+                                <td style="text-align:center"><%=course[i].START_TIME %></td>						    
+							    <td style="text-align:center"><%=CourseAccess.GetDownloadTimeByCourseID(course[i].ID) %></td>
+                                <td style="text-align:center"><a href="#" onclick="showComment('<%=course[i].ID %>')">查看评论</a></td>
+						    </tr>	
+                        <%  } %>	
+					</tbody>
+				    </table>                               
                 </div>
-
-                <!--block div是datatable用来定位的，不要在里面放出了table以外的东西-->
-                <ul style="float:right">
-                    <li><a href="AddManager.aspx">添加管理员</a></li>
-                </ul>
-
             </div>
-
         </div>
         <div class="clear">
         </div>
