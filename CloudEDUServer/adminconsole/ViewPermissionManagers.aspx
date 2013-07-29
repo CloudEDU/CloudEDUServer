@@ -142,7 +142,7 @@
                         <tbody>
                             <%
                                 PERMISSION[] permission_name = (PERMISSION[])Session["permission_name"];
-                                MANAGER[] manager = ManagerAccess.GetManagersByPermission(permission_name[0]);
+                                MANAGER[] manager = ManagerAccess.GetManagersByPermissions(permission_name);
                                 for (int i = 0; i < manager.Length; i++)
                                 {
                              
