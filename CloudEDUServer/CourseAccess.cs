@@ -178,6 +178,15 @@ namespace CloudEDUServer
             return resources;
         }
 
+        public static COMMENT GetCommentByID(int comment_id)
+        {
+            COMMENT comment = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                comment = ctx.COMMENTs.Where(c => c.ID == comment_id).FirstOrDefault();
+            }
+            return comment;
+        }
 
         public static RESOURCE[] GetResourcesByLesson(int lesson_id)
         {

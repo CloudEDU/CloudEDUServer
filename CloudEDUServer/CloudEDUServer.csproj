@@ -767,7 +767,7 @@
     <Content Include="adminconsole\CourseInfo.aspx" />
     <Content Include="adminconsole\ViewPermissionManagers.aspx" />
     <Content Include="adminconsole\ViewTypeManagers.aspx" />
-    <Content Include="CustomerService.svc" />
+    <Content Include="Service.svc" />
     <Content Include="test.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -952,6 +952,13 @@
     <Compile Include="adminconsole\ViewTypeManagers.aspx.designer.cs">
       <DependentUpon>ViewTypeManagers.aspx</DependentUpon>
     </Compile>
+    <Compile Include="adminconsole\CourseInfo.aspx.cs">
+      <DependentUpon>CourseInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\CourseInfo.aspx.designer.cs">
+      <DependentUpon>CourseInfo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ATTEND.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
@@ -979,17 +986,7 @@
     <Compile Include="COURSE.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="adminconsole\CourseInfo.aspx.cs">
-      <DependentUpon>CourseInfo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="adminconsole\CourseInfo.aspx.designer.cs">
-      <DependentUpon>CourseInfo.aspx</DependentUpon>
-    </Compile>
     <Compile Include="CourseAccess.cs" />
-    <Compile Include="CourseService.svc.cs">
-      <DependentUpon>CourseService.svc</DependentUpon>
-    </Compile>
     <Compile Include="COURSE_AVAIL.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
@@ -1005,20 +1002,11 @@
     <Compile Include="COURSE_PENDING.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CreateCourse_Result.cs">
-      <DependentUpon>CloudEDUModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="CUSTOMER.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CustomerAccess.cs" />
-    <Compile Include="CustomerService.svc.cs">
-      <DependentUpon>CustomerService.svc</DependentUpon>
-    </Compile>
     <Compile Include="DOCUMENT.cs">
-      <DependentUpon>CloudEDUModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EnrollCourse_Result.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LESSON.cs">
@@ -1026,14 +1014,6 @@
     </Compile>
     <Compile Include="MANAGER.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ManagerAccess.cs" />
-    <Compile Include="adminconsole\Navigation.aspx.cs">
-      <DependentUpon>Navigation.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="adminconsole\Navigation.aspx.designer.cs">
-      <DependentUpon>Navigation.aspx</DependentUpon>
     </Compile>
     <Compile Include="NOTE.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
@@ -1050,14 +1030,6 @@
     <Compile Include="PERMISSION.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="adminconsole\Site.Master.cs">
-      <DependentUpon>Site.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="adminconsole\Site.Master.designer.cs">
-      <DependentUpon>Site.Master</DependentUpon>
-    </Compile>
     <Compile Include="RECOMMENDATION.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
@@ -1069,6 +1041,25 @@
     </Compile>
     <Compile Include="SALEORDER.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service.svc.cs">
+      <DependentUpon>Service.svc</DependentUpon>
+    </Compile>
+    <Compile Include="ManagerAccess.cs" />
+    <Compile Include="adminconsole\Navigation.aspx.cs">
+      <DependentUpon>Navigation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\Navigation.aspx.designer.cs">
+      <DependentUpon>Navigation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="adminconsole\Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
     </Compile>
     <Compile Include="test.svc.cs">
       <DependentUpon>test.svc</DependentUpon>
