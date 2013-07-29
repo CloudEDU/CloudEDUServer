@@ -261,14 +261,15 @@ namespace CloudEDUServer
             return reco;
         }
 
-        //public static COURSE_HOTRANK_Result[] GetHotRankOfCourses()
-        //{
-        //    COURSE_HOTRANK_Result[] hotrank = null;
-        //    using (CloudEDUEntities ctx = new CloudEDUEntities())
-        //    {
-        //        hotrank = 
-        //    }
-        //}
+        public static COURSE_HOTRANK_Result[] GetHotRankOfCourses()
+        {
+            COURSE_HOTRANK_Result[] hotrank = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                hotrank = ctx.COURSE_HOTRANK().ToArray();
+            }
+            return hotrank;
+        }
 
         public static RECOMMENDATION GetRecommendationByID(int reco_id)
         {
