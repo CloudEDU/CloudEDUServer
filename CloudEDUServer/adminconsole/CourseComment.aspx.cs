@@ -19,7 +19,7 @@ namespace CloudEDUServer.adminconsole
                     try
                     {
                         int id = int.Parse(Request.Params.Get("id"));
-                     //   CourseAccess.RemoveComment(CourseAccess.GetCommentById(id));
+                        CourseAccess.RemoveComment(CourseAccess.GetCommentByID(id));
                     }
                     catch
                     {

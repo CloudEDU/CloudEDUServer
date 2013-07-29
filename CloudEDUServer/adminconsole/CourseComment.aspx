@@ -76,7 +76,7 @@
         function deleteComment(id) {
             if (confirm("确认删除该评论吗")) {
                 jQuery.post("CourseComment.aspx", { operate: "delete", id: id }, function (data) {
-                    if (data=="successs")
+                    if (data=="success")
                     {
                         window.location.href = "CourseComment.aspx";
                     }
@@ -136,7 +136,7 @@
                                     <td style="text-align: center"><%=CustomerAccess.GetCustomerByID( comment[i].CUSTOMER_ID).NAME %></td>
                                     <td style="text-align: center"><%=comment[i].CONTENT %></td>
                                     <td style="text-align: center"><%=comment[i].TIME %></td>
-                                    <td style="text-align:center" onclick="deleteComment(<%=comment[i].ID %>)">删除</td>
+                                    <td style="text-align: center" onclick="deleteComment(<%=comment[i].ID %>)">删除</td>
                                 </tr>
                                 <%
                                 }
@@ -156,6 +156,7 @@
                                             <td style="text-align: center"><%=CustomerAccess.GetCustomerByID( allComment[i].CUSTOMER_ID).NAME %></td>
                                             <td style="text-align: center"><%=allComment[i].CONTENT %></td>
                                             <td style="text-align: center"><%=allComment[i].TIME %></td>
+                                             <td style="text-align: center" onclick="deleteComment(<%=allComment[i].ID %>)">删除</td>
                                         </tr>
                                     <%
                                     }
