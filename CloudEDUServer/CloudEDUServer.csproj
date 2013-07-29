@@ -972,6 +972,9 @@
     <Compile Include="COURSE_CANCEL.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="COURSE_HOTRANK_Result.cs">
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="COURSE_OK.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>

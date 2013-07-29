@@ -261,6 +261,25 @@ namespace CloudEDUServer
             return reco;
         }
 
+        //public static COURSE_HOTRANK_Result[] GetHotRankOfCourses()
+        //{
+        //    COURSE_HOTRANK_Result[] hotrank = null;
+        //    using (CloudEDUEntities ctx = new CloudEDUEntities())
+        //    {
+        //        hotrank = 
+        //    }
+        //}
+
+        public static RECOMMENDATION GetRecommendationByID(int reco_id)
+        {
+            RECOMMENDATION reco = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                reco = ctx.RECOMMENDATIONs.Where(r => r.ID == reco_id).FirstOrDefault();
+            }
+            return reco;
+        }
+
         public static COURSE[] GetCoursesByRecommendation(RECOMMENDATION reco)
         {
             COURSE[] courses = null;
