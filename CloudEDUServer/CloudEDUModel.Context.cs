@@ -96,5 +96,10 @@ namespace CloudEDUServer
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EnrollCourse_Result>("EnrollCourse", course_idParameter, customer_idParameter);
         }
+    
+        public virtual ObjectResult<COURSE_HOTRANK_Result> COURSE_HOTRANK()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<COURSE_HOTRANK_Result>("COURSE_HOTRANK");
+        }
     }
 }

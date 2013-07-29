@@ -198,7 +198,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="CATE_NAME" Type="nchar" MaxLength="10" />
+          <Property Name="CATE_NAME" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="COMMENT">
           <Key>
@@ -807,6 +807,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="COURSE_HOTRANK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="COURSE" />
         <Function Name="CreateCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="COURSE">
           <Parameter Name="teacher" Type="int" Mode="In" />
           <Parameter Name="title" Type="nvarchar" Mode="In" />
@@ -947,13 +948,14 @@
           </FunctionImport>
           <EntitySet Name="NOTE_SHARABLE" EntityType="CloudEDUModel.NOTE_SHARABLE" />
           <EntitySet Name="COURSE_AVAIL" EntityType="CloudEDUModel.COURSE_AVAIL" />
+          <FunctionImport Name="COURSE_HOTRANK" ReturnType="Collection(CloudEDUModel.COURSE_HOTRANK_Result)" />
         </EntityContainer>
         <EntityType Name="CATEGORY">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="CATE_NAME" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="CATE_NAME" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="COURSEs" Relationship="CloudEDUModel.FK_COURSE_CATEGORY" FromRole="CATEGORY" ToRole="COURSE" />
         </EntityType>
         <EntityType Name="COMMENT">
@@ -1511,6 +1513,10 @@
           <Property Type="String" Name="PG_DESCRIPTION" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="ICON_URL" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
+        <ComplexType Name="COURSE_HOTRANK_Result">
+          <Property Type="Int32" Name="COURSE_ID" Nullable="false" />
+          <Property Type="Int32" Name="STUDENTS" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1830,6 +1836,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="COURSE_HOTRANK" FunctionName="CloudEDUModel.Store.COURSE_HOTRANK">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CloudEDUModel.COURSE_HOTRANK_Result">
+                <ScalarProperty Name="COURSE_ID" ColumnName="COURSE_ID" />
+                <ScalarProperty Name="STUDENTS" ColumnName="STUDENTS" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
