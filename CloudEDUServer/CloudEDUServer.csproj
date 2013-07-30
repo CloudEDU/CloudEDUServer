@@ -1016,6 +1016,14 @@
     <Compile Include="MANAGER.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ManagerAccess.cs" />
+    <Compile Include="adminconsole\Navigation.aspx.cs">
+      <DependentUpon>Navigation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\Navigation.aspx.designer.cs">
+      <DependentUpon>Navigation.aspx</DependentUpon>
+    </Compile>
     <Compile Include="NOTE.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
@@ -1031,6 +1039,14 @@
     <Compile Include="PERMISSION.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="adminconsole\Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
     <Compile Include="RECOMMENDATION.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
@@ -1042,22 +1058,6 @@
     </Compile>
     <Compile Include="SALEORDER.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ManagerAccess.cs" />
-    <Compile Include="adminconsole\Navigation.aspx.cs">
-      <DependentUpon>Navigation.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="adminconsole\Navigation.aspx.designer.cs">
-      <DependentUpon>Navigation.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="adminconsole\Site.Master.cs">
-      <DependentUpon>Site.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="adminconsole\Site.Master.designer.cs">
-      <DependentUpon>Site.Master</DependentUpon>
     </Compile>
     <Compile Include="TransactionAccess.cs" />
     <Compile Include="TYPE.cs">
