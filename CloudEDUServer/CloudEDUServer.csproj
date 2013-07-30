@@ -767,8 +767,6 @@
     <Content Include="adminconsole\CourseInfo.aspx" />
     <Content Include="adminconsole\ViewPermissionManagers.aspx" />
     <Content Include="adminconsole\ViewTypeManagers.aspx" />
-    <Content Include="Service.svc" />
-    <Content Include="test.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -983,6 +981,9 @@
     <Compile Include="COMMENT.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="COMMENT_DET.cs">
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="COURSE.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
@@ -1042,9 +1043,6 @@
     <Compile Include="SALEORDER.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Service.svc.cs">
-      <DependentUpon>Service.svc</DependentUpon>
-    </Compile>
     <Compile Include="ManagerAccess.cs" />
     <Compile Include="adminconsole\Navigation.aspx.cs">
       <DependentUpon>Navigation.aspx</DependentUpon>
@@ -1060,9 +1058,6 @@
     </Compile>
     <Compile Include="adminconsole\Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
-    </Compile>
-    <Compile Include="test.svc.cs">
-      <DependentUpon>test.svc</DependentUpon>
     </Compile>
     <Compile Include="TransactionAccess.cs" />
     <Compile Include="TYPE.cs">

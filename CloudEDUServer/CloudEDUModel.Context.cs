@@ -50,6 +50,7 @@ namespace CloudEDUServer
         public DbSet<COURSE_PENDING> COURSE_PENDING { get; set; }
         public DbSet<NOTE_SHARABLE> NOTE_SHARABLE { get; set; }
         public DbSet<COURSE_CANCEL> COURSE_CANCEL { get; set; }
+        public DbSet<COMMENT_DET> COMMENT_DET { get; set; }
     
         public virtual ObjectResult<COURSE_HOTRANK_Result> COURSE_HOTRANK()
         {

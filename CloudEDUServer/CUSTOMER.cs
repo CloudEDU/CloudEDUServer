@@ -31,8 +31,8 @@ namespace CloudEDUServer
         public decimal BALANCE { get; set; }
         public string EMAIL { get; set; }
         public string DEGREE { get; set; }
-        public Nullable<double> LEARN_RATE { get; set; }
-        public Nullable<double> TEACH_RATE { get; set; }
+        public double LEARN_RATE { get; set; }
+        public double TEACH_RATE { get; set; }
         public System.DateTime BIRTHDAY { get; set; }
         public bool ALLOW { get; set; }
     
