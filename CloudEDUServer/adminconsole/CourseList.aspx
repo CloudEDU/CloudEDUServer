@@ -106,7 +106,13 @@
 <body id="Body1" runat="server">
     <div class="container_12">    
         <!--#include file="Navigation.aspx" -->
-
+        <%
+            if (!ManagerAccess.haveCourseViewPermission((MANAGER)Session["manager"]))
+            {
+                Response.Redirect("Default.aspx");
+                Response.End();
+            }
+        %>
         <div class="grid_10">
             <div class="box round first grid">
                 <h2>
@@ -169,8 +175,16 @@
                                           
                             for (int i=0; i<course.Length; i++)
                             {
+                                if (ManagerAccess.haveCourseEditPermission((MANAGER)Session["manager"]))
+                                {
                          %>
-						    <tr ondblclick="editCourse('<%=course[i].ID %>')">
+                            
+						        <tr ondblclick="editCourse('<%=course[i].ID %>')">
+                                <%}
+                                  else
+                                  {%>
+                                <tr>
+                                 <%}%>
 							    <td style="text-align:center"><%=course[i].TITLE %></td>	
 							    <td style="text-align:center"><%=course[i].PRICE.ToString().Substring(0,course[i].PRICE.ToString().Length-2) %></td>
                                 <td style="text-align:center"><%=course[i].TEACHER %></td>						    

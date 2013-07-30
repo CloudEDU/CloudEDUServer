@@ -82,6 +82,13 @@
 <body>
     <div class="container_12">
         <!--#include file="Navigation.aspx" -->
+       <%
+            if (!ManagerAccess.haveCourseViewPermission((MANAGER)Session["manager"]))
+            {
+                Response.Redirect("Default.aspx");
+                Response.End();
+            }
+        %>
         <div class="grid_10">
             <div class="box round first">
                 <h2>

@@ -153,6 +153,14 @@
     <div class="container_12">    
         <!--#include file="Navigation.aspx" -->
 
+        <%
+            if (!ManagerAccess.haveUserPermission((MANAGER)Session["manager"]))
+            {
+                Response.Redirect("Default.aspx");
+                Response.End();
+            }
+        %>
+
         <div class="grid_10">
             <h2>Edit User
             </h2>
