@@ -174,7 +174,7 @@
 							    <td style="text-align:center"><%=course[i].TITLE %></td>	
 							    <td style="text-align:center"><%=course[i].PRICE.ToString().Substring(0,course[i].PRICE.ToString().Length-2) %></td>
                                 <td style="text-align:center"><%=course[i].TEACHER %></td>						    
-							    <td style="text-align:center"><%=CourseAccess.GetCategorieById(course[i].CATEGORY).NAME %></td>
+							    <td style="text-align:center"><%=CourseAccess.GetCategoryByID((int)course[i].CATEGORY).CATE_NAME %></td>
                                 <td style="text-align:center"><%=course[i].COURSE_STATUS %></td>
 							    <td style="text-align:center"><%=course[i].PG %></td>
 							    <td style="text-align:center"><%=course[i].ICON_URL %></td>	

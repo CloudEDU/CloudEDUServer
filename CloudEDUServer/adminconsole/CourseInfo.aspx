@@ -85,7 +85,7 @@
         <div class="grid_10">
             <div class="box round first">
                 <h2>
-                    Typography</h2>
+                    Course Information</h2>
                 <div class="block">
                     <!-- paragraphs -->
                     <%
