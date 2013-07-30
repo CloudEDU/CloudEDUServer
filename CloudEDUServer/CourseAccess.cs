@@ -249,16 +249,16 @@ namespace CloudEDUServer
             return comments;
         }
 
-        public static CUSTOMER[] GetCustomersAsStudentByCourse(int course_id)
-        {
-            CUSTOMER[] customers = null;
-            using (CloudEDUEntities ctx = new CloudEDUEntities())
-            {
-                var cs = ctx.COURSEs.Include("CUSTOMER_attend").Where(c => c.ID == course_id).FirstOrDefault();
-                customers = cs.CUSTOMER_attend.ToArray();
-            }
-            return customers;
-        }
+        //public static CUSTOMER[] GetCustomersAsStudentByCourse(int course_id)
+        //{
+        //    CUSTOMER[] customers = null;
+        //    using (CloudEDUEntities ctx = new CloudEDUEntities())
+        //    {
+        //        var cs = ctx.COURSEs.Include("CUSTOMER_attend").Where(c => c.ID == course_id).FirstOrDefault();
+        //        customers = cs.CUSTOMER_attend.ToArray();
+        //    }
+        //    return customers;
+        //}
 
         public static RECOMMENDATION[] GetAllRecommendations()
         {
