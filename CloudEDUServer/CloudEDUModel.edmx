@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CloudEDUModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CloudEDUModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="CloudEDUModelStoreContainer">
           <EntitySet Name="CATEGORY" EntityType="CloudEDUModel.Store.CATEGORY" store:Type="Tables" Schema="COURSE" />
           <EntitySet Name="COMMENT" EntityType="CloudEDUModel.Store.COMMENT" store:Type="Tables" Schema="COURSE" />
@@ -26,6 +26,18 @@
           <EntitySet Name="PERMISSION" EntityType="CloudEDUModel.Store.PERMISSION" store:Type="Tables" Schema="MANAGER" />
           <EntitySet Name="TYPE" EntityType="CloudEDUModel.Store.TYPE" store:Type="Tables" Schema="MANAGER" />
           <EntitySet Name="SALEORDER" EntityType="CloudEDUModel.Store.SALEORDER" store:Type="Tables" Schema="TRSACTION" />
+          <EntitySet Name="COMMENT_DET" EntityType="CloudEDUModel.Store.COMMENT_DET" store:Type="Views" store:Schema="COURSE" store:Name="COMMENT_DET">
+            <DefiningQuery>SELECT 
+      [COMMENT_DET].[ID] AS [ID], 
+      [COMMENT_DET].[CUSTOMER_ID] AS [CUSTOMER_ID], 
+      [COMMENT_DET].[COURSE_ID] AS [COURSE_ID], 
+      [COMMENT_DET].[CONTENT] AS [CONTENT], 
+      [COMMENT_DET].[TITLE] AS [TITLE], 
+      [COMMENT_DET].[TIME] AS [TIME], 
+      [COMMENT_DET].[RATE] AS [RATE], 
+      [COMMENT_DET].[USERNAME] AS [USERNAME]
+      FROM [COURSE].[COMMENT_DET] AS [COMMENT_DET]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="COURSE_AVAIL" EntityType="CloudEDUModel.Store.COURSE_AVAIL" store:Type="Views" store:Schema="COURSE" store:Name="COURSE_AVAIL">
             <DefiningQuery>SELECT 
       [COURSE_AVAIL].[ID] AS [ID], 
@@ -313,8 +325,8 @@
           <Property Name="BALANCE" Type="money" Nullable="false" />
           <Property Name="EMAIL" Type="varchar" MaxLength="50" />
           <Property Name="DEGREE" Type="varchar" MaxLength="20" />
-          <Property Name="LEARN_RATE" Type="float" />
-          <Property Name="TEACH_RATE" Type="float" />
+          <Property Name="LEARN_RATE" Type="float" Nullable="false" />
+          <Property Name="TEACH_RATE" Type="float" Nullable="false" />
           <Property Name="BIRTHDAY" Type="date" Nullable="false" />
           <Property Name="ALLOW" Type="bit" Nullable="false" />
         </EntityType>
@@ -389,6 +401,27 @@
           <Property Name="COURSE" Type="int" Nullable="false" />
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="TIME" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+      警告 6002: 表/视图“CloudEDU.COURSE.COMMENT_DET”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+        <EntityType Name="COMMENT_DET">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CUSTOMER_ID" />
+            <PropertyRef Name="COURSE_ID" />
+            <PropertyRef Name="CONTENT" />
+            <PropertyRef Name="TIME" />
+            <PropertyRef Name="USERNAME" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="CUSTOMER_ID" Type="int" Nullable="false" />
+          <Property Name="COURSE_ID" Type="int" Nullable="false" />
+          <Property Name="CONTENT" Type="text" Nullable="false" />
+          <Property Name="TITLE" Type="varchar" MaxLength="100" />
+          <Property Name="TIME" Type="datetime" Nullable="false" />
+          <Property Name="RATE" Type="float" />
+          <Property Name="USERNAME" Type="varchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <!--生成过程中发现错误:
       警告 6002: 表/视图“CloudEDU.COURSE.COURSE_AVAIL”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
@@ -836,8 +869,7 @@
         <Function Name="GetCustomerAgeForID" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="CUSTOMER">
           <Parameter Name="customer_id" Type="int" Mode="In" />
         </Function>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CloudEDUModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -962,6 +994,7 @@
             <Parameter Name="course_id" Mode="In" Type="Int32" />
             <Parameter Name="customer_id" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="COMMENT_DET" EntityType="CloudEDUModel.COMMENT_DET" />
         </EntityContainer>
         <EntityType Name="CATEGORY">
           <Key>
@@ -1099,8 +1132,8 @@
           <Property Name="BALANCE" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="EMAIL" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="DEGREE" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="LEARN_RATE" Type="Double" />
-          <Property Name="TEACH_RATE" Type="Double" />
+          <Property Name="LEARN_RATE" Type="Double" Nullable="false" />
+          <Property Name="TEACH_RATE" Type="Double" Nullable="false" />
           <Property Name="BIRTHDAY" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ALLOW" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="COMMENTs" Relationship="CloudEDUModel.FK__COMMENT__CUSTOME__6E01572D" FromRole="CUSTOMER" ToRole="COMMENT" />
@@ -1518,6 +1551,24 @@
           <Property Type="Int32" Name="COURSE_ID" Nullable="false" />
           <Property Type="Int32" Name="STUDENTS" Nullable="true" />
         </ComplexType>
+        <EntityType Name="COMMENT_DET">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CUSTOMER_ID" />
+            <PropertyRef Name="COURSE_ID" />
+            <PropertyRef Name="CONTENT" />
+            <PropertyRef Name="TIME" />
+            <PropertyRef Name="USERNAME" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="CUSTOMER_ID" Nullable="false" />
+          <Property Type="Int32" Name="COURSE_ID" Nullable="false" />
+          <Property Type="String" Name="CONTENT" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TITLE" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="TIME" Nullable="false" Precision="3" />
+          <Property Type="Double" Name="RATE" />
+          <Property Type="String" Name="USERNAME" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1827,6 +1878,20 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CreateCourse" FunctionName="CloudEDUModel.Store.CreateCourse" />
           <FunctionImportMapping FunctionImportName="EnrollCourse" FunctionName="CloudEDUModel.Store.EnrollCourse" />
+          <EntitySetMapping Name="COMMENT_DET">
+            <EntityTypeMapping TypeName="CloudEDUModel.COMMENT_DET">
+              <MappingFragment StoreEntitySet="COMMENT_DET">
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="RATE" ColumnName="RATE" />
+                <ScalarProperty Name="TIME" ColumnName="TIME" />
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+                <ScalarProperty Name="COURSE_ID" ColumnName="COURSE_ID" />
+                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
