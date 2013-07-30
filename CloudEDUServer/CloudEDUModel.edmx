@@ -33,11 +33,13 @@
       [COURSE_AVAIL].[RATE] AS [RATE], 
       [COURSE_AVAIL].[TITLE] AS [TITLE], 
       [COURSE_AVAIL].[INTRO] AS [INTRO], 
-      [COURSE_AVAIL].[NAME] AS [NAME], 
+      [COURSE_AVAIL].[TEACHER_NAME] AS [TEACHER_NAME], 
       [COURSE_AVAIL].[CATE_NAME] AS [CATE_NAME], 
       [COURSE_AVAIL].[RESTRICT_AGE] AS [RESTRICT_AGE], 
       [COURSE_AVAIL].[PG_DESCRIPTION] AS [PG_DESCRIPTION], 
-      [COURSE_AVAIL].[ICON_URL] AS [ICON_URL]
+      [COURSE_AVAIL].[ICON_URL] AS [ICON_URL], 
+      [COURSE_AVAIL].[RATED_USERS] AS [RATED_USERS], 
+      [COURSE_AVAIL].[LESSON_NUM] AS [LESSON_NUM]
       FROM [COURSE].[COURSE_AVAIL] AS [COURSE_AVAIL]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="COURSE_OK" EntityType="CloudEDUModel.Store.COURSE_OK" store:Type="Views" store:Schema="COURSE" store:Name="COURSE_OK">
@@ -210,6 +212,7 @@
           <Property Name="CONTENT" Type="text" Nullable="false" />
           <Property Name="TITLE" Type="varchar" MaxLength="100" />
           <Property Name="TIME" Type="datetime" Nullable="false" />
+          <Property Name="RATE" Type="float" />
         </EntityType>
         <EntityType Name="COURSE">
           <Key>
@@ -313,6 +316,7 @@
           <Property Name="LEARN_RATE" Type="float" />
           <Property Name="TEACH_RATE" Type="float" />
           <Property Name="BIRTHDAY" Type="date" Nullable="false" />
+          <Property Name="ALLOW" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="FAVORITE">
           <Key>
@@ -400,11 +404,13 @@
           <Property Name="RATE" Type="float" />
           <Property Name="TITLE" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="INTRO" Type="text" />
-          <Property Name="NAME" Type="varchar" MaxLength="50" />
-          <Property Name="CATE_NAME" Type="nchar" MaxLength="10" />
+          <Property Name="TEACHER_NAME" Type="varchar" MaxLength="50" />
+          <Property Name="CATE_NAME" Type="nvarchar" MaxLength="50" />
           <Property Name="RESTRICT_AGE" Type="int" />
           <Property Name="PG_DESCRIPTION" Type="nvarchar" MaxLength="100" />
           <Property Name="ICON_URL" Type="nvarchar" MaxLength="100" />
+          <Property Name="RATED_USERS" Type="int" />
+          <Property Name="LESSON_NUM" Type="int" />
         </EntityType>
         <!--生成过程中发现错误:
       警告 6002: 表/视图“CloudEDU.COURSE.COURSE_OK”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
@@ -821,6 +827,12 @@
           <Parameter Name="course_id" Type="int" Mode="In" />
           <Parameter Name="customer_id" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetNumberOfLessonsByCourseID" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="COURSE">
+          <Parameter Name="crs_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetNumberOfRatedUsersByCourseID" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="COURSE">
+          <Parameter Name="crs_id" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetCustomerAgeForID" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="CUSTOMER">
           <Parameter Name="customer_id" Type="int" Mode="In" />
         </Function>
@@ -969,6 +981,7 @@
           <Property Name="CONTENT" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="TITLE" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="TIME" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RATE" Type="Double" />
           <NavigationProperty Name="CUSTOMER" Relationship="CloudEDUModel.FK__COMMENT__CUSTOME__6E01572D" FromRole="COMMENT" ToRole="CUSTOMER" />
           <NavigationProperty Name="COURSE" Relationship="CloudEDUModel.FK_COMMENT_COURSE" FromRole="COMMENT" ToRole="COURSE" />
         </EntityType>
@@ -1089,6 +1102,7 @@
           <Property Name="LEARN_RATE" Type="Double" />
           <Property Name="TEACH_RATE" Type="Double" />
           <Property Name="BIRTHDAY" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ALLOW" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="COMMENTs" Relationship="CloudEDUModel.FK__COMMENT__CUSTOME__6E01572D" FromRole="CUSTOMER" ToRole="COMMENT" />
           <NavigationProperty Name="COURSEs" Relationship="CloudEDUModel.FK_COURSE_TEACHER" FromRole="CUSTOMER" ToRole="COURSE" />
           <NavigationProperty Name="ATTENDs" Relationship="CloudEDUModel.FK_ATTEND_CUSTOMER" FromRole="CUSTOMER" ToRole="ATTEND" />
@@ -1173,11 +1187,13 @@
           <Property Name="RATE" Type="Double" />
           <Property Name="TITLE" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="INTRO" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
-          <Property Name="NAME" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="CATE_NAME" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="TEACHER_NAME" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CATE_NAME" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="RESTRICT_AGE" Type="Int32" />
           <Property Name="PG_DESCRIPTION" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="ICON_URL" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="RATED_USERS" Type="Int32" />
+          <Property Name="LESSON_NUM" Type="Int32" />
         </EntityType>
         <EntityType Name="COURSE_OK">
           <Key>
@@ -1525,6 +1541,7 @@
                 <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
                 <ScalarProperty Name="TITLE" ColumnName="TITLE" />
                 <ScalarProperty Name="TIME" ColumnName="TIME" />
+                <ScalarProperty Name="RATE" ColumnName="RATE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1628,6 +1645,7 @@
                 <ScalarProperty Name="LEARN_RATE" ColumnName="LEARN_RATE" />
                 <ScalarProperty Name="TEACH_RATE" ColumnName="TEACH_RATE" />
                 <ScalarProperty Name="BIRTHDAY" ColumnName="BIRTHDAY" />
+                <ScalarProperty Name="ALLOW" ColumnName="ALLOW" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1701,11 +1719,13 @@
                 <ScalarProperty Name="RATE" ColumnName="RATE" />
                 <ScalarProperty Name="TITLE" ColumnName="TITLE" />
                 <ScalarProperty Name="INTRO" ColumnName="INTRO" />
-                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="TEACHER_NAME" ColumnName="TEACHER_NAME" />
                 <ScalarProperty Name="CATE_NAME" ColumnName="CATE_NAME" />
                 <ScalarProperty Name="RESTRICT_AGE" ColumnName="RESTRICT_AGE" />
                 <ScalarProperty Name="PG_DESCRIPTION" ColumnName="PG_DESCRIPTION" />
                 <ScalarProperty Name="ICON_URL" ColumnName="ICON_URL" />
+                <ScalarProperty Name="RATED_USERS" ColumnName="RATED_USERS" />
+                <ScalarProperty Name="LESSON_NUM" ColumnName="LESSON_NUM" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

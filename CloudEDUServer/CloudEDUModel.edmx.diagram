@@ -4,24 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f606dcac5e5041648689009472309810" Name="关系图1">
-        <EntityTypeShape EntityType="CloudEDUModel.CATEGORY" Width="1.5" PointX="3.75" PointY="7.875" IsExpanded="true" />
+      <Diagram DiagramId="3697dda5855842f2a83b99521a196467" Name="关系图1">
+        <EntityTypeShape EntityType="CloudEDUModel.CATEGORY" Width="1.5" PointX="3.75" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudEDUModel.COMMENT" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CloudEDUModel.COURSE" Width="1.5" PointX="6" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CloudEDUModel.DOCUMENT" Width="1.5" PointX="10.5" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CloudEDUModel.LESSON" Width="1.5" PointX="8.25" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CloudEDUModel.PARENT_GUIDE" Width="1.5" PointX="3.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.COURSE" Width="1.5" PointX="6" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.DOCUMENT" Width="1.5" PointX="10.5" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.LESSON" Width="1.5" PointX="8.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.PARENT_GUIDE" Width="1.5" PointX="3.75" PointY="14.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudEDUModel.RECOMMENDATION" Width="1.5" PointX="8.25" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CloudEDUModel.RES_TYPE" Width="1.5" PointX="8.25" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CloudEDUModel.RESOURCE" Width="1.5" PointX="10.5" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CloudEDUModel.ATTEND" Width="1.5" PointX="13.5" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.RES_TYPE" Width="1.5" PointX="8.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.RESOURCE" Width="1.5" PointX="10.5" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.ATTEND" Width="1.5" PointX="13.5" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudEDUModel.CUSTOMER" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="CloudEDUModel.NOTE" Width="1.5" PointX="10.5" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.NOTE" Width="1.5" PointX="10.5" PointY="12.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudEDUModel.OPR_LOG" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudEDUModel.MANAGER" Width="1.5" PointX="13" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudEDUModel.PERMISSION" Width="1.5" PointX="15.25" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudEDUModel.TYPE" Width="1.5" PointX="10.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CloudEDUModel.SALEORDER" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.SALEORDER" Width="1.5" PointX="8.25" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudEDUModel.COURSE_AVAIL" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudEDUModel.COURSE_OK" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudEDUModel.COURSE_PENDING" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />

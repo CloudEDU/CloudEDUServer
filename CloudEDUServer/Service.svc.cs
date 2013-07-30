@@ -22,7 +22,7 @@ namespace CloudEDUServer
         {
             // TODO: set rules to indicate which entity sets and service operations are visible, updatable, etc.
             // Examples:
-            config.SetEntitySetAccessRule("*", EntitySetRights.AllRead);
+            config.SetEntitySetAccessRule("*", EntitySetRights.All);
             config.SetServiceOperationAccessRule("*", ServiceOperationRights.All);
             config.DataServiceBehavior.MaxProtocolVersion = DataServiceProtocolVersion.V3;
         }
@@ -52,11 +52,12 @@ namespace CloudEDUServer
         /// <param name="icon_url"></param>
         /// <returns>0 success, others fail</returns>
         [WebGet]
-        public int? CreateCourse(int teacher_id, string title, string intro, int category_id, decimal price, int pg_id, string icon_url)
+        public int? CreateCourse(int teacher_id, string title, string intro, int category_id, double price, int pg_id, string icon_url)
         {
-            int? res = ctx.CreateCourse(teacher_id, title, intro, category_id, price, pg_id, icon_url).FirstOrDefault();
+            int? res = ctx.CreateCourse(teacher_id, title, intro, category_id, new decimal(price), pg_id, icon_url).FirstOrDefault();
             return res;
         }
+
 
         //[WebGet]
         //public IQueryable<CUSTOMER> GetCustomersByName(string name)

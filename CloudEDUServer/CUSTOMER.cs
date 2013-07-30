@@ -34,6 +34,7 @@ namespace CloudEDUServer
         public Nullable<double> LEARN_RATE { get; set; }
         public Nullable<double> TEACH_RATE { get; set; }
         public System.DateTime BIRTHDAY { get; set; }
+        public bool ALLOW { get; set; }
     
         public virtual ICollection<COMMENT> COMMENTs { get; set; }
         public virtual ICollection<COURSE> COURSEs { get; set; }

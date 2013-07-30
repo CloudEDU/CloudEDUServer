@@ -19,10 +19,12 @@ namespace CloudEDUServer
         public Nullable<double> RATE { get; set; }
         public string TITLE { get; set; }
         public string INTRO { get; set; }
-        public string NAME { get; set; }
+        public string TEACHER_NAME { get; set; }
         public string CATE_NAME { get; set; }
         public Nullable<int> RESTRICT_AGE { get; set; }
         public string PG_DESCRIPTION { get; set; }
         public string ICON_URL { get; set; }
+        public Nullable<int> RATED_USERS { get; set; }
+        public Nullable<int> LESSON_NUM { get; set; }
     }
 }
