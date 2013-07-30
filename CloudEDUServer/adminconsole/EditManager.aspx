@@ -156,7 +156,7 @@
         <div class="grid_10">
             <div class="box round first fullpage">
                 <h2>
-                    Form Controls</h2>
+                    Edit Manager</h2>
                 <div class="block ">
                     <form>
                     <table class="form">

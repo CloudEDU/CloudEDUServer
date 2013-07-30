@@ -81,7 +81,7 @@
 
         <div class="grid_10">
             <div class="box round first grid">
-                <h2>Course List</h2>
+                <h2>Transaction List</h2>
                 <div class="block">
                     
 					<table class="data display datatable">

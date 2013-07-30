@@ -13,6 +13,28 @@ namespace CloudEDUServer.adminconsole
         {
             try
             {
+                if (Request.Params.Get("operate").Equals("new"))
+                {
+                    try
+                    {
+                        string idStr = Request.Params.Get("id");
+                        int id = int.Parse(idStr);
+                        Session["editCourse"] = CourseAccess.GetCourseById(id);
+
+                        CATEGORY category=new CATEGORY();
+                        category.CATE_NAME=Request.Params.Get("title");
+                        CourseAccess.AddCategory(category);
+                    }
+                    catch
+                    {
+                        Response.Write("新建错误,可能存在问题：已经存在该类型");
+                        Response.End();
+                    }
+                    Response.Write("success");
+                    Response.End();
+                }
+
+
                 COURSE course=null;
                 try
                 {
@@ -46,7 +68,7 @@ namespace CloudEDUServer.adminconsole
                 {
                     CATEGORY[] category=CourseAccess.GetAllCategories();
                     int categoryInt=int.Parse(Request.Params.Get("category"));
-                    
+                    course.CATEGORY = category[categoryInt].ID;
                 }
                 catch
                 {

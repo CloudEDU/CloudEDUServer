@@ -108,6 +108,40 @@
             else return true;
         }
 
+        var isShow = false;
+        function showNewCategory() {
+            if (isShow) {
+                $("#NewCategory").hide();
+                document.getElementById('showNewCategoryButton').innerHTML = "Add Category";
+                isShow = false;
+            }
+            else {
+                $("#NewCategory").show();
+                document.getElementById('showNewCategoryButton').innerHTML = "Cancel Category";
+                isShow = true;
+            }
+        }
+
+        var isPost = false;
+        function submitNewCategory(courseId) {
+            if (isPost) {
+                alert("正在更新中，请稍后");
+                return;
+            }
+            isPost = true;
+            jQuery.post("EditCourse.aspx", { operate: "new",id:courseId, title: document.getElementById("NewCategoryTitle").value }, function (data) {
+                if (data == "success") {
+                    document.getElementById("NewCategoryTitle").value = "";
+                    alert("新建成功");
+                    window.location.href = "EditCourse.aspx";
+                }
+                else {
+                    alert(data);
+                }
+                isPost = false;
+            })
+        }
+
    </script>
 </head>
 <body id="Body1" class="Body1" runat="server">
@@ -123,8 +157,29 @@
        %>
         <div class="grid_10">
             <div class="box round first fullpage">
-                <h2>
-                    Form Controls</h2>
+                <h2> Edit Course</h2>
+
+                <br />
+                 <button onclick="showNewCategory()" style="float:right" id="showNewCategoryButton">Add Category</button>
+                <br/>
+                <br />
+                <table id="NewCategory" style="float:right; display:none; z-index:100;">
+                    <tr>
+                        <td class="col1">
+                            <label>Title</label>
+                        </td>
+                        <td class="col2">
+                            <input type="text" id="NewCategoryTitle" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td style="text-align:right">
+                            <button onclick="submitNewCategory(<%=course.ID %>)">确认</button>
+                        </td>
+                    </tr>
+                </table>
                 <div class="block ">
                     <form>
                     <table class="form">
@@ -170,6 +225,20 @@
                                         <option value="<%=i %>"><%=category[i].CATE_NAME %></option>
                                     <%}%>
                                 </select>
+                                <script>
+                                    <%
+                                    int cateId=0;
+                                    for (int i = 0; i < category.Length; i++)
+                                    {
+                                        if (category[i].ID == (int)course.CATEGORY)
+                                        {
+                                            cateId = i;
+                                            break;
+                                        }
+                                    }
+                                    %>
+                                    document.getElementById('category').value='<%=cateId%>';
+                                </script>
                             </td>
                         </tr>                            
                     </table>  

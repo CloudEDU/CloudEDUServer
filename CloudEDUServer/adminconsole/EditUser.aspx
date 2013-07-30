@@ -154,6 +154,8 @@
         <!--#include file="Navigation.aspx" -->
 
         <div class="grid_10">
+            <h2>Edit User
+            </h2>
             <div class="box round first grid">
                 <%
                     CUSTOMER customer = null; 
@@ -222,6 +224,7 @@
                                             <option value="lower">Lower</option>
                                             <option value=""></option>
                                         </select>
+
                                         <%
                                             if (customer.DEGREE == null)
                                             {
