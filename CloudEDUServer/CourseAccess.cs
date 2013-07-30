@@ -270,6 +270,16 @@ namespace CloudEDUServer
             return reco;
         }
 
+        public static CATEGORY GetCategoryByID(int cate_id)
+        {
+            CATEGORY cate = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                cate = ctx.CATEGORies.Where(c => c.ID == cate_id).FirstOrDefault();
+            }
+            return cate;
+        }
+
         public static COURSE_HOTRANK_Result[] GetHotRankOfCourses()
         {
             COURSE_HOTRANK_Result[] hotrank = null;
