@@ -21,7 +21,7 @@ namespace CloudEDUServer
             this.ATTENDs = new HashSet<ATTEND>();
             this.LESSONs = new HashSet<LESSON>();
             this.RECOMMENDATIONs = new HashSet<RECOMMENDATION>();
-            this.CUSTOMER_attend = new HashSet<CUSTOMER>();
+            this.CUSTOMERs = new HashSet<CUSTOMER>();
         }
     
         public int ID { get; set; }
@@ -44,6 +44,6 @@ namespace CloudEDUServer
         public virtual CUSTOMER CUSTOMER { get; set; }
         public virtual ICollection<LESSON> LESSONs { get; set; }
         public virtual ICollection<RECOMMENDATION> RECOMMENDATIONs { get; set; }
-        public virtual ICollection<CUSTOMER> CUSTOMER_attend { get; set; }
+        public virtual ICollection<CUSTOMER> CUSTOMERs { get; set; }
     }
 }

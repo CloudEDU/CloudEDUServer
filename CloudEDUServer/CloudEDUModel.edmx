@@ -1008,7 +1008,7 @@
           <NavigationProperty Name="CUSTOMER" Relationship="CloudEDUModel.FK_COURSE_TEACHER" FromRole="COURSE" ToRole="CUSTOMER" />
           <NavigationProperty Name="LESSONs" Relationship="CloudEDUModel.FK_LESSON_COURSE" FromRole="COURSE" ToRole="LESSON" />
           <NavigationProperty Name="RECOMMENDATIONs" Relationship="CloudEDUModel.RECO_COURSE" FromRole="COURSE" ToRole="RECOMMENDATION" />
-          <NavigationProperty Name="CUSTOMER_attend" Relationship="CloudEDUModel.FAVORITE" FromRole="COURSE" ToRole="CUSTOMER" />
+          <NavigationProperty Name="CUSTOMERs" Relationship="CloudEDUModel.FAVORITE" FromRole="COURSE" ToRole="CUSTOMER" />
         </EntityType>
         <EntityType Name="DOCUMENT">
           <Key>

@@ -249,16 +249,16 @@ namespace CloudEDUServer
             return comments;
         }
 
-        public static CUSTOMER[] GetCustomersAsStudentByCourse(int course_id)
-        {
-            CUSTOMER[] customers = null;
-            using (CloudEDUEntities ctx = new CloudEDUEntities())
-            {
-                var cs = ctx.COURSEs.Include("CUSTOMER_attend").Where(c => c.ID == course_id).FirstOrDefault();
-                customers = cs.CUSTOMER_attend.ToArray();
-            }
-            return customers;
-        }
+        //public static CUSTOMER[] GetCustomersAsStudentByCourse(int course_id)
+        //{
+        //    CUSTOMER[] customers = null;
+        //    using (CloudEDUEntities ctx = new CloudEDUEntities())
+        //    {
+        //        var cs = ctx.COURSEs.Include("CUSTOMER_attend").Where(c => c.ID == course_id).FirstOrDefault();
+        //        customers = cs.CUSTOMER_attend.ToArray();
+        //    }
+        //    return customers;
+        //}
 
         public static RECOMMENDATION[] GetAllRecommendations()
         {
@@ -268,6 +268,16 @@ namespace CloudEDUServer
                 reco = ctx.RECOMMENDATIONs.ToArray();
             }
             return reco;
+        }
+
+        public static CATEGORY GetCategoryByID(int cate_id)
+        {
+            CATEGORY cate = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                cate = ctx.CATEGORies.Where(c => c.ID == cate_id).FirstOrDefault();
+            }
+            return cate;
         }
 
         public static COURSE_HOTRANK_Result[] GetHotRankOfCourses()
