@@ -147,7 +147,16 @@
 <body id="Body1" class="Body1" runat="server">
    <div class="container_12">
         <!--#include file="Navigation.aspx" -->
+        <%
+            if (!ManagerAccess.haveCourseEditPermission((MANAGER)Session["manager"]))
+            {
+                Response.Redirect("Default.aspx");
+                Response.End();
+            }
+        %>
+
        <%
+           
            if (Session["editCourse"] == null)
            {
                Response.Redirect("Default.aspx"); 

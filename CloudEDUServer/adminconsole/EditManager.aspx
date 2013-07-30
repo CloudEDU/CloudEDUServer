@@ -148,11 +148,38 @@
             else return true;
         }
 
+        function changePermission(ele) {
+            if (ele.id == "permissionID2") {
+                if (ele.checked == true) {
+                    document.getElementById("permissionID1").checked = true;
+                }
+            }
+            if (ele.id == "permissionID1") {
+                if (ele.checked == false) {
+                    document.getElementById("permissionID2").checked = false;
+                    document.getElementById("permissionID3").checked = false;
+                }
+            }
+            if (ele.id == "permissionID3") {
+                if (ele.checked == true) {
+                    document.getElementById("permissionID1").checked = true;
+                }
+            }
+        }
    </script>
 </head>
 <body id="Body1" class="Body1" runat="server">
    <div class="container_12">
         <!--#include file="Navigation.aspx" -->
+
+       <%
+            if (!ManagerAccess.haveManagerPermission((MANAGER)Session["manager"]))
+            {
+                Response.Redirect("Default.aspx");
+                Response.End();
+            }
+        %>
+
         <div class="grid_10">
             <div class="box round first fullpage">
                 <h2>
@@ -216,12 +243,12 @@
                                     {
                                         editPermisionJ++;                                
                                 %>
-                                      <input type="checkbox" id="<%="permissionID"+i%>" checked="checked" /><%=permission[i].NAME %>
+                                      <input type="checkbox" id="<%="permissionID"+i%>" onchange="changePermission(this)" checked="checked" /><%=permission[i].NAME %>
                                     
                                 <% } 
                                    else
                                    {%>
-                                      <input type="checkbox" id="<%="permissionID"+i%>" /><%=permission[i].NAME %>
+                                      <input type="checkbox" id="<%="permissionID"+i%>"  onchange="changePermission(this)" /><%=permission[i].NAME %>
                                    <%}
                                 }
                                 Session["editPermission"]=null;

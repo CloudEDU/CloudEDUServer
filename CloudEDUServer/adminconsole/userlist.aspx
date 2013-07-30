@@ -118,9 +118,17 @@
                         <%
                             CUSTOMER[] user=CustomerAccess.GetAllCustomers();
                             for (int i=0; i<user.Length; i++)
-                            { 
+                            {
+                                if (ManagerAccess.haveUserPermission((MANAGER)Session["manager"]))
+                                { 
                          %>
+                            
 						    <tr ondblclick="editUser(<%=user[i].ID %>)">
+                               <%}
+                                    else
+                                    {%>
+                                <tr>
+                                 <%} %>
 							    <td style="text-align:center"><%=user[i].NAME %></td>
 							    <td style="text-align:center"><%=user[i].BALANCE.ToString().Substring(0,user[i].BALANCE.ToString().Length-2) %></td>
 							    <td style="text-align:center"><%=user[i].EMAIL %></td>	

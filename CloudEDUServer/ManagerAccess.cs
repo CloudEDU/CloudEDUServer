@@ -423,5 +423,143 @@ namespace CloudEDUServer
             return true;
 
         }
+
+        public static bool haveUserPermission(MANAGER manager)
+        {
+            try
+            {
+                PERMISSION[] permission = GetPermissionsByManager(manager);
+                for (int i = 0; i < permission.Length; i++)
+                {
+                    if (permission[i].ID == 1) return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool haveCourseViewPermission(MANAGER manager)
+        {
+
+            try
+            {
+                PERMISSION[] permission = GetPermissionsByManager(manager);
+                for (int i = 0; i < permission.Length; i++)
+                {
+                    if (permission[i].ID == 2) return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false; 
+            }
+        }
+
+        public static bool haveCourseEditPermission(MANAGER manager)
+        {
+            try
+            {
+                PERMISSION[] permission = GetPermissionsByManager(manager);
+                for (int i = 0; i < permission.Length; i++)
+                {
+                    if (permission[i].ID == 3) return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool haveCourseStorePermission(MANAGER manager)
+        {
+            try
+            {
+                PERMISSION[] permission = GetPermissionsByManager(manager);
+                for (int i = 0; i < permission.Length; i++)
+                {
+                    if (permission[i].ID == 4) return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool haveManagerPermission(MANAGER manager)
+        {
+            try
+            {
+                PERMISSION[] permission = GetPermissionsByManager(manager);
+                for (int i = 0; i < permission.Length; i++)
+                {
+                    if (permission[i].ID == 5) return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool haveTransactionPermission(MANAGER manager)
+        {
+            try
+            {
+                PERMISSION[] permission = GetPermissionsByManager(manager);
+                for (int i = 0; i < permission.Length; i++)
+                {
+                    if (permission[i].ID == 7) return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool haveDblogPermission(MANAGER manager)
+        {
+            try
+            {
+                PERMISSION[] permission = GetPermissionsByManager(manager);
+                for (int i = 0; i < permission.Length; i++)
+                {
+                    if (permission[i].ID == 8) return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool haveCourseCencorPermission(MANAGER manager)
+        {
+            try
+            {
+                PERMISSION[] permission = GetPermissionsByManager(manager);
+                for (int i = 0; i < permission.Length; i++)
+                {
+                    if (permission[i].ID == 9) return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+
+            }
+        }
     }
 }

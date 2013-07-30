@@ -124,7 +124,13 @@
 <body id="Body1" class="Body1" runat="server">
     <div class="container_12">
         <!--#include file="Navigation.aspx" -->
-
+        <%
+            if (!ManagerAccess.haveManagerPermission((MANAGER)Session["manager"]))
+            {
+                Response.Redirect("Default.aspx");
+                Response.End();
+            }
+        %>
         <div class="grid_10">
             <div class="box round first grid">
                 <h2>Manager List
