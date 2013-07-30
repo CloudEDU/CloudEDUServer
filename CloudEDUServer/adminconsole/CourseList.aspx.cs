@@ -11,12 +11,34 @@ namespace CloudEDUServer.adminconsole
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string operate = Request.Params.Get("operate");
-            string value = Request.Params.Get("value");
-            if (operate!=null && operate.Equals("select"))
+            try
             {
-                Session["CourseListSelect"] = value;
+                string operate = Request.Params.Get("operate");
+                string value = Request.Params.Get("value");
+                if (operate != null && operate.Equals("select"))
+                {
+                    Session["CourseListSelect"] = value;
+                }
+                else if (operate != null && operate.Equals("edit"))
+                {
+                    try
+                    {
+                        COURSE course = CourseAccess.GetCourseById(int.Parse(Request.Params.Get("courseId")));
+                        Session["editCourse"] = course;
+                    }
+                    catch
+                    {
+                        Response.Write("编辑错误");
+                        Response.End();
+                    }
+                    Response.Write("success");
+                    Response.End();
+                }
+            }
+            catch
+            {
             }
         }
+     
     }
 }

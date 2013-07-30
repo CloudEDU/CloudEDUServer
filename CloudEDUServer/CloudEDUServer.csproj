@@ -169,6 +169,7 @@
     <Content Include="adminconsole\css\usercss.css" />
     <Content Include="adminconsole\DatabaseLog.aspx" />
     <Content Include="adminconsole\Default.aspx" />
+    <Content Include="adminconsole\EditCourse.aspx" />
     <Content Include="adminconsole\EditManager.aspx" />
     <Content Include="adminconsole\EditUser.aspx" />
     <Content Include="adminconsole\Global.asax" />
@@ -425,6 +426,7 @@
     <Content Include="adminconsole\img\textarea-tl.png" />
     <Content Include="adminconsole\img\textarea-tr.png" />
     <Content Include="adminconsole\img\vertical.jpg" />
+    <Content Include="adminconsole\js\EditCourse.aspx" />
     <Content Include="adminconsole\js\fancy-button\fancy-button.js" />
     <Content Include="adminconsole\js\jqPlot\excanvas.min.js" />
     <Content Include="adminconsole\js\jqPlot\jquery.jqplot.min.js" />
@@ -821,6 +823,13 @@
     <Compile Include="adminconsole\DatabaseLog.aspx.designer.cs">
       <DependentUpon>DatabaseLog.aspx</DependentUpon>
     </Compile>
+    <Compile Include="adminconsole\EditCourse.aspx.cs">
+      <DependentUpon>EditCourse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\EditCourse.aspx.designer.cs">
+      <DependentUpon>EditCourse.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminconsole\EditManager.aspx.cs">
       <DependentUpon>EditManager.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -834,6 +843,13 @@
     </Compile>
     <Compile Include="adminconsole\EditUser.aspx.designer.cs">
       <DependentUpon>EditUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminconsole\js\EditCourse.aspx.cs">
+      <DependentUpon>EditCourse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\js\EditCourse.aspx.designer.cs">
+      <DependentUpon>EditCourse.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminconsole\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
