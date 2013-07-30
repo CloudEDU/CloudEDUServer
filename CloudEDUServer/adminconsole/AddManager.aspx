@@ -150,6 +150,24 @@
             else return true;
         }
         
+        function changePermission(ele) {
+            if (ele.id == "permissionID2") {
+                if (ele.checked == true) {
+                    document.getElementById("permissionID1").checked = true;
+                }
+            }
+            if (ele.id == "permissionID1") {
+                if (ele.checked == false) {
+                    document.getElementById("permissionID2").checked = false;
+                    document.getElementById("permissionID3").checked = false;
+                }
+            }
+            if (ele.id == "permissionID3") {
+                if (ele.checked == true) {
+                    document.getElementById("permissionID1").checked = true;
+                }
+            }
+        }
    </script>
 </head>
 
@@ -201,11 +219,11 @@
                             <td>
                                 <select id="type" name="select">
                                     <%
-                                       CloudEDUServer.TYPE []allType=ManagerAccess.GetAllManagerTypes();
+                                       TYPE []allType=ManagerAccess.GetAllManagerTypes();
                                        for (int i=0; i<allType.Length; i++)
                                        { 
                                     %>
-                                        <option value="<%=i %>"><%=i %></option>
+                                        <option value="<%=allType[i].ID %>"><%=allType[i].DESCRIPTION %></option>
                                     <%}%>
                                 </select>
                             </td>
@@ -220,7 +238,7 @@
                                 for (int i=0; i<permission.Length; i++)
                                 {                          
                                 %>
-                                    <input type="checkbox" id="<%="permissionID"+i %>" /><%=permission[i].NAME %>
+                                    <input type="checkbox" id="<%="permissionID"+i %>" onchange="changePermission(this)" /><%=permission[i].NAME %>
                                <%}%>           
                             </td>
                         </tr>
