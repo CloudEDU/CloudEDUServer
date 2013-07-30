@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CloudEDUModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CloudEDUModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="CloudEDUModelStoreContainer">
           <EntitySet Name="CATEGORY" EntityType="CloudEDUModel.Store.CATEGORY" store:Type="Tables" Schema="COURSE" />
           <EntitySet Name="COMMENT" EntityType="CloudEDUModel.Store.COMMENT" store:Type="Tables" Schema="COURSE" />
@@ -356,8 +356,8 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="OPR" Type="nchar" Nullable="false" MaxLength="50" />
-          <Property Name="OPR_TIME" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
-          <Property Name="MSG" Type="xml" />
+          <Property Name="OPR_TIME" Type="datetime" Nullable="false" />
+          <Property Name="MSG" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="GRANTED">
           <Key>
@@ -869,7 +869,12 @@
         <Function Name="GetCustomerAgeForID" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="CUSTOMER">
           <Parameter Name="customer_id" Type="int" Mode="In" />
         </Function>
-      </Schema></edmx:StorageModels>
+        <Function Name="AddDBLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="opr" Type="nchar" Mode="In" />
+          <Parameter Name="MSG" Type="nvarchar" Mode="In" />
+        </Function>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CloudEDUModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -891,6 +896,7 @@
           <EntitySet Name="PERMISSIONs" EntityType="CloudEDUModel.PERMISSION" />
           <EntitySet Name="TYPEs" EntityType="CloudEDUModel.TYPE" />
           <EntitySet Name="SALEORDERs" EntityType="CloudEDUModel.SALEORDER" />
+          <EntitySet Name="COMMENT_DET" EntityType="CloudEDUModel.COMMENT_DET" />
           <EntitySet Name="COURSE_AVAIL" EntityType="CloudEDUModel.COURSE_AVAIL" />
           <EntitySet Name="COURSE_OK" EntityType="CloudEDUModel.COURSE_OK" />
           <EntitySet Name="COURSE_PENDING" EntityType="CloudEDUModel.COURSE_PENDING" />
@@ -981,7 +987,7 @@
             <End Role="PERMISSION" EntitySet="PERMISSIONs" />
           </AssociationSet>
           <FunctionImport Name="COURSE_HOTRANK" ReturnType="Collection(CloudEDUModel.COURSE_HOTRANK_Result)" />
-          <FunctionImport Name="CreateCourse" ReturnType="Collection(Int32)">
+          <FunctionImport Name="CreateCourse" ReturnType="Collection(Decimal)">
             <Parameter Name="teacher" Mode="In" Type="Int32" />
             <Parameter Name="title" Mode="In" Type="String" />
             <Parameter Name="intro" Mode="In" Type="String" />
@@ -994,7 +1000,10 @@
             <Parameter Name="course_id" Mode="In" Type="Int32" />
             <Parameter Name="customer_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="COMMENT_DET" EntityType="CloudEDUModel.COMMENT_DET" />
+          <FunctionImport Name="AddDBLog">
+            <Parameter Name="opr" Mode="In" Type="String" />
+            <Parameter Name="MSG" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="CATEGORY">
           <Key>
@@ -1164,8 +1173,8 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="OPR" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="true" />
-          <Property Name="OPR_TIME" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" p1:StoreGeneratedPattern="Computed" />
-          <Property Name="MSG" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="OPR_TIME" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MSG" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
         </EntityType>
         <EntityType Name="MANAGER">
           <Key>
@@ -1208,6 +1217,24 @@
           <NavigationProperty Name="COURSE1" Relationship="CloudEDUModel.FK__SALEORDER__COURS__534D60F1" FromRole="SALEORDER" ToRole="COURSE" />
           <NavigationProperty Name="CUSTOMER" Relationship="CloudEDUModel.FK__SALEORDER__BUYER__5070F446" FromRole="SALEORDER" ToRole="CUSTOMER" />
           <NavigationProperty Name="CUSTOMER1" Relationship="CloudEDUModel.FK__SALEORDER__SALER__5165187F" FromRole="SALEORDER" ToRole="CUSTOMER" />
+        </EntityType>
+        <EntityType Name="COMMENT_DET">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CUSTOMER_ID" />
+            <PropertyRef Name="COURSE_ID" />
+            <PropertyRef Name="CONTENT" />
+            <PropertyRef Name="TIME" />
+            <PropertyRef Name="USERNAME" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="CUSTOMER_ID" Type="Int32" Nullable="false" />
+          <Property Name="COURSE_ID" Type="Int32" Nullable="false" />
+          <Property Name="CONTENT" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="TITLE" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="TIME" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RATE" Type="Double" />
+          <Property Name="USERNAME" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
         </EntityType>
         <EntityType Name="COURSE_AVAIL">
           <Key>
@@ -1551,24 +1578,6 @@
           <Property Type="Int32" Name="COURSE_ID" Nullable="false" />
           <Property Type="Int32" Name="STUDENTS" Nullable="true" />
         </ComplexType>
-        <EntityType Name="COMMENT_DET">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="CUSTOMER_ID" />
-            <PropertyRef Name="COURSE_ID" />
-            <PropertyRef Name="CONTENT" />
-            <PropertyRef Name="TIME" />
-            <PropertyRef Name="USERNAME" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="Int32" Name="CUSTOMER_ID" Nullable="false" />
-          <Property Type="Int32" Name="COURSE_ID" Nullable="false" />
-          <Property Type="String" Name="CONTENT" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="TITLE" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="TIME" Nullable="false" Precision="3" />
-          <Property Type="Double" Name="RATE" />
-          <Property Type="String" Name="USERNAME" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1762,6 +1771,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="COMMENT_DET">
+            <EntityTypeMapping TypeName="CloudEDUModel.COMMENT_DET">
+              <MappingFragment StoreEntitySet="COMMENT_DET">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+                <ScalarProperty Name="COURSE_ID" ColumnName="COURSE_ID" />
+                <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="TIME" ColumnName="TIME" />
+                <ScalarProperty Name="RATE" ColumnName="RATE" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="COURSE_AVAIL">
             <EntityTypeMapping TypeName="CloudEDUModel.COURSE_AVAIL">
               <MappingFragment StoreEntitySet="COURSE_AVAIL">
@@ -1878,20 +1901,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CreateCourse" FunctionName="CloudEDUModel.Store.CreateCourse" />
           <FunctionImportMapping FunctionImportName="EnrollCourse" FunctionName="CloudEDUModel.Store.EnrollCourse" />
-          <EntitySetMapping Name="COMMENT_DET">
-            <EntityTypeMapping TypeName="CloudEDUModel.COMMENT_DET">
-              <MappingFragment StoreEntitySet="COMMENT_DET">
-                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
-                <ScalarProperty Name="RATE" ColumnName="RATE" />
-                <ScalarProperty Name="TIME" ColumnName="TIME" />
-                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
-                <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
-                <ScalarProperty Name="COURSE_ID" ColumnName="COURSE_ID" />
-                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddDBLog" FunctionName="CloudEDUModel.Store.AddDBLog" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -16,7 +16,7 @@ namespace CloudEDUServer
     {
         public int ID { get; set; }
         public string OPR { get; set; }
-        public byte[] OPR_TIME { get; set; }
+        public System.DateTime OPR_TIME { get; set; }
         public string MSG { get; set; }
     }
 }
