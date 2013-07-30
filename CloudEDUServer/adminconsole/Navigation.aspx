@@ -53,7 +53,7 @@
                         <li><a class="menuitem">Courstore Management</a>
                             <ul class="submenu">
                                 <li><a href="CourseList.aspx">Course List</a> </li>
-                                <li><a href="CourseStore.aspx">Course Store</a></li>
+                                <li><a href="RecommendationCourse.aspx">Recommendation</a></li>
                                 <li><a href="CourseComment.aspx">Course Comment</a></li>
                                 <li><a href="CourseCensorship.aspx">Course Censorship</a>
                             </ul>

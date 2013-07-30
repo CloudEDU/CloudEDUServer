@@ -174,14 +174,14 @@
 							    <td style="text-align:center"><%=course[i].TITLE %></td>	
 							    <td style="text-align:center"><%=course[i].PRICE.ToString().Substring(0,course[i].PRICE.ToString().Length-2) %></td>
                                 <td style="text-align:center"><%=course[i].TEACHER %></td>						    
-							    <td style="text-align:center"><%=course[i].CATEGORY %></td>
+							    <td style="text-align:center"><%=CourseAccess.GetCategorieById(course[i].CATEGORY).NAME %></td>
                                 <td style="text-align:center"><%=course[i].COURSE_STATUS %></td>
 							    <td style="text-align:center"><%=course[i].PG %></td>
 							    <td style="text-align:center"><%=course[i].ICON_URL %></td>	
                                 <td style="text-align:center"><%=course[i].START_TIME %></td>						    
 							    <td style="text-align:center"><%=CourseAccess.GetDownloadTimeByCourseID(course[i].ID) %></td>
                                 <td style="text-align:center"><a href="#" onclick="showCourseInfo(<%=course[i].ID%>)">more</a></td>
-                                <td style="text-align:center"><a href="#" onclick="showComment('<%=course[i].ID %>')">查看评论</a></td>
+                                <td style="text-align:center"><a href="#" onclick="showComment('<%=course[i].ID %>')">评论</a></td>
 						    </tr>	
                         <%  } %>	
 					</tbody>

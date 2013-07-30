@@ -46,7 +46,7 @@ namespace CloudEDUServer.adminconsole
                 {
                     CATEGORY[] category=CourseAccess.GetAllCategories();
                     int categoryInt=int.Parse(Request.Params.Get("category"));
-                    
+                    course.CATEGORY = category[categoryInt].ID;
                 }
                 catch
                 {

@@ -82,6 +82,12 @@
                 window.location.href = "CourseComment.aspx";
             });
         }
+
+        function changeUserState(ele) {
+            jQuery.post("UserList.aspx", { userId: ele.name, userState: ele.value }, function (data) {
+            });
+        }
+
     </script>
 
 </head>
@@ -105,6 +111,7 @@
                             <th style="text-align:center">Teach Rate</th>
                             <th style="text-align:center">Birthday</th>
                             <th style="text-align:center">Comment</th>
+                            <th style="text-align:center">Allow</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -115,13 +122,31 @@
                          %>
 						    <tr ondblclick="editUser(<%=user[i].ID %>)">
 							    <td style="text-align:center"><%=user[i].NAME %></td>
-							    <td style="text-align:center"><%=user[i].BALANCE %></td>
+							    <td style="text-align:center"><%=user[i].BALANCE.ToString().Substring(0,user[i].BALANCE.ToString().Length-2) %></td>
 							    <td style="text-align:center"><%=user[i].EMAIL %></td>	
                                 <td style="text-align:center; text-transform:capitalize"><%=user[i].DEGREE %></td>						    
 							    <td style="text-align:center"><%=user[i].LEARN_RATE %></td>
                                 <td style="text-align:center"><%=user[i].TEACH_RATE %></td>
                                 <td style="text-align:center"><%=user[i].BIRTHDAY.ToShortDateString() %></td>
-                                <td style="text-align:center"><a href="javascript:showUserComment('<%=user[i].ID %>')">查看该用户所有评论</a></td>
+                                
+                                <td style="text-align:center">
+                                     <%
+                                        if (user[i].ALLOW)
+                                        {
+                                    %>
+                                            <input type="radio" name="<%=user[i].ID %>" checked="checked" value="YES" onchange="changeUserState(this)" />YES
+                                            <input type="radio" name="<%=user[i].ID %>" value="NO" onchange="changeUserState(this)" />NO
+                                  
+                                    <%         
+                                        }
+                                        else
+                                        {
+                                    %>
+                                            <input type="radio" name="<%=user[i].ID %>" value="YES" onchange="changeUserState(this)" />YES
+                                            <input type="radio" name="<%=user[i].ID %>" value="NO" checked="checked" onchange="changeUserState(this)" />NO
+                                    <%  }   %>
+                                </td>
+                                <td style="text-align:center"><a href="javascript:showUserComment('<%=user[i].ID %>')">评论</a></td>
 						    </tr>	
                         <%  } %>	
 					</tbody>
