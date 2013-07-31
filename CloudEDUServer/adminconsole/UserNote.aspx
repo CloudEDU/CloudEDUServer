@@ -123,7 +123,16 @@
                         </thead>
                         <tbody>
                             <%
-                                NOTE_SHARABLE[] note = CourseAccess.GetNoteSharableByCustomer(user);
+                                NOTE_SHARABLE[] note=null;
+                                if (user != null)
+                                {
+                                    note = CourseAccess.GetNoteSharableByCustomer(user); 
+                                }
+                                else if (lesson != null)
+                                {
+                                    note = CourseAccess.GetNoteSharableByLesson(lesson);
+                                }
+                                 
                                 for (int i = 0; i < note.Length; i++)
                                 {
                              

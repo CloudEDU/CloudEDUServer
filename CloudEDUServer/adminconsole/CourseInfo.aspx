@@ -77,8 +77,8 @@
             setSidebarHeight();
         });
 
-        function showRecourse(lessonId) {
-            window.location.href = "Recourse.aspx?lessonId="+lessonId;
+        function showResource(lessonId) {
+            window.location.href = "Resource.aspx?lessonId="+lessonId;
         }
 
         function showDocument(lessonId) {
@@ -86,7 +86,7 @@
         }
 
         function showNote(lessonId) {
-            window.location.href = "Note.aspx?lessonId=" + lessonId;
+            window.location.href = "UserNote.aspx?lessonId=" + lessonId;
         }
      </script>
 
@@ -147,9 +147,9 @@
                                 <td style="text-align:center"><%=lesson[i].TITLE %></td>
 							    <td style="text-align:center"><%=lesson[i].NUMBER %></td>
 							    <td style="text-align:center"><%=lesson[i].CONTENT %></td>			    	
-                                <td style="text-align:center"><a href="javascript:showNote('<%=lesson[i].ID %>')">资源</a></td>
+                                <td style="text-align:center"><a href="javascript:showResource('<%=lesson[i].ID %>')">资源</a></td>
                                 <td style="text-align:center"><a href="javascript:showDocument('<%=lesson[i].ID %>')">文档</a></td>
-                                <td style="text-align:center"><a href="javascript:showRecourse('<%=lesson[i].ID %>')">笔记</a></td>
+                                <td style="text-align:center"><a href="javascript:showNote('<%=lesson[i].ID %>')">笔记</a></td>
 						    </tr>	
                         <%  } %>
 					</tbody>
