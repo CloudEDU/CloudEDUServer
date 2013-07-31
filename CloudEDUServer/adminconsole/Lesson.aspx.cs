@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace CloudEDUServer.adminconsole.js
+namespace CloudEDUServer.adminconsole
 {
-    public partial class EditCourse : System.Web.UI.Page
+    public partial class Lesson : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

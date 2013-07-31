@@ -426,7 +426,6 @@
     <Content Include="adminconsole\img\textarea-tl.png" />
     <Content Include="adminconsole\img\textarea-tr.png" />
     <Content Include="adminconsole\img\vertical.jpg" />
-    <Content Include="adminconsole\js\EditCourse.aspx" />
     <Content Include="adminconsole\js\fancy-button\fancy-button.js" />
     <Content Include="adminconsole\js\jqPlot\excanvas.min.js" />
     <Content Include="adminconsole\js\jqPlot\jquery.jqplot.min.js" />
@@ -753,6 +752,7 @@
     <Content Include="adminconsole\js\tiny-mce\utils\form_utils.js" />
     <Content Include="adminconsole\js\tiny-mce\utils\mctabs.js" />
     <Content Include="adminconsole\js\tiny-mce\utils\validate.js" />
+    <Content Include="adminconsole\Lesson.aspx" />
     <Content Include="adminconsole\Login.aspx" />
     <Content Include="adminconsole\Logout.aspx" />
     <Content Include="adminconsole\ManagerList.aspx" />
@@ -842,12 +842,12 @@
     <Compile Include="adminconsole\EditUser.aspx.designer.cs">
       <DependentUpon>EditUser.aspx</DependentUpon>
     </Compile>
-    <Compile Include="adminconsole\js\EditCourse.aspx.cs">
-      <DependentUpon>EditCourse.aspx</DependentUpon>
+    <Compile Include="adminconsole\Lesson.aspx.cs">
+      <DependentUpon>Lesson.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="adminconsole\js\EditCourse.aspx.designer.cs">
-      <DependentUpon>EditCourse.aspx</DependentUpon>
+    <Compile Include="adminconsole\Lesson.aspx.designer.cs">
+      <DependentUpon>Lesson.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminconsole\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

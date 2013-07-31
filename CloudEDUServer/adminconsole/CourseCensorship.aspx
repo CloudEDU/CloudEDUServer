@@ -80,6 +80,12 @@
         function showCourseInfo(courseID) {
             window.location.href = "CourseInfo.aspx?courseId=" + courseID;
         }
+
+        function courseListSelect() {
+            jQuery.post("CourseList.aspx", { operate: "select", value: document.getElementById("CourseListSelect").value }, function () {
+                window.location.href = "CourseCensorship.aspx";
+            })
+        }
     </script>
 
 </head>
@@ -95,7 +101,23 @@
         %>
         <div class="grid_10">
             <div class="box round first grid">
-                <h2>Course Censorship</h2>
+                <h2>
+                     <select id="CourseListSelect" onchange="courseListSelect()">
+                        <option value="all">All Course</option>
+                        <option value="pending">Pending Course</option>
+                        <option value="ok">OK Course </option>
+                        <option value="cancel">Cancel Course</option>
+                    </select>
+                    <%
+                        if (Session["CourseListSelect"]==null)
+                        {
+                            Session["CourseListSelect"] = "all";
+                        }; 
+                    %>
+                    <script>
+                        document.getElementById('CourseListSelect').value = "<%=Session["CourseListSelect"]%>";
+                    </script>
+                </h2>
                 <div class="block">
                     
 					<table class="data display datatable">
@@ -109,14 +131,32 @@
 					</thead>
 					<tbody>
                         <%
-                            COURSE[] course = CourseAccess.GetAllCourses();
+                             COURSE[] course =null;
+                    
+                            if (Session["CourseListSelect"].Equals("pending"))
+                            {
+                                course = CourseAccess.GetAllPendingCourses();
+                            }
+                            else if (Session["CourseListSelect"].Equals("cancel"))
+                            {
+                                course = CourseAccess.GetAllCancelCourses();
+                            }
+                            else if (Session["CourseListSelect"].Equals("ok"))
+                            {
+                                course = CourseAccess.GetAllOKCourses();
+                            }
+                            else
+                            {
+                                course = CourseAccess.GetAllCourses();
+                            }
+                                          
                             for (int i=0; i<course.Length; i++)
                             {
                         %>
 						    <tr  ondblclick="showCourseInfo(<%=course[i].ID %>)">
                                 <td style="text-align:center"><%=course[i].TITLE %></td>
 							    <td style="text-align:center"><%=course[i].START_TIME %></td>
-							    <td style="text-align:center"><%=course[i].TEACHER %></td>
+							    <td style="text-align:center"><%=CustomerAccess.GetCustomerByID( course[i].TEACHER).NAME %></td>
 							    <td style="text-align:center">
                                     <%
                                         if (course[i].COURSE_STATUS.Substring(0,2).Equals("OK"))

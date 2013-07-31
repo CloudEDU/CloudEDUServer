@@ -59,9 +59,32 @@
             });
 
         }
+
+        $(document).ready(function () {
+            //获取窗口高度
+            var winHeight;
+            if (window.innerHeight)
+                winHeight = window.innerHeight - 72 - 36 - 134;
+            else if ((document.body) && (document.body.clientHeight))
+                winHeight = document.body.clientHeight-72-36-134;
+            if (winHeight < 0) winHeight = 0;
+            document.getElementById("loginTopDiv").style.marginTop = winHeight/2+"px";
+            document.getElementById("loginBottomDiv").style.height = winHeight / 2 + "px";
+        });
+
+        $(window).resize(function () {
+            var winHeight;
+            if (window.innerHeight)
+                winHeight = window.innerHeight - 72 - 36 - 134;
+            else if ((document.body) && (document.body.clientHeight))
+                winHeight = document.body.clientHeight - 72 - 36 - 134;
+            if (winHeight < 0) winHeight = 0;
+            document.getElementById("loginTopDiv").style.marginTop = winHeight / 2 + "px";
+            document.getElementById("loginBottomDiv").style.height = winHeight / 2 + "px";
+        });
     </script>
 </head>
-<body id="Body1" runat="server" style="height:100%; width:100%; margin:0 0 0 0">
+<body id="Body1" runat="server"  style="height:100%; width:100%; margin:0 0 0 0">
     <form id="form1" runat="server" style="height:100%">
     <div class="container_12">
         <div class="grid_12 header-repeat">
@@ -74,12 +97,13 @@
         </div>
         <div class="clear">
         </div>
-        <div style="width:200px; margin-left:auto; margin-right:auto; margin-top:200px">
+        <div id="loginTopDiv" style="width:200px; margin-left:auto; margin-right:auto;">
             <input type="text" id="account" class="loginText" placeholder="Account" class="LoginSpan"/> <br /><br />
             <input type="password" id="password" class="loginText" placeholder="Password" /> <br /><br />
             <input type="button" value="登陆" onclick="login()"/><br />
         </div>
-        <div style="height:200px"></div>
+         <div id="loginBottomDiv" style="background-color:#2E5E79">
+        </div>
     </div>
     <div class="clear">
     </div>

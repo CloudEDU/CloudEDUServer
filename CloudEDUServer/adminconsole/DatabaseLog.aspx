@@ -93,22 +93,23 @@
 					<table class="data display datatable">
 					<thead>
 						<tr>
-							<th style="text-align:center">ID</th>
-							<th style="text-align:center">User ID</th>
-							<th style="text-align:center">Manager ID</th>
-                            <th style="text-align:center">Time</th>
-                            <th style="text-align:center">Operation</th>
+							<th style="text-align:center">Opr</th>
+							<th style="text-align:center">Msg</th>
+							<th style="text-align:center">Opr Time</th>
 						</tr>
 					</thead>
 					<tbody>
+                        <%
+                            OPR_LOG[] log = ManagerAccess.GetAllDBLogs();
+                            for (int i=0; i<log.Length; i++)
+                            {
+                         %>
 						    <tr>
-							    <td style="text-align:center">VioletHill</td>
-							    <td style="text-align:center">100</td>
-							    <td style="text-align:center">mailqiufeng@gmail.com</td>	
-                                <td style="text-align:center">dafa</td>						    
-							    <td style="text-align:center">fda</td>
+							    <td style="text-align:center"><%=log[i].OPR %></td>
+							    <td style="text-align:center"><%=log[i].MSG%></td>
+							    <td style="text-align:center"><%=log[i].OPR_TIME %></td>	
 						    </tr>	
-                        		
+                        <%  }%>		
 					</tbody>
 				    </table>                               
                 </div>

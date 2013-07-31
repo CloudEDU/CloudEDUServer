@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EditCourse.aspx.cs" Inherits="CloudEDUServer.adminconsole.js.EditCourse" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Lesson.aspx.cs" Inherits="CloudEDUServer.adminconsole.Lesson" %>
 
 <!DOCTYPE html>
 

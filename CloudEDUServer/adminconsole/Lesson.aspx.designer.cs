@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CloudEDUServer.adminconsole.js
+namespace CloudEDUServer.adminconsole
 {
 
 
-    public partial class EditCourse
+    public partial class Lesson
     {
 
         /// <summary>
