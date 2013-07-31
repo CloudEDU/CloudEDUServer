@@ -40,7 +40,7 @@ namespace CloudEDUServer
             OPR_LOG[] logs = null;
             using (CloudEDUEntities ctx = new CloudEDUEntities())
             {
-                logs = ctx.OPR_LOG.ToArray()
+                logs = ctx.OPR_LOG.ToArray();
             }
             return logs;
         }
