@@ -1,13 +1,13 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CourseInfo.aspx.cs" Inherits="CloudEDUServer.CourseInfo" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Resource.aspx.cs" Inherits="CloudEDUServer.adminconsole.Resource" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Typography | BlueWhale Admin</title>
-    
-    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+
+     <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
@@ -65,34 +65,18 @@
     <script src="js/setup.js" type="text/javascript"></script>
 
     <script type="text/javascript">
-
         $(document).ready(function () {
-
             setupLeftMenu();
-
             $('.datatable').dataTable({
                 "sPaginationType": "full_numbers"
             });
-
             setSidebarHeight();
         });
-
-        function showRecourse(lessonId) {
-            window.location.href = "Recourse.aspx?lessonId="+lessonId;
-        }
-
-        function showDocument(lessonId) {
-            window.location.href = "Document.aspx?lessonId=" + lessonId;
-        }
-
-        function showNote(lessonId) {
-            window.location.href = "Note.aspx?lessonId=" + lessonId;
-        }
-     </script>
+    </script>
 
 </head>
-<body>
-    <div class="container_12">
+<body id="Body1" runat="server">
+    <div class="container_12">    
         <!--#include file="Navigation.aspx" -->
        <%
             if (!ManagerAccess.haveCourseViewPermission((MANAGER)Session["manager"]))
@@ -102,58 +86,50 @@
             }
         %>
         <div class="grid_10">
-            <div class="box round first">
-                <h2>
-                    Course Information</h2>
+            <div class="box round first grid">
+                <h2>Transaction List</h2>
                 <div class="block">
-                    <!-- paragraphs -->
-                    <%
-                        COURSE course=null;
+                     <%
+                        LESSON lesson=null;
                         try
                         {
-                            course = CourseAccess.GetCourseById(int.Parse(Request.Params.Get("courseId")));
+                            lesson = CourseAccess.GetLessonByID(int.Parse(Request.Params.Get("lessonId")));
                         }
                         catch
                         {
                         }
-                        if (course == null)
+                        if (lesson == null)
                         {
                             Response.Redirect("Default.aspx");
                             Response.End();
                             return;
                         }
                     %>
-                    <p class="start">
-                        <img src="img/vertical.jpg" alt="Ginger" class="right" style="margin-left:auto; margin-right:auto" /><%=course.INTRO %></p>
-
-                    <table class="data display datatable">
+					<table class="data display datatable">
 					<thead>
 						<tr>
-                            <th style="text-align:center">Title</th>
-							<th style="text-align:center">Number</th>
-							<th style="text-align:center">Content</th>						
-                            <th style="text-align:center">Resource</th>
-                            <th style="text-align:center">Document</th>
-                            <th style="text-align:center">Note</th>
+							<th style="text-align:center">Title</th>
+                            <th style="text-align:center">Intro</th>
+							<th style="text-align:center">Recourse Type</th>
+							<th style="text-align:center">resource.url</th>
 						</tr>
 					</thead>
 					<tbody>
                         <%
-                            LESSON[] lesson = CourseAccess.GetLessonsByCourse(course);
-                            for (int i=0; i<lesson.Length; i++)
+                            RESOURCE[] resource = CourseAccess.GetResourcesByLesson(lesson);
+                            for (int i=0; i<resource.Length; i++)
                             {
-                        %>
+                         %>
 						    <tr>
-                                <td style="text-align:center"><%=lesson[i].TITLE %></td>
-							    <td style="text-align:center"><%=lesson[i].NUMBER %></td>
-							    <td style="text-align:center"><%=lesson[i].CONTENT %></td>			    	
-                                <td style="text-align:center"><a href="javascript:showNote('<%=lesson[i].ID %>')">资源</a></td>
-                                <td style="text-align:center"><a href="javascript:showDocument('<%=lesson[i].ID %>')">文档</a></td>
-                                <td style="text-align:center"><a href="javascript:showRecourse('<%=lesson[i].ID %>')">笔记</a></td>
+							    <td style="text-align:center"><%=resource[i].TITLE %></td>
+                                <td style="text-align:center"><%=resource[i].INTRO %></td>
+							    <td style="text-align:center"><%=CourseAccess.GetResourceTypeByID(resource[i].TYPE).DESCRIPTION %></td>
+							    <td style="text-align:center"><%=resource[i].URL %></td>	
+                                
 						    </tr>	
-                        <%  } %>
+                        <% }%>
 					</tbody>
-				    </table>                        
+				    </table>                               
                 </div>
             </div>
         </div>
@@ -167,6 +143,7 @@
             Copyright <a href="#">Cloud Edu</a>. All Rights Reserved.
         </p>
     </div>
-    
 </body>
 </html>
+
+

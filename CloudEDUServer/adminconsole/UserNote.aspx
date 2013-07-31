@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CourseInfo.aspx.cs" Inherits="CloudEDUServer.CourseInfo" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UserNote.aspx.cs" Inherits="CloudEDUServer.adminconsole.UserNote" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -6,7 +6,9 @@
 <head id="Head1" runat="server">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>Typography | BlueWhale Admin</title>
-    
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
     <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
@@ -62,100 +64,85 @@
     <!-- Load TinyMCE -->
     <script src="js/tiny-mce/jquery.tinymce.js" type="text/javascript"></script>
 
+    <script type="text/javascript" src="js/table/table.js"></script>
     <script src="js/setup.js" type="text/javascript"></script>
 
     <script type="text/javascript">
 
         $(document).ready(function () {
-
             setupLeftMenu();
-
             $('.datatable').dataTable({
                 "sPaginationType": "full_numbers"
             });
-
             setSidebarHeight();
         });
 
-        function showRecourse(lessonId) {
-            window.location.href = "Recourse.aspx?lessonId="+lessonId;
-        }
-
-        function showDocument(lessonId) {
-            window.location.href = "Document.aspx?lessonId=" + lessonId;
-        }
-
-        function showNote(lessonId) {
-            window.location.href = "Note.aspx?lessonId=" + lessonId;
-        }
-     </script>
-
+      
+    </script>
 </head>
-<body>
+<body id="Body1" runat="server">
     <div class="container_12">
         <!--#include file="Navigation.aspx" -->
-       <%
-            if (!ManagerAccess.haveCourseViewPermission((MANAGER)Session["manager"]))
+        <%
+            CUSTOMER user = null;
+            LESSON lesson = null;
+            try
+            {
+                user = CustomerAccess.GetCustomerByID(int.Parse(Request.Params.Get("UserId")));
+            }
+            catch
+            {
+            }
+            try
+            {
+                lesson = CourseAccess.GetLessonByID(int.Parse(Request.Params.Get("lessonId")));
+            }
+            catch
+            {
+            }
+            if (user == null && lesson==null)
             {
                 Response.Redirect("Default.aspx");
                 Response.End();
             }
         %>
         <div class="grid_10">
-            <div class="box round first">
-                <h2>
-                    Course Information</h2>
+            <div class="box round first grid">
+                <h2>Manager List
+                </h2>
                 <div class="block">
-                    <!-- paragraphs -->
-                    <%
-                        COURSE course=null;
-                        try
-                        {
-                            course = CourseAccess.GetCourseById(int.Parse(Request.Params.Get("courseId")));
-                        }
-                        catch
-                        {
-                        }
-                        if (course == null)
-                        {
-                            Response.Redirect("Default.aspx");
-                            Response.End();
-                            return;
-                        }
-                    %>
-                    <p class="start">
-                        <img src="img/vertical.jpg" alt="Ginger" class="right" style="margin-left:auto; margin-right:auto" /><%=course.INTRO %></p>
+                    <table class="data display datatable" id="example">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center">Title</th>
+                                <th style="text-align: center">Lesson</th>
+                                <th style="text-align: center">User</th>
+                                <th style="text-align: center">Content</th>
+                                <th style="text-align: center">Data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                NOTE_SHARABLE[] note = CourseAccess.GetNoteSharableByCustomer(user);
+                                for (int i = 0; i < note.Length; i++)
+                                {
+                             
+                            %>
+                            <tr>
+                                <td style="text-align: center"><%=note[i].TITLE%></td>
+                                <td style="text-align: center"><%=CourseAccess.GetLessonByID( note[i].LESSON_ID).TITLE%></td>
+                                <td style="text-align: center"><%=CustomerAccess.GetCustomerByID((int)note[i].CUSTOMER_ID).NAME%></td>        
+                                <td style="text-align: center"><%=note[i].CONTENT %></td>
+                                <td style="text-align: center"><%=note[i].DATE %></td>
+                            </tr>
+                            <%}%>
+                        </tbody>
+                    </table>
 
-                    <table class="data display datatable">
-					<thead>
-						<tr>
-                            <th style="text-align:center">Title</th>
-							<th style="text-align:center">Number</th>
-							<th style="text-align:center">Content</th>						
-                            <th style="text-align:center">Resource</th>
-                            <th style="text-align:center">Document</th>
-                            <th style="text-align:center">Note</th>
-						</tr>
-					</thead>
-					<tbody>
-                        <%
-                            LESSON[] lesson = CourseAccess.GetLessonsByCourse(course);
-                            for (int i=0; i<lesson.Length; i++)
-                            {
-                        %>
-						    <tr>
-                                <td style="text-align:center"><%=lesson[i].TITLE %></td>
-							    <td style="text-align:center"><%=lesson[i].NUMBER %></td>
-							    <td style="text-align:center"><%=lesson[i].CONTENT %></td>			    	
-                                <td style="text-align:center"><a href="javascript:showNote('<%=lesson[i].ID %>')">资源</a></td>
-                                <td style="text-align:center"><a href="javascript:showDocument('<%=lesson[i].ID %>')">文档</a></td>
-                                <td style="text-align:center"><a href="javascript:showRecourse('<%=lesson[i].ID %>')">笔记</a></td>
-						    </tr>	
-                        <%  } %>
-					</tbody>
-				    </table>                        
                 </div>
+
             </div>
+
         </div>
         <div class="clear">
         </div>
@@ -167,6 +154,5 @@
             Copyright <a href="#">Cloud Edu</a>. All Rights Reserved.
         </p>
     </div>
-    
 </body>
 </html>

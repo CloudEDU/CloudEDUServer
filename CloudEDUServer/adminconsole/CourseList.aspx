@@ -192,7 +192,7 @@
                                 <td style="text-align:center"><%=CustomerAccess.GetCustomerByID( course[i].TEACHER).NAME %></td>						    
 							    <td style="text-align:center"><%=CourseAccess.GetCategoryByID((int)course[i].CATEGORY).CATE_NAME %></td>
                                 <td style="text-align:center"><%=course[i].COURSE_STATUS %></td>
-							    <td style="text-align:center"><%=course[i].PG %></td>
+							    <td style="text-align:center"><%=CourseAccess.GetParentGuideByID((int)course[i].PG).DESCRIPTION %></td>
 							    <td style="text-align:center"><%=course[i].ICON_URL %></td>	
                                 <td style="text-align:center"><%=course[i].START_TIME.ToShortDateString() %></td>						    
 							    <td style="text-align:center"><%=CourseAccess.GetDownloadTimeByCourseID(course[i].ID) %></td>

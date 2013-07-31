@@ -169,6 +169,7 @@
     <Content Include="adminconsole\css\usercss.css" />
     <Content Include="adminconsole\DatabaseLog.aspx" />
     <Content Include="adminconsole\Default.aspx" />
+    <Content Include="adminconsole\Document.aspx" />
     <Content Include="adminconsole\EditCourse.aspx" />
     <Content Include="adminconsole\EditManager.aspx" />
     <Content Include="adminconsole\EditUser.aspx" />
@@ -752,7 +753,6 @@
     <Content Include="adminconsole\js\tiny-mce\utils\form_utils.js" />
     <Content Include="adminconsole\js\tiny-mce\utils\mctabs.js" />
     <Content Include="adminconsole\js\tiny-mce\utils\validate.js" />
-    <Content Include="adminconsole\Lesson.aspx" />
     <Content Include="adminconsole\Login.aspx" />
     <Content Include="adminconsole\Logout.aspx" />
     <Content Include="adminconsole\ManagerList.aspx" />
@@ -760,11 +760,13 @@
     <Content Include="adminconsole\PermissionList.aspx" />
     <Content Include="adminconsole\RecommendationCourse.aspx" />
     <Content Include="adminconsole\RecommendationCourseList.aspx" />
+    <Content Include="adminconsole\Resource.aspx" />
     <Content Include="adminconsole\ShowRecommendationCourse.aspx" />
     <Content Include="adminconsole\TransactionList.aspx" />
     <Content Include="adminconsole\TypeList.aspx" />
     <Content Include="adminconsole\UserList.aspx" />
     <Content Include="adminconsole\CourseInfo.aspx" />
+    <Content Include="adminconsole\UserNote.aspx" />
     <Content Include="adminconsole\ViewPermissionManagers.aspx" />
     <Content Include="adminconsole\ViewTypeManagers.aspx" />
     <Content Include="Web.config">
@@ -821,6 +823,13 @@
     <Compile Include="adminconsole\DatabaseLog.aspx.designer.cs">
       <DependentUpon>DatabaseLog.aspx</DependentUpon>
     </Compile>
+    <Compile Include="adminconsole\Document.aspx.cs">
+      <DependentUpon>Document.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\Document.aspx.designer.cs">
+      <DependentUpon>Document.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminconsole\EditCourse.aspx.cs">
       <DependentUpon>EditCourse.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -841,13 +850,6 @@
     </Compile>
     <Compile Include="adminconsole\EditUser.aspx.designer.cs">
       <DependentUpon>EditUser.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="adminconsole\Lesson.aspx.cs">
-      <DependentUpon>Lesson.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="adminconsole\Lesson.aspx.designer.cs">
-      <DependentUpon>Lesson.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminconsole\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -908,6 +910,13 @@
     <Compile Include="adminconsole\RecommendationCourseList.aspx.designer.cs">
       <DependentUpon>RecommendationCourseList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="adminconsole\Resource.aspx.cs">
+      <DependentUpon>Resource.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\Resource.aspx.designer.cs">
+      <DependentUpon>Resource.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminconsole\ShowRecommendationCourse.aspx.cs">
       <DependentUpon>ShowRecommendationCourse.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -935,6 +944,13 @@
     </Compile>
     <Compile Include="adminconsole\UserList.aspx.designer.cs">
       <DependentUpon>UserList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminconsole\UserNote.aspx.cs">
+      <DependentUpon>UserNote.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminconsole\UserNote.aspx.designer.cs">
+      <DependentUpon>UserNote.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminconsole\ViewPermissionManagers.aspx.cs">
       <DependentUpon>ViewPermissionManagers.aspx</DependentUpon>

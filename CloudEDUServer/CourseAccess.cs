@@ -167,6 +167,46 @@ namespace CloudEDUServer
             return documents;
         }
 
+        public static DOCUMENT GetDocumentByDocumentID(int document_id)
+        {
+            DOCUMENT document = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                document = ctx.DOCUMENTs.Where(c => c.ID == document_id).FirstOrDefault();
+            }
+            return document;
+        }
+
+        public static RESOURCE GetResourceByResourceID(int resource_id)
+        {
+            RESOURCE resource = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                resource = ctx.RESOURCEs.Where(r => r.ID == resource_id).FirstOrDefault();
+            }
+            return resource;
+        }
+
+        public static RES_TYPE GetResourceTypeByID(int id)
+        {
+            RES_TYPE res = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                res = ctx.RES_TYPE.Where(r => r.ID == id).FirstOrDefault();
+            }
+            return res;
+        }
+
+        public static PARENT_GUIDE GetParentGuideByID(int id)
+        {
+            PARENT_GUIDE pg = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                pg = ctx.PARENT_GUIDE.Where(p => p.ID == id).FirstOrDefault();
+            }
+            return pg;
+        }
+
         public static RESOURCE[] GetResourcesByLesson(LESSON lesson)
         {
             RESOURCE[] resources = null;
@@ -177,6 +217,8 @@ namespace CloudEDUServer
             }
             return resources;
         }
+
+
 
         public static COMMENT GetCommentByID(int comment_id)
         {

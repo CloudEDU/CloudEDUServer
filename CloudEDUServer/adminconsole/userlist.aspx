@@ -88,6 +88,10 @@
             });
         }
 
+        function showUserNote(userId) {
+            window.location.href = "UserNote.aspx?userId="+userId;
+        }
+
     </script>
 
 </head>
@@ -111,7 +115,8 @@
                             <th style="text-align:center">Teach Rate</th>
                             <th style="text-align:center">Birthday</th>
                             <th style="text-align:center">Comment</th>
-                            <th style="text-align:center">Allow</th>
+                             <th style="text-align:center">note</th>
+                            <th style="text-align:center">Allow</th>                          
 						</tr>
 					</thead>
 					<tbody>
@@ -136,7 +141,8 @@
 							    <td style="text-align:center"><%=user[i].LEARN_RATE %></td>
                                 <td style="text-align:center"><%=user[i].TEACH_RATE %></td>
                                 <td style="text-align:center"><%=user[i].BIRTHDAY.ToShortDateString() %></td>
-                                
+                                <td style="text-align:center"><a href="javascript:showUserComment('<%=user[i].ID %>')">评论</a></td>
+                                 <td style="text-align:center"><a href="javascript:showUserNote('<%=user[i].ID %>')">笔记</a></td>
                                 <td style="text-align:center">
                                      <%
                                         if (user[i].ALLOW)
@@ -154,7 +160,7 @@
                                             <input type="radio" name="<%=user[i].ID %>" value="NO" checked="checked" onchange="changeUserState(this)" />NO
                                     <%  }   %>
                                 </td>
-                                <td style="text-align:center"><a href="javascript:showUserComment('<%=user[i].ID %>')">评论</a></td>
+                               
 						    </tr>	
                         <%  } %>	
 					</tbody>
