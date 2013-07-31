@@ -80,7 +80,7 @@
                 return;
             }
             isUpdate = true;
-
+            alert(document.getElementById("birthday").value);
             if (confirm("确认编辑该用户吗")) {
                 var account = document.getElementById("account").value;
                 var password = document.getElementById("password").value;
@@ -258,7 +258,7 @@
                                         <label>Birthday</label>
                                     </td>
                                     <td>
-                                        <input type="text" id="birthday" value="<%=customer.BIRTHDAY.ToShortDateString() %>"/>
+                                        <input type="date" id="birthday"   value="<%=TransactionAccess.dateToString( customer.BIRTHDAY.ToShortDateString()) %>"/>
                                     </td>
                                 </tr>
                             </table>  
