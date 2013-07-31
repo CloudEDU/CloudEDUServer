@@ -129,6 +129,16 @@ namespace CloudEDUServer
             return managers;
         }
 
+        public static TYPE GetTypeByID(int type_id)
+        {
+            TYPE type = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                type = ctx.TYPEs.Where(t => t.ID == type_id).FirstOrDefault();
+            }
+            return type;
+        }
+
         public static MANAGER[] GetManagersByPermissions(PERMISSION[] perms)
         {
             MANAGER[] managers = null;

@@ -156,7 +156,7 @@
                             <tr ondblclick="editManager('<%=manager[i].NAME%>')">
                                 <td style="text-align: center"><%=manager[i].NAME%></td>
                                 <td style="text-align: center"><%=ManagerAccess.getPermissionStringByManager(manager[i])%></td>
-                                <td style="text-align: center"><%=manager[i].MNGR_TYPE%></td>
+                                <td style="text-align: center"><%=ManagerAccess.GetTypeByID((int)manager[i].MNGR_TYPE).DESCRIPTION%></td>
                                 <td style="text-align: center"><a href="javascript:deleteManager('<%=manager[i].NAME%>')">删除</a></td>
                             </tr>
                             <%}%>

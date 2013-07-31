@@ -219,11 +219,11 @@
                             <td>
                                 <select id="type" name="select">
                                     <%
-                                       CloudEDUServer.TYPE []allType=ManagerAccess.GetAllManagerTypes();
+                                       TYPE []allType=ManagerAccess.GetAllManagerTypes();
                                        for (int i=0; i<allType.Length; i++)
                                        { 
                                     %>
-                                        <option value="<%=i %>"><%=i %></option>
+                                        <option value="<%=allType[i].ID %>"><%=allType[i].DESCRIPTION %></option>
                                     <%}%>
                                 </select>
                             </td>
