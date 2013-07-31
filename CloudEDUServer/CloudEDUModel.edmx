@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CloudEDUModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CloudEDUModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="CloudEDUModelStoreContainer">
           <EntitySet Name="CATEGORY" EntityType="CloudEDUModel.Store.CATEGORY" store:Type="Tables" Schema="COURSE" />
           <EntitySet Name="COMMENT" EntityType="CloudEDUModel.Store.COMMENT" store:Type="Tables" Schema="COURSE" />
@@ -223,7 +223,7 @@
           <Property Name="COURSE_ID" Type="int" Nullable="false" />
           <Property Name="CONTENT" Type="text" Nullable="false" />
           <Property Name="TITLE" Type="varchar" MaxLength="100" />
-          <Property Name="TIME" Type="datetime" Nullable="false" />
+          <Property Name="TIME" Type="datetime2" Nullable="false" />
           <Property Name="RATE" Type="float" />
         </EntityType>
         <EntityType Name="COURSE">
@@ -240,7 +240,7 @@
           <Property Name="COURSE_STATUS" Type="nchar" Nullable="false" MaxLength="10" />
           <Property Name="PG" Type="int" />
           <Property Name="ICON_URL" Type="nvarchar" MaxLength="100" />
-          <Property Name="START_TIME" Type="datetime" Nullable="false" />
+          <Property Name="START_TIME" Type="datetime2" Nullable="false" />
         </EntityType>
         <EntityType Name="DOCUMENT">
           <Key>
@@ -312,7 +312,7 @@
           </Key>
           <Property Name="CUSTOMER_ID" Type="int" Nullable="false" />
           <Property Name="COURSE_ID" Type="int" Nullable="false" />
-          <Property Name="START_TIME" Type="datetime" Nullable="false" />
+          <Property Name="START_TIME" Type="datetime2" Nullable="false" />
           <Property Name="CURRENT_LESSON" Type="int" />
         </EntityType>
         <EntityType Name="CUSTOMER">
@@ -327,7 +327,7 @@
           <Property Name="DEGREE" Type="varchar" MaxLength="20" />
           <Property Name="LEARN_RATE" Type="float" Nullable="false" />
           <Property Name="TEACH_RATE" Type="float" Nullable="false" />
-          <Property Name="BIRTHDAY" Type="date" Nullable="false" />
+          <Property Name="BIRTHDAY" Type="datetime2" Nullable="false" />
           <Property Name="ALLOW" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="FAVORITE">
@@ -346,7 +346,7 @@
           <Property Name="CONTENT" Type="text" Nullable="false" />
           <Property Name="LESSON_ID" Type="int" Nullable="false" />
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="DATE" Type="datetime" Nullable="false" />
+          <Property Name="DATE" Type="datetime2" Nullable="false" />
           <Property Name="CUSTOMER_ID" Type="int" />
           <Property Name="SHARE" Type="bit" Nullable="false" />
         </EntityType>
@@ -873,8 +873,7 @@
           <Parameter Name="opr" Type="nchar" Mode="In" />
           <Parameter Name="MSG" Type="nvarchar" Mode="In" />
         </Function>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CloudEDUModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1022,7 +1021,7 @@
           <Property Name="COURSE_ID" Type="Int32" Nullable="false" />
           <Property Name="CONTENT" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="TITLE" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="TIME" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TIME" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="RATE" Type="Double" />
           <NavigationProperty Name="CUSTOMER" Relationship="CloudEDUModel.FK__COMMENT__CUSTOME__6E01572D" FromRole="COMMENT" ToRole="CUSTOMER" />
           <NavigationProperty Name="COURSE" Relationship="CloudEDUModel.FK_COMMENT_COURSE" FromRole="COMMENT" ToRole="COURSE" />
@@ -1041,7 +1040,7 @@
           <Property Name="COURSE_STATUS" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
           <Property Name="PG" Type="Int32" />
           <Property Name="ICON_URL" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="START_TIME" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="START_TIME" Type="DateTime" Nullable="false" Precision="7" />
           <NavigationProperty Name="CATEGORY1" Relationship="CloudEDUModel.FK_COURSE_CATEGORY" FromRole="COURSE" ToRole="CATEGORY" />
           <NavigationProperty Name="COMMENTs" Relationship="CloudEDUModel.FK_COMMENT_COURSE" FromRole="COURSE" ToRole="COMMENT" />
           <NavigationProperty Name="SALEORDERs" Relationship="CloudEDUModel.FK__SALEORDER__COURS__534D60F1" FromRole="COURSE" ToRole="SALEORDER" />
@@ -1125,7 +1124,7 @@
           </Key>
           <Property Name="CUSTOMER_ID" Type="Int32" Nullable="false" />
           <Property Name="COURSE_ID" Type="Int32" Nullable="false" />
-          <Property Name="START_TIME" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="START_TIME" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="CURRENT_LESSON" Type="Int32" />
           <NavigationProperty Name="COURSE" Relationship="CloudEDUModel.FK_ATTEND_COURSE" FromRole="ATTEND" ToRole="COURSE" />
           <NavigationProperty Name="LESSON" Relationship="CloudEDUModel.FK_ATTEND_CURRENTLESSON" FromRole="ATTEND" ToRole="LESSON" />
@@ -1143,7 +1142,7 @@
           <Property Name="DEGREE" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="LEARN_RATE" Type="Double" Nullable="false" />
           <Property Name="TEACH_RATE" Type="Double" Nullable="false" />
-          <Property Name="BIRTHDAY" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="BIRTHDAY" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="ALLOW" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="COMMENTs" Relationship="CloudEDUModel.FK__COMMENT__CUSTOME__6E01572D" FromRole="CUSTOMER" ToRole="COMMENT" />
           <NavigationProperty Name="COURSEs" Relationship="CloudEDUModel.FK_COURSE_TEACHER" FromRole="CUSTOMER" ToRole="COURSE" />
@@ -1161,7 +1160,7 @@
           <Property Name="CONTENT" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="LESSON_ID" Type="Int32" Nullable="false" />
           <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="CUSTOMER_ID" Type="Int32" />
           <Property Name="SHARE" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="LESSON" Relationship="CloudEDUModel.FK__NOTE__LESSON_ID__3A81B327" FromRole="NOTE" ToRole="LESSON" />

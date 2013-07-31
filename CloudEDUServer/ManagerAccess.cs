@@ -35,6 +35,16 @@ namespace CloudEDUServer
             return managers;
         }
 
+        public static OPR_LOG[] GetAllDBLogs()
+        {
+            OPR_LOG[] logs = null;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                logs = ctx.OPR_LOG.ToArray()
+            }
+            return logs;
+        }
+
         public static PERMISSION[] GetAllPermissions()
         {
             PERMISSION[] permissions = null;
