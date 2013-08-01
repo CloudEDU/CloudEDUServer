@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Typography | BlueWhale Admin</title>
+    <title>Cloud Edu</title>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
@@ -108,7 +108,7 @@
         %>
         <div class="grid_10">
             <div class="box round first grid">
-                <h2>Manager List
+                <h2>Note List
                 </h2>
                 <div class="block">
                     <table class="data display datatable" id="example">

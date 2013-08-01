@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Permission Management | CloudEDU</title>
+    <title>Cloud Edu</title>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
