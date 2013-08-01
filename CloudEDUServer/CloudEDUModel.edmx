@@ -95,6 +95,19 @@
       [NOTE_SHARABLE].[SHARE] AS [SHARE]
       FROM [CUSTOMER].[NOTE_SHARABLE] AS [NOTE_SHARABLE]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="NOTE_SHAREABLE_AVAIL" EntityType="CloudEDUModel.Store.NOTE_SHAREABLE_AVAIL" store:Type="Views" store:Schema="CUSTOMER" store:Name="NOTE_SHAREABLE_AVAIL">
+            <DefiningQuery>SELECT 
+      [NOTE_SHAREABLE_AVAIL].[TITLE] AS [TITLE], 
+      [NOTE_SHAREABLE_AVAIL].[CONTENT] AS [CONTENT], 
+      [NOTE_SHAREABLE_AVAIL].[LESSON_ID] AS [LESSON_ID], 
+      [NOTE_SHAREABLE_AVAIL].[ID] AS [ID], 
+      [NOTE_SHAREABLE_AVAIL].[DATE] AS [DATE], 
+      [NOTE_SHAREABLE_AVAIL].[CUSTOMER_ID] AS [CUSTOMER_ID], 
+      [NOTE_SHAREABLE_AVAIL].[SHARE] AS [SHARE], 
+      [NOTE_SHAREABLE_AVAIL].[COURSE_TITLE] AS [COURSE_TITLE], 
+      [NOTE_SHAREABLE_AVAIL].[CUSTOMER_NAME] AS [CUSTOMER_NAME]
+      FROM [CUSTOMER].[NOTE_SHAREABLE_AVAIL] AS [NOTE_SHAREABLE_AVAIL]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="COURSE_CANCEL" EntityType="CloudEDUModel.Store.COURSE_CANCEL" store:Type="Views" store:Schema="MANAGER" store:Name="COURSE_CANCEL">
             <DefiningQuery>SELECT 
       [COURSE_CANCEL].[ID] AS [ID], 
@@ -513,6 +526,29 @@
           <Property Name="SHARE" Type="bit" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
+      警告 6002: 表/视图“CloudEDU.CUSTOMER.NOTE_SHAREABLE_AVAIL”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+        <EntityType Name="NOTE_SHAREABLE_AVAIL">
+          <Key>
+            <PropertyRef Name="CONTENT" />
+            <PropertyRef Name="LESSON_ID" />
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="DATE" />
+            <PropertyRef Name="SHARE" />
+            <PropertyRef Name="COURSE_TITLE" />
+            <PropertyRef Name="CUSTOMER_NAME" />
+          </Key>
+          <Property Name="TITLE" Type="varchar" MaxLength="50" />
+          <Property Name="CONTENT" Type="text" Nullable="false" />
+          <Property Name="LESSON_ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="DATE" Type="datetime2" Nullable="false" />
+          <Property Name="CUSTOMER_ID" Type="int" />
+          <Property Name="SHARE" Type="bit" Nullable="false" />
+          <Property Name="COURSE_TITLE" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CUSTOMER_NAME" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <!--生成过程中发现错误:
       警告 6002: 表/视图“CloudEDU.MANAGER.COURSE_CANCEL”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
       -->
         <EntityType Name="COURSE_CANCEL">
@@ -856,6 +892,12 @@
           <Parameter Name="pg" Type="int" Mode="In" />
           <Parameter Name="icon_url" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="CreateLesson" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="COURSE">
+          <Parameter Name="course_id" Type="int" Mode="In" />
+          <Parameter Name="title" Type="varchar" Mode="In" />
+          <Parameter Name="number" Type="int" Mode="In" />
+          <Parameter Name="content" Type="text" Mode="In" />
+        </Function>
         <Function Name="EnrollCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="COURSE">
           <Parameter Name="course_id" Type="int" Mode="In" />
           <Parameter Name="customer_id" Type="int" Mode="In" />
@@ -1002,6 +1044,13 @@
           <FunctionImport Name="AddDBLog">
             <Parameter Name="opr" Mode="In" Type="String" />
             <Parameter Name="MSG" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="NOTE_SHAREABLE_AVAIL" EntityType="CloudEDUModel.NOTE_SHAREABLE_AVAIL" />
+          <FunctionImport Name="CreateLesson" ReturnType="Collection(Decimal)">
+            <Parameter Name="course_id" Mode="In" Type="Int32" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="number" Mode="In" Type="Int32" />
+            <Parameter Name="content" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="CATEGORY">
@@ -1577,6 +1626,26 @@
           <Property Type="Int32" Name="COURSE_ID" Nullable="false" />
           <Property Type="Int32" Name="STUDENTS" Nullable="true" />
         </ComplexType>
+        <EntityType Name="NOTE_SHAREABLE_AVAIL">
+          <Key>
+            <PropertyRef Name="CONTENT" />
+            <PropertyRef Name="LESSON_ID" />
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="DATE" />
+            <PropertyRef Name="SHARE" />
+            <PropertyRef Name="COURSE_TITLE" />
+            <PropertyRef Name="CUSTOMER_NAME" />
+          </Key>
+          <Property Type="String" Name="TITLE" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CONTENT" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="LESSON_ID" Nullable="false" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="DateTime" Name="DATE" Nullable="false" Precision="7" />
+          <Property Type="Int32" Name="CUSTOMER_ID" />
+          <Property Type="Boolean" Name="SHARE" Nullable="false" />
+          <Property Type="String" Name="COURSE_TITLE" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CUSTOMER_NAME" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1901,6 +1970,22 @@
           <FunctionImportMapping FunctionImportName="CreateCourse" FunctionName="CloudEDUModel.Store.CreateCourse" />
           <FunctionImportMapping FunctionImportName="EnrollCourse" FunctionName="CloudEDUModel.Store.EnrollCourse" />
           <FunctionImportMapping FunctionImportName="AddDBLog" FunctionName="CloudEDUModel.Store.AddDBLog" />
+          <EntitySetMapping Name="NOTE_SHAREABLE_AVAIL">
+            <EntityTypeMapping TypeName="CloudEDUModel.NOTE_SHAREABLE_AVAIL">
+              <MappingFragment StoreEntitySet="NOTE_SHAREABLE_AVAIL">
+                <ScalarProperty Name="CUSTOMER_NAME" ColumnName="CUSTOMER_NAME" />
+                <ScalarProperty Name="COURSE_TITLE" ColumnName="COURSE_TITLE" />
+                <ScalarProperty Name="SHARE" ColumnName="SHARE" />
+                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LESSON_ID" ColumnName="LESSON_ID" />
+                <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CreateLesson" FunctionName="CloudEDUModel.Store.CreateLesson" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

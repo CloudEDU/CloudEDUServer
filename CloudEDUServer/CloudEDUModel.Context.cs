@@ -51,6 +51,7 @@ namespace CloudEDUServer
         public DbSet<COURSE_PENDING> COURSE_PENDING { get; set; }
         public DbSet<NOTE_SHARABLE> NOTE_SHARABLE { get; set; }
         public DbSet<COURSE_CANCEL> COURSE_CANCEL { get; set; }
+        public DbSet<NOTE_SHAREABLE_AVAIL> NOTE_SHAREABLE_AVAIL { get; set; }
     
         public virtual ObjectResult<COURSE_HOTRANK_Result> COURSE_HOTRANK()
         {
@@ -114,6 +115,27 @@ namespace CloudEDUServer
                 new ObjectParameter("MSG", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddDBLog", oprParameter, mSGParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> CreateLesson(Nullable<int> course_id, string title, Nullable<int> number, string content)
+        {
+            var course_idParameter = course_id.HasValue ?
+                new ObjectParameter("course_id", course_id) :
+                new ObjectParameter("course_id", typeof(int));
+    
+            var titleParameter = title != null ?
+                new ObjectParameter("title", title) :
+                new ObjectParameter("title", typeof(string));
+    
+            var numberParameter = number.HasValue ?
+                new ObjectParameter("number", number) :
+                new ObjectParameter("number", typeof(int));
+    
+            var contentParameter = content != null ?
+                new ObjectParameter("content", content) :
+                new ObjectParameter("content", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("CreateLesson", course_idParameter, titleParameter, numberParameter, contentParameter);
         }
     }
 }

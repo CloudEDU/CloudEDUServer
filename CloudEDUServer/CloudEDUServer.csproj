@@ -1046,6 +1046,9 @@
     <Compile Include="NOTE_SHARABLE.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="NOTE_SHAREABLE_AVAIL.cs">
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="OPR_LOG.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>

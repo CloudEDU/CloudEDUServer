@@ -45,6 +45,19 @@ namespace CloudEDUServer
             return logs;
         }
 
+        public static void test()
+        {
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                var s = from attends in ctx.ATTENDs
+                        join courses in ctx.COURSE_AVAIL
+                        on attends.COURSE_ID equals courses.ID
+                        where attends.CUSTOMER_ID == 1
+                        select courses;
+                System.Diagnostics.Debug.WriteLine(s.Count());
+            }
+        }
+
         public static PERMISSION[] GetAllPermissions()
         {
             PERMISSION[] permissions = null;
