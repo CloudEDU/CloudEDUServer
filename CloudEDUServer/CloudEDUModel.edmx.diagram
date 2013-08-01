@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d333ae8a4a61479492ee3890e0e04ed9" Name="关系图1">
+      <Diagram DiagramId="ce16fbb836904a60b517b4492cfc8b7d" Name="关系图1">
         <EntityTypeShape EntityType="CloudEDUModel.CATEGORY" Width="1.5" PointX="3.75" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudEDUModel.COMMENT" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudEDUModel.COURSE" Width="1.5" PointX="6" PointY="9.75" IsExpanded="true" />
@@ -26,8 +26,11 @@
         <EntityTypeShape EntityType="CloudEDUModel.COURSE_AVAIL" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudEDUModel.COURSE_OK" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudEDUModel.COURSE_PENDING" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.COURSE_RECO_AVAIL" Width="1.5" PointX="12.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.NOTE_AVAIL" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudEDUModel.NOTE_SHARABLE" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CloudEDUModel.COURSE_CANCEL" Width="1.5" PointX="12.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.NOTE_SHAREABLE_AVAIL" Width="1.5" PointX="14.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudEDUModel.COURSE_CANCEL" Width="1.5" PointX="14.75" PointY="13.75" IsExpanded="true" />
         <AssociationConnector Association="CloudEDUModel.FK_COURSE_CATEGORY" ManuallyRouted="false" />
         <AssociationConnector Association="CloudEDUModel.FK__COMMENT__CUSTOME__6E01572D" ManuallyRouted="false" />
         <AssociationConnector Association="CloudEDUModel.FK_COMMENT_COURSE" ManuallyRouted="false" />
@@ -49,7 +52,6 @@
         <AssociationConnector Association="CloudEDUModel.RECO_COURSE" ManuallyRouted="false" />
         <AssociationConnector Association="CloudEDUModel.FAVORITE" ManuallyRouted="false" />
         <AssociationConnector Association="CloudEDUModel.GRANTED" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="CloudEDUModel.NOTE_SHAREABLE_AVAIL" Width="1.5" PointX="9.02164720232675" PointY="9.7295828506953939" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CloudEDUModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CloudEDUModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="CloudEDUModelStoreContainer">
           <EntitySet Name="CATEGORY" EntityType="CloudEDUModel.Store.CATEGORY" store:Type="Tables" Schema="COURSE" />
           <EntitySet Name="COMMENT" EntityType="CloudEDUModel.Store.COMMENT" store:Type="Tables" Schema="COURSE" />
@@ -84,6 +84,40 @@
       [COURSE_PENDING].[START_TIME] AS [START_TIME]
       FROM [COURSE].[COURSE_PENDING] AS [COURSE_PENDING]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="COURSE_RECO_AVAIL" EntityType="CloudEDUModel.Store.COURSE_RECO_AVAIL" store:Type="Views" store:Schema="COURSE" store:Name="COURSE_RECO_AVAIL">
+            <DefiningQuery>SELECT 
+      [COURSE_RECO_AVAIL].[ID] AS [ID], 
+      [COURSE_RECO_AVAIL].[PRICE] AS [PRICE], 
+      [COURSE_RECO_AVAIL].[RATE] AS [RATE], 
+      [COURSE_RECO_AVAIL].[TITLE] AS [TITLE], 
+      [COURSE_RECO_AVAIL].[INTRO] AS [INTRO], 
+      [COURSE_RECO_AVAIL].[TEACHER_NAME] AS [TEACHER_NAME], 
+      [COURSE_RECO_AVAIL].[CATE_NAME] AS [CATE_NAME], 
+      [COURSE_RECO_AVAIL].[RESTRICT_AGE] AS [RESTRICT_AGE], 
+      [COURSE_RECO_AVAIL].[PG_DESCRIPTION] AS [PG_DESCRIPTION], 
+      [COURSE_RECO_AVAIL].[ICON_URL] AS [ICON_URL], 
+      [COURSE_RECO_AVAIL].[RATED_USERS] AS [RATED_USERS], 
+      [COURSE_RECO_AVAIL].[LESSON_NUM] AS [LESSON_NUM], 
+      [COURSE_RECO_AVAIL].[RECO_TITLE] AS [RECO_TITLE], 
+      [COURSE_RECO_AVAIL].[RECO_ID] AS [RECO_ID], 
+      [COURSE_RECO_AVAIL].[Expr1] AS [Expr1]
+      FROM [COURSE].[COURSE_RECO_AVAIL] AS [COURSE_RECO_AVAIL]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="NOTE_AVAIL" EntityType="CloudEDUModel.Store.NOTE_AVAIL" store:Type="Views" store:Schema="CUSTOMER" store:Name="NOTE_AVAIL">
+            <DefiningQuery>SELECT 
+      [NOTE_AVAIL].[TITLE] AS [TITLE], 
+      [NOTE_AVAIL].[CONTENT] AS [CONTENT], 
+      [NOTE_AVAIL].[LESSON_ID] AS [LESSON_ID], 
+      [NOTE_AVAIL].[ID] AS [ID], 
+      [NOTE_AVAIL].[DATE] AS [DATE], 
+      [NOTE_AVAIL].[CUSTOMER_ID] AS [CUSTOMER_ID], 
+      [NOTE_AVAIL].[SHARE] AS [SHARE], 
+      [NOTE_AVAIL].[COURSE_TITLE] AS [COURSE_TITLE], 
+      [NOTE_AVAIL].[CUSTOMER_NAME] AS [CUSTOMER_NAME], 
+      [NOTE_AVAIL].[COURSE_ID] AS [COURSE_ID], 
+      [NOTE_AVAIL].[LESSON_NUMBER] AS [LESSON_NUMBER]
+      FROM [CUSTOMER].[NOTE_AVAIL] AS [NOTE_AVAIL]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="NOTE_SHARABLE" EntityType="CloudEDUModel.Store.NOTE_SHARABLE" store:Type="Views" store:Schema="CUSTOMER" store:Name="NOTE_SHARABLE">
             <DefiningQuery>SELECT 
       [NOTE_SHARABLE].[TITLE] AS [TITLE], 
@@ -105,7 +139,9 @@
       [NOTE_SHAREABLE_AVAIL].[CUSTOMER_ID] AS [CUSTOMER_ID], 
       [NOTE_SHAREABLE_AVAIL].[SHARE] AS [SHARE], 
       [NOTE_SHAREABLE_AVAIL].[COURSE_TITLE] AS [COURSE_TITLE], 
-      [NOTE_SHAREABLE_AVAIL].[CUSTOMER_NAME] AS [CUSTOMER_NAME]
+      [NOTE_SHAREABLE_AVAIL].[CUSTOMER_NAME] AS [CUSTOMER_NAME], 
+      [NOTE_SHAREABLE_AVAIL].[COURSE_ID] AS [COURSE_ID], 
+      [NOTE_SHAREABLE_AVAIL].[LESSON_NUMBER] AS [LESSON_NUMBER]
       FROM [CUSTOMER].[NOTE_SHAREABLE_AVAIL] AS [NOTE_SHAREABLE_AVAIL]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="COURSE_CANCEL" EntityType="CloudEDUModel.Store.COURSE_CANCEL" store:Type="Views" store:Schema="MANAGER" store:Name="COURSE_CANCEL">
@@ -507,6 +543,60 @@
           <Property Name="START_TIME" Type="datetime" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
+      警告 6002: 表/视图“CloudEDU.COURSE.COURSE_RECO_AVAIL”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+        <EntityType Name="COURSE_RECO_AVAIL">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PRICE" />
+            <PropertyRef Name="TITLE" />
+            <PropertyRef Name="RECO_TITLE" />
+            <PropertyRef Name="RECO_ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="PRICE" Type="money" Nullable="false" />
+          <Property Name="RATE" Type="float" />
+          <Property Name="TITLE" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="INTRO" Type="text" />
+          <Property Name="TEACHER_NAME" Type="varchar" MaxLength="50" />
+          <Property Name="CATE_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="RESTRICT_AGE" Type="int" />
+          <Property Name="PG_DESCRIPTION" Type="nvarchar" MaxLength="100" />
+          <Property Name="ICON_URL" Type="nvarchar" MaxLength="100" />
+          <Property Name="RATED_USERS" Type="int" />
+          <Property Name="LESSON_NUM" Type="int" />
+          <Property Name="RECO_TITLE" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="RECO_ID" Type="int" Nullable="false" />
+          <Property Name="Expr1" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--生成过程中发现错误:
+      警告 6002: 表/视图“CloudEDU.CUSTOMER.NOTE_AVAIL”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+        <EntityType Name="NOTE_AVAIL">
+          <Key>
+            <PropertyRef Name="CONTENT" />
+            <PropertyRef Name="LESSON_ID" />
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="DATE" />
+            <PropertyRef Name="SHARE" />
+            <PropertyRef Name="COURSE_TITLE" />
+            <PropertyRef Name="CUSTOMER_NAME" />
+            <PropertyRef Name="COURSE_ID" />
+            <PropertyRef Name="LESSON_NUMBER" />
+          </Key>
+          <Property Name="TITLE" Type="varchar" MaxLength="50" />
+          <Property Name="CONTENT" Type="text" Nullable="false" />
+          <Property Name="LESSON_ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="DATE" Type="datetime2" Nullable="false" />
+          <Property Name="CUSTOMER_ID" Type="int" />
+          <Property Name="SHARE" Type="bit" Nullable="false" />
+          <Property Name="COURSE_TITLE" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CUSTOMER_NAME" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="COURSE_ID" Type="int" Nullable="false" />
+          <Property Name="LESSON_NUMBER" Type="int" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
       警告 6002: 表/视图“CloudEDU.CUSTOMER.NOTE_SHARABLE”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
       -->
         <EntityType Name="NOTE_SHARABLE">
@@ -537,6 +627,8 @@
             <PropertyRef Name="SHARE" />
             <PropertyRef Name="COURSE_TITLE" />
             <PropertyRef Name="CUSTOMER_NAME" />
+            <PropertyRef Name="COURSE_ID" />
+            <PropertyRef Name="LESSON_NUMBER" />
           </Key>
           <Property Name="TITLE" Type="varchar" MaxLength="50" />
           <Property Name="CONTENT" Type="text" Nullable="false" />
@@ -547,6 +639,8 @@
           <Property Name="SHARE" Type="bit" Nullable="false" />
           <Property Name="COURSE_TITLE" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="CUSTOMER_NAME" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="COURSE_ID" Type="int" Nullable="false" />
+          <Property Name="LESSON_NUMBER" Type="int" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
       警告 6002: 表/视图“CloudEDU.MANAGER.COURSE_CANCEL”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
@@ -915,7 +1009,8 @@
           <Parameter Name="opr" Type="nchar" Mode="In" />
           <Parameter Name="MSG" Type="nvarchar" Mode="In" />
         </Function>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CloudEDUModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -941,7 +1036,10 @@
           <EntitySet Name="COURSE_AVAIL" EntityType="CloudEDUModel.COURSE_AVAIL" />
           <EntitySet Name="COURSE_OK" EntityType="CloudEDUModel.COURSE_OK" />
           <EntitySet Name="COURSE_PENDING" EntityType="CloudEDUModel.COURSE_PENDING" />
+          <EntitySet Name="COURSE_RECO_AVAIL" EntityType="CloudEDUModel.COURSE_RECO_AVAIL" />
+          <EntitySet Name="NOTE_AVAIL" EntityType="CloudEDUModel.NOTE_AVAIL" />
           <EntitySet Name="NOTE_SHARABLE" EntityType="CloudEDUModel.NOTE_SHARABLE" />
+          <EntitySet Name="NOTE_SHAREABLE_AVAIL" EntityType="CloudEDUModel.NOTE_SHAREABLE_AVAIL" />
           <EntitySet Name="COURSE_CANCEL" EntityType="CloudEDUModel.COURSE_CANCEL" />
           <AssociationSet Name="FK_COURSE_CATEGORY" Association="CloudEDUModel.FK_COURSE_CATEGORY">
             <End Role="CATEGORY" EntitySet="CATEGORies" />
@@ -1037,6 +1135,12 @@
             <Parameter Name="pg" Mode="In" Type="Int32" />
             <Parameter Name="icon_url" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="CreateLesson" ReturnType="Collection(Decimal)">
+            <Parameter Name="course_id" Mode="In" Type="Int32" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="number" Mode="In" Type="Int32" />
+            <Parameter Name="content" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="EnrollCourse" ReturnType="Collection(Int32)">
             <Parameter Name="course_id" Mode="In" Type="Int32" />
             <Parameter Name="customer_id" Mode="In" Type="Int32" />
@@ -1044,13 +1148,6 @@
           <FunctionImport Name="AddDBLog">
             <Parameter Name="opr" Mode="In" Type="String" />
             <Parameter Name="MSG" Mode="In" Type="String" />
-          </FunctionImport>
-          <EntitySet Name="NOTE_SHAREABLE_AVAIL" EntityType="CloudEDUModel.NOTE_SHAREABLE_AVAIL" />
-          <FunctionImport Name="CreateLesson" ReturnType="Collection(Decimal)">
-            <Parameter Name="course_id" Mode="In" Type="Int32" />
-            <Parameter Name="title" Mode="In" Type="String" />
-            <Parameter Name="number" Mode="In" Type="Int32" />
-            <Parameter Name="content" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="CATEGORY">
@@ -1345,6 +1442,54 @@
           <Property Name="ICON_URL" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="START_TIME" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <EntityType Name="COURSE_RECO_AVAIL">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PRICE" />
+            <PropertyRef Name="TITLE" />
+            <PropertyRef Name="RECO_TITLE" />
+            <PropertyRef Name="RECO_ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="PRICE" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="RATE" Type="Double" />
+          <Property Name="TITLE" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="INTRO" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="TEACHER_NAME" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CATE_NAME" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="RESTRICT_AGE" Type="Int32" />
+          <Property Name="PG_DESCRIPTION" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="ICON_URL" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="RATED_USERS" Type="Int32" />
+          <Property Name="LESSON_NUM" Type="Int32" />
+          <Property Name="RECO_TITLE" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="RECO_ID" Type="Int32" Nullable="false" />
+          <Property Name="Expr1" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="NOTE_AVAIL">
+          <Key>
+            <PropertyRef Name="CONTENT" />
+            <PropertyRef Name="LESSON_ID" />
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="DATE" />
+            <PropertyRef Name="SHARE" />
+            <PropertyRef Name="COURSE_TITLE" />
+            <PropertyRef Name="CUSTOMER_NAME" />
+            <PropertyRef Name="COURSE_ID" />
+            <PropertyRef Name="LESSON_NUMBER" />
+          </Key>
+          <Property Name="TITLE" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CONTENT" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="LESSON_ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="DATE" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CUSTOMER_ID" Type="Int32" />
+          <Property Name="SHARE" Type="Boolean" Nullable="false" />
+          <Property Name="COURSE_TITLE" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CUSTOMER_NAME" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="COURSE_ID" Type="Int32" Nullable="false" />
+          <Property Name="LESSON_NUMBER" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="NOTE_SHARABLE">
           <Key>
             <PropertyRef Name="CONTENT" />
@@ -1360,6 +1505,30 @@
           <Property Name="DATE" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CUSTOMER_ID" Type="Int32" />
           <Property Name="SHARE" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NOTE_SHAREABLE_AVAIL">
+          <Key>
+            <PropertyRef Name="CONTENT" />
+            <PropertyRef Name="LESSON_ID" />
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="DATE" />
+            <PropertyRef Name="SHARE" />
+            <PropertyRef Name="COURSE_TITLE" />
+            <PropertyRef Name="CUSTOMER_NAME" />
+            <PropertyRef Name="COURSE_ID" />
+            <PropertyRef Name="LESSON_NUMBER" />
+          </Key>
+          <Property Name="TITLE" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CONTENT" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="LESSON_ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="DATE" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CUSTOMER_ID" Type="Int32" />
+          <Property Name="SHARE" Type="Boolean" Nullable="false" />
+          <Property Name="COURSE_TITLE" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CUSTOMER_NAME" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="COURSE_ID" Type="Int32" Nullable="false" />
+          <Property Name="LESSON_NUMBER" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="COURSE_CANCEL">
           <Key>
@@ -1626,26 +1795,6 @@
           <Property Type="Int32" Name="COURSE_ID" Nullable="false" />
           <Property Type="Int32" Name="STUDENTS" Nullable="true" />
         </ComplexType>
-        <EntityType Name="NOTE_SHAREABLE_AVAIL">
-          <Key>
-            <PropertyRef Name="CONTENT" />
-            <PropertyRef Name="LESSON_ID" />
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="DATE" />
-            <PropertyRef Name="SHARE" />
-            <PropertyRef Name="COURSE_TITLE" />
-            <PropertyRef Name="CUSTOMER_NAME" />
-          </Key>
-          <Property Type="String" Name="TITLE" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="CONTENT" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="LESSON_ID" Nullable="false" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="DateTime" Name="DATE" Nullable="false" Precision="7" />
-          <Property Type="Int32" Name="CUSTOMER_ID" />
-          <Property Type="Boolean" Name="SHARE" Nullable="false" />
-          <Property Type="String" Name="COURSE_TITLE" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="CUSTOMER_NAME" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1905,6 +2054,44 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="COURSE_RECO_AVAIL">
+            <EntityTypeMapping TypeName="CloudEDUModel.COURSE_RECO_AVAIL">
+              <MappingFragment StoreEntitySet="COURSE_RECO_AVAIL">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+                <ScalarProperty Name="RATE" ColumnName="RATE" />
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="INTRO" ColumnName="INTRO" />
+                <ScalarProperty Name="TEACHER_NAME" ColumnName="TEACHER_NAME" />
+                <ScalarProperty Name="CATE_NAME" ColumnName="CATE_NAME" />
+                <ScalarProperty Name="RESTRICT_AGE" ColumnName="RESTRICT_AGE" />
+                <ScalarProperty Name="PG_DESCRIPTION" ColumnName="PG_DESCRIPTION" />
+                <ScalarProperty Name="ICON_URL" ColumnName="ICON_URL" />
+                <ScalarProperty Name="RATED_USERS" ColumnName="RATED_USERS" />
+                <ScalarProperty Name="LESSON_NUM" ColumnName="LESSON_NUM" />
+                <ScalarProperty Name="RECO_TITLE" ColumnName="RECO_TITLE" />
+                <ScalarProperty Name="RECO_ID" ColumnName="RECO_ID" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NOTE_AVAIL">
+            <EntityTypeMapping TypeName="CloudEDUModel.NOTE_AVAIL">
+              <MappingFragment StoreEntitySet="NOTE_AVAIL">
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+                <ScalarProperty Name="LESSON_ID" ColumnName="LESSON_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+                <ScalarProperty Name="SHARE" ColumnName="SHARE" />
+                <ScalarProperty Name="COURSE_TITLE" ColumnName="COURSE_TITLE" />
+                <ScalarProperty Name="CUSTOMER_NAME" ColumnName="CUSTOMER_NAME" />
+                <ScalarProperty Name="COURSE_ID" ColumnName="COURSE_ID" />
+                <ScalarProperty Name="LESSON_NUMBER" ColumnName="LESSON_NUMBER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="NOTE_SHARABLE">
             <EntityTypeMapping TypeName="CloudEDUModel.NOTE_SHARABLE">
               <MappingFragment StoreEntitySet="NOTE_SHARABLE">
@@ -1915,6 +2102,23 @@
                 <ScalarProperty Name="DATE" ColumnName="DATE" />
                 <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
                 <ScalarProperty Name="SHARE" ColumnName="SHARE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NOTE_SHAREABLE_AVAIL">
+            <EntityTypeMapping TypeName="CloudEDUModel.NOTE_SHAREABLE_AVAIL">
+              <MappingFragment StoreEntitySet="NOTE_SHAREABLE_AVAIL">
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+                <ScalarProperty Name="LESSON_ID" ColumnName="LESSON_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+                <ScalarProperty Name="SHARE" ColumnName="SHARE" />
+                <ScalarProperty Name="COURSE_TITLE" ColumnName="COURSE_TITLE" />
+                <ScalarProperty Name="CUSTOMER_NAME" ColumnName="CUSTOMER_NAME" />
+                <ScalarProperty Name="COURSE_ID" ColumnName="COURSE_ID" />
+                <ScalarProperty Name="LESSON_NUMBER" ColumnName="LESSON_NUMBER" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1968,24 +2172,9 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CreateCourse" FunctionName="CloudEDUModel.Store.CreateCourse" />
+          <FunctionImportMapping FunctionImportName="CreateLesson" FunctionName="CloudEDUModel.Store.CreateLesson" />
           <FunctionImportMapping FunctionImportName="EnrollCourse" FunctionName="CloudEDUModel.Store.EnrollCourse" />
           <FunctionImportMapping FunctionImportName="AddDBLog" FunctionName="CloudEDUModel.Store.AddDBLog" />
-          <EntitySetMapping Name="NOTE_SHAREABLE_AVAIL">
-            <EntityTypeMapping TypeName="CloudEDUModel.NOTE_SHAREABLE_AVAIL">
-              <MappingFragment StoreEntitySet="NOTE_SHAREABLE_AVAIL">
-                <ScalarProperty Name="CUSTOMER_NAME" ColumnName="CUSTOMER_NAME" />
-                <ScalarProperty Name="COURSE_TITLE" ColumnName="COURSE_TITLE" />
-                <ScalarProperty Name="SHARE" ColumnName="SHARE" />
-                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
-                <ScalarProperty Name="DATE" ColumnName="DATE" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="LESSON_ID" ColumnName="LESSON_ID" />
-                <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
-                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="CreateLesson" FunctionName="CloudEDUModel.Store.CreateLesson" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

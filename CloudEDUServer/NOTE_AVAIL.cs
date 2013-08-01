@@ -12,7 +12,7 @@ namespace CloudEDUServer
     using System;
     using System.Collections.Generic;
     
-    public partial class NOTE_SHAREABLE_AVAIL
+    public partial class NOTE_AVAIL
     {
         public string TITLE { get; set; }
         public string CONTENT { get; set; }

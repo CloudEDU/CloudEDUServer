@@ -1019,6 +1019,9 @@
     <Compile Include="COURSE_PENDING.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="COURSE_RECO_AVAIL.cs">
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="CUSTOMER.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
@@ -1041,6 +1044,9 @@
       <DependentUpon>Navigation.aspx</DependentUpon>
     </Compile>
     <Compile Include="NOTE.cs">
+      <DependentUpon>CloudEDUModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NOTE_AVAIL.cs">
       <DependentUpon>CloudEDUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="NOTE_SHARABLE.cs">
