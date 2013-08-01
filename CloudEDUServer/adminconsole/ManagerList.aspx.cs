@@ -45,6 +45,11 @@ namespace CloudEDUServer.adminconsole
                         Response.Write("管理员不存在");
                         Response.End();
                     }
+                    if (deleteManager.ID == selfManage.ID)
+                    {
+                        Response.Write("不可以删除自己");
+                        Response.End();
+                    }
                     if (ManagerAccess.RemoveManager(deleteManager.ID))
                     {
                         Response.Write("success");
