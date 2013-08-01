@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>Cloud Edu</title>
 
      <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
@@ -87,7 +87,7 @@
         %>
         <div class="grid_10">
             <div class="box round first grid">
-                <h2>User List</h2>
+                <h2>Database Log</h2>
                 <div class="block">
                     
 					<table class="data display datatable">
