@@ -1093,12 +1093,8 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="adminconsole\img\.DS_Store" />
-    <Content Include="adminconsole\img\gallery\.DS_Store" />
-    <Content Include="adminconsole\img\gallery\thumbs_small\Thumbs.db" />
     <Content Include="adminconsole\img\pretty-photo\.DS_Store" />
     <Content Include="adminconsole\img\pretty-photo\fullscreen\.DS_Store" />
-    <Content Include="adminconsole\img\Thumbs.db" />
     <Content Include="adminconsole\js\.DS_Store" />
     <Content Include="adminconsole\js\jqPlot\.DS_Store" />
     <Content Include="adminconsole\js\jquery-ui\.DS_Store" />
@@ -1136,6 +1132,9 @@
     <Folder Include="adminconsole\js\tiny-mce\plugins\spellchecker\classes\utils\" />
     <Folder Include="adminconsole\js\tiny-mce\plugins\spellchecker\includes\" />
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -1149,9 +1148,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>45687</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:61388/</IISUrl>
+          <IISUrl>http://localhost:45687/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

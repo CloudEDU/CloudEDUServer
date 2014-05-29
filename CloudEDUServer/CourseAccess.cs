@@ -26,7 +26,7 @@ namespace CloudEDUServer
             return courses;
         }
 
-        public static COURSE[] GetAllPendingCourses()
+         public static COURSE[] GetAllPendingCourses()
         {
             COURSE_PENDING[] courses = null;
             using (CloudEDUEntities ctx = new CloudEDUEntities())

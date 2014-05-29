@@ -114,7 +114,7 @@ namespace CloudEDUServer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("CreateLesson", course_idParameter, titleParameter, numberParameter, contentParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> EnrollCourse(Nullable<int> course_id, Nullable<int> customer_id)
+        public virtual int EnrollCourse(Nullable<int> course_id, Nullable<int> customer_id)
         {
             var course_idParameter = course_id.HasValue ?
                 new ObjectParameter("course_id", course_id) :
@@ -124,7 +124,7 @@ namespace CloudEDUServer
                 new ObjectParameter("customer_id", customer_id) :
                 new ObjectParameter("customer_id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("EnrollCourse", course_idParameter, customer_idParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EnrollCourse", course_idParameter, customer_idParameter);
         }
     
         public virtual int AddDBLog(string opr, string mSG)
@@ -138,6 +138,15 @@ namespace CloudEDUServer
                 new ObjectParameter("MSG", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddDBLog", oprParameter, mSGParameter);
+        }
+    
+        public virtual int RefreshRate(Nullable<int> crs_id)
+        {
+            var crs_idParameter = crs_id.HasValue ?
+                new ObjectParameter("crs_id", crs_id) :
+                new ObjectParameter("crs_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RefreshRate", crs_idParameter);
         }
     }
 }
